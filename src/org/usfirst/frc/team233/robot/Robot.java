@@ -28,8 +28,6 @@ public class Robot extends IterativeRobot {
 
 	Command autonomousCommand;
 	SendableChooser<Command> chooser = new SendableChooser<>();
-	Joystick left = new Joystick(4);
-	Joystick right = new Joystick(5);
 
 	/**
 	 * This function is run when the robot is first started up and should be

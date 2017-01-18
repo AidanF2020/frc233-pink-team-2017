@@ -17,12 +17,12 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class DriveTrain extends Subsystem{
 	private SpeedController frontLeftMotor = new Talon(RobotMap.leftFrontMotorPort);
-	//private SpeedController rearLeftMotor = new Talon(2);
+	private SpeedController rearLeftMotor = new Talon(RobotMap.leftBackMotorPort);
 	private SpeedController frontRightMotor = new Talon(RobotMap.rightFrontMotorPort);
-	//private SpeedController rearRightMotor = new Talon(4);
+	private SpeedController rearRightMotor = new Talon(RobotMap.rightBackMotorPort);
 
 	//private RobotDrive drive = new RobotDrive(frontLeftMotor, rearLeftMotor, frontRightMotor, rearRightMotor);
-	private RobotDrive drive = new RobotDrive(frontLeftMotor, frontRightMotor);
+	private RobotDrive drive = new RobotDrive(frontLeftMotor, rearLeftMotor, frontRightMotor, rearRightMotor);
 
 	/*
 	private Encoder leftEncoder = new Encoder(1, 2);
@@ -58,8 +58,8 @@ public class DriveTrain extends Subsystem{
 	 * @param joy
 	 *            The ps3 style joystick to use to drive tank style.
 	 */
-	public void drive(Joystick joy) {
-		drive(-joy.getY(), -joy.getAxis(AxisType.kThrottle));
+	public void drive(Joystick base) {
+		drive(-base.getY(), -base.getAxis(AxisType.kThrottle));
 	}
 
 }
