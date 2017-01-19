@@ -18,8 +18,8 @@ import org.usfirst.frc.team233.robot.commands.ExampleCommand;
  * interface to the commands and command groups that allow control of the robot.
  */
 public class OI {
-	private Joystick base = new Joystick(0);
-	private Joystick shooter = new Joystick(1);
+	private Joystick base = new Joystick(RobotMap.baseJoystickPort);
+	private Joystick shooter = new Joystick(RobotMap.shooterJoystickPort);
 	
 	public OI() {
 		// TODO Auto-generated constructor stub

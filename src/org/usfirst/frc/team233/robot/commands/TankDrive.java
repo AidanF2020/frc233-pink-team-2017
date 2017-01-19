@@ -14,6 +14,7 @@ public class TankDrive extends Command {
 		// Called repeatedly when this Command is scheduled to run
 		@Override
 		protected void execute() {
+			System.out.println("TankDrive Execute!!!");
 			Robot.drivetrain.drive(Robot.oi.getBaseJoystick());
 		}
 

@@ -51,6 +51,7 @@ public class DriveTrain extends Subsystem{
 	 *            Speed in range [-1,1]
 	 */
 	public void drive(double left, double right) {
+		//System.out.println("Drive2");
 		drive.tankDrive(left, right);
 	}
 
@@ -59,6 +60,7 @@ public class DriveTrain extends Subsystem{
 	 *            The ps3 style joystick to use to drive tank style.
 	 */
 	public void drive(Joystick base) {
+		//System.out.println("Drive1");
 		drive(-base.getY(), -base.getAxis(AxisType.kThrottle));
 	}
 

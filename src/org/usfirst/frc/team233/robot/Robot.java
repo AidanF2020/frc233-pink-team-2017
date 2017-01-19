@@ -10,6 +10,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import org.usfirst.frc.team233.robot.commands.ExampleCommand;
+import org.usfirst.frc.team233.robot.commands.TankDrive;
 import org.usfirst.frc.team233.robot.subsystems.DriveTrain;
 import org.usfirst.frc.team233.robot.subsystems.ExampleSubsystem;
 
@@ -25,6 +26,7 @@ public class Robot extends IterativeRobot {
 	public static final ExampleSubsystem exampleSubsystem = new ExampleSubsystem();
 	public static OI oi;
 	public static DriveTrain drivetrain;
+	//public static TankDrive tankDrive;
 
 	Command autonomousCommand;
 	SendableChooser<Command> chooser = new SendableChooser<>();
@@ -39,7 +41,16 @@ public class Robot extends IterativeRobot {
 		drivetrain = new DriveTrain();
 		chooser.addDefault("Default Auto", new ExampleCommand());
 		// chooser.addObject("My Auto", new MyAutoCommand());
+		System.out.println("RoboInit");
 		SmartDashboard.putData("Auto mode", chooser);
+	}
+	
+	@Override
+	public void robotPeriodic() {
+		// TODO Auto-generated method stub
+		System.out.println("Robot Periodic");
+		Robot.drivetrain.drive(Robot.oi.getBaseJoystick());
+		//super.robotPeriodic();
 	}
 
 	/**
@@ -90,6 +101,7 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void autonomousPeriodic() {
 		Scheduler.getInstance().run();
+		
 	}
 
 	@Override
@@ -100,6 +112,10 @@ public class Robot extends IterativeRobot {
 		// this line or comment it out.
 		if (autonomousCommand != null)
 			autonomousCommand.cancel();
+		System.out.println("Teleop Init");
+		//Scheduler.getInstance().add(tankDrive);
+		//Scheduler.getInstance().enable();
+		
 	}
 
 	/**
