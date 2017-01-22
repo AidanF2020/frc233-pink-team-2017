@@ -1,6 +1,5 @@
 package org.usfirst.frc.team233.robot;
 
-
 /**
  * The RobotMap is a mapping from the ports sensors and actuators are wired into
  * to a variable name. This provides flexibility changing wiring, makes checking
@@ -24,4 +23,28 @@ public class RobotMap {
 	
 	public static int baseJoystickPort = 0;
 	public static int shooterJoystickPort = 1;
+	
+	
+	public static enum Encoders {
+		FrontLeft(0,1),
+		BackLeft(2,3),
+		FrontRight(4,5),
+		BackRight(6,7);
+		
+		private final int channelA;
+		private final int channelB;
+		
+		Encoders(int channelA, int channelB) {
+			this.channelA = channelA;
+			this.channelB = channelB;
+		}
+		
+		public int channelA() {
+			return this.channelA;
+		}
+		
+		public int channelB() {
+			return this.channelB;
+		}
+	}
 }

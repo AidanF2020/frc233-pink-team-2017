@@ -5,8 +5,6 @@ import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 
 //import org.usfirst.frc.team233.robot.commands.Autonomous;
-//import org.usfirst.frc.team233.robot.commands.CloseClaw;
-import org.usfirst.frc.team233.robot.commands.ExampleCommand;
 //import org.usfirst.frc.team233.robot.commands.OpenClaw;
 //import org.usfirst.frc.team233.robot.commands.Pickup;
 //import org.usfirst.frc.team233.robot.commands.Place;
@@ -37,7 +35,8 @@ public class OI {
 		JoystickButton start = new JoystickButton(base, 10);
 		JoystickButton leftJoystickPress = new JoystickButton(base, 11);
 		JoystickButton rightJoystickPress = new JoystickButton(base, 12);
-		int dpad = base.getPOV();
+		int baseDpad = base.getPOV();
+		
 		//Shooter
 		JoystickButton shooterX = new JoystickButton(base, 1);
 		JoystickButton shooterA = new JoystickButton(base, 2);
@@ -51,7 +50,7 @@ public class OI {
 		JoystickButton shooterStart = new JoystickButton(base, 10);
 		JoystickButton shooterleftJoystickPress = new JoystickButton(base, 11);
 		JoystickButton shooterrightJoystickPress = new JoystickButton(base, 12);
-		int baseDpad = base.getPOV();
+		int shooterDpad = shooter.getPOV();
 		
 		
 		// Connect the buttons to commands

@@ -2,17 +2,14 @@
 package org.usfirst.frc.team233.robot;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
-import edu.wpi.first.wpilibj.Joystick;
+//import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
-import org.usfirst.frc.team233.robot.commands.ExampleCommand;
-import org.usfirst.frc.team233.robot.commands.TankDrive;
 import org.usfirst.frc.team233.robot.subsystems.DriveTrain;
-import org.usfirst.frc.team233.robot.subsystems.ExampleSubsystem;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -23,7 +20,6 @@ import org.usfirst.frc.team233.robot.subsystems.ExampleSubsystem;
  */
 public class Robot extends IterativeRobot {
 
-	public static final ExampleSubsystem exampleSubsystem = new ExampleSubsystem();
 	public static OI oi;
 	public static DriveTrain drivetrain;
 	//public static TankDrive tankDrive;
@@ -39,19 +35,12 @@ public class Robot extends IterativeRobot {
 	public void robotInit() {
 		oi = new OI();
 		drivetrain = new DriveTrain();
-		chooser.addDefault("Default Auto", new ExampleCommand());
 		// chooser.addObject("My Auto", new MyAutoCommand());
 		System.out.println("RoboInit");
 		SmartDashboard.putData("Auto mode", chooser);
 	}
 	
-	@Override
-	public void robotPeriodic() {
-		// TODO Auto-generated method stub
-		System.out.println("Robot Periodic");
-		Robot.drivetrain.drive(Robot.oi.getBaseJoystick());
-		//super.robotPeriodic();
-	}
+	
 
 	/**
 	 * This function is called once each time the robot enters Disabled mode.
@@ -60,7 +49,8 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void disabledInit() {
-
+		// Reset any resources that are not needed
+		Robot.drivetrain.disableDriveTrain();
 	}
 
 	@Override
@@ -106,6 +96,7 @@ public class Robot extends IterativeRobot {
 
 	@Override
 	public void teleopInit() {
+		//ASUME 4inch wheels
 		// This makes sure that the autonomous stops running when
 		// teleop starts running. If you want the autonomous to
 		// continue until interrupted by another command, remove
@@ -113,8 +104,10 @@ public class Robot extends IterativeRobot {
 		if (autonomousCommand != null)
 			autonomousCommand.cancel();
 		System.out.println("Teleop Init");
-		//Scheduler.getInstance().add(tankDrive);
 		//Scheduler.getInstance().enable();
+		//Scheduler.getInstance().removeAll();
+		//Scheduler.getInstance().add(tankDrive);
+		
 		
 	}
 
@@ -123,9 +116,20 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void teleopPeriodic() {
-		Scheduler.getInstance().run();
+		//Scheduler.getInstance().run();
+		// TODO Test this change in code to verify if the motors still run
+		//System.out.println("Teleop Periodic");
+		Robot.drivetrain.drive(Robot.oi.getBaseJoystick());
 	}
 
+	@Override
+	public void robotPeriodic() {
+		// TODO Auto-generated method stub
+		//System.out.println("Robot Periodic");
+		//Robot.drivetrain.drive(Robot.oi.getBaseJoystick());
+		//super.robotPeriodic();
+	}
+	
 	/**
 	 * This function is called periodically during test mode
 	 */
