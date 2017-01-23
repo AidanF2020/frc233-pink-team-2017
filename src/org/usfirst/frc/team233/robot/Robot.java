@@ -119,12 +119,16 @@ public class Robot extends IterativeRobot {
 		//Scheduler.getInstance().run();
 		// TODO Test this change in code to verify if the motors still run
 		//System.out.println("Teleop Periodic");
-		Robot.drivetrain.drive(Robot.oi.getBaseJoystick());
 	}
 
 	@Override
 	public void robotPeriodic() {
 		// TODO Auto-generated method stub
+		/* NOTE
+		 * I removed the drive method in favor of the command
+		 * TankDrive, which is set as the default command now
+		 * in the DriveTrain subsystem class.
+		 * NEED TO TEST THIS!!!*/
 		//System.out.println("Robot Periodic");
 		//Robot.drivetrain.drive(Robot.oi.getBaseJoystick());
 		//super.robotPeriodic();

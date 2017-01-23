@@ -3,6 +3,7 @@ package org.usfirst.frc.team233.robot.subsystems;
 //import org.usfirst.frc.team233.robot.Robot;
 import org.usfirst.frc.team233.robot.RobotMap;
 import org.usfirst.frc.team233.robot.RobotMap.Encoders;
+import org.usfirst.frc.team233.robot.commands.TankDrive;
 
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Joystick;
@@ -51,7 +52,7 @@ public class DriveTrain extends Subsystem{
 	@Override
 	protected void initDefaultCommand() {
 		// TODO Auto-generated method stub
-		// Currently not going to be used in this subsystem.
+		setDefaultCommand(new TankDrive());
 	}
 	
 	/**
