@@ -116,7 +116,7 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void teleopPeriodic() {
-		//Scheduler.getInstance().run();
+		Scheduler.getInstance().run();
 		// TODO Test this change in code to verify if the motors still run
 		//System.out.println("Teleop Periodic");
 	}
