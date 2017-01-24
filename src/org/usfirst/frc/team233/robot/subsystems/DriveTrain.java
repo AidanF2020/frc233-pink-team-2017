@@ -13,6 +13,7 @@ import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.Joystick.AxisType;
 import edu.wpi.first.wpilibj.PIDSourceType;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 //import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 
 
@@ -89,14 +90,36 @@ public class DriveTrain extends Subsystem{
 	/** Setup encoders before use. */
 	public void setupEncoders() {
 		frontLeftEncoder.setDistancePerPulse(distancePerPulse);
-		frontLeftEncoder.setPIDSourceType(PIDSourceType.kRate);
+		frontLeftEncoder.setPIDSourceType(PIDSourceType.kDisplacement);
+		SmartDashboard.putData("Front Left Encoder", frontLeftEncoder);
+		
 		backLeftEncoder.setDistancePerPulse(distancePerPulse);
-		backLeftEncoder.setPIDSourceType(PIDSourceType.kRate);
+		backLeftEncoder.setPIDSourceType(PIDSourceType.kDisplacement);
+		SmartDashboard.putData("Back Left Encoder", backLeftEncoder);
 		
 		frontRightEncoder.setDistancePerPulse(distancePerPulse);
-		frontRightEncoder.setPIDSourceType(PIDSourceType.kRate);
+		frontRightEncoder.setPIDSourceType(PIDSourceType.kDisplacement);
+		SmartDashboard.putData("Front Right Encoder", frontRightEncoder);
+		
 		backRightEncoder.setDistancePerPulse(distancePerPulse);
-		backRightEncoder.setPIDSourceType(PIDSourceType.kRate);
+		backRightEncoder.setPIDSourceType(PIDSourceType.kDisplacement);
+		SmartDashboard.putData("Back Right Encoder", backRightEncoder);
+	}
+	
+	/** Obtain the average distance from the encoders on the 
+	 * left of the drive train. */
+	public double getLeftAvgDistance() {
+		double dist = (frontLeftEncoder.getDistance() + backLeftEncoder.getDistance()) / 2;
+		SmartDashboard.putNumber("Left Avg Distange", dist);
+		return dist;
+	}
+	
+	/** Obtain the average distance from the encoders on the 
+	 * right of the drive train. */
+	public double getRightAvgDistance() {
+		double dist = (frontRightEncoder.getDistance() + backRightEncoder.getDistance()) / 2;
+		SmartDashboard.putNumber("Right Avg Distange", dist);
+		return dist;
 	}
 	
 	/** This method should be called on any disable to reset and
