@@ -24,38 +24,9 @@ public class RobotMap {
 	public static int baseJoystickPort = 0;
 	public static int shooterJoystickPort = 1;
 	
-	/** Encoder enum. Place any new encoder definition as follow:
-	 * <Encoder_Name>(Channel A port, Channel B port).
-	 * 
-	 * NOTE: port definition for the encoders should
-	 * be added to the encoder definition area*/
-	public static enum Encoders {
-		/* ENCODER DEFINITION AREA */
-		
-		// Drive train encoders
-		FrontLeft(0,1),
-		BackLeft(2,3),
-		FrontRight(4,5),
-		BackRight(6,7);
-		/* ADD NEW ENCODERS HERE */
-		
-		//=====================================
-		/* DO NOT TOUCH THIS PART OF
-		 * THE CODE */
-		private final int channelA;
-		private final int channelB;
-		
-		Encoders(int channelA, int channelB) {
-			this.channelA = channelA;
-			this.channelB = channelB;
-		}
-		
-		public int channelA() {
-			return this.channelA;
-		}
-		
-		public int channelB() {
-			return this.channelB;
-		}
-	}
+	public static int leftEncoderAPort = 0;
+	public static int leftEncoderBPort = 1;
+	public static int rightEncoderAPort = 3;
+	public static int rightEncoderBPort = 4;
+	
 }

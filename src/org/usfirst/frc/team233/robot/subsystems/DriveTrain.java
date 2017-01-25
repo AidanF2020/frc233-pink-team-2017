@@ -2,7 +2,6 @@ package org.usfirst.frc.team233.robot.subsystems;
 
 //import org.usfirst.frc.team233.robot.Robot;
 import org.usfirst.frc.team233.robot.RobotMap;
-import org.usfirst.frc.team233.robot.RobotMap.Encoders;
 import org.usfirst.frc.team233.robot.commands.TankDrive;
 
 import edu.wpi.first.wpilibj.Encoder;
@@ -30,16 +29,14 @@ public class DriveTrain extends Subsystem{
 	/* Calculate the distance each pulse in the encoder equals to.
 	 * Equation: (Wheel Diameter x Pi) / Number of pulses per encoder revolution */
 	private final double wheelDiameter = 1.0;
-	private final int pulsePerRevolution = 1024;
+	private final int pulsePerRevolution = 40;
 	private final double distancePerPulse = (Math.PI * wheelDiameter) / pulsePerRevolution;
 	
 	
 	
 	// Define all the encoders that are going to be used for the drive train.
-	private Encoder frontLeftEncoder = new Encoder(Encoders.FrontLeft.channelA(), Encoders.FrontLeft.channelB());
-	private Encoder backLeftEncoder = new Encoder(Encoders.BackLeft.channelA(), Encoders.BackLeft.channelB());
-	private Encoder frontRightEncoder = new Encoder(Encoders.FrontRight.channelA(), Encoders.FrontRight.channelB());
-	private Encoder backRightEncoder = new Encoder(Encoders.BackRight.channelA(), Encoders.BackRight.channelB());
+	private Encoder leftEncoder = new Encoder(RobotMap.leftEncoderAPort, RobotMap.leftEncoderBPort);
+	private Encoder rightEncoder = new Encoder(RobotMap.rightEncoderAPort, RobotMap.rightEncoderBPort);
 	
 	
 	/** Drive train constructor.*/
@@ -80,45 +77,34 @@ public class DriveTrain extends Subsystem{
 
 	/** Reset all encoders. */
 	public void resetEncoders() {
-		frontLeftEncoder.reset();
-		backLeftEncoder.reset();
-		
-		frontRightEncoder.reset();
-		backRightEncoder.reset();
+		leftEncoder.reset();
+		rightEncoder.reset();
 	}
 	
 	/** Setup encoders before use. */
 	public void setupEncoders() {
-		frontLeftEncoder.setDistancePerPulse(distancePerPulse);
-		frontLeftEncoder.setPIDSourceType(PIDSourceType.kDisplacement);
-		SmartDashboard.putData("Front Left Encoder", frontLeftEncoder);
+		leftEncoder.setDistancePerPulse(distancePerPulse);
+		leftEncoder.setPIDSourceType(PIDSourceType.kDisplacement);
+		SmartDashboard.putData("Left Encoder", leftEncoder);
 		
-		backLeftEncoder.setDistancePerPulse(distancePerPulse);
-		backLeftEncoder.setPIDSourceType(PIDSourceType.kDisplacement);
-		SmartDashboard.putData("Back Left Encoder", backLeftEncoder);
-		
-		frontRightEncoder.setDistancePerPulse(distancePerPulse);
-		frontRightEncoder.setPIDSourceType(PIDSourceType.kDisplacement);
-		SmartDashboard.putData("Front Right Encoder", frontRightEncoder);
-		
-		backRightEncoder.setDistancePerPulse(distancePerPulse);
-		backRightEncoder.setPIDSourceType(PIDSourceType.kDisplacement);
-		SmartDashboard.putData("Back Right Encoder", backRightEncoder);
+		rightEncoder.setDistancePerPulse(distancePerPulse);
+		rightEncoder.setPIDSourceType(PIDSourceType.kDisplacement);
+		SmartDashboard.putData("Right Encoder", rightEncoder);
 	}
 	
-	/** Obtain the average distance from the encoders on the 
+	/** Obtain the distance from the encoder on the 
 	 * left of the drive train. */
-	public double getLeftAvgDistance() {
-		double dist = (frontLeftEncoder.getDistance() + backLeftEncoder.getDistance()) / 2;
-		SmartDashboard.putNumber("Left Avg Distange", dist);
+	public double getLeftDistance() {
+		double dist = leftEncoder.getDistance();
+		SmartDashboard.putNumber("Left Distance", dist);
 		return dist;
 	}
 	
-	/** Obtain the average distance from the encoders on the 
+	/** Obtain the distance from the encoder on the 
 	 * right of the drive train. */
-	public double getRightAvgDistance() {
-		double dist = (frontRightEncoder.getDistance() + backRightEncoder.getDistance()) / 2;
-		SmartDashboard.putNumber("Right Avg Distange", dist);
+	public double getRightDistance() {
+		double dist = rightEncoder.getDistance();
+		SmartDashboard.putNumber("Right Distance", dist);
 		return dist;
 	}
 	
