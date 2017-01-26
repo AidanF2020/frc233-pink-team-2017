@@ -1,5 +1,7 @@
 package org.usfirst.frc.team233.robot;
 
+import org.usfirst.frc.team233.robot.commands.SpinUp;
+
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
@@ -63,6 +65,7 @@ public class OI {
 		//r2.whenPressed(new Pickup());
 		//l1.whenPressed(new Place());
 		//l2.whenPressed(new Autonomous());
+		rightBumper.whileHeld(new SpinUp());
 	}
 	
 	public Joystick getBaseJoystick() {

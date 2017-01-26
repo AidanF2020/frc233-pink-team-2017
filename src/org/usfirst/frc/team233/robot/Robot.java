@@ -1,4 +1,3 @@
-
 package org.usfirst.frc.team233.robot;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
@@ -129,9 +128,6 @@ public class Robot extends IterativeRobot {
 		 * TankDrive, which is set as the default command now
 		 * in the DriveTrain subsystem class.
 		 * NEED TO TEST THIS!!!*/
-		//System.out.println("Robot Periodic");
-		//Robot.drivetrain.drive(Robot.oi.getBaseJoystick());
-		//super.robotPeriodic();
 	}
 	
 	/**
