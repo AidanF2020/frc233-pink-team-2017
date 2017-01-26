@@ -8,7 +8,7 @@ public class SpinUp extends Command {
 
 		public SpinUp() {
 			// TODO Auto-generated constructor stub
-			
+			requires(Robot.shooterWheel);
 		}
 	
 		// Called repeatedly when this Command is scheduled to run
