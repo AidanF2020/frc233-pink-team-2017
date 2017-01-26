@@ -1,4 +1,3 @@
-
 package org.usfirst.frc.team233.robot;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
@@ -9,7 +8,11 @@ import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
+import org.usfirst.frc.team233.robot.subsystems.BallCollector;
 import org.usfirst.frc.team233.robot.subsystems.DriveTrain;
+import org.usfirst.frc.team233.robot.subsystems.Hopper;
+import org.usfirst.frc.team233.robot.subsystems.RopeClimber;
+import org.usfirst.frc.team233.robot.subsystems.ShooterWheel;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -19,9 +22,14 @@ import org.usfirst.frc.team233.robot.subsystems.DriveTrain;
  * directory.
  */
 public class Robot extends IterativeRobot {
-
 	public static OI oi;
+	
+	// Define subsystem varaibles
 	public static DriveTrain drivetrain;
+	public static ShooterWheel shooterWheel;
+	public static BallCollector ballCollector;
+	public static RopeClimber ropeClimber;
+	public static Hopper hopper;
 	//public static TankDrive tankDrive;
 
 	Command autonomousCommand;
@@ -35,6 +43,7 @@ public class Robot extends IterativeRobot {
 	public void robotInit() {
 		oi = new OI();
 		drivetrain = new DriveTrain();
+		shooterWheel = new ShooterWheel();
 		// chooser.addObject("My Auto", new MyAutoCommand());
 		System.out.println("RoboInit");
 		SmartDashboard.putData("Auto mode", chooser);
@@ -129,9 +138,6 @@ public class Robot extends IterativeRobot {
 		 * TankDrive, which is set as the default command now
 		 * in the DriveTrain subsystem class.
 		 * NEED TO TEST THIS!!!*/
-		//System.out.println("Robot Periodic");
-		//Robot.drivetrain.drive(Robot.oi.getBaseJoystick());
-		//super.robotPeriodic();
 	}
 	
 	/**
