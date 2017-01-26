@@ -20,25 +20,9 @@ public class ShooterWheel extends Subsystem {
 		// TODO Auto-generated method stub
 		
 	}
-		public void spin() {
-		// TODO Auto-generated method stub
-		//double throttle = shooterJoystick.getRawAxis(8);
-		//System.out.println(throttle);
-		//double limitedThrottle = limit(throttle);
-		//limitedThrottle = limitedThrottle * limitedThrottle;
-//		if (isSpinning){
-//			
-//			shooter.set(0);
-//			isSpinning = false;
-//		
-//		} else {
-			shooter.set(motorSpeed);
-//			isSpinning = true;
-//			
-//		}
-			
 	
-		
+	public void spin() {
+		shooter.set(motorSpeed);
 	}
 	
 	public void stop(){
