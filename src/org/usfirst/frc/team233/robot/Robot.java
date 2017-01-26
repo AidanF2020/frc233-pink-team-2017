@@ -8,7 +8,10 @@ import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
+import org.usfirst.frc.team233.robot.subsystems.BallCollector;
 import org.usfirst.frc.team233.robot.subsystems.DriveTrain;
+import org.usfirst.frc.team233.robot.subsystems.Hopper;
+import org.usfirst.frc.team233.robot.subsystems.RopeClimber;
 import org.usfirst.frc.team233.robot.subsystems.ShooterWheel;
 
 /**
@@ -19,10 +22,14 @@ import org.usfirst.frc.team233.robot.subsystems.ShooterWheel;
  * directory.
  */
 public class Robot extends IterativeRobot {
-
 	public static OI oi;
+	
+	// Define subsystem varaibles
 	public static DriveTrain drivetrain;
 	public static ShooterWheel shooterWheel;
+	public static BallCollector ballCollector;
+	public static RopeClimber ropeClimber;
+	public static Hopper hopper;
 	//public static TankDrive tankDrive;
 
 	Command autonomousCommand;

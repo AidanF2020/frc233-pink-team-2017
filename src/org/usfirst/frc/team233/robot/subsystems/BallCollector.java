@@ -6,14 +6,14 @@ import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
-public class BallCollector<Collect> extends Subsystem{
+public class BallCollector extends Subsystem{
 	
-	//Collector Motor Definition
+	// Collector Motor Definition
 	private SpeedController collectorMotor = new Talon(RobotMap.collectorMotorPort);
 	private final double collectorSpeed = 0.5;
+	private final boolean isInverted = false;
 	
-	public BallCollector() {
-		
+	public BallCollector() {	
 		// TODO Auto-generated constructor stub
 	}
 
@@ -22,24 +22,30 @@ public class BallCollector<Collect> extends Subsystem{
 		// TODO Auto-generated method stub
 		
 	}
+	
+	/** Start collecting balls */
 	public void collect() {
+		// Set the correct orientation for the motors
+		collectorMotor.setInverted(isInverted);
 		
-		//Sets Motor Power To 1 
+		// Run the collector motor at defined speed
 		collectorMotor.set(collectorSpeed);
 		 
 	}
+	
+	/** Reverse collector to eject balls */
 	public void eject() {
+		// Reverse the orientation of the motor
+		collectorMotor.setInverted(!isInverted);
 		
-		//Sets Motor Power To 1 
-		
-		collectorMotor.set(-1 * collectorSpeed);
+		// Run the collector motor at defined speed
+		collectorMotor.set(collectorSpeed);
 	}
 	
-		
+	/** Stop collecting balls*/
 	public void stop() {
-		
-		//Sets Motor Power To 1 
-		collectorMotor.set(0);
+		// Stop the collector 
+		collectorMotor.stopMotor();
 	}
 	
 }

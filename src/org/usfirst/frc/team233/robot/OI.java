@@ -1,5 +1,6 @@
 package org.usfirst.frc.team233.robot;
 
+import org.usfirst.frc.team233.robot.commands.SpinStop;
 import org.usfirst.frc.team233.robot.commands.SpinUp;
 
 import edu.wpi.first.wpilibj.Joystick;
@@ -65,7 +66,29 @@ public class OI {
 		//r2.whenPressed(new Pickup());
 		//l1.whenPressed(new Place());
 		//l2.whenPressed(new Autonomous());
+		
+		
+		/** READ THIS!!!
+		 * From my understanding we are going to implement
+		 * the shooting capability in one action, not two
+		 * as we previously thought. So for testing purposes
+		 * we are going to put these command in the right bumper
+		 * to test the logic. BUT we will need to create a 
+		 * class that extends the CommandGroup class to implement
+		 * a set of commands that will:
+		 *	(1) Set the shooter wheel to the correct speed
+		 *	(2) Hopper will feed the balls
+		 *	(3) Shoot the balls
+		 *	(4) Stop all these actions once the driver 
+		 *		releases the trigger
+		 *
+		 * Also note that we are going to use the triggers
+		 * instead of the bumpers to perform the shooting.
+		 * 
+		 * TODO - Test these commands to see if they work.
+		 * */
 		rightBumper.whileHeld(new SpinUp());
+		rightBumper.whenReleased(new SpinStop());
 	}
 	
 	public Joystick getBaseJoystick() {

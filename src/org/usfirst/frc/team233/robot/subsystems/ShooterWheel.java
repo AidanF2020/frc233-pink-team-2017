@@ -11,6 +11,8 @@ public class ShooterWheel extends Subsystem {
 	private SpeedController shooter = new Talon(RobotMap.shooterMotorPort);
 	//private boolean isSpinning;
 	private double motorSpeed = 1.0;
+	
+	
 	public ShooterWheel() {
 		// TODO Auto-generated constructor stub
 	}
@@ -18,7 +20,6 @@ public class ShooterWheel extends Subsystem {
 	@Override
 	protected void initDefaultCommand() {
 		// TODO Auto-generated method stub
-		
 	}
 	
 	public void spin() {
