@@ -42,6 +42,7 @@ public class DriveTrain extends Subsystem{
 	/** Drive train constructor.*/
 	public DriveTrain() {
 		super();
+		drive.setSafetyEnabled(false);
 		resetEncoders();
 		setupEncoders();
 	}
