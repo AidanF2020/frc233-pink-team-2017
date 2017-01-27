@@ -7,7 +7,7 @@ public class EjectBalls extends Command{
 	
 	public EjectBalls() {
 		// TODO Auto-generated constructor stub
-		requires(Robot.ballCollector);
+		//requires(Robot.ballCollector);
 	}
 	
 	@Override
