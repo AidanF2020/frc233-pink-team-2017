@@ -9,7 +9,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 public class BallCollector extends Subsystem{
 	
 	// Collector Motor Definition
-	private SpeedController collectorMotor = new Talon(RobotMap.collectorMotorPort);
+	private SpeedController collectorMotor = new Talon(6);
 	private final double collectorSpeed = 0.5;
 	private final boolean isInverted = false;
 	
