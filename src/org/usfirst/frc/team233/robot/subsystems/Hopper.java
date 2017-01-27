@@ -19,7 +19,7 @@ public class Hopper extends Subsystem {
 	public void agitate(Joystick shooter){
 		//Robot.oi.getShooterJoystick().
 		//shooter.getButton(button)
-		agitatorMotor.set(blowerSpeed);
+		agitatorMotor.set(agitatorSpeed);
 	}
 	
 	public void blow(){
