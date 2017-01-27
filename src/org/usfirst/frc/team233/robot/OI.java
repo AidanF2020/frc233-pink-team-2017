@@ -1,7 +1,10 @@
 package org.usfirst.frc.team233.robot;
 
+import org.usfirst.frc.team233.robot.commands.CollectBalls;
+import org.usfirst.frc.team233.robot.commands.EjectBalls;
 import org.usfirst.frc.team233.robot.commands.SpinStop;
 import org.usfirst.frc.team233.robot.commands.SpinUp;
+import org.usfirst.frc.team233.robot.commands.StopCollector;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
@@ -19,6 +22,7 @@ import edu.wpi.first.wpilibj.buttons.JoystickButton;
  * interface to the commands and command groups that allow control of the robot.
  */
 public class OI {
+	//game controllers
 	private Joystick base = new Joystick(RobotMap.baseJoystickPort);
 	private Joystick shooter = new Joystick(RobotMap.shooterJoystickPort);
 	
@@ -40,15 +44,15 @@ public class OI {
 		JoystickButton rightJoystickPress = new JoystickButton(base, 12);
 		int baseDpad = base.getPOV();
 		
-		//Shooter
+		//the args should all have shooter instead of base
 		JoystickButton shooterX = new JoystickButton(base, 1);
 		JoystickButton shooterA = new JoystickButton(base, 2);
 		JoystickButton shooterB = new JoystickButton(base, 3);
 		JoystickButton shooterY = new JoystickButton(base, 4);
 		JoystickButton shooterLeftBumper = new JoystickButton(base, 5);
-		JoystickButton shooterRightBumper = new JoystickButton(base, 6);
-		JoystickButton shooterLeftTrigger = new JoystickButton(base, 7);
-		JoystickButton shooterRightTrigger = new JoystickButton(base, 8);
+		JoystickButton shooterRightBumper = new JoystickButton(shooter, 6);
+		JoystickButton shooterLeftTrigger = new JoystickButton(shooter, 7);
+		JoystickButton shooterRightTrigger = new JoystickButton(shooter, 8);
 		JoystickButton shooterSelect = new JoystickButton(base, 9);
 		JoystickButton shooterStart = new JoystickButton(base, 10);
 		JoystickButton shooterleftJoystickPress = new JoystickButton(base, 11);
@@ -67,28 +71,14 @@ public class OI {
 		//l1.whenPressed(new Place());
 		//l2.whenPressed(new Autonomous());
 		
+		shooterRightBumper.whileHeld(new SpinUp());
+		shooterRightBumper.whenReleased(new SpinStop());
 		
-		/** READ THIS!!!
-		 * From my understanding we are going to implement
-		 * the shooting capability in one action, not two
-		 * as we previously thought. So for testing purposes
-		 * we are going to put these command in the right bumper
-		 * to test the logic. BUT we will need to create a 
-		 * class that extends the CommandGroup class to implement
-		 * a set of commands that will:
-		 *	(1) Set the shooter wheel to the correct speed
-		 *	(2) Hopper will feed the balls
-		 *	(3) Shoot the balls
-		 *	(4) Stop all these actions once the driver 
-		 *		releases the trigger
-		 *
-		 * Also note that we are going to use the triggers
-		 * instead of the bumpers to perform the shooting.
-		 * 
-		 * TODO - Test these commands to see if they work.
-		 * */
-		rightBumper.whileHeld(new SpinUp());
-		rightBumper.whenReleased(new SpinStop());
+		shooterRightTrigger.whileHeld(new CollectBalls());
+		shooterRightTrigger.whenReleased(new StopCollector());
+		
+		shooterLeftTrigger.whileHeld(new EjectBalls());
+		shooterLeftTrigger.whenReleased(new StopCollector());
 	}
 	
 	public Joystick getBaseJoystick() {
