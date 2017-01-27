@@ -22,7 +22,7 @@ import org.usfirst.frc.team233.robot.subsystems.ShooterWheel;
  * directory.
  */
 public class Robot extends IterativeRobot {
-	public static OI oi;
+	
 	
 	// Define subsystem varaibles
 	public static DriveTrain drivetrain;
@@ -30,7 +30,7 @@ public class Robot extends IterativeRobot {
 	public static BallCollector ballCollector;
 	public static RopeClimber ropeClimber;
 	public static Hopper hopper;
-	//public static TankDrive tankDrive;
+	public static OI oi;
 
 	Command autonomousCommand;
 	SendableChooser<Command> chooser = new SendableChooser<>();
@@ -41,9 +41,10 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void robotInit() {
-		oi = new OI();
 		drivetrain = new DriveTrain();
 		shooterWheel = new ShooterWheel();
+		ballCollector = new BallCollector();
+		oi = new OI();
 		// chooser.addObject("My Auto", new MyAutoCommand());
 		System.out.println("RoboInit");
 		SmartDashboard.putData("Auto mode", chooser);
