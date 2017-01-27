@@ -1,5 +1,7 @@
 package org.usfirst.frc.team233.robot;
 
+import edu.wpi.first.wpilibj.ControllerPower;
+
 /**
  * The RobotMap is a mapping from the ports sensors and actuators are wired into
  * to a variable name. This provides flexibility changing wiring, makes checking
@@ -20,44 +22,20 @@ public class RobotMap {
 	public static int leftBackMotorPort = 1;
 	public static int rightFrontMotorPort = 2;
 	public static int rightBackMotorPort = 3;
-	public static int shooterMotorPort = 4;
-	public static int shooterIndexerPort = 5;
 	
 	public static int baseJoystickPort = 0;
 	public static int shooterJoystickPort = 1;
 	
-	/** Encoder enum. Place any new encoder definition as follow:
-	 * <Encoder_Name>(Channel A port, Channel B port).
-	 * 
-	 * NOTE: port definition for the encoders should
-	 * be added to the encoder definition area*/
-	public static enum Encoders {
-		/* ENCODER DEFINITION AREA */
-		
-		// Drive train encoders
-		FrontLeft(0,1),
-		BackLeft(2,3),
-		FrontRight(4,5),
-		BackRight(6,7);
-		/* ADD NEW ENCODERS HERE */
-		
-		//=====================================
-		/* DO NOT TOUCH THIS PART OF
-		 * THE CODE */
-		private final int channelA;
-		private final int channelB;
-		
-		Encoders(int channelA, int channelB) {
-			this.channelA = channelA;
-			this.channelB = channelB;
-		}
-		
-		public int channelA() {
-			return this.channelA;
-		}
-		
-		public int channelB() {
-			return this.channelB;
-		}
-	}
+	public static int leftEncoderAPort = 0;
+	public static int leftEncoderBPort = 1;
+	public static int rightEncoderAPort = 3;
+	public static int rightEncoderBPort = 4;
+
+	//Hopper variables
+	public static int hopperAgitatorPort;
+	public static int hopperBlowerPort;
+	
+	public ControllerPower cp = new ControllerPower();
+	//can read amps in thru power distrib board
 }
+	
