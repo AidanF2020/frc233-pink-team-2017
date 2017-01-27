@@ -1,17 +1,21 @@
+
 package org.usfirst.frc.team233.robot;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
 //import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
+import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
+import org.usfirst.frc.team233.robot.commands.SpinUp;
+import org.usfirst.frc.team233.robot.commands.TankDrive;
+import org.usfirst.frc.team233.robot.commands.ToggleIndexer;
 import org.usfirst.frc.team233.robot.subsystems.BallCollector;
 import org.usfirst.frc.team233.robot.subsystems.DriveTrain;
-import org.usfirst.frc.team233.robot.subsystems.Hopper;
-import org.usfirst.frc.team233.robot.subsystems.RopeClimber;
+import org.usfirst.frc.team233.robot.subsystems.ShooterIndexer;
 import org.usfirst.frc.team233.robot.subsystems.ShooterWheel;
 
 /**
@@ -22,15 +26,16 @@ import org.usfirst.frc.team233.robot.subsystems.ShooterWheel;
  * directory.
  */
 public class Robot extends IterativeRobot {
+
 	public static OI oi;
-	
-	// Define subsystem varaibles
-	public static DriveTrain drivetrain;
-	public static ShooterWheel shooterWheel;
+	public static DriveTrain drivetrain; //the tank drive subsystem
+	public static TankDrive tankDrive; //the tank drive command
+	public static SpinUp spinUp; // the command to spin up the shooter wheel
+	public static ShooterWheel shooterWheel; //the shooter wheel subsystem
+	public static ToggleIndexer toggleIndexer; //the command to toggle the shooter indexer
+	public static ShooterIndexer shooterIndexer; //the shooter indexer subsystem
+	public static ShooterWheel indexerWheel;
 	public static BallCollector ballCollector;
-	public static RopeClimber ropeClimber;
-	public static Hopper hopper;
-	//public static TankDrive tankDrive;
 
 	Command autonomousCommand;
 	SendableChooser<Command> chooser = new SendableChooser<>();
@@ -44,6 +49,8 @@ public class Robot extends IterativeRobot {
 		oi = new OI();
 		drivetrain = new DriveTrain();
 		shooterWheel = new ShooterWheel();
+		ballCollector = new BallCollector();
+		//indexerWheel = new ShooterWheel();
 		// chooser.addObject("My Auto", new MyAutoCommand());
 		System.out.println("RoboInit");
 		SmartDashboard.putData("Auto mode", chooser);
@@ -113,9 +120,14 @@ public class Robot extends IterativeRobot {
 		if (autonomousCommand != null)
 			autonomousCommand.cancel();
 		System.out.println("Teleop Init");
-		//Scheduler.getInstance().enable();
+		Scheduler.getInstance().enable();
 		//Scheduler.getInstance().removeAll();
-		//Scheduler.getInstance().add(tankDrive);
+		
+		//adding commands to be conditionally executed when scheduler.getInstance.run() is
+		//called in teleopPeriodic()
+		Scheduler.getInstance().add(tankDrive);
+		//Scheduler.getInstance().add(spinUp);
+		//Scheduler.getInstance().add(toggleIndexer);
 		
 		
 	}
@@ -138,6 +150,10 @@ public class Robot extends IterativeRobot {
 		 * TankDrive, which is set as the default command now
 		 * in the DriveTrain subsystem class.
 		 * NEED TO TEST THIS!!!*/
+		//System.out.println("Robot Periodic");
+		//Robot.drivetrain.drive(Robot.oi.getBaseJoystick());
+		//super.robotPeriodic();
+		//Robot.shooterWheel.spin(Robot.oi.getShooterJoystick());
 	}
 	
 	/**
