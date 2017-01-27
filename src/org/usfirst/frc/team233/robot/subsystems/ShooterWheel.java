@@ -20,8 +20,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class ShooterWheel extends Subsystem {
 
 	private SpeedController shooter = new Talon(RobotMap.shooterMotorPort);
-	private SpeedController indexer = new Talon(5);
-	private static int simulatedEncoderCount = 0;
+	private SpeedController indexer = new Talon(5); //afraid to change anything cause it works right now, but will probably change this to port 7 to accommodate the RobotMap everyone else is using
 	private boolean isSpinning = false;
 	private double motorSpeed = .8;
 	public ShooterWheel() {
