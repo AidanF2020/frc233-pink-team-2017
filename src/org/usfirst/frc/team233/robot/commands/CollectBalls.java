@@ -7,7 +7,7 @@ public class CollectBalls extends Command {
 
 	public CollectBalls() {
 		// TODO Auto-generated constructor stub
-		requires(Robot.ballCollector);
+		//requires(Robot.ballCollector);
 	}
 	
 	@Override
