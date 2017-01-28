@@ -90,8 +90,12 @@ public class OI {
 		 * 
 		 * TODO - Test these commands to see if they work.
 		 * */
-		shooterRightBumper.whileHeld(new SpinUp());
-		shooterRightBumper.whenReleased(new SpinStop());
+		rightBumper.whileHeld(new SpinUp());
+		rightBumper.whenReleased(new SpinStop());
+
+//		shooterRightBumper.whileHeld(new SpinUp());
+//		shooterRightBumper.whenReleased(new SpinStop());
+
 		
 		rightTrigger.whileHeld(new CollectBalls());
 		rightTrigger.whenReleased(new StopCollector());

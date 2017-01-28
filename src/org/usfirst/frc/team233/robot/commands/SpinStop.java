@@ -15,7 +15,7 @@ public class SpinStop extends Command {
 	@Override
 	protected void execute() {
 		//System.out.println("TankDrive Execute!!!");
-		Robot.shooterWheel.stop();;
+		Robot.shooterWheel.stop();
 	}
 
 	// Make this return true when this Command no longer needs to run execute()
