@@ -121,9 +121,27 @@ public class DriveTrain extends Subsystem{
 		return dist;
 	}
 	
+	/** Average the distance of both encoders and return its 
+	 * value. Also put this value in the SmartDashboard. */
+	public double getDistanceTraveled() {
+		double avgEncoders = (leftEncoder.getDistance() + rightEncoder.getDistance()) / 2;
+		SmartDashboard.putNumber("Encoder Avg", avgEncoders);
+		return avgEncoders;
+	}
+	
+	/** Use this method to reset encoders and any other resource
+	 * for autonomous use. */
+	public void reset() {
+		resetEncoders();
+	}
+	
 	/** This method should be called on any disable to reset and
 	 * release any resource that is not going to be used anymore.*/
 	public void disableDriveTrain() {
 		resetEncoders();
+		frontLeftMotor.disable();
+		frontRightMotor.disable();
+		rearLeftMotor.disable();
+		rearRightMotor.disable();
 	}
 }
