@@ -26,6 +26,8 @@ public class DriveTrain extends Subsystem{
 	// Link the motors to the robot
 	private RobotDrive drive = new RobotDrive(frontLeftMotor, rearLeftMotor, frontRightMotor, rearRightMotor);
 	
+	boolean isInverted = false;
+	
 	/* Calculate the distance each pulse in the encoder equals to.
 	 * Equation: (Wheel Diameter x Pi) / Number of pulses per encoder revolution */
 	private final double wheelDiameter = 1.0;
@@ -42,7 +44,8 @@ public class DriveTrain extends Subsystem{
 	/** Drive train constructor.*/
 	public DriveTrain() {
 		super();
-		drive.setSafetyEnabled(false);
+		drive.setSafetyEnabled(true);
+		setupMotors();
 		resetEncoders();
 		setupEncoders();
 	}
@@ -80,6 +83,15 @@ public class DriveTrain extends Subsystem{
 	public void resetEncoders() {
 		leftEncoder.reset();
 		rightEncoder.reset();
+	}
+	
+	
+	public void setupMotors() {
+		frontLeftMotor.setInverted(isInverted);
+		rearLeftMotor.setInverted(isInverted);
+		
+		frontRightMotor.setInverted(isInverted);
+		rearRightMotor.setInverted(isInverted);
 	}
 	
 	/** Setup encoders before use. */

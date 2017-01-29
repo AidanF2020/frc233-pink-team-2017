@@ -16,17 +16,8 @@ public class SpinStop extends Command {
 	// Called repeatedly when this Command is scheduled to run
 	@Override
 	protected void execute() {
-		// System.out.println("TankDrive Execute!!!");
-		//System.out.println("going to spin");
-	//	try {
-		//	TimeUnit.SECONDS.sleep(1);
-		//} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			//System.out.println("time delay isnt working");
-		//}
-
+		//System.out.println("TankDrive Execute!!!");
 		Robot.shooterWheel.stop();
-
 	}
 
 	// Make this return true when this Command no longer needs to run execute()

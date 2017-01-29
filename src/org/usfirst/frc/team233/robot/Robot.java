@@ -26,16 +26,15 @@ import org.usfirst.frc.team233.robot.subsystems.ShooterWheel;
  * directory.
  */
 public class Robot extends IterativeRobot {
-
-	public static OI oi;
-	public static DriveTrain drivetrain; //the tank drive subsystem
-	public static TankDrive tankDrive; //the tank drive command
-	public static SpinUp spinUp; // the command to spin up the shooter wheel
-	public static ShooterWheel shooterWheel; //the shooter wheel subsystem
-	public static ToggleIndexer toggleIndexer; //the command to toggle the shooter indexer
-	public static ShooterIndexer shooterIndexer; //the shooter indexer subsystem
-	public static ShooterWheel indexerWheel;
+	
+	
+	// Define subsystem varaibles
+	public static DriveTrain drivetrain;
+	public static ShooterWheel shooterWheel;
 	public static BallCollector ballCollector;
+	public static RopeClimber ropeClimber;
+	public static Hopper hopper;
+	public static OI oi;
 
 	Command autonomousCommand;
 	SendableChooser<Command> chooser = new SendableChooser<>();
@@ -46,11 +45,10 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void robotInit() {
-		oi = new OI();
 		drivetrain = new DriveTrain();
 		shooterWheel = new ShooterWheel();
 		ballCollector = new BallCollector();
-		//indexerWheel = new ShooterWheel();
+		oi = new OI();
 		// chooser.addObject("My Auto", new MyAutoCommand());
 		System.out.println("RoboInit");
 		SmartDashboard.putData("Auto mode", chooser);

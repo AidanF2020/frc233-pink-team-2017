@@ -44,19 +44,19 @@ public class OI {
 		JoystickButton rightJoystickPress = new JoystickButton(base, 12);
 		int baseDpad = base.getPOV();
 		
-		//the args should all have shooter instead of base
-		JoystickButton shooterX = new JoystickButton(base, 1);
-		JoystickButton shooterA = new JoystickButton(base, 2);
-		JoystickButton shooterB = new JoystickButton(base, 3);
-		JoystickButton shooterY = new JoystickButton(base, 4);
-		JoystickButton shooterLeftBumper = new JoystickButton(base, 5);
+		//Shooter
+		JoystickButton shooterX = new JoystickButton(shooter, 1);
+		JoystickButton shooterA = new JoystickButton(shooter, 2);
+		JoystickButton shooterB = new JoystickButton(shooter, 3);
+		JoystickButton shooterY = new JoystickButton(shooter, 4);
+		JoystickButton shooterLeftBumper = new JoystickButton(shooter, 5);
 		JoystickButton shooterRightBumper = new JoystickButton(shooter, 6);
 		JoystickButton shooterLeftTrigger = new JoystickButton(shooter, 7);
 		JoystickButton shooterRightTrigger = new JoystickButton(shooter, 8);
-		JoystickButton shooterSelect = new JoystickButton(base, 9);
-		JoystickButton shooterStart = new JoystickButton(base, 10);
-		JoystickButton shooterleftJoystickPress = new JoystickButton(base, 11);
-		JoystickButton shooterrightJoystickPress = new JoystickButton(base, 12);
+		JoystickButton shooterSelect = new JoystickButton(shooter, 9);
+		JoystickButton shooterStart = new JoystickButton(shooter, 10);
+		JoystickButton shooterleftJoystickPress = new JoystickButton(shooter, 11);
+		JoystickButton shooterrightJoystickPress = new JoystickButton(shooter, 12);
 		int shooterDpad = shooter.getPOV();
 		
 		
@@ -74,11 +74,37 @@ public class OI {
 		shooterRightBumper.whileHeld(new SpinUp());
 		shooterRightBumper.whenReleased(new SpinStop());
 		
-		shooterRightTrigger.whileHeld(new CollectBalls());
-		shooterRightTrigger.whenReleased(new StopCollector());
+		/** READ THIS!!!
+		 * From my understanding we are going to implement
+		 * the shooting capability in one action, not two
+		 * as we previously thought. So for testing purposes
+		 * we are going to put these command in the right bumper
+		 * to test the logic. BUT we will need to create a 
+		 * class that extends the CommandGroup class to implement
+		 * a set of commands that will:
+		 *	(1) Set the shooter wheel to the correct speed
+		 *	(2) Hopper will feed the balls
+		 *	(3) Shoot the balls
+		 *	(4) Stop all these actions once the driver 
+		 *		releases the trigger
+		 *
+		 * Also note that we are going to use the triggers
+		 * instead of the bumpers to perform the shooting.
+		 * 
+		 * TODO - Test these commands to see if they work.
+		 * */
+		rightBumper.whileHeld(new SpinUp());
+		rightBumper.whenReleased(new SpinStop());
+
+//		shooterRightBumper.whileHeld(new SpinUp());
+//		shooterRightBumper.whenReleased(new SpinStop());
+
 		
-		shooterLeftTrigger.whileHeld(new EjectBalls());
-		shooterLeftTrigger.whenReleased(new StopCollector());
+		rightTrigger.whileHeld(new CollectBalls());
+		rightTrigger.whenReleased(new StopCollector());
+		
+		leftTrigger.whileHeld(new EjectBalls());
+		leftTrigger.whenReleased(new StopCollector());
 	}
 	
 	public Joystick getBaseJoystick() {
