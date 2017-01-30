@@ -1,4 +1,3 @@
-
 package org.usfirst.frc.team233.robot;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
@@ -34,7 +33,12 @@ public class Robot extends IterativeRobot {
 	public static BallCollector ballCollector;
 	public static RopeClimber ropeClimber;
 	public static Hopper hopper;
+	public static Agitate agitate;
+	public static Blow blow;
 	public static OI oi;
+	public static Shooter shooter;
+	public static Shoot shoot;
+	public static SpinUp spinup;
 
 	Command autonomousCommand;
 	SendableChooser<Command> chooser = new SendableChooser<>();
@@ -46,7 +50,9 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void robotInit() {
 		drivetrain = new DriveTrain();
-		shooterWheel = new ShooterWheel();
+        hopper = new Hopper();
+        shooter = new Shooter();
+        
 		ballCollector = new BallCollector();
 		oi = new OI();
 		// chooser.addObject("My Auto", new MyAutoCommand());
@@ -123,11 +129,6 @@ public class Robot extends IterativeRobot {
 		
 		//adding commands to be conditionally executed when scheduler.getInstance.run() is
 		//called in teleopPeriodic()
-		Scheduler.getInstance().add(tankDrive);
-		//Scheduler.getInstance().add(spinUp);
-		//Scheduler.getInstance().add(toggleIndexer);
-		
-		
 	}
 
 	/**
@@ -138,6 +139,8 @@ public class Robot extends IterativeRobot {
 		Scheduler.getInstance().run();
 		// TODO Test this change in code to verify if the motors still run
 		//System.out.println("Teleop Periodic");
+		shooter.flywheel.adjustFlywheelSpeed();
+
 	}
 
 	@Override
