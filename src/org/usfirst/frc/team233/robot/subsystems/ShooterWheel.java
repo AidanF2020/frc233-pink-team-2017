@@ -9,6 +9,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 public class ShooterWheel extends Subsystem {
 
 	private SpeedController shooter = new Talon(RobotMap.shooterMotorPort);
+	private SpeedController indexer = new Talon(RobotMap.indexerMotorPort);
 	//private boolean isSpinning;
 	private double motorSpeed = 1.0;
 	

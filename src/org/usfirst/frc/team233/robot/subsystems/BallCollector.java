@@ -1,5 +1,6 @@
 package org.usfirst.frc.team233.robot.subsystems;
 
+import org.usfirst.frc.team233.robot.Robot;
 import org.usfirst.frc.team233.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.SpeedController;
@@ -25,9 +26,10 @@ public class BallCollector extends Subsystem{
 	
 	/** Start collecting balls */
 	public void collect() {
-		// Set the correct orientation for the motors
-		collectorMotor.setInverted(isInverted);
-		
+		if (Robot.isReal()) {
+			// Set the correct orientation for the motors
+			collectorMotor.setInverted(isInverted);
+		}
 		// Run the collector motor at defined speed
 		collectorMotor.set(collectorSpeed);
 		 
@@ -35,9 +37,10 @@ public class BallCollector extends Subsystem{
 	
 	/** Reverse collector to eject balls */
 	public void eject() {
-		// Reverse the orientation of the motor
-		collectorMotor.setInverted(!isInverted);
-		
+		if (Robot.isReal()) {
+			// Reverse the orientation of the motor
+			collectorMotor.setInverted(!isInverted);
+		}
 		// Run the collector motor at defined speed
 		collectorMotor.set(collectorSpeed);
 	}

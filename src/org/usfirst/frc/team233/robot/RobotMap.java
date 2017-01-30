@@ -25,16 +25,17 @@ public class RobotMap {
 	
 	// Shooter variables
 	public static int shooterMotorPort = 4;
+	public static int indexerMotorPort = 5;
 	
 	// Collector variables
-	public static int collectorMotorPort = 5;
+	public static int collectorMotorPort = 6;
 	
 	// Rope climber variables
-	public static int ropeClimberMotorPort = 6;
+	public static int ropeClimberMotorPort = 7;
 	
 	//Hopper variables
-	public static int hopperAgitatorPort;
-	public static int hopperBlowerPort;
+	public static int hopperAgitatorPort = 8;
+	public static int hopperBlowerPort = 9;
 	
 	
 	// Joystick variable

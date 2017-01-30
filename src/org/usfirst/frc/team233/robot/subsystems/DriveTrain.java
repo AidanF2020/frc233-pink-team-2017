@@ -1,5 +1,6 @@
 package org.usfirst.frc.team233.robot.subsystems;
 
+import org.usfirst.frc.team233.robot.Robot;
 //import org.usfirst.frc.team233.robot.Robot;
 import org.usfirst.frc.team233.robot.RobotMap;
 import org.usfirst.frc.team233.robot.commands.TankDrive;
@@ -28,13 +29,14 @@ public class DriveTrain extends Subsystem{
 	
 	boolean isInverted = false;
 	
-	/* Calculate the distance each pulse in the encoder equals to.
+	/* Calculate the distance each pulse in the encoder equals to for simulation.
 	 * Equation: (Wheel Diameter x Pi) / Number of pulses per encoder revolution */
 	private final double wheelDiameter = 1.0;
 	private final int pulsePerRevolution = 40;
 	private final double distancePerPulse = (Math.PI * wheelDiameter) / pulsePerRevolution;
 	
-	
+	// Fixed value for distancePerPulse used in real robot
+	private final double distancePerPulseConstant = 0.124;
 	
 	// Define all the encoders that are going to be used for the drive train.
 	private Encoder leftEncoder = new Encoder(RobotMap.leftEncoderAPort, RobotMap.leftEncoderBPort);
@@ -96,11 +98,21 @@ public class DriveTrain extends Subsystem{
 	
 	/** Setup encoders before use. */
 	public void setupEncoders() {
-		leftEncoder.setDistancePerPulse(distancePerPulse);
+		//Setup left encoder
+		if (Robot.isReal()) {
+			leftEncoder.setDistancePerPulse(distancePerPulseConstant);
+		} else {
+			leftEncoder.setDistancePerPulse(distancePerPulse);
+		}
 		leftEncoder.setPIDSourceType(PIDSourceType.kDisplacement);
 		SmartDashboard.putData("Left Encoder", leftEncoder);
 		
-		rightEncoder.setDistancePerPulse(distancePerPulse);
+		// Setup right encoder
+		if (Robot.isReal()) {
+			rightEncoder.setDistancePerPulse(distancePerPulseConstant);
+		} else {
+			rightEncoder.setDistancePerPulse(distancePerPulse);
+		}		
 		rightEncoder.setPIDSourceType(PIDSourceType.kDisplacement);
 		SmartDashboard.putData("Right Encoder", rightEncoder);
 	}
