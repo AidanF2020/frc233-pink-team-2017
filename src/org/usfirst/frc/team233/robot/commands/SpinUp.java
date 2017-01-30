@@ -24,7 +24,10 @@ public class SpinUp extends Command {
 			// TODO Auto-generated catch block
 			//System.out.println("time delay isnt working");
 		//}
-
+		if(Robot.oi.shooterDpad != 8){
+			Robot.shooter.flywheel.adjustFlywheelSpeed();
+		}
+		Robot.shooter.flywheel.spin();
 		Robot.shooterWheel.spin();
 		//try {
 		//	TimeUnit.SECONDS.sleep(2);
