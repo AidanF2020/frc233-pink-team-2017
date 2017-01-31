@@ -1,22 +1,13 @@
-package org.usfirst.frc.team233.robot.subsystems;
+package org.usfirst.frc.team233.robot.commands;
 
+import org.usfirst.frc.team233.robot.PinkPD;
+import org.usfirst.frc.team233.robot.Range;
 import org.usfirst.frc.team233.robot.Robot;
-//import org.usfirst.frc.team233.robot.Robot;
-import org.usfirst.frc.team233.robot.RobotMap;
-import org.usfirst.frc.team233.robot.commands.TankDrive;
 
-import edu.wpi.first.wpilibj.Encoder;
-import edu.wpi.first.wpilibj.Joystick;
-import edu.wpi.first.wpilibj.RobotDrive;
-import edu.wpi.first.wpilibj.SpeedController;
-import edu.wpi.first.wpilibj.Talon;
-import edu.wpi.first.wpilibj.Joystick.AxisType;
-import edu.wpi.first.wpilibj.PIDSourceType;
-import edu.wpi.first.wpilibj.command.Subsystem;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-//import edu.wpi.first.wpilibj.livewindow.LiveWindow;
-public class PinkNavigate extends DriveTrain
-{
+import edu.wpi.first.wpilibj.command.Command;
+
+
+public class PinkNavigate extends Command {
     static final double COUNTS_PER_INCH = 54;  // Base travel
     static final double POSITION_THRESHOLD = 30.0;   // Counts
     static final double ANGLE_THRESHOLD = 5.0;     // Degrees
@@ -83,6 +74,14 @@ public class PinkNavigate extends DriveTrain
     {
         return ((Robot.drivetrain.getLeftDistance() + Robot.drivetrain.getRightDistance())/2.0);
     }
+
+    
+    
+	@Override
+	protected boolean isFinished() {
+		// TODO Auto-generated method stub
+		return false;
+	}
 
     /**
      * Created by Andy on 11/12/2015.

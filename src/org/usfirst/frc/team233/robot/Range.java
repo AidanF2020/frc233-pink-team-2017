@@ -1,4 +1,4 @@
-package org.usfirst.frc.team233.robot.subsystems;
+package org.usfirst.frc.team233.robot;
 
 public class Range {
 public static double clip (double cmd, double max, double min) {
