@@ -12,7 +12,7 @@ public class Agitate extends Command {
 	
 	@Override
 	protected void execute(){
-		Robot.hopper.agitate(Robot.oi.getShooterJoystick());
+		Robot.hopper.agitate();
 	}
 
 

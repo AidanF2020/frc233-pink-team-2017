@@ -2,6 +2,7 @@ package org.usfirst.frc.team233.robot.subsystems;
 
 import org.usfirst.frc.team233.robot.RobotMap;
 
+import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.Talon;
@@ -13,18 +14,20 @@ public class Hopper extends Subsystem {
 	private double agitatorSpeed = 1;
 	private SpeedController agitatorMotor = new Talon(RobotMap.hopperAgitatorPort); 
 	private SpeedController blowerMotor = new Talon(RobotMap.hopperBlowerPort);
-	
-	//private RobotDrive drive = new RobotDrive(agitatorMotor, blowerMotor);
+	private Encoder encoder = new Encoder(0,1);
+	private final double shooterDistancePerPulse = 0.123;
 	
 	public Hopper() {
 		super();
+		encoder.reset();
+		encoder.setDistancePerPulse(shooterDistancePerPulse);
 	}
 	
-	//link motor to joystick via port?
-	public void agitate(Joystick shooter){
+	public void agitate(){
 		//Robot.oi.getShooterJoystick().
 		//shooter.getButton(button)
 		agitatorMotor.set(agitatorSpeed);
+		System.out.println("Agitator: " + encoder.getDistance());
 	}
 	
 	public void blow(){

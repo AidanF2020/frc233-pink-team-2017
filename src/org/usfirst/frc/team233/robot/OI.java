@@ -70,7 +70,7 @@ public class OI {
 		//l1.whenPressed(new Place());
 		//l2.whenPressed(new Autonomous());
 		
-		
+		// For testing purposes we are using the base joystick
 		rightBumper.whileHeld(new SpinUp());
 		rightBumper.whenReleased(new SpinStop());
 
