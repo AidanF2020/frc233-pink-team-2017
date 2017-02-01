@@ -9,8 +9,6 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 public class RopeClimber extends Subsystem {
 
 	private SpeedController climberMotor = new Talon(RobotMap.ropeClimberMotorPort);
-	private double climbingSpeed = 0.75;
-	private double holdSpeed = 0.25;
 	private double looseSpeed = - 0.10;
 	private final boolean isInverted = false;
 	
@@ -22,7 +20,7 @@ public class RopeClimber extends Subsystem {
 	/** Skeleton method for a simple rope climbing action. */
 	public void startClimbingRope() {
 		climberMotor.setInverted(isInverted);
-		climberMotor.set(climbingSpeed);
+		climberMotor.set(RobotMap.ropeClimberSpeed);
 	}
 	
 	
@@ -32,7 +30,7 @@ public class RopeClimber extends Subsystem {
 	public void holdPosition() {
 		// Not clear what we are doing here yet.
 		climberMotor.setInverted(isInverted);
-		climberMotor.set(holdSpeed);
+		climberMotor.set(RobotMap.ropeHoldSpeed);
 	}
 	
 	/** Not sure if method is really needed, but I'll

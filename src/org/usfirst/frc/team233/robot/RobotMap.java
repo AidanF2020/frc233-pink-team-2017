@@ -7,46 +7,69 @@ package org.usfirst.frc.team233.robot;
  * floating around.
  */
 public class RobotMap {
-	// For example to map the left and right motors, you could define the
-	// following variables to use with your drivetrain subsystem.
-	// public static int leftMotor = 1;
-	// public static int rightMotor = 2;
 	
-	// If you are using multiple modules, make sure to define both the port
-	// number and the module. For example you with a rangefinder:
-	// public static int rangefinderPort = 1;
-	// public static int rangefinderModule = 1;
-	
-	// Drive train variables
+	//============================================
+	// 		DRIVE TRAIN VARIABLES
+	//============================================
+	// Motors
 	public static int leftFrontMotorPort = 0;
 	public static int leftBackMotorPort = 1;
 	public static int rightFrontMotorPort = 2;
 	public static int rightBackMotorPort = 3;
-	
-	// Shooter variables
-	public static int shooterMotorPort = 4;
-	public static int indexerMotorPort = 5;
-	
-	// Collector variables
-	public static int collectorMotorPort = 6;
-	
-	// Rope climber variables
-	public static int ropeClimberMotorPort = 7;
-	
-	//Hopper variables
-	public static int hopperAgitatorPort = 8;
-	public static int hopperBlowerPort = 9;
-	
-	
-	// Joystick variable
-	public static int baseJoystickPort = 0;
-	public static int shooterJoystickPort = 1;
 	
 	// Encoders
 	public static int leftEncoderAPort = 0;
 	public static int leftEncoderBPort = 1;
 	public static int rightEncoderAPort = 3;
 	public static int rightEncoderBPort = 4;
+	
+	
+	//============================================
+	// 		COLLECTOR VARIABLES
+	//============================================
+	public static int collectorMotorPort = 6;
+	public static double collectorMotorSpeed = 0.5;
+	
+
+	//============================================
+	// 		ROPE CLIMBER VARIABLES
+	//============================================
+	// Motors
+	public static int ropeClimberMotorPort = 7;
+	public static double ropeClimberSpeed = 0.75;
+	public static double ropeHoldSpeed = 0.25;
+	
+	
+	//============================================
+	// 		SHOOTER VARIABLES
+	//============================================
+	// Motors
+	public static int shooterMotorPort = 4;
+	public static int indexerMotorPort = 5;
+	public static double shooterMotorSpeed = 1.0;
+	
+	// Encoder
+	public static int shooterEncoderPortA = 5;
+	public static int shooterEncoderPortB = 6;
+	
+	
+	//============================================
+	// 		HOPPER VARIABLES
+	//============================================
+	// Motors
+	public static int hopperAgitatorPort = 8;
+	public static int hopperBlowerPort = 9;
+	public static double hopperBlowerSpeed = 1;
+	public static double hopperAgitatorSpeed = 1;
+	
+	
+	//============================================
+	// 		JOYSTICK VARIABLES
+	//============================================
+	public static int baseJoystickPort = 0;
+	public static int shooterJoystickPort = 1;
+	
+	
 	
 	
 	

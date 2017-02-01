@@ -10,28 +10,21 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class Hopper extends Subsystem {
 
-	private double blowerSpeed = 1;
-	private double agitatorSpeed = 1;
 	private SpeedController agitatorMotor = new Talon(RobotMap.hopperAgitatorPort); 
 	private SpeedController blowerMotor = new Talon(RobotMap.hopperBlowerPort);
-	private Encoder encoder = new Encoder(0,1);
-	private final double shooterDistancePerPulse = 0.123;
 	
 	public Hopper() {
 		super();
-		encoder.reset();
-		encoder.setDistancePerPulse(shooterDistancePerPulse);
 	}
 	
 	public void agitate(){
 		//Robot.oi.getShooterJoystick().
 		//shooter.getButton(button)
-		agitatorMotor.set(agitatorSpeed);
-		System.out.println("Agitator: " + encoder.getDistance());
+		agitatorMotor.set(RobotMap.hopperAgitatorSpeed);
 	}
 	
 	public void blow(){
-		blowerMotor.set(blowerSpeed);
+		blowerMotor.set(RobotMap.hopperBlowerSpeed);
 	}
 
 	@Override

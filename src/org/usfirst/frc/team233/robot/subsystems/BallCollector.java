@@ -11,7 +11,6 @@ public class BallCollector extends Subsystem{
 	
 	// Collector Motor Definition
 	private SpeedController collectorMotor = new Talon(RobotMap.collectorMotorPort);
-	private final double collectorSpeed = 0.5;
 	private final boolean isInverted = false;
 	
 	public BallCollector() {	
@@ -31,7 +30,7 @@ public class BallCollector extends Subsystem{
 			collectorMotor.setInverted(isInverted);
 		}
 		// Run the collector motor at defined speed
-		collectorMotor.set(collectorSpeed);
+		collectorMotor.set(RobotMap.collectorMotorSpeed);
 		 
 	}
 	
@@ -42,7 +41,7 @@ public class BallCollector extends Subsystem{
 			collectorMotor.setInverted(!isInverted);
 		}
 		// Run the collector motor at defined speed
-		collectorMotor.set(collectorSpeed);
+		collectorMotor.set(RobotMap.collectorMotorSpeed);
 	}
 	
 	/** Stop collecting balls*/
