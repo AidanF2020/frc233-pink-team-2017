@@ -8,14 +8,14 @@ public class SpinUp extends Command {
 	
 	public SpinUp() {
 		// TODO Auto-generated constructor stub
-		requires(Robot.shooterWheel);
+		requires(Robot.shooter);
 	}
 
 	// Called repeatedly when this Command is scheduled to run
 	@Override
 	protected void execute() {
 		//System.out.println("TankDrive Execute!!!");
-		Robot.shooterWheel.spin();
+		Robot.shooter.spin();
 	}
 
 	// Make this return true when this Command no longer needs to run execute()

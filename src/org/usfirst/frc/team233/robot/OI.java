@@ -1,8 +1,9 @@
 package org.usfirst.frc.team233.robot;
 
+import org.usfirst.frc.team233.robot.commands.Ceasefire;
 import org.usfirst.frc.team233.robot.commands.CollectBalls;
 import org.usfirst.frc.team233.robot.commands.EjectBalls;
-import org.usfirst.frc.team233.robot.commands.SpinStop;
+import org.usfirst.frc.team233.robot.commands.Shoot;
 import org.usfirst.frc.team233.robot.commands.SpinUp;
 import org.usfirst.frc.team233.robot.commands.StopCollector;
 
@@ -27,7 +28,11 @@ public class OI {
 	
 	public OI() {
 		// TODO Auto-generated constructor stub
-		// Create some buttons
+		
+		//==========================================
+		//		Link to Joystick Buttons
+		//==========================================
+		
 		//Base Driver
 		JoystickButton x = new JoystickButton(base, 1);
 		JoystickButton a = new JoystickButton(base, 2);
@@ -59,24 +64,13 @@ public class OI {
 		int shooterDpad = shooter.getPOV();
 		
 		
-		// Connect the buttons to commands
-		//d_up.whenPressed(new SetElevatorSetpoint(0.2));
-		//d_down.whenPressed(new SetElevatorSetpoint(-0.2));
-		//d_right.whenPressed(new CloseClaw());
-		//d_left.whenPressed(new OpenClaw());
-
-		//r1.whenPressed(new PrepareToPickup());
-		//r2.whenPressed(new Pickup());
-		//l1.whenPressed(new Place());
-		//l2.whenPressed(new Autonomous());
 		
-		// For testing purposes we are using the base joystick
-		rightBumper.whileHeld(new SpinUp());
-		rightBumper.whenReleased(new SpinStop());
-
-//		shooterRightBumper.whileHeld(new SpinUp());
-//		shooterRightBumper.whenReleased(new SpinStop());
-
+		//==========================================
+		//		Map Joysticks to Commands
+		//==========================================
+		
+		shooterRightTrigger.whileHeld(new Shoot());
+		shooterRightTrigger.whenReleased(new Ceasefire());
 		
 		rightTrigger.whileHeld(new CollectBalls());
 		rightTrigger.whenReleased(new StopCollector());

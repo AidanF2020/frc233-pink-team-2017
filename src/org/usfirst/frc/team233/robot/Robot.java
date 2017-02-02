@@ -12,7 +12,7 @@ import org.usfirst.frc.team233.robot.subsystems.BallCollector;
 import org.usfirst.frc.team233.robot.subsystems.DriveTrain;
 import org.usfirst.frc.team233.robot.subsystems.Hopper;
 import org.usfirst.frc.team233.robot.subsystems.RopeClimber;
-import org.usfirst.frc.team233.robot.subsystems.ShooterWheel;
+import org.usfirst.frc.team233.robot.subsystems.Shooter;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -26,7 +26,7 @@ public class Robot extends IterativeRobot {
 	
 	// Define subsystem varaibles
 	public static DriveTrain drivetrain;
-	public static ShooterWheel shooterWheel;
+	public static Shooter shooter;
 	public static BallCollector ballCollector;
 	public static RopeClimber ropeClimber;
 	public static Hopper hopper;
@@ -42,8 +42,9 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void robotInit() {
 		drivetrain = new DriveTrain();
-		shooterWheel = new ShooterWheel();
+		shooter = new Shooter();
 		ballCollector = new BallCollector();
+		shooter = new Shooter();
 		oi = new OI();
 		// chooser.addObject("My Auto", new MyAutoCommand());
 		System.out.println("RoboInit");

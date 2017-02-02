@@ -25,6 +25,20 @@ public class RobotMap {
 	
 	
 	//============================================
+	// 		SHOOTER VARIABLES
+	//============================================
+	// Motors
+	public static int flywheelMotorPort = 4;
+	public static int indexerMotorPort = 5;
+	public static double flywheelMotorSpeed = 1.0;
+	public static double indexerMotorSpeed = 0.5;
+	
+	// Encoder
+	public static int flywheelEncoderPortA = 5;
+	public static int flywheelEncoderPortB = 6;
+	
+	
+	//============================================
 	// 		COLLECTOR VARIABLES
 	//============================================
 	public static int collectorMotorPort = 6;
@@ -38,19 +52,6 @@ public class RobotMap {
 	public static int ropeClimberMotorPort = 7;
 	public static double ropeClimberSpeed = 0.75;
 	public static double ropeHoldSpeed = 0.25;
-	
-	
-	//============================================
-	// 		SHOOTER VARIABLES
-	//============================================
-	// Motors
-	public static int shooterMotorPort = 4;
-	public static int indexerMotorPort = 5;
-	public static double shooterMotorSpeed = 1.0;
-	
-	// Encoder
-	public static int shooterEncoderPortA = 5;
-	public static int shooterEncoderPortB = 6;
 	
 	
 	//============================================
