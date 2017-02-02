@@ -4,18 +4,19 @@ import edu.wpi.first.wpilibj.IterativeRobot;
 //import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
-import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
+import org.usfirst.frc.team233.robot.commands.Agitate;
+import org.usfirst.frc.team233.robot.commands.Blow;
+import org.usfirst.frc.team233.robot.commands.Shoot;
 import org.usfirst.frc.team233.robot.commands.SpinUp;
 import org.usfirst.frc.team233.robot.commands.TankDrive;
-import org.usfirst.frc.team233.robot.commands.ToggleIndexer;
 import org.usfirst.frc.team233.robot.subsystems.BallCollector;
 import org.usfirst.frc.team233.robot.subsystems.DriveTrain;
-import org.usfirst.frc.team233.robot.subsystems.ShooterIndexer;
-import org.usfirst.frc.team233.robot.subsystems.ShooterWheel;
+import org.usfirst.frc.team233.robot.subsystems.Hopper;
+import org.usfirst.frc.team233.robot.subsystems.Shooter;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -25,20 +26,20 @@ import org.usfirst.frc.team233.robot.subsystems.ShooterWheel;
  * directory.
  */
 public class Robot extends IterativeRobot {
-	
-	
-	// Define subsystem varaibles
-	public static DriveTrain drivetrain;
-	public static ShooterWheel shooterWheel;
-	public static BallCollector ballCollector;
-	public static RopeClimber ropeClimber;
-	public static Hopper hopper;
-	public static Agitate agitate;
-	public static Blow blow;
+
 	public static OI oi;
+	public static DriveTrain drivetrain;
+	public static TankDrive tankDrive;
+	
 	public static Shooter shooter;
 	public static Shoot shoot;
 	public static SpinUp spinup;
+	
+	public static Hopper hopper;
+	public static Agitate agitate;
+	public static Blow blow;
+	
+	public static BallCollector ballCollector;
 
 	Command autonomousCommand;
 	SendableChooser<Command> chooser = new SendableChooser<>();
@@ -49,23 +50,33 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void robotInit() {
+		//try{
 		drivetrain = new DriveTrain();
-        hopper = new Hopper();
-        shooter = new Shooter();
-        
+		hopper = new Hopper();
 		ballCollector = new BallCollector();
+		shooter = new Shooter();
+		
 		oi = new OI();
+		
 		// chooser.addObject("My Auto", new MyAutoCommand());
 		System.out.println("RoboInit");
 		SmartDashboard.putData("Auto mode", chooser);
+//		} catch (Exception e){
+//			e.getMessage();
+//			e.
+//			e.printStackTrace();
+//		}
 	}
-	
 	
 
 	/**
 	 * This function is called once each time the robot enters Disabled mode.
 	 * You can use it to reset any subsystem information you want to clear when
 	 * the robot is disabled.
+	 * Stops running when you hit the button on the drivers station
+	 * Supposed to close serial ports, turn off pins, turn off motors
+	 * Sending off signals, clear cache etc.
+	 * (Check rules)
 	 */
 	@Override
 	public void disabledInit() {
@@ -111,7 +122,6 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void autonomousPeriodic() {
 		Scheduler.getInstance().run();
-		
 	}
 
 	@Override
@@ -126,9 +136,6 @@ public class Robot extends IterativeRobot {
 		System.out.println("Teleop Init");
 		Scheduler.getInstance().enable();
 		//Scheduler.getInstance().removeAll();
-		
-		//adding commands to be conditionally executed when scheduler.getInstance.run() is
-		//called in teleopPeriodic()
 	}
 
 	/**
@@ -140,7 +147,6 @@ public class Robot extends IterativeRobot {
 		// TODO Test this change in code to verify if the motors still run
 		//System.out.println("Teleop Periodic");
 		shooter.flywheel.adjustFlywheelSpeed();
-
 	}
 
 	@Override
@@ -154,7 +160,6 @@ public class Robot extends IterativeRobot {
 		//System.out.println("Robot Periodic");
 		//Robot.drivetrain.drive(Robot.oi.getBaseJoystick());
 		//super.robotPeriodic();
-		//Robot.shooterWheel.spin(Robot.oi.getShooterJoystick());
 	}
 	
 	/**
