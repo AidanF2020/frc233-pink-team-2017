@@ -1,7 +1,6 @@
 package org.usfirst.frc.team233.robot.commands;
 
 import org.usfirst.frc.team233.robot.Robot;
-
 import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.command.Command;
 
@@ -15,7 +14,8 @@ public class Shoot extends Command {
 	
 	@Override
 	protected void execute(){
-		Robot.shooter.shoot(Robot.oi.shooterDpad);
+		//Robot.shooter.shoot(Robot.oi.shooterDpad);
+		Robot.shooter.shoot();
 	}
 
 	@Override
