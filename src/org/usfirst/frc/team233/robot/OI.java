@@ -2,25 +2,30 @@ package org.usfirst.frc.team233.robot;
 
 import org.usfirst.frc.team233.robot.commands.CollectBalls;
 import org.usfirst.frc.team233.robot.commands.EjectBalls;
-import org.usfirst.frc.team233.robot.commands.SpinStop;
-import org.usfirst.frc.team233.robot.commands.SpinUp;
-import org.usfirst.frc.team233.robot.commands.StopCollector;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 
+//import org.usfirst.frc.team233.robot.commands.Autonomous;
+//import org.usfirst.frc.team233.robot.commands.OpenClaw;
+//import org.usfirst.frc.team233.robot.commands.Pickup;
+//import org.usfirst.frc.team233.robot.commands.Place;
+//import org.usfirst.frc.team233.robot.commands.PrepareToPickup;
+//import org.usfirst.frc.team233.robot.commands.SetElevatorSetpoint;
+
 /**
+ * OI == "operator interface"
  * This class is the glue that binds the controls on the physical operator
  * interface to the commands and command groups that allow control of the robot.
  */
 public class OI {
-	//game controllers
 	private Joystick base = new Joystick(RobotMap.baseJoystickPort);
 	private Joystick shooter = new Joystick(RobotMap.shooterJoystickPort);
 	
+	public int shooterDpad;
+	
 	public OI() {
-		// TODO Auto-generated constructor stub
 		// Create some buttons
 		//Base Driver
 		JoystickButton x = new JoystickButton(base, 1);
@@ -37,7 +42,7 @@ public class OI {
 		JoystickButton rightJoystickPress = new JoystickButton(base, 12);
 		int baseDpad = base.getPOV();
 		
-		//Shooter
+		//Shooter controller
 		JoystickButton shooterX = new JoystickButton(shooter, 1);
 		JoystickButton shooterA = new JoystickButton(shooter, 2);
 		JoystickButton shooterB = new JoystickButton(shooter, 3);
@@ -51,16 +56,16 @@ public class OI {
 		JoystickButton shooterleftJoystickPress = new JoystickButton(shooter, 11);
 		JoystickButton shooterrightJoystickPress = new JoystickButton(shooter, 12);
 		int shooterDpad = shooter.getPOV();
-
-        // Base button-command pairs (responsible for driving & collecting)
+		
+		// Driver button-command pairs (responsible for driving & collecting)
+		//driverRightBumper			//Gearshift
 		rightTrigger.whileHeld(new CollectBalls());
-		rightTrigger.whenReleased(new StopCollector());
 		leftTrigger.whileHeld(new EjectBalls());
-		leftTrigger.whenReleased(new StopCollector());
 		
 		// Shooter button-command pairs (responsible for shooting & climbing)
-		shooterRightBumper.whenPressed(new SpinUp());
-		shooterRightTrigger.whileHeld(new Shoot());
+		shooterRightBumper.whenPressed(Robot.spinup);
+		shooterRightTrigger.whileHeld(Robot.shoot);
+		
 	}
 	
 	public Joystick getBaseJoystick() {
