@@ -1,11 +1,8 @@
 package org.usfirst.frc.team233.robot.subsystems;
-
 import org.usfirst.frc.team233.robot.RobotMap;
-
 import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.command.Subsystem;
-
 public class BallCollector extends Subsystem{
 	
 	// Collector Motor Definition
@@ -16,7 +13,6 @@ public class BallCollector extends Subsystem{
 	public BallCollector() {	
 		// TODO Auto-generated constructor stub
 	}
-
 	@Override
 	protected void initDefaultCommand() {
 		// TODO Auto-generated method stub
@@ -49,4 +45,3 @@ public class BallCollector extends Subsystem{
 	}
 	
 }
-
