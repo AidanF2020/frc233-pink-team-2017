@@ -2,9 +2,9 @@ package org.usfirst.frc.team233.robot.subsystems;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
 
-public class GearSlot extends Subsystem {
+public class CoinSlot extends Subsystem {
 
-	public GearSlot() {
+	public CoinSlot() {
 		// TODO Auto-generated constructor stub
 	}
 
