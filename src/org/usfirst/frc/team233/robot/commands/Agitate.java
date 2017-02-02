@@ -12,10 +12,13 @@ public class Agitate extends Command {
 	
 	@Override
 	protected void execute(){
-		Robot.hopper.agitate(Robot.oi.getShooterJoystick());
+		Robot.hopper.agitate();
 	}
 
-
+	/**
+	 * called by the Scheduler
+	 * returns false if it still needs to run execute()
+	 */
 	@Override
 	protected boolean isFinished() {
 		return false;
