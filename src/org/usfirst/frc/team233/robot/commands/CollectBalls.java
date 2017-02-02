@@ -1,10 +1,8 @@
 package org.usfirst.frc.team233.robot.commands;
-
 import org.usfirst.frc.team233.robot.Robot;
 import edu.wpi.first.wpilibj.command.Command;
 
 public class CollectBalls extends Command {
-
 	public CollectBalls() {
 		// TODO Auto-generated constructor stub
 		//requires(Robot.ballCollector);
