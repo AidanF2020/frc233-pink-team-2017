@@ -21,10 +21,13 @@ public class Shooter extends Subsystem {
 	public FlyWheel flywheel;
 	public Indexer indexer;
 	public PIDController pid;
-	
+	public Encoder encoder;
 	public Shooter(){
 		flywheel = new FlyWheel();
 		indexer = new Indexer();
+		encoder = new Encoder(5,6); //haphazardly put this and uncommented other encoder stuff, not sure if the encoder stuff is right,
+		                            // but nothing crashes with it, so leaving it here. 
+		
 	}
 	
 	@Override
@@ -33,13 +36,27 @@ public class Shooter extends Subsystem {
 	
 	//public void shoot(int shooterDpadPos){
 	public void shoot(){
-		flywheel.flywheelMotor.set(1);
+		flywheel.spin();
+		//didnt have two available motors at the time, so whether this part of the code works has not been proven.
 		if(Robot.shooter.flywheel.motorSpeedEqualsSetSpeed()){
-			indexer.releaseBall();
+			indexer.releaseBall(); 
 		} else {
 			indexer.stop();
 		}
 	}
+	
+	/**
+	 * Alternate shoot procedure, in case Andy wants this other process instead
+	 * @author Tony
+	 */
+	/*	public void shoot(){
+		flywheel.flywheelMotor.set(flywheel.flywheelSpeed);
+		if(Robot.shooter.flywheel.motorSpeedEqualsSetSpeed()){
+			indexer.releaseBall(); //keeping in mind that the indexer motor speed will be set
+									//slow enough to allow the flywheel to recover.
+		
+	} 
+	 */
 
 	/**
 	 * shooter dpad used to speed up and slow down flywheel
@@ -50,7 +67,7 @@ public class Shooter extends Subsystem {
 		public SpeedController flywheelMotor = new Talon(RobotMap.shooterMotorPort);
 		//private boolean isSpinning = false;
 		public double flywheelSpeed = .8;
-		private int simulatedEncoderCount = 0;
+		//private int simulatedEncoderCount = 0;
 		private double tolerance = 0.1;
 		//private Encoder encoder = new Encoder(0, 0);
 		
@@ -80,20 +97,20 @@ public class Shooter extends Subsystem {
 			// } else {
 			// if (!isSpinning)
 			flywheelMotor.set(flywheelSpeed);
-			simulatedEncoderCount++;
-			System.out.println(simulatedEncoderCount);
-			if (simulatedEncoderCount >= 31000) {
-				simulatedEncoderCount = 100;
-			}
-			if (simulatedEncoderCount >= 100) {
-				//indexer.set(.5);
-			}
+//			simulatedEncoderCount++;
+//			System.out.println(simulatedEncoderCount);
+//			if (simulatedEncoderCount >= 31000) {
+//				simulatedEncoderCount = 100;
+//			}
+//			if (simulatedEncoderCount >= 100) {
+//				//indexer.set(.5);
+//			}
 		}
 
 		public void stop() {
 			flywheelMotor.stopMotor();
 			//indexer.set(0);
-			simulatedEncoderCount = 0;
+			//simulatedEncoderCount = 0;
 		}
 
 		protected double limit(double num) {
@@ -108,23 +125,24 @@ public class Shooter extends Subsystem {
 		
 		/** Reset all encoders. */
 		public void resetEncoder() {
-			//encoder.reset();
+			encoder.reset();
 		}
 		
 		/** Setup encoders before use. */
 		public void setupEncoder() {
-			//encoder.setDistancePerPulse(distancePerPulse);
+			encoder.setDistancePerPulse(distancePerPulse);
 			//leftEncoder.setPIDSourceType(PIDSourceType.kDisplacement);
 			//SmartDashboard.putData("Flywheel Encoder", encoder);
 		}
 		
 		public double getFlywheelSetSpeed(){
+			System.out.println(flywheelMotor.get());
 			return flywheelMotor.get();
 		}
 		
 		public double getFlywheelMotorSpeed(){
-			//return encoder.getRate();
-			return 0;
+			return encoder.getRate();
+			//return 0;
 		}
 		
 		public void adjustFlywheelSpeed(){
@@ -150,14 +168,7 @@ public class Shooter extends Subsystem {
 	 */
 	public class Indexer extends Subsystem {
 
-		public SpeedController indexer = new Talon(5); // afraid to change
-		// anything cause it
-		// works right now, but
-		// will probably change
-		// this to port 7 to
-		// accommodate the
-		// RobotMap everyone
-		// else is using
+		public SpeedController indexer = new Talon(RobotMap.indexerMotorPort);
 		public double indexerSpeed = 0.5;
 		
 		@Override
@@ -169,6 +180,13 @@ public class Shooter extends Subsystem {
 			indexer.set(indexerSpeed);
 			//indexer.
 		}
+		
+		public void stop(){
+			indexer.stopMotor();
+		}
+	}
+}
+
 		
 		public void stop(){
 			indexer.stopMotor();
