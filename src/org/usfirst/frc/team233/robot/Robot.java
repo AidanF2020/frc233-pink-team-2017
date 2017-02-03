@@ -44,7 +44,6 @@ public class Robot extends IterativeRobot {
 		drivetrain = new DriveTrain();
 		shooter = new Shooter();
 		ballCollector = new BallCollector();
-		shooter = new Shooter();
 		oi = new OI();
 		// chooser.addObject("My Auto", new MyAutoCommand());
 		System.out.println("RoboInit");
