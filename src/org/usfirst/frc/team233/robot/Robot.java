@@ -8,11 +8,10 @@ import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
-import org.usfirst.frc.team233.robot.commands.Agitate;
-import org.usfirst.frc.team233.robot.commands.Blow;
+import org.usfirst.frc.team233.robot.commands.CollectBalls;
 import org.usfirst.frc.team233.robot.commands.Shoot;
-import org.usfirst.frc.team233.robot.commands.SpinUp;
 import org.usfirst.frc.team233.robot.commands.TankDrive;
+import org.usfirst.frc.team233.robot.commands.firstRoutine;
 import org.usfirst.frc.team233.robot.subsystems.BallCollector;
 import org.usfirst.frc.team233.robot.subsystems.DriveTrain;
 import org.usfirst.frc.team233.robot.subsystems.Hopper;
@@ -29,15 +28,10 @@ public class Robot extends IterativeRobot {
 
 	public static OI oi;
 	public static DriveTrain drivetrain;
-	public static TankDrive tankDrive;
-	
+	public static TankDrive tankDrive; //not deleting this particular command instantiation until i can test how the robot responds to the change
 	public static Shooter shooter;
-	public static Shoot shoot;
-	public static SpinUp spinup;
-	
 	public static Hopper hopper;
-	public static Agitate agitate;
-	public static Blow blow;
+	
 	
 	public static BallCollector ballCollector;
 
@@ -55,8 +49,16 @@ public class Robot extends IterativeRobot {
 		hopper = new Hopper();
 		ballCollector = new BallCollector();
 		shooter = new Shooter();
-		
 		oi = new OI();
+		
+		chooser.addDefault("1st routine", new Shoot());
+		chooser.addObject("2nd option", new CollectBalls());
+		// chooser.addObject("My Auto", new MyAutoCommand());
+		System.out.println("RoboInit");
+		SmartDashboard.putData("Auto mode", chooser);
+		
+		
+		
 		
 		// chooser.addObject("My Auto", new MyAutoCommand());
 		System.out.println("RoboInit");
