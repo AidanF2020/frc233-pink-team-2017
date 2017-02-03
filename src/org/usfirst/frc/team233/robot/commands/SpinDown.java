@@ -4,9 +4,9 @@ import org.usfirst.frc.team233.robot.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
 
-public class SpinUp extends Command {
+public class SpinDown extends Command {
 	
-	public SpinUp() {
+	public SpinDown() {
 		// TODO Auto-generated constructor stub
 		//requires(Robot.shooter);
 	}
@@ -15,7 +15,7 @@ public class SpinUp extends Command {
 	@Override
 	protected void execute() {
 		//System.out.println("TankDrive Execute!!!");
-		Robot.shooter.spin();
+		Robot.shooter.stop();
 	}
 
 	// Make this return true when this Command no longer needs to run execute()

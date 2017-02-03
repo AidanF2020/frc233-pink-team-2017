@@ -24,7 +24,7 @@ import org.usfirst.frc.team233.robot.subsystems.Shooter;
 public class Robot extends IterativeRobot {
 	
 	
-	// Define subsystem varaibles
+	// Define subsystem variables
 	public static DriveTrain drivetrain;
 	public static Shooter shooter;
 	public static BallCollector ballCollector;

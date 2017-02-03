@@ -30,12 +30,15 @@ public class Shooter extends Subsystem {
 	}
 	
 	public void stop(){
-		flywheel.stopFlywheel();
-		indexer.stopIndexer();
+		flywheel.stopFlywheel();	
 	}
 	
 	public void shoot() {
 		indexer.releaseBalls();
+	}
+
+	public void stopIndexer() {
+		indexer.stopIndexer();
 	}
 	
 	public boolean isFlywheelUpToSpeed() {

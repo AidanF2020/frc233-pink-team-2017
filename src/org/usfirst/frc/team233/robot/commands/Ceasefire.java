@@ -14,7 +14,7 @@ public class Ceasefire extends Command {
 	@Override
 	protected void execute() {
 		// TODO Auto-generated method stub
-		Robot.shooter.stop();
+		Robot.shooter.stopIndexer();;
 		
 	}
 	

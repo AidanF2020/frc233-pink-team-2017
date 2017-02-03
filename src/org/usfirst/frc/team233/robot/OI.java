@@ -1,9 +1,11 @@
 package org.usfirst.frc.team233.robot;
 
+import org.usfirst.frc.team233.robot.commands.BeginShooting;
 import org.usfirst.frc.team233.robot.commands.Ceasefire;
 import org.usfirst.frc.team233.robot.commands.CollectBalls;
 import org.usfirst.frc.team233.robot.commands.EjectBalls;
-import org.usfirst.frc.team233.robot.commands.Shoot;
+import org.usfirst.frc.team233.robot.commands.AutonomousShoot;
+import org.usfirst.frc.team233.robot.commands.SpinDown;
 import org.usfirst.frc.team233.robot.commands.SpinUp;
 import org.usfirst.frc.team233.robot.commands.StopCollector;
 
@@ -69,7 +71,10 @@ public class OI {
 		//		Map Joysticks to Commands
 		//==========================================
 		
-		shooterRightTrigger.whileHeld(new Shoot());
+		shooterRightBumper.whileHeld(new SpinUp());
+		shooterRightBumper.whenReleased(new SpinDown());
+		
+		shooterRightTrigger.whileHeld(new BeginShooting());
 		shooterRightTrigger.whenReleased(new Ceasefire());
 		
 		rightTrigger.whileHeld(new CollectBalls());
