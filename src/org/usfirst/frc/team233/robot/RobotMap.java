@@ -30,6 +30,8 @@ public class RobotMap {
 	// Motors
 	public static int flywheelMotorPort = 4;
 	public static int indexerMotorPort = 5;
+	
+	// Motor Speeds
 	public static double flywheelMotorSpeed = 1.0;
 	public static double indexerMotorSpeed = 0.5;
 	
@@ -41,7 +43,10 @@ public class RobotMap {
 	//============================================
 	// 		COLLECTOR VARIABLES
 	//============================================
+	// Motor
 	public static int collectorMotorPort = 6;
+	
+	// Motor Speed
 	public static double collectorMotorSpeed = 0.5;
 	
 
@@ -50,6 +55,8 @@ public class RobotMap {
 	//============================================
 	// Motors
 	public static int ropeClimberMotorPort = 7;
+	
+	// Motor Speeds
 	public static double ropeClimberSpeed = 0.75;
 	public static double ropeHoldSpeed = 0.25;
 	
@@ -58,10 +65,12 @@ public class RobotMap {
 	// 		HOPPER VARIABLES
 	//============================================
 	// Motors
-	public static int hopperAgitatorPort = 8;
-	public static int hopperBlowerPort = 9;
-	public static double hopperBlowerSpeed = 1;
-	public static double hopperAgitatorSpeed = 1;
+	public static int agitatorMotorPort = 8;
+	public static int blowerMotorPort = 9;
+	
+	// Motor Speeds
+	public static double blowerMotorSpeed = 1;
+	public static double agitatorMotorSpeed = 1;
 	
 	
 	//============================================

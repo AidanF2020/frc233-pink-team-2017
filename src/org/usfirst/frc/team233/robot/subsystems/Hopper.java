@@ -10,8 +10,8 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class Hopper extends Subsystem {
 
-	private SpeedController agitatorMotor = new Talon(RobotMap.hopperAgitatorPort); 
-	private SpeedController blowerMotor = new Talon(RobotMap.hopperBlowerPort);
+	private SpeedController agitatorMotor = new Talon(RobotMap.agitatorMotorPort); 
+	private SpeedController blowerMotor = new Talon(RobotMap.blowerMotorPort);
 	
 	public Hopper() {
 		super();
@@ -20,11 +20,11 @@ public class Hopper extends Subsystem {
 	public void agitate(){
 		//Robot.oi.getShooterJoystick().
 		//shooter.getButton(button)
-		agitatorMotor.set(RobotMap.hopperAgitatorSpeed);
+		agitatorMotor.set(RobotMap.agitatorMotorSpeed);
 	}
 	
 	public void blow(){
-		blowerMotor.set(RobotMap.hopperBlowerSpeed);
+		blowerMotor.set(RobotMap.blowerMotorSpeed);
 	}
 
 	@Override
