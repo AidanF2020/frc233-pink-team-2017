@@ -25,6 +25,7 @@ public class RobotMap {
 	public static int rightBackMotorPort = 3;
 	
 	public static int shooterMotorPort = 4;
+	public static int indexerMotorPort = 7;
 	public static int collectorMotorPort = 5;
 	public static int ropeClimberMotorPort = 6;
 	
@@ -41,6 +42,7 @@ public class RobotMap {
 	//Hopper motor ports
 	public static int hopperAgitatorPort;
 	public static int hopperBlowerPort;
+	
 	
 	public ControllerPower cp = new ControllerPower();
 	//can read amps in thru power distrib board
