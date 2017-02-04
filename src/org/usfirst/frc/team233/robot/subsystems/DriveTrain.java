@@ -27,7 +27,7 @@ public class DriveTrain extends Subsystem{
 	// Link the motors to the robot
 	private RobotDrive drive = new RobotDrive(frontLeftMotor, rearLeftMotor, frontRightMotor, rearRightMotor);
 	
-	boolean isInverted = false;
+	boolean isInverted = true;
 	
 	/* Calculate the distance each pulse in the encoder equals to for simulation.
 	 * Equation: (Wheel Diameter x Pi) / Number of pulses per encoder revolution */
