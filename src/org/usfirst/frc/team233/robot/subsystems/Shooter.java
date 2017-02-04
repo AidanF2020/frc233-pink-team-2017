@@ -53,15 +53,16 @@ public class Shooter extends Subsystem {
 	 */
 	public class Flywheel {
 		public SpeedController flywheelMotor = new Talon(RobotMap.flywheelMotorPort);
-		//private boolean isSpinning = false;
+		
 		public double flywheelSpeed = 0.8;
 		private double tolerance = 0.1;
+		private final double flywheelKp = 0.1;
 		private Encoder encoder = new Encoder(RobotMap.flywheelEncoderPortA,RobotMap.flywheelEncoderPortB);
 		private final double flywheelDistancePerPulse = 0.123;
 		
 		/* Calculate the distance each pulse in the encoder equals to.
 		 * Equation: (Wheel Diameter x Pi) / Number of pulses per encoder revolution */
-		private final double gearDiameter = 3.0;
+		private final double gearDiameter = 4.0;
 		private final int pulsePerRevolution = 40;
 		private final double distancePerPulse = (Math.PI * gearDiameter) / pulsePerRevolution;
 		
@@ -72,7 +73,8 @@ public class Shooter extends Subsystem {
 		}
 
 		public void startFlywheel() {
-			flywheelMotor.set(flywheelSpeed);
+			System.out.println("Running Flywheel");
+			flywheelMotor.set(getPDSpeed(getFlywheelMotorSpeed(), flywheelSpeed, flywheelKp));
 		}
 
 		public void stopFlywheel() {
@@ -101,14 +103,19 @@ public class Shooter extends Subsystem {
 			SmartDashboard.putData("Flywheel Encoder", encoder);
 		}
 		
-		public double getFlywheelSetSpeed(){
+		/** Get the current value of the flywheel motor.
+		 * Ranges from -1.0 to 1.0 */
+		public double getFlywheelMotorSpeed(){
 			return flywheelMotor.get();
 		}
 		
-		public double getFlywheelMotorSpeed(){
+		/** Get the speed of the flywheel, which is determined
+		 * by the encoder. */
+		public double getFlywheelEncoderSpeed(){
 			return encoder.getRate();
 		}
 		
+		/** Adjust the speed of the */
 		public void adjustFlywheelSpeed(int adjustment){
 			if(adjustment == 0){
 				flywheelSpeed += .1;
@@ -117,11 +124,28 @@ public class Shooter extends Subsystem {
 			}
 		}
 		
+		/** Calculate a P and D values and apply it to the speed that 
+		 * is going to be applied to the flywheel motor. */
+		public double getPDSpeed(double currentSpeed, double targetSpeed, double Kp) {
+			double error = (targetSpeed - currentSpeed);
+	        double speedCmd;
+	        System.out.println("inside getSpeedCmd, currentSpeed: "+currentSpeed);
+	        speedCmd = ((Kp * error) + targetSpeed);
+
+	        return speedCmd;
+		}
+		
 		public boolean motorSpeedEqualsSetSpeed(){
-			if (Math.abs(getFlywheelMotorSpeed() - flywheelMotor.get()) < tolerance){
+			if (Math.abs(getFlywheelMotorSpeed() - flywheelSpeed) < tolerance) {
 				return true;
 			}
 			return false;
+			
+			
+//			if (Math.abs(getFlywheelMotorSpeed() - flywheelMotor.get()) < tolerance){
+//				return true;
+//			}
+//			return false;
 		}
 	}
 

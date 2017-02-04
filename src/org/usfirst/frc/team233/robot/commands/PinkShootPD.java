@@ -1,4 +1,4 @@
-package org.usfirst.frc.team233.robot.subsystems;
+package org.usfirst.frc.team233.robot.commands;
 
 import org.usfirst.frc.team233.robot.Robot;
 import org.usfirst.frc.team233.robot.RobotMap;
@@ -15,7 +15,7 @@ public class PinkShootPD{
 
     // Use a PD to determine a motor command, which has a range of -1 to 1 (-1=rev; 0=stop; 1=fwd)
     public static double getSpeedCmd( double targetSpeed, double Kp) {
-    	double currentSpeed = Robot.shooterWheel.getRate();
+    	double currentSpeed = 0.0;//Robot.shooterWheel.getRate();
     	double error = (targetSpeed - currentSpeed);
         double speedCmd;
         System.out.println("inside getSpeedCmd, currentSpeed: "+currentSpeed);
