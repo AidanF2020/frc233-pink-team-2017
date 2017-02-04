@@ -1,5 +1,14 @@
 package org.usfirst.frc.team233.robot;
 
+import org.usfirst.frc.team233.robot.commands.BeginShooting;
+import org.usfirst.frc.team233.robot.commands.Ceasefire;
+import org.usfirst.frc.team233.robot.commands.CollectBalls;
+import org.usfirst.frc.team233.robot.commands.EjectBalls;
+import org.usfirst.frc.team233.robot.commands.AutonomousShoot;
+import org.usfirst.frc.team233.robot.commands.SpinDown;
+import org.usfirst.frc.team233.robot.commands.SpinUp;
+import org.usfirst.frc.team233.robot.commands.StopCollector;
+
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
@@ -21,7 +30,11 @@ public class OI {
 	
 	public OI() {
 		// TODO Auto-generated constructor stub
-		// Create some buttons
+		
+		//==========================================
+		//		Link to Joystick Buttons
+		//==========================================
+		
 		//Base Driver
 		JoystickButton x = new JoystickButton(base, 1);
 		JoystickButton a = new JoystickButton(base, 2);
@@ -38,31 +51,37 @@ public class OI {
 		int baseDpad = base.getPOV();
 		
 		//Shooter
-		JoystickButton shooterX = new JoystickButton(base, 1);
-		JoystickButton shooterA = new JoystickButton(base, 2);
-		JoystickButton shooterB = new JoystickButton(base, 3);
-		JoystickButton shooterY = new JoystickButton(base, 4);
-		JoystickButton shooterLeftBumper = new JoystickButton(base, 5);
-		JoystickButton shooterRightBumper = new JoystickButton(base, 6);
-		JoystickButton shooterLeftTrigger = new JoystickButton(base, 7);
-		JoystickButton shooterRightTrigger = new JoystickButton(base, 8);
-		JoystickButton shooterSelect = new JoystickButton(base, 9);
-		JoystickButton shooterStart = new JoystickButton(base, 10);
-		JoystickButton shooterleftJoystickPress = new JoystickButton(base, 11);
-		JoystickButton shooterrightJoystickPress = new JoystickButton(base, 12);
+		JoystickButton shooterX = new JoystickButton(shooter, 1);
+		JoystickButton shooterA = new JoystickButton(shooter, 2);
+		JoystickButton shooterB = new JoystickButton(shooter, 3);
+		JoystickButton shooterY = new JoystickButton(shooter, 4);
+		JoystickButton shooterLeftBumper = new JoystickButton(shooter, 5);
+		JoystickButton shooterRightBumper = new JoystickButton(shooter, 6);
+		JoystickButton shooterLeftTrigger = new JoystickButton(shooter, 7);
+		JoystickButton shooterRightTrigger = new JoystickButton(shooter, 8);
+		JoystickButton shooterSelect = new JoystickButton(shooter, 9);
+		JoystickButton shooterStart = new JoystickButton(shooter, 10);
+		JoystickButton shooterleftJoystickPress = new JoystickButton(shooter, 11);
+		JoystickButton shooterrightJoystickPress = new JoystickButton(shooter, 12);
 		int shooterDpad = shooter.getPOV();
 		
 		
-		// Connect the buttons to commands
-		//d_up.whenPressed(new SetElevatorSetpoint(0.2));
-		//d_down.whenPressed(new SetElevatorSetpoint(-0.2));
-		//d_right.whenPressed(new CloseClaw());
-		//d_left.whenPressed(new OpenClaw());
-
-		//r1.whenPressed(new PrepareToPickup());
-		//r2.whenPressed(new Pickup());
-		//l1.whenPressed(new Place());
-		//l2.whenPressed(new Autonomous());
+		
+		//==========================================
+		//		Map Joysticks to Commands
+		//==========================================
+		
+		shooterRightBumper.whileHeld(new SpinUp());
+		shooterRightBumper.whenReleased(new SpinDown());
+		
+		shooterRightTrigger.whileHeld(new BeginShooting());
+		shooterRightTrigger.whenReleased(new Ceasefire());
+		
+		rightTrigger.whileHeld(new CollectBalls());
+		rightTrigger.whenReleased(new StopCollector());
+		
+		leftTrigger.whileHeld(new EjectBalls());
+		leftTrigger.whenReleased(new StopCollector());
 	}
 	
 	public Joystick getBaseJoystick() {

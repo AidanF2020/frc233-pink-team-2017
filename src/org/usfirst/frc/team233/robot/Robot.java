@@ -8,7 +8,11 @@ import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
+import org.usfirst.frc.team233.robot.subsystems.BallCollector;
 import org.usfirst.frc.team233.robot.subsystems.DriveTrain;
+import org.usfirst.frc.team233.robot.subsystems.Hopper;
+import org.usfirst.frc.team233.robot.subsystems.RopeClimber;
+import org.usfirst.frc.team233.robot.subsystems.Shooter;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -18,10 +22,15 @@ import org.usfirst.frc.team233.robot.subsystems.DriveTrain;
  * directory.
  */
 public class Robot extends IterativeRobot {
-
-	public static OI oi;
+	
+	
+	// Define subsystem variables
 	public static DriveTrain drivetrain;
-	//public static TankDrive tankDrive;
+	public static Shooter shooter;
+	public static BallCollector ballCollector;
+	public static RopeClimber ropeClimber;
+	public static Hopper hopper;
+	public static OI oi;
 
 	Command autonomousCommand;
 	SendableChooser<Command> chooser = new SendableChooser<>();
@@ -32,8 +41,10 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void robotInit() {
-		oi = new OI();
 		drivetrain = new DriveTrain();
+		shooter = new Shooter();
+		ballCollector = new BallCollector();
+		oi = new OI();
 		// chooser.addObject("My Auto", new MyAutoCommand());
 		System.out.println("RoboInit");
 		SmartDashboard.putData("Auto mode", chooser);

@@ -1,5 +1,6 @@
 package org.usfirst.frc.team233.robot.subsystems;
 
+import org.usfirst.frc.team233.robot.Robot;
 //import org.usfirst.frc.team233.robot.Robot;
 import org.usfirst.frc.team233.robot.RobotMap;
 import org.usfirst.frc.team233.robot.commands.TankDrive;
@@ -26,13 +27,16 @@ public class DriveTrain extends Subsystem{
 	// Link the motors to the robot
 	private RobotDrive drive = new RobotDrive(frontLeftMotor, rearLeftMotor, frontRightMotor, rearRightMotor);
 	
-	/* Calculate the distance each pulse in the encoder equals to.
+	boolean isInverted = true;
+	
+	/* Calculate the distance each pulse in the encoder equals to for simulation.
 	 * Equation: (Wheel Diameter x Pi) / Number of pulses per encoder revolution */
 	private final double wheelDiameter = 1.0;
 	private final int pulsePerRevolution = 40;
 	private final double distancePerPulse = (Math.PI * wheelDiameter) / pulsePerRevolution;
 	
-	
+	// Fixed value for distancePerPulse used in real robot
+	private final double distancePerPulseConstant = 0.124;
 	
 	// Define all the encoders that are going to be used for the drive train.
 	private Encoder leftEncoder = new Encoder(RobotMap.leftEncoderAPort, RobotMap.leftEncoderBPort);
@@ -42,6 +46,8 @@ public class DriveTrain extends Subsystem{
 	/** Drive train constructor.*/
 	public DriveTrain() {
 		super();
+		drive.setSafetyEnabled(true);
+		setupMotors();
 		resetEncoders();
 		setupEncoders();
 	}
@@ -81,13 +87,32 @@ public class DriveTrain extends Subsystem{
 		rightEncoder.reset();
 	}
 	
+	
+	public void setupMotors() {
+		frontLeftMotor.setInverted(isInverted);
+		rearLeftMotor.setInverted(isInverted);
+		
+		frontRightMotor.setInverted(isInverted);
+		rearRightMotor.setInverted(isInverted);
+	}
+	
 	/** Setup encoders before use. */
 	public void setupEncoders() {
-		leftEncoder.setDistancePerPulse(distancePerPulse);
+		//Setup left encoder
+		if (Robot.isReal()) {
+			leftEncoder.setDistancePerPulse(distancePerPulseConstant);
+		} else {
+			leftEncoder.setDistancePerPulse(distancePerPulse);
+		}
 		leftEncoder.setPIDSourceType(PIDSourceType.kDisplacement);
 		SmartDashboard.putData("Left Encoder", leftEncoder);
 		
-		rightEncoder.setDistancePerPulse(distancePerPulse);
+		// Setup right encoder
+		if (Robot.isReal()) {
+			rightEncoder.setDistancePerPulse(distancePerPulseConstant);
+		} else {
+			rightEncoder.setDistancePerPulse(distancePerPulse);
+		}		
 		rightEncoder.setPIDSourceType(PIDSourceType.kDisplacement);
 		SmartDashboard.putData("Right Encoder", rightEncoder);
 	}
@@ -108,9 +133,27 @@ public class DriveTrain extends Subsystem{
 		return dist;
 	}
 	
+	/** Average the distance of both encoders and return its 
+	 * value. Also put this value in the SmartDashboard. */
+	public double getDistanceTraveled() {
+		double avgEncoders = (leftEncoder.getDistance() + rightEncoder.getDistance()) / 2;
+		SmartDashboard.putNumber("Encoder Avg", avgEncoders);
+		return avgEncoders;
+	}
+	
+	/** Use this method to reset encoders and any other resource
+	 * for autonomous use. */
+	public void reset() {
+		resetEncoders();
+	}
+	
 	/** This method should be called on any disable to reset and
 	 * release any resource that is not going to be used anymore.*/
 	public void disableDriveTrain() {
 		resetEncoders();
+		frontLeftMotor.disable();
+		frontRightMotor.disable();
+		rearLeftMotor.disable();
+		rearRightMotor.disable();
 	}
 }
