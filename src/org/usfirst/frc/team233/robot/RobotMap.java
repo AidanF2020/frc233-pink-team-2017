@@ -12,10 +12,10 @@ public class RobotMap {
 	// 		DRIVE TRAIN VARIABLES
 	//============================================
 	// Motors
-	public static int leftFrontMotorPort = 0;
-	public static int leftBackMotorPort = 1;
-	public static int rightFrontMotorPort = 2;
-	public static int rightBackMotorPort = 3;
+	public static int leftFrontMotorPort = 2;
+	public static int leftBackMotorPort = 3;
+	public static int rightFrontMotorPort = 0;
+	public static int rightBackMotorPort = 1;
 	
 	// Encoders
 	public static int leftEncoderAPort = 0;
