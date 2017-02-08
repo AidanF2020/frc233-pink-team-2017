@@ -8,25 +8,19 @@ public class SpinDown extends Command {
 	
 	public SpinDown() {
 		// TODO Auto-generated constructor stub
-		//requires(Robot.shooter);
+		requires(Robot.flywheel);
 	}
 
 	// Called repeatedly when this Command is scheduled to run
 	@Override
 	protected void execute() {
 		//System.out.println("TankDrive Execute!!!");
-		Robot.shooter.stop();
+		Robot.flywheel.stopFlywheel();
 	}
 
 	// Make this return true when this Command no longer needs to run execute()
 	@Override
 	protected boolean isFinished() {
 		return true; // Runs until interrupted
-	}
-
-	// Called once after isFinished returns true
-	@Override
-	protected void end() {
-		//Robot.shooterWheel.stop();
 	}
 }

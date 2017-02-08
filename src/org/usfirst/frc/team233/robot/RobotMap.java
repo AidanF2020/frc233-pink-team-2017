@@ -47,7 +47,7 @@ public class RobotMap {
 	public static int collectorMotorPort = 6;
 	
 	// Motor Speed
-	public static double collectorMotorSpeed = 0.5;
+	public static double collectorMotorSpeed = 1.0;
 	
 
 	//============================================
@@ -66,10 +66,8 @@ public class RobotMap {
 	//============================================
 	// Motors
 	public static int agitatorMotorPort = 8;
-	public static int blowerMotorPort = 9;
 	
 	// Motor Speeds
-	public static double blowerMotorSpeed = 1;
 	public static double agitatorMotorSpeed = 1;
 	
 	

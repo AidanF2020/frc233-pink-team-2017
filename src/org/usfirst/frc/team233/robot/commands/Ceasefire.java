@@ -8,13 +8,15 @@ public class Ceasefire extends Command {
 
 	public Ceasefire() {
 		// TODO Auto-generated constructor stub
-		requires(Robot.shooter);
+		requires(Robot.indexer);
+		//requires(Robot.hopper);
 	}
 	
 	@Override
 	protected void execute() {
 		// TODO Auto-generated method stub
-		Robot.shooter.stopIndexer();;
+		Robot.indexer.stopIndexer();
+		Robot.hopper.stopAgitate();
 		
 	}
 	

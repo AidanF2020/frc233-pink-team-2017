@@ -71,11 +71,11 @@ public class OI {
 		//		Map Joysticks to Commands
 		//==========================================
 		
-		shooterRightBumper.whileHeld(new SpinUp());
-		shooterRightBumper.whenReleased(new SpinDown());
+		//shooterRightBumper.whileHeld(new SpinUp());
+		//shooterRightBumper.whenReleased(new SpinDown());
 		
-		shooterRightTrigger.whileHeld(new BeginShooting());
-		shooterRightTrigger.whenReleased(new Ceasefire());
+		//shooterRightTrigger.whileHeld(new BeginShooting());
+		//shooterRightTrigger.whenReleased(new Ceasefire());
 		
 		rightTrigger.whileHeld(new CollectBalls());
 		rightTrigger.whenReleased(new StopCollector());

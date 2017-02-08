@@ -6,16 +6,20 @@ import edu.wpi.first.wpilibj.command.Command;
 
 public class BeginShooting extends Command {
 
+	private boolean skipSpeedCheck;
+	
 	public BeginShooting() {
 		// TODO Auto-generated constructor stub
-		requires(Robot.shooter);
+		requires(Robot.indexer);
 	}
 	
 	@Override
 	protected void execute() {
 		// TODO Auto-generated method stub
-		if(Robot.shooter.isFlywheelUpToSpeed()) {
-			Robot.shooter.shoot();
+		if(Robot.flywheel.motorSpeedEqualsSetSpeed() || skipSpeedCheck) {
+			skipSpeedCheck = true;
+			Robot.hopper.agitate();
+			Robot.indexer.releaseBalls();
 		}
 	}
 	
@@ -23,6 +27,14 @@ public class BeginShooting extends Command {
 	protected boolean isFinished() {
 		// TODO Auto-generated method stub
 		return false;
+	}
+	
+	@Override
+	protected void interrupted() {
+		// TODO Auto-generated method stub
+		super.interrupted();
+		//System.out.println("BeginShooting Interrupted!!!");
+		skipSpeedCheck = false;
 	}
 
 }

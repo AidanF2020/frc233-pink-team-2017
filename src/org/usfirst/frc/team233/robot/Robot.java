@@ -10,9 +10,10 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import org.usfirst.frc.team233.robot.subsystems.BallCollector;
 import org.usfirst.frc.team233.robot.subsystems.DriveTrain;
+import org.usfirst.frc.team233.robot.subsystems.Flywheel;
 import org.usfirst.frc.team233.robot.subsystems.Hopper;
+import org.usfirst.frc.team233.robot.subsystems.Indexer;
 import org.usfirst.frc.team233.robot.subsystems.RopeClimber;
-import org.usfirst.frc.team233.robot.subsystems.Shooter;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -26,7 +27,8 @@ public class Robot extends IterativeRobot {
 	
 	// Define subsystem variables
 	public static DriveTrain drivetrain;
-	public static Shooter shooter;
+	public static Flywheel flywheel;
+	public static Indexer indexer;
 	public static BallCollector ballCollector;
 	public static RopeClimber ropeClimber;
 	public static Hopper hopper;
@@ -42,7 +44,9 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void robotInit() {
 		drivetrain = new DriveTrain();
-		shooter = new Shooter();
+		//shooter = new Shooter();
+		flywheel = new Flywheel();
+		indexer = new Indexer();
 		ballCollector = new BallCollector();
 		oi = new OI();
 		// chooser.addObject("My Auto", new MyAutoCommand());
