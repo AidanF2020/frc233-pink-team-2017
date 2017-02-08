@@ -11,7 +11,6 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.usfirst.frc.team233.robot.commands.CollectBalls;
 import org.usfirst.frc.team233.robot.commands.Shoot;
 import org.usfirst.frc.team233.robot.commands.TankDrive;
-import org.usfirst.frc.team233.robot.commands.firstRoutine;
 import org.usfirst.frc.team233.robot.subsystems.BallCollector;
 import org.usfirst.frc.team233.robot.subsystems.DriveTrain;
 import org.usfirst.frc.team233.robot.subsystems.Hopper;
@@ -51,7 +50,7 @@ public class Robot extends IterativeRobot {
 		shooter = new Shooter();
 		oi = new OI();
 		
-		chooser.addDefault("1st routine", new firstRoutine());
+		chooser.addDefault("1st routine", new Shoot());
 		chooser.addObject("2nd option", new CollectBalls());
 		// chooser.addObject("My Auto", new MyAutoCommand());
 		System.out.println("RoboInit");
