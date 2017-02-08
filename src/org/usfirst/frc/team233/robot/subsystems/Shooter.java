@@ -25,8 +25,7 @@ public class Shooter extends Subsystem {
 	public Shooter(){
 		flywheel = new FlyWheel();
 		indexer = new Indexer();
-		encoder = new Encoder(5,6); //haphazardly put this and uncommented other encoder stuff, not sure if the encoder stuff is right,
-		                            // but nothing crashes with it, so leaving it here. 
+		encoder = new Encoder(5,6);
 		
 	}
 	
@@ -37,9 +36,8 @@ public class Shooter extends Subsystem {
 	//public void shoot(int shooterDpadPos){
 	public void shoot(){
 		flywheel.spin();
-		//didnt have two available motors at the time, so whether this part of the code works has not been proven.
 		if(Robot.shooter.flywheel.motorSpeedEqualsSetSpeed()){
-			indexer.releaseBall(); 
+			indexer.releaseBall();
 		} else {
 			indexer.stop();
 		}
@@ -168,7 +166,14 @@ public class Shooter extends Subsystem {
 	 */
 	public class Indexer extends Subsystem {
 
-		public SpeedController indexer = new Talon(RobotMap.indexerMotorPort);
+		public SpeedController indexer = new Talon(RobotMap.indexerMotorPort); // afraid to change
+		// anything cause it
+		// works right now, but
+		// will probably change
+		// this to port 7 to
+		// accommodate the
+		// RobotMap everyone
+		// else is using
 		public double indexerSpeed = 0.5;
 		
 		@Override
@@ -180,13 +185,6 @@ public class Shooter extends Subsystem {
 			indexer.set(indexerSpeed);
 			//indexer.
 		}
-		
-		public void stop(){
-			indexer.stopMotor();
-		}
-	}
-}
-
 		
 		public void stop(){
 			indexer.stopMotor();
