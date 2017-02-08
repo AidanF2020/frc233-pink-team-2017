@@ -51,7 +51,7 @@ public class Robot extends IterativeRobot {
 		shooter = new Shooter();
 		oi = new OI();
 		
-		chooser.addDefault("1st routine", new Shoot());
+		chooser.addDefault("1st routine", new firstRoutine());
 		chooser.addObject("2nd option", new CollectBalls());
 		// chooser.addObject("My Auto", new MyAutoCommand());
 		System.out.println("RoboInit");
