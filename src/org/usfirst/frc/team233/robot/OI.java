@@ -2,6 +2,9 @@ package org.usfirst.frc.team233.robot;
 
 import org.usfirst.frc.team233.robot.commands.CollectBalls;
 import org.usfirst.frc.team233.robot.commands.EjectBalls;
+import org.usfirst.frc.team233.robot.commands.Shoot;
+import org.usfirst.frc.team233.robot.commands.StopShooting;
+import org.usfirst.frc.team233.robot.commands.StopCollector;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
@@ -57,14 +60,14 @@ public class OI {
 		JoystickButton shooterrightJoystickPress = new JoystickButton(shooter, 12);
 		int shooterDpad = shooter.getPOV();
 		
-		// Driver button-command pairs (responsible for driving & collecting)
-		//driverRightBumper			//Gearshift
-		rightTrigger.whileHeld(new CollectBalls());
-		leftTrigger.whileHeld(new EjectBalls());
+		shooterRightBumper.whileHeld(new Shoot());
+		shooterRightBumper.whenReleased(new StopShooting());
 		
-		// Shooter button-command pairs (responsible for shooting & climbing)
-		shooterRightBumper.whenPressed(Robot.spinup);
-		shooterRightTrigger.whileHeld(Robot.shoot);
+		shooterRightTrigger.whileHeld(new CollectBalls());
+		shooterRightTrigger.whenReleased(new StopCollector());
+		
+		shooterLeftTrigger.whileHeld(new EjectBalls());
+		shooterLeftTrigger.whenReleased(new StopCollector());
 		
 	}
 	
