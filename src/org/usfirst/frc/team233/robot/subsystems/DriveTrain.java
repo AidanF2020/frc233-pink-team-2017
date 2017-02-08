@@ -19,8 +19,8 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class DriveTrain extends Subsystem{
 	// Drive train motor definition
 	private SpeedController frontLeftMotor = new Talon(RobotMap.leftFrontMotorPort);
-	private SpeedController rearLeftMotor = new Talon(RobotMap.leftBackMotorPort);
-	private SpeedController frontRightMotor = new Talon(RobotMap.rightFrontMotorPort);
+	public SpeedController rearLeftMotor = new Talon(RobotMap.leftBackMotorPort);
+	public SpeedController frontRightMotor = new Talon(RobotMap.rightFrontMotorPort);
 	private SpeedController rearRightMotor = new Talon(RobotMap.rightBackMotorPort);
 	
 	// Link the motors to the robot
