@@ -9,7 +9,7 @@ public class Shoot extends Command {
 	
 	public Shoot(){
 		requires(Robot.shooter);
-		//pid = new PIDController(0, 0, 0, 0, null, null); Causing "Robots don't quit!"
+		//pid = new PIDController(0, 0, 0, 0, null, null);
 	}
 	
 	@Override
