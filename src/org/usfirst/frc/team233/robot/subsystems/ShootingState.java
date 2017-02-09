@@ -1,7 +1,7 @@
-package org.usfirst.frc.team233.robot.commands;
+package org.usfirst.frc.team233.robot.subsystems;
 
 public enum ShootingState {
-	
+
 	READY_TO_SHOOT, SHOOTING, FLYWHEEL_STOPPED, FLYWHEEL_SPINNING_UP, FLYWHEEL_UP_TO_SPEED, BALLS_RELEASING,
 	INDEXER_STOPPED
 

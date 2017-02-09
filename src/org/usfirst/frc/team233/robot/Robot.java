@@ -44,12 +44,12 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void robotInit() {
 		drivetrain = new DriveTrain();
-		//shooter = new Shooter();
 		flywheel = new Flywheel();
 		indexer = new Indexer();
 		ballCollector = new BallCollector();
+		ropeClimber = new RopeClimber();
 		oi = new OI();
-		// chooser.addObject("My Auto", new MyAutoCommand());
+
 		System.out.println("RoboInit");
 		SmartDashboard.putData("Auto mode", chooser);
 	}
@@ -138,11 +138,6 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void robotPeriodic() {
 		// TODO Auto-generated method stub
-		/* NOTE
-		 * I removed the drive method in favor of the command
-		 * TankDrive, which is set as the default command now
-		 * in the DriveTrain subsystem class.
-		 * NEED TO TEST THIS!!!*/
 	}
 	
 	/**

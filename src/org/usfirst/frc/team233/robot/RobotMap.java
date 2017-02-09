@@ -23,6 +23,9 @@ public class RobotMap {
 	public static int rightEncoderAPort = 3;
 	public static int rightEncoderBPort = 4;
 	
+	//Pneumatics
+	public static int compressorPort = 0;
+	public static int shiftingSolenoidPort = 1;
 	
 	//============================================
 	// 		SHOOTER VARIABLES

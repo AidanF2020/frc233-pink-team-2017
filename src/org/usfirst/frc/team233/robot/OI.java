@@ -4,9 +4,12 @@ import org.usfirst.frc.team233.robot.commands.BeginShooting;
 import org.usfirst.frc.team233.robot.commands.Ceasefire;
 import org.usfirst.frc.team233.robot.commands.CollectBalls;
 import org.usfirst.frc.team233.robot.commands.EjectBalls;
+import org.usfirst.frc.team233.robot.commands.ShiftGear;
 import org.usfirst.frc.team233.robot.commands.AutonomousShoot;
 import org.usfirst.frc.team233.robot.commands.SpinDown;
 import org.usfirst.frc.team233.robot.commands.SpinUp;
+import org.usfirst.frc.team233.robot.commands.StartClimb;
+import org.usfirst.frc.team233.robot.commands.StopClimb;
 import org.usfirst.frc.team233.robot.commands.StopCollector;
 
 import edu.wpi.first.wpilibj.Joystick;
@@ -82,6 +85,12 @@ public class OI {
 		
 		leftTrigger.whileHeld(new EjectBalls());
 		leftTrigger.whenReleased(new StopCollector());
+		
+		rightBumper.whenPressed(new ShiftGear());
+		
+		// WARNING: Haven't tested this code yet!!!
+		a.whileHeld(new StartClimb());
+		a.whenReleased(new StopClimb());
 	}
 	
 	public Joystick getBaseJoystick() {

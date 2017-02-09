@@ -5,9 +5,11 @@ import org.usfirst.frc.team233.robot.Robot;
 import org.usfirst.frc.team233.robot.RobotMap;
 import org.usfirst.frc.team233.robot.commands.TankDrive;
 
+import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.RobotDrive;
+import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.Joystick.AxisType;
@@ -24,10 +26,13 @@ public class DriveTrain extends Subsystem{
 	private SpeedController frontRightMotor = new Talon(RobotMap.rightFrontMotorPort);
 	private SpeedController rearRightMotor = new Talon(RobotMap.rightBackMotorPort);
 	
+	private Compressor compressor = new Compressor(RobotMap.compressorPort);
+	
+	private Solenoid shifterSolenoid = new Solenoid(RobotMap.shiftingSolenoidPort);
 	// Link the motors to the robot
 	private RobotDrive drive = new RobotDrive(frontLeftMotor, rearLeftMotor, frontRightMotor, rearRightMotor);
 	
-	boolean isInverted = true;
+	boolean isInverted = false;
 	
 	/* Calculate the distance each pulse in the encoder equals to for simulation.
 	 * Equation: (Wheel Diameter x Pi) / Number of pulses per encoder revolution */
@@ -50,6 +55,7 @@ public class DriveTrain extends Subsystem{
 		setupMotors();
 		resetEncoders();
 		setupEncoders();
+		compressor.setClosedLoopControl(true);
 	}
 	
 	
@@ -78,7 +84,8 @@ public class DriveTrain extends Subsystem{
 	 */
 	public void drive(Joystick base) {
 		//System.out.println("Drive1");
-		drive(-base.getY(), -base.getAxis(AxisType.kThrottle));
+		//drive(-base.getY(), -base.getAxis(AxisType.kThrottle));
+		drive(-base.getAxis(AxisType.kThrottle), -base.getY());
 	}
 
 	/** Reset all encoders. */
@@ -155,5 +162,14 @@ public class DriveTrain extends Subsystem{
 		frontRightMotor.disable();
 		rearLeftMotor.disable();
 		rearRightMotor.disable();
+	}
+	
+	public void shiftGears() {
+		if (shifterSolenoid.get()) {
+			shifterSolenoid.set(false);
+		}
+		else {
+			shifterSolenoid.set(true);
+		}
 	}
 }
