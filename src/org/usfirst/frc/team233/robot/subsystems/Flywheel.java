@@ -11,6 +11,8 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class Flywheel extends Subsystem {
 	public SpeedController flywheelMotor = new Talon(RobotMap.flywheelMotorPort);
 	
+	private ShootingState state;
+	
 	public double flywheelSpeed = RobotMap.flywheelMotorSpeed;
 	private double tolerance = 0.1;
 	private final double flywheelKp = 0.1;
@@ -26,6 +28,7 @@ public class Flywheel extends Subsystem {
 	public Flywheel() {
 		super();
 		SmartDashboard.putNumber("Flywheel Motor Speed", flywheelMotor.get());
+		state = ShootingState.FLYWHEEL_INIT;
 		encoder.reset();
 		encoder.setDistancePerPulse(flywheelDistancePerPulse);
 	}
@@ -45,6 +48,10 @@ public class Flywheel extends Subsystem {
 
 	public void stopFlywheel() {
 		flywheelMotor.stopMotor();
+	}
+	
+	public void flywheelHalfSpeed() {
+		flywheelMotor.set(0.5);
 	}
 
 	
@@ -115,6 +122,14 @@ public class Flywheel extends Subsystem {
 			return true;
 		}
 		return false;
+	}
+	
+	public void setFlywheelState(ShootingState setState) {
+		state = setState;
+	}
+
+	public ShootingState getFlywheelState() {
+		return state;
 	}
 
 }

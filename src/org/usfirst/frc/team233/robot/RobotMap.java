@@ -23,9 +23,12 @@ public class RobotMap {
 	public static int rightEncoderAPort = 2;
 	public static int rightEncoderBPort = 3;
 	
-	//Pneumatics
+	// Pneumatics
 	public static int compressorPort = 0;
 	public static int shiftingSolenoidPort = 1;
+	
+	// Gyro
+	public static int gyroPort = 1;
 	
 	//============================================
 	// 		SHOOTER VARIABLES
@@ -36,7 +39,7 @@ public class RobotMap {
 	
 	// Motor Speeds
 	public static double flywheelMotorSpeed = 1.0;
-	public static double indexerMotorSpeed = 0.5;
+	public static double indexerMotorSpeed = 1.0;
 	
 	// Encoder
 	public static int flywheelEncoderPortA = 5;
@@ -60,8 +63,7 @@ public class RobotMap {
 	public static int ropeClimberMotorPort = 7;
 	
 	// Motor Speeds
-	public static double ropeClimberSpeed = 0.75;
-	public static double ropeHoldSpeed = 0.25;
+	public static double ropeClimberSpeed = 1.0;
 	
 	
 	//============================================

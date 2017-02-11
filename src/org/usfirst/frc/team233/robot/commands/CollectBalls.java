@@ -19,6 +19,14 @@ public class CollectBalls extends Command {
 	@Override
 	protected boolean isFinished() {
 		// TODO Auto-generated method stub
+		// FOR TESTING!!!!
+		if (Robot.oi.getBaseJoystick().getRawButton(8)) {
+			System.out.println("Right Trigger Pressed!");
+		}
+		else {
+			System.out.println("Right Trigger RELEASED!!!");
+		}
+		
 		return true;
 	}
 }

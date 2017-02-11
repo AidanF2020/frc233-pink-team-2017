@@ -1,8 +1,17 @@
 package org.usfirst.frc.team233.robot.subsystems;
 
+/**
+ * This ENUM defines all possible states that the shooter
+ * subsystem will have. */
 public enum ShootingState {
-
-	READY_TO_SHOOT, SHOOTING, FLYWHEEL_STOPPED, FLYWHEEL_SPINNING_UP, FLYWHEEL_UP_TO_SPEED, BALLS_RELEASING,
-	INDEXER_STOPPED
-
+	BALLS_RELEASING,
+	FLYWHEEL_INIT,
+	FLYWHEEL_SPINNING_UP,
+	FLYWHEEL_STOPPED,
+	FLYWHEEL_UP_TO_SPEED,
+	INDEXER_STOPPED,
+	READY_TO_SHOOT, 
+	SHOOTING_INTERRUPTED,
+	SHOOTING,
+	SHOOT
 }

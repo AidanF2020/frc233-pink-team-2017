@@ -5,6 +5,7 @@ import org.usfirst.frc.team233.robot.Robot;
 import org.usfirst.frc.team233.robot.RobotMap;
 import org.usfirst.frc.team233.robot.commands.TankDrive;
 
+import edu.wpi.first.wpilibj.AnalogGyro;
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.CounterBase.EncodingType;
 import edu.wpi.first.wpilibj.Encoder;
@@ -28,8 +29,9 @@ public class DriveTrain extends Subsystem{
 	private SpeedController rearRightMotor = new Talon(RobotMap.rightBackMotorPort);
 	
 	private Compressor compressor = new Compressor(RobotMap.compressorPort);
-	
+	private AnalogGyro gyro = new AnalogGyro(RobotMap.gyroPort);
 	private Solenoid shifterSolenoid = new Solenoid(RobotMap.shiftingSolenoidPort);
+	
 	// Link the motors to the robot
 	private RobotDrive drive = new RobotDrive(frontLeftMotor, rearLeftMotor, frontRightMotor, rearRightMotor);
 	
@@ -55,14 +57,13 @@ public class DriveTrain extends Subsystem{
 	/** Drive train constructor.*/
 	public DriveTrain() {
 		super();
-		System.out.println("Drivetrain Constructor");
+		//System.out.println("Drivetrain Constructor");
 		drive.setSafetyEnabled(true);
 		setupMotors();
 		setupEncoders();
 		resetEncoders();
-		compressor.setClosedLoopControl(true);
+		setupComponents();
 	}
-	
 	
 	@Override
 	protected void initDefaultCommand() {
@@ -70,42 +71,17 @@ public class DriveTrain extends Subsystem{
 		setDefaultCommand(new TankDrive());
 	}
 	
-	/**
-	 * Tank style driving for the DriveTrain.
-	 * 
-	 * @param left
-	 *            Speed in range [-1,1]
-	 * @param right
-	 *            Speed in range [-1,1]
-	 */
-	public void drive(double left, double right) {
-		//System.out.println("Drive2");
-		drive.tankDrive(left, right);
-	}
-
-	/**
-	 * @param joy
-	 *            The ps3 style joystick to use to drive tank style.
-	 */
-	public void drive(Joystick base) {
-		//System.out.println("Drive1");
-		//drive(-base.getY(), -base.getAxis(AxisType.kThrottle));
-		drive(-base.getAxis(AxisType.kThrottle), -base.getY());
-	}
-
-	/** Reset all encoders. */
-	public void resetEncoders() {
-		leftEncoder.reset();
-		rightEncoder.reset();
-	}
-	
-	
 	public void setupMotors() {
 		frontLeftMotor.setInverted(isInverted);
 		rearLeftMotor.setInverted(isInverted);
 		
 		frontRightMotor.setInverted(isInverted);
 		rearRightMotor.setInverted(isInverted);
+	}
+	
+	public void setupComponents() {
+		compressor.setClosedLoopControl(true);
+		gyro.calibrate();
 	}
 	
 	/** Setup encoders before use. */
@@ -133,6 +109,35 @@ public class DriveTrain extends Subsystem{
 		//rightEncoder.setSamplesToAverage(6);
 	}
 	
+	/** Reset all encoders. */
+	public void resetEncoders() {
+		leftEncoder.reset();
+		rightEncoder.reset();
+	}
+	
+	/**
+	 * Tank style driving for the DriveTrain.
+	 * 
+	 * @param left
+	 *            Speed in range [-1,1]
+	 * @param right
+	 *            Speed in range [-1,1]
+	 */
+	public void drive(double left, double right) {
+		//System.out.println("Drive2");
+		drive.tankDrive(left, right);
+	}
+
+	/**
+	 * @param joy
+	 *            The ps3 style joystick to use to drive tank style.
+	 */
+	public void drive(Joystick base) {
+		//System.out.println("Drive1");
+		//drive(-base.getY(), -base.getAxis(AxisType.kThrottle));
+		drive(-base.getAxis(AxisType.kThrottle), -base.getY());
+	}
+	
 	/** Obtain the distance from the encoder on the 
 	 * left of the drive train. */
 	public double getLeftDistance() {
@@ -157,6 +162,19 @@ public class DriveTrain extends Subsystem{
 		return avgEncoders;
 	}
 	
+	public void shiftGears() {
+		if (shifterSolenoid.get()) {
+			shifterSolenoid.set(false);
+		}
+		else {
+			shifterSolenoid.set(true);
+		}
+	}
+	
+	public double getGyroRotation() {
+		return gyro.getAngle();
+	}
+	
 	/** Use this method to reset encoders and any other resource
 	 * for autonomous use. */
 	public void reset() {
@@ -171,14 +189,5 @@ public class DriveTrain extends Subsystem{
 		frontRightMotor.disable();
 		rearLeftMotor.disable();
 		rearRightMotor.disable();
-	}
-	
-	public void shiftGears() {
-		if (shifterSolenoid.get()) {
-			shifterSolenoid.set(false);
-		}
-		else {
-			shifterSolenoid.set(true);
-		}
 	}
 }
