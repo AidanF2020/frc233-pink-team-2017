@@ -1,31 +1,27 @@
 package org.usfirst.frc.team233.robot.commands;
 
 import org.usfirst.frc.team233.robot.Robot;
+
 import edu.wpi.first.wpilibj.command.Command;
 
-public class StopCollector extends Command {
+public class ReverseClimber extends Command {
 
-	public StopCollector() {
+	public ReverseClimber() {
 		// TODO Auto-generated constructor stub
-		requires(Robot.ballCollector);
+		requires(Robot.ropeClimber);
 	}
 	
 	@Override
 	protected void execute() {
 		// TODO Auto-generated method stub
-		Robot.ballCollector.stop();
+		super.execute();
+		Robot.ropeClimber.reverseClimber();
 	}
-	
+
 	@Override
 	protected boolean isFinished() {
 		// TODO Auto-generated method stub
-		if (Robot.oi.getBaseJoystick().getRawButton(8)) {
-			System.out.println("STOP - Right Trigger Pressed!");
-		}
-		else {
-			System.out.println("STOP - Right Trigger RELEASED!!!");
-		}
-		return true;
+		return false;
 	}
 
 }

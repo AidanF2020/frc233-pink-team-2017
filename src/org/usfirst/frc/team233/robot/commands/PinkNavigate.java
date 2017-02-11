@@ -3,6 +3,7 @@ package org.usfirst.frc.team233.robot.commands;
 import org.usfirst.frc.team233.robot.PinkPD;
 import org.usfirst.frc.team233.robot.Range;
 import org.usfirst.frc.team233.robot.Robot;
+import org.usfirst.frc.team233.robot.subsystems.RopeClimber;
 
 import edu.wpi.first.wpilibj.command.Command;
 
@@ -20,14 +21,31 @@ public class PinkNavigate extends Command {
     private double angularVelocity; 
     private double maxPower;
 
+    
+    /** Constructor - Define the distance and angle for the robot to */
+    public PinkNavigate(double targetPos, double targetAngle, int currentAngle,
+		     		    double linearVelocity, double angularVelocity, 
+		     		    double maxPower) {
+    	this.targetPos = targetPos;
+    	this.targetAngle = targetAngle;
+    	this.currentAngle = currentAngle;
+    	this.linearVelocity = linearVelocity;
+    	this.angularVelocity = angularVelocity;
+    	this.maxPower = maxPower;
+    	requires(Robot.drivetrain);
+    	//Robot.drivetrain.resetEncoders();
+    	resetBasePosition();
+    }
+    
+    
     // Tank drive two wheels to target positions in inches.
     // Returns true when both arrive at the target.
     public boolean driveToPos() {
     	double motorCmd = 0;
         double targetPosCounts = targetPos * COUNTS_PER_INCH;
         double leftMotorCmd, rightMotorCmd;
-        double leftWheelPos = Robot.drivetrain.getDistanceTraveled();
-        double rightWheelPos = Robot.drivetrain.getDistanceTraveled();
+        double leftWheelPos = Robot.drivetrain.getLeftDistance();
+        double rightWheelPos = Robot.drivetrain.getRightDistance();
         double angleErrorDegrees = targetAngle - currentAngle;
         double currentPosCounts = (leftWheelPos + rightWheelPos)/2.0;
         double angleOffset;
@@ -82,17 +100,7 @@ public class PinkNavigate extends Command {
     }
 
     
-    /** Constructor - Define the distance and angle for the robot to */
-    public PinkNavigate(double targetPos, double targetAngle, int currentAngle,
-		     		    double linearVelocity, double angularVelocity, 
-		     		    double maxPower) {
-    	this.targetPos = targetPos;
-    	this.targetAngle = targetAngle;
-    	this.currentAngle = currentAngle;
-    	this.linearVelocity = linearVelocity;
-    	this.angularVelocity = angularVelocity;
-    	this.maxPower = maxPower;
-    }
+   
     
     
     @Override
@@ -112,6 +120,7 @@ public class PinkNavigate extends Command {
 	protected void end() {
 		// TODO Auto-generated method stub
 		super.end();
+		stopBase();
 	}
 
     /**

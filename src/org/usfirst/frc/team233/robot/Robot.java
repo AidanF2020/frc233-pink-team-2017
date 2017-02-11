@@ -118,6 +118,7 @@ public class Robot extends IterativeRobot {
 		if (autonomousCommand != null)
 			autonomousCommand.cancel();
 		System.out.println("Teleop Init");
+		drivetrain.resetEncoders();
 		//Scheduler.getInstance().enable();
 		//Scheduler.getInstance().removeAll();
 		//Scheduler.getInstance().add(tankDrive);
@@ -140,7 +141,10 @@ public class Robot extends IterativeRobot {
 	public void log() {
 		SmartDashboard.putNumber("Left Encoder = ", drivetrain.getLeftDistance());
 		SmartDashboard.putNumber("Right Encoder = ", drivetrain.getRightDistance());
-		SmartDashboard.putNumber("Flywheel Motor Speed", flywheel.getFlywheelMotorSpeed());
+		//SmartDashboard.putNumber("Flywheel Motor Speed", flywheel.getFlywheelMotorSpeed());
+		//SmartDashboard.putNumber("Count Encoder Left", drivetrain.getLeftEncoderCount());
+		//SmartDashboard.putNumber("Count Encoder Right", drivetrain.getRightEncoderCount());
+		//SmartDashboard.putData("Gyro", drivetrain.getDriveTrainGyro());
 	}
 	
 	@Override

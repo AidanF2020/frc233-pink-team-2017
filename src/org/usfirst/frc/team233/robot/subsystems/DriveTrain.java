@@ -44,14 +44,14 @@ public class DriveTrain extends Subsystem{
 	private final double distancePerPulse = (Math.PI * wheelDiameter) / pulsePerRevolution;
 	
 	// Fixed value for distancePerPulse used in real robot
-	private final double distancePerPulseConstant = 0.314;
+	private final double distancePerPulseConstant = 0.0014169323;
 	
 	// Define all the encoders that are going to be used for the drive train.
 //	private Encoder leftEncoder = new Encoder(RobotMap.leftEncoderAPort, RobotMap.leftEncoderBPort);
 //	private Encoder rightEncoder = new Encoder(RobotMap.rightEncoderAPort, RobotMap.rightEncoderBPort);
-//	
-	private Encoder leftEncoder = new Encoder(RobotMap.leftEncoderAPort, RobotMap.leftEncoderBPort, true, EncodingType.k4X);
-	private Encoder rightEncoder = new Encoder(RobotMap.rightEncoderAPort, RobotMap.rightEncoderBPort, true, EncodingType.k4X);
+	
+	private Encoder leftEncoder = new Encoder(RobotMap.leftEncoderAPort, RobotMap.leftEncoderBPort, false, EncodingType.k2X);
+	private Encoder rightEncoder = new Encoder(RobotMap.rightEncoderAPort, RobotMap.rightEncoderBPort, false, EncodingType.k2X);
 	
 	
 	/** Drive train constructor.*/
@@ -81,7 +81,7 @@ public class DriveTrain extends Subsystem{
 	
 	public void setupComponents() {
 		compressor.setClosedLoopControl(true);
-		gyro.calibrate();
+		//gyro.calibrate();
 	}
 	
 	/** Setup encoders before use. */
@@ -154,6 +154,15 @@ public class DriveTrain extends Subsystem{
 		return dist;
 	}
 	
+	public int getLeftEncoderCount() {
+		return leftEncoder.get();
+	}
+	
+	public int getRightEncoderCount() {
+		return rightEncoder.get();
+	}
+	
+	
 	/** Average the distance of both encoders and return its 
 	 * value. Also put this value in the SmartDashboard. */
 	public double getDistanceTraveled() {
@@ -173,6 +182,10 @@ public class DriveTrain extends Subsystem{
 	
 	public double getGyroRotation() {
 		return gyro.getAngle();
+	}
+	
+	public AnalogGyro getDriveTrainGyro() {
+		return gyro;
 	}
 	
 	/** Use this method to reset encoders and any other resource

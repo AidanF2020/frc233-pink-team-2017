@@ -33,6 +33,10 @@ public class RopeClimber extends Subsystem {
 	}
 	
 	
+	public void reverseClimber() {
+		climberMotor.set(-0.5);
+	}
+	
 	@Override
 	protected void initDefaultCommand() {
 		// TODO Auto-generated method stub
