@@ -103,6 +103,16 @@ public class PinkNavigate extends Command {
 		super.end();
 		stopBase();
 	}
+	
+	//migrated over from Range class
+	public static double clip (double cmd, double max, double min) {
+		if (cmd > max) {
+			return max;
+		}
+		else if (cmd < min){
+			return min;
+		}
+	}
 
     /**
      * Created by Andy on 11/12/2015.
