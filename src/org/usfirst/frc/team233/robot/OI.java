@@ -5,7 +5,6 @@ import org.usfirst.frc.team233.robot.commands.BeginShooting;
 import org.usfirst.frc.team233.robot.commands.Ceasefire;
 import org.usfirst.frc.team233.robot.commands.CollectBalls;
 import org.usfirst.frc.team233.robot.commands.EjectBalls;
-import org.usfirst.frc.team233.robot.commands.ReverseClimber;
 import org.usfirst.frc.team233.robot.commands.ShiftGear;
 import org.usfirst.frc.team233.robot.commands.SpinDown;
 import org.usfirst.frc.team233.robot.commands.SpinUp;
@@ -92,8 +91,6 @@ public class OI {
 		// WARNING: Haven't tested this code yet!!!
 		a.whileHeld(new StartClimb());
 		a.whenReleased(new StopClimb());
-		b.whileHeld(new ReverseClimber());
-		b.whenReleased(new StopClimb());
 	}
 	
 	public Joystick getBaseJoystick() {
