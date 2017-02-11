@@ -21,7 +21,10 @@ public class RopeClimber extends Subsystem {
 
 	/** Skeleton method for a simple rope climbing action. */
 	public void startClimbingRope() {
-		climberMotor.set(RobotMap.ropeClimberSpeed);
+		// climber motor must be undirectional --> abs value of given speed
+		// otherwise ratchet component gets destroyed
+		// no backspinning
+		climberMotor.set(Math.abs(RobotMap.ropeClimberSpeed));
 	}
 	
 	
@@ -32,10 +35,10 @@ public class RopeClimber extends Subsystem {
 		climberMotor.stopMotor();
 	}
 	
-	
-	public void reverseClimber() {
-		climberMotor.set(-0.5);
-	}
+//  UNSUPPORTED BY HARDWARE	
+// 	public void reverseClimber() {
+// 		climberMotor.set(-0.5);
+// 	}
 	
 	@Override
 	protected void initDefaultCommand() {
