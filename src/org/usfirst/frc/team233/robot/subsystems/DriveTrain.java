@@ -6,6 +6,7 @@ import org.usfirst.frc.team233.robot.RobotMap;
 import org.usfirst.frc.team233.robot.commands.TankDrive;
 
 import edu.wpi.first.wpilibj.Compressor;
+import edu.wpi.first.wpilibj.CounterBase.EncodingType;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.RobotDrive;
@@ -41,20 +42,24 @@ public class DriveTrain extends Subsystem{
 	private final double distancePerPulse = (Math.PI * wheelDiameter) / pulsePerRevolution;
 	
 	// Fixed value for distancePerPulse used in real robot
-	private final double distancePerPulseConstant = 0.124;
+	private final double distancePerPulseConstant = 0.314;
 	
 	// Define all the encoders that are going to be used for the drive train.
-	private Encoder leftEncoder = new Encoder(RobotMap.leftEncoderAPort, RobotMap.leftEncoderBPort);
-	private Encoder rightEncoder = new Encoder(RobotMap.rightEncoderAPort, RobotMap.rightEncoderBPort);
+//	private Encoder leftEncoder = new Encoder(RobotMap.leftEncoderAPort, RobotMap.leftEncoderBPort);
+//	private Encoder rightEncoder = new Encoder(RobotMap.rightEncoderAPort, RobotMap.rightEncoderBPort);
+//	
+	private Encoder leftEncoder = new Encoder(RobotMap.leftEncoderAPort, RobotMap.leftEncoderBPort, true, EncodingType.k4X);
+	private Encoder rightEncoder = new Encoder(RobotMap.rightEncoderAPort, RobotMap.rightEncoderBPort, true, EncodingType.k4X);
 	
 	
 	/** Drive train constructor.*/
 	public DriveTrain() {
 		super();
+		System.out.println("Drivetrain Constructor");
 		drive.setSafetyEnabled(true);
 		setupMotors();
-		resetEncoders();
 		setupEncoders();
+		resetEncoders();
 		compressor.setClosedLoopControl(true);
 	}
 	
@@ -111,24 +116,28 @@ public class DriveTrain extends Subsystem{
 		} else {
 			leftEncoder.setDistancePerPulse(distancePerPulse);
 		}
+		// These values setup here are random!!!
+		// Need to determine the best values for this!
 		leftEncoder.setPIDSourceType(PIDSourceType.kDisplacement);
-		SmartDashboard.putData("Left Encoder", leftEncoder);
+		//leftEncoder.setSamplesToAverage(6);
+		//leftEncoder.setMinRate(10);
 		
 		// Setup right encoder
 		if (Robot.isReal()) {
 			rightEncoder.setDistancePerPulse(distancePerPulseConstant);
 		} else {
 			rightEncoder.setDistancePerPulse(distancePerPulse);
-		}		
+		}
 		rightEncoder.setPIDSourceType(PIDSourceType.kDisplacement);
-		SmartDashboard.putData("Right Encoder", rightEncoder);
+		//rightEncoder.setMinRate(10);
+		//rightEncoder.setSamplesToAverage(6);
 	}
 	
 	/** Obtain the distance from the encoder on the 
 	 * left of the drive train. */
 	public double getLeftDistance() {
 		double dist = leftEncoder.getDistance();
-		SmartDashboard.putNumber("Left Distance", dist);
+		//SmartDashboard.putNumber("Left Distance", dist);
 		return dist;
 	}
 	
@@ -136,7 +145,7 @@ public class DriveTrain extends Subsystem{
 	 * right of the drive train. */
 	public double getRightDistance() {
 		double dist = rightEncoder.getDistance();
-		SmartDashboard.putNumber("Right Distance", dist);
+		//SmartDashboard.putNumber("Right Distance", dist);
 		return dist;
 	}
 	
@@ -144,7 +153,7 @@ public class DriveTrain extends Subsystem{
 	 * value. Also put this value in the SmartDashboard. */
 	public double getDistanceTraveled() {
 		double avgEncoders = (leftEncoder.getDistance() + rightEncoder.getDistance()) / 2;
-		SmartDashboard.putNumber("Encoder Avg", avgEncoders);
+		//SmartDashboard.putNumber("Encoder Avg", avgEncoders);
 		return avgEncoders;
 	}
 	

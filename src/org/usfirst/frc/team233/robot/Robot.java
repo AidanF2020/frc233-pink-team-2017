@@ -131,10 +131,18 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
+		log();
 		// TODO Test this change in code to verify if the motors still run
 		//System.out.println("Teleop Periodic");
 	}
-
+	
+	
+	public void log() {
+		SmartDashboard.putNumber("Left Encoder = ", drivetrain.getLeftDistance());
+		SmartDashboard.putNumber("Right Encoder = ", drivetrain.getRightDistance());
+		SmartDashboard.putNumber("Flywheel Motor Speed", flywheel.getFlywheelMotorSpeed());
+	}
+	
 	@Override
 	public void robotPeriodic() {
 		// TODO Auto-generated method stub

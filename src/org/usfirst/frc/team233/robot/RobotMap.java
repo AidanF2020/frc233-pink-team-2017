@@ -20,8 +20,8 @@ public class RobotMap {
 	// Encoders
 	public static int leftEncoderAPort = 0;
 	public static int leftEncoderBPort = 1;
-	public static int rightEncoderAPort = 3;
-	public static int rightEncoderBPort = 4;
+	public static int rightEncoderAPort = 2;
+	public static int rightEncoderBPort = 3;
 	
 	//Pneumatics
 	public static int compressorPort = 0;
