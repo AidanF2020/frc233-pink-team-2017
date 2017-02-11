@@ -8,6 +8,7 @@ import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
+import org.usfirst.frc.team233.robot.autonomous.AutoTest1;
 import org.usfirst.frc.team233.robot.subsystems.BallCollector;
 import org.usfirst.frc.team233.robot.subsystems.DriveTrain;
 import org.usfirst.frc.team233.robot.subsystems.Flywheel;
@@ -51,6 +52,7 @@ public class Robot extends IterativeRobot {
 		oi = new OI();
 
 		System.out.println("RoboInit");
+		SmartDashboard.putData(new AutoTest1());
 		SmartDashboard.putData("Auto mode", chooser);
 	}
 	
@@ -144,7 +146,7 @@ public class Robot extends IterativeRobot {
 		//SmartDashboard.putNumber("Flywheel Motor Speed", flywheel.getFlywheelMotorSpeed());
 		//SmartDashboard.putNumber("Count Encoder Left", drivetrain.getLeftEncoderCount());
 		//SmartDashboard.putNumber("Count Encoder Right", drivetrain.getRightEncoderCount());
-		//SmartDashboard.putData("Gyro", drivetrain.getDriveTrainGyro());
+		SmartDashboard.putData("Gyro", drivetrain.getDriveTrainGyro());
 	}
 	
 	@Override
