@@ -63,7 +63,7 @@ public class PinkNavigate extends Command {
         rightMotorCmd *= maxPower;
 
         Robot.drivetrain.drive(leftMotorCmd, rightMotorCmd);
-        if((Math.abs(targetPosCounts - currentPosCounts)<POSITION_THRESHOLD)&&(Math.abs(angleErrorDegrees)<ANGLE_THRESHOLD)) {
+        if((Math.abs(linearError) < POSITION_THRESHOLD) && (Math.abs(angularError) < ANGLE_THRESHOLD)) {
              return true;
         } else {
             return false;
