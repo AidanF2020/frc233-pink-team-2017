@@ -112,6 +112,9 @@ public class PinkNavigate extends Command {
 		else if (cmd < min){
 			return min;
 		}
+		else {
+			return cmd;
+		}
 	}
 
     /**
