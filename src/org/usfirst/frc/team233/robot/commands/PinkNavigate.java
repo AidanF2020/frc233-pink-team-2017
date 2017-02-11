@@ -43,12 +43,7 @@ public class PinkNavigate extends Command {
     public boolean driveToPos() {
     	double motorCmd = 0;
         double targetPosCounts = targetPos * COUNTS_PER_INCH;
-        double leftMotorCmd, rightMotorCmd;
-        double leftWheelPos = Robot.drivetrain.getLeftDistance();
-        double rightWheelPos = Robot.drivetrain.getRightDistance();
-        double angleErrorDegrees = targetAngle - currentAngle;
-        double currentPosCounts = (leftWheelPos + rightWheelPos)/2.0;
-        double angleOffset;
+        double currentPosCounts = (Robot.drivetrain.getLeftDistance() + Robot.drivetrain.getRightDistance())/2.0;
         double linearError = targetPosCounts - currentPosCounts;
         double angularError = targetAngle - currentAngle;
 
@@ -56,9 +51,9 @@ public class PinkNavigate extends Command {
         motorCmd = Range.clip(motorCmd, 0.5, -0.5);
 
         // Determine and add the angle offset
-        angleOffset = PinkPD.getMotorCmd(0.02, 0.02, angularError, angularVelocity);
-        leftMotorCmd = motorCmd + angleOffset;
-        rightMotorCmd = motorCmd - angleOffset;
+        double angleOffset = PinkPD.getMotorCmd(0.02, 0.02, angularError, angularVelocity);
+        double leftMotorCmd = motorCmd + angleOffset;
+        double rightMotorCmd = motorCmd - angleOffset;
         leftMotorCmd = Range.clip(leftMotorCmd, -1.0, 1.0);
         rightMotorCmd = Range.clip(rightMotorCmd, -1.0, 1.0);
 
@@ -68,57 +63,43 @@ public class PinkNavigate extends Command {
         rightMotorCmd *= maxPower;
 
         Robot.drivetrain.drive(leftMotorCmd, rightMotorCmd);
-        if((Math.abs(targetPosCounts - currentPosCounts)<POSITION_THRESHOLD)&&(Math.abs(angleErrorDegrees)<ANGLE_THRESHOLD))
-        {
+        if((Math.abs(targetPosCounts - currentPosCounts)<POSITION_THRESHOLD)&&(Math.abs(angleErrorDegrees)<ANGLE_THRESHOLD)) {
              return true;
-        } else
-        {
+        } else {
             return false;
         }
     }
 
-    public static void stopBase()
-    {
+    public static void stopBase() {
         Robot.drivetrain.drive(0, 0);
     }
 
-    public static boolean resetBasePosition()
-    {
+    public static boolean resetBasePosition() {
         boolean resetStatus = false;
         Robot.drivetrain.resetEncoders();
         
-        if ((Robot.drivetrain.getLeftDistance()==0)&&(Robot.drivetrain.getRightDistance()==0))
-        {
+        if ((Robot.drivetrain.getLeftDistance()==0)&&(Robot.drivetrain.getRightDistance()==0)) {
             resetStatus = true;
         }
         return resetStatus;
     }
 
-    public static double getBasePosition()
-    {
+    public static double getBasePosition() {
         return ((Robot.drivetrain.getLeftDistance() + Robot.drivetrain.getRightDistance())/2.0);
     }
-
-    
-   
-    
     
     @Override
     protected void execute() {
-    	// TODO Auto-generated method stub
     	super.execute();
-    	
     }
     
 	@Override
 	protected boolean isFinished() {
-		// TODO Auto-generated method stub
 		return driveToPos();
 	}
 	
 	@Override
 	protected void end() {
-		// TODO Auto-generated method stub
 		super.end();
 		stopBase();
 	}
