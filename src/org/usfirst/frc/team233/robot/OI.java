@@ -1,11 +1,11 @@
 package org.usfirst.frc.team233.robot;
 
+import org.usfirst.frc.team233.robot.autonomous.AutonomousShoot;
 import org.usfirst.frc.team233.robot.commands.BeginShooting;
 import org.usfirst.frc.team233.robot.commands.Ceasefire;
 import org.usfirst.frc.team233.robot.commands.CollectBalls;
 import org.usfirst.frc.team233.robot.commands.EjectBalls;
 import org.usfirst.frc.team233.robot.commands.ShiftGear;
-import org.usfirst.frc.team233.robot.commands.AutonomousShoot;
 import org.usfirst.frc.team233.robot.commands.SpinDown;
 import org.usfirst.frc.team233.robot.commands.SpinUp;
 import org.usfirst.frc.team233.robot.commands.StartClimb;

@@ -1,4 +1,7 @@
-package org.usfirst.frc.team233.robot.commands;
+package org.usfirst.frc.team233.robot.autonomous;
+
+import org.usfirst.frc.team233.robot.commands.BeginShooting;
+import org.usfirst.frc.team233.robot.commands.SpinUp;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
