@@ -28,7 +28,7 @@ public class RobotMap {
 	public static int shiftingSolenoidPort = 1;
 	
 	// Gyro
-	public static int gyroPort = 1;
+	public static int gyroPort = 0;
 	
 	//============================================
 	// 		SHOOTER VARIABLES
