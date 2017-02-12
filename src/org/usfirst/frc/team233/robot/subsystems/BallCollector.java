@@ -50,5 +50,12 @@ public class BallCollector extends Subsystem{
 		collectorMotor.stopMotor();
 	}
 	
+	
+	
+	public enum CollectorAction {
+		COLLECT,
+		EJECT,
+		STOP
+	}
 }
 

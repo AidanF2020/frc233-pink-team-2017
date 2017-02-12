@@ -19,6 +19,12 @@ public class RopeClimber extends Subsystem {
 		}
 	}
 
+	@Override
+	protected void initDefaultCommand() {
+		// TODO Auto-generated method stub
+		
+	}
+
 	/** Skeleton method for a simple rope climbing action. */
 	public void startClimbingRope() {
 		// climber motor must be undirectional --> abs value of given speed
@@ -27,23 +33,17 @@ public class RopeClimber extends Subsystem {
 		climberMotor.set(Math.abs(RobotMap.ropeClimberSpeed));
 	}
 	
-	
-	/** Logic behind this method is still undetermined.
-	 * Will need to revise after they decide on how they
-	 * want to manage staying at the top of the rope.  */
 	public void stopClimbingRope() {
 		climberMotor.stopMotor();
 	}
 	
-//  UNSUPPORTED BY HARDWARE	
-// 	public void reverseClimber() {
-// 		climberMotor.set(-0.5);
-// 	}
+ 	public void reverseClimber() {
+ 		climberMotor.set(-0.5);
+ 	}
 	
-	@Override
-	protected void initDefaultCommand() {
-		// TODO Auto-generated method stub
-		
-	}
-
+ 	public enum ClimberAction {
+ 		CLIMB,
+ 		REVERSE,
+ 		STOP
+ 	}
 }

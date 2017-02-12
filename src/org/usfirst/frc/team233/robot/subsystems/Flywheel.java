@@ -14,8 +14,11 @@ public class Flywheel extends Subsystem {
 	private ShootingState state;
 	
 	public double flywheelSpeed = RobotMap.flywheelMotorSpeed;
+	private final boolean isInverted = false;
+	
 	private double tolerance = 0.1;
 	private final double flywheelKp = 0.1;
+	
 	private Encoder encoder = new Encoder(RobotMap.flywheelEncoderPortA, RobotMap.flywheelEncoderPortB);
 	private final double flywheelDistancePerPulse = 0.123;
 	
@@ -26,8 +29,7 @@ public class Flywheel extends Subsystem {
 	private final double distancePerPulse = (Math.PI * gearDiameter) / pulsePerRevolution;
 	
 	public Flywheel() {
-		super();
-		SmartDashboard.putNumber("Flywheel Motor Speed", flywheelMotor.get());
+		flywheelMotor.setInverted(isInverted);
 		state = ShootingState.FLYWHEEL_INIT;
 		encoder.reset();
 		encoder.setDistancePerPulse(flywheelDistancePerPulse);
@@ -41,8 +43,6 @@ public class Flywheel extends Subsystem {
 	}
 
 	public void startFlywheel() {
-		//System.out.println("Running Flywheel");
-		//flywheelMotor.set(flywheelSpeed);
 		flywheelMotor.set(getPDSpeed(flywheelMotor.get(), flywheelSpeed, flywheelKp));
 	}
 
@@ -54,7 +54,6 @@ public class Flywheel extends Subsystem {
 		flywheelMotor.set(0.5);
 	}
 
-	
 	/** Reset all encoders. */
 	public void resetEncoder() {
 		encoder.reset();

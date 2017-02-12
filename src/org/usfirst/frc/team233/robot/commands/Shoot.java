@@ -11,31 +11,50 @@ import edu.wpi.first.wpilibj.command.Command;
  * 		    DO NOT use for shooting
  * 			yet!*/
 public class Shoot extends Command{
-
-	public Shoot() {
+	ShootingState state;
+	
+	public Shoot(ShootingState state) {
 		// TODO Auto-generated constructor stub
 		requires(Robot.flywheel);
-		Robot.flywheel.setFlywheelState(ShootingState.FLYWHEEL_SPINNING_UP);
+		this.state = state;
 	}
 	
 	@Override
 	protected void execute() {
 		// TODO Auto-generated method stub
 		super.execute();
-		switch (Robot.flywheel.getFlywheelState()) {
-			case FLYWHEEL_SPINNING_UP:
+		switch (state) {
+			case START_FLYWHEEL:
+				Robot.flywheel.flywheelHalfSpeed();
+				break;
+				
+			case SHOOT:
 				Robot.flywheel.startFlywheel();
+				state = ShootingState.FLYWHEEL_SPINNING_UP;
+				break;
+				
+			case FLYWHEEL_SPINNING_UP:
 				if (Robot.flywheel.motorSpeedEqualsSetSpeed()) {
-					Robot.flywheel.setFlywheelState(ShootingState.FLYWHEEL_UP_TO_SPEED);
+					state = ShootingState.FLYWHEEL_UP_TO_SPEED;
 				}
 				break;
-			
+		
 			case FLYWHEEL_UP_TO_SPEED:
 				Robot.hopper.agitate();
+				state = ShootingState.SHOOTING;
 				break;
 			
-			case SHOOT:
+			case SHOOTING:
 				Robot.indexer.releaseBalls();
+				break;
+				
+			case CEASEFIRE:
+				Robot.hopper.stopAgitate();
+				Robot.indexer.stopIndexer();
+				break;
+				
+			case STOP_FLYWHEEL:
+				Robot.flywheel.stopFlywheel();
 				break;
 	
 			default:
@@ -47,7 +66,14 @@ public class Shoot extends Command{
 	@Override
 	protected boolean isFinished() {
 		// TODO Auto-generated method stub
-		return false;
+		if ((ShootingState.START_FLYWHEEL == state) || 
+			(ShootingState.CEASEFIRE == state) ||
+			(ShootingState.STOP_FLYWHEEL == state)) {
+			return true;
+		}
+		else {
+			return false;
+		}
 	}
 
 }

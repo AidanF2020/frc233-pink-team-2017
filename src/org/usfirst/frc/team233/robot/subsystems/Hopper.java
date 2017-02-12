@@ -2,8 +2,6 @@ package org.usfirst.frc.team233.robot.subsystems;
 
 import org.usfirst.frc.team233.robot.RobotMap;
 
-import edu.wpi.first.wpilibj.Encoder;
-import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -16,15 +14,17 @@ public class Hopper extends Subsystem {
 		super();
 	}
 	
+	@Override
+	protected void initDefaultCommand() {
+		// TODO Auto-generated method stub
+		
+	}
+	
 	public void agitate(){
-		//Robot.oi.getShooterJoystick().
-		//shooter.getButton(button)
-		//comp.start();
 		agitatorMotor.set(RobotMap.agitatorMotorSpeed);
 	}
 	
 	public void stopAgitate() {
-		//comp.stop();
 		agitatorMotor.stopMotor();
 	}
 	
@@ -32,14 +32,11 @@ public class Hopper extends Subsystem {
 		agitatorMotor.set(-RobotMap.agitatorMotorSpeed);
 	}
 	
-	public void blow(){
-		//blowerMotor.set(RobotMap.blowerMotorSpeed);
-	}
-
-	@Override
-	protected void initDefaultCommand() {
-		// TODO Auto-generated method stub
-		
+	
+	public enum HopperAction {
+		AGITATE,
+		REVERSE_AGITATE,
+		STOP_AGITATE
 	}
 
 }
