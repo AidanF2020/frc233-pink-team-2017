@@ -41,9 +41,5 @@ public class RopeClimber extends Subsystem {
  		climberMotor.set(-0.5);
  	}
 	
- 	public enum ClimberAction {
- 		CLIMB,
- 		REVERSE,
- 		STOP
- 	}
+ 	
 }

@@ -1,11 +1,16 @@
 package org.usfirst.frc.team233.robot.commands;
 
 import org.usfirst.frc.team233.robot.Robot;
-import org.usfirst.frc.team233.robot.subsystems.RopeClimber.ClimberAction;
 
 import edu.wpi.first.wpilibj.command.Command;
 
 public class ClimbCommand extends Command {
+	
+	public enum ClimberAction {
+ 		CLIMB,
+ 		REVERSE,
+ 		STOP
+ 	}
 	
 	ClimberAction action;
 	
