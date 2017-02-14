@@ -5,7 +5,6 @@ import org.usfirst.frc.team233.robot.subsystems.ShootingState;
 
 import edu.wpi.first.wpilibj.command.Command;
 
-
 /**
  * WARNING: Still in prototype phase!
  * 		    DO NOT use for shooting

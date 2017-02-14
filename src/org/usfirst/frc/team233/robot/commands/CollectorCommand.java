@@ -1,12 +1,16 @@
 package org.usfirst.frc.team233.robot.commands;
 
 import org.usfirst.frc.team233.robot.Robot;
-import org.usfirst.frc.team233.robot.subsystems.BallCollector.CollectorAction;
 
 import edu.wpi.first.wpilibj.command.Command;
 
 public class CollectorCommand extends Command {
-
+	
+	public enum CollectorAction {
+		COLLECT,
+		EJECT,
+		STOP
+	}
 	CollectorAction action;
 	
 	public CollectorCommand(CollectorAction action) {

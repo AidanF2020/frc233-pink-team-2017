@@ -4,7 +4,7 @@ import org.usfirst.frc.team233.robot.commands.ClimbCommand;
 import org.usfirst.frc.team233.robot.commands.CollectorCommand;
 import org.usfirst.frc.team233.robot.commands.ShiftGear;
 import org.usfirst.frc.team233.robot.commands.Shoot;
-import org.usfirst.frc.team233.robot.subsystems.BallCollector.CollectorAction;
+import org.usfirst.frc.team233.robot.commands.CollectorCommand.CollectorAction;
 import org.usfirst.frc.team233.robot.commands.ClimbCommand.ClimberAction;
 import org.usfirst.frc.team233.robot.subsystems.ShootingState;
 

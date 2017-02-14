@@ -31,12 +31,4 @@ public class Hopper extends Subsystem {
 	public void reverseAgitate() {
 		agitatorMotor.set(-RobotMap.agitatorMotorSpeed);
 	}
-	
-	
-	public enum HopperAction {
-		AGITATE,
-		REVERSE_AGITATE,
-		STOP_AGITATE
-	}
-
 }
