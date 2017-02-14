@@ -3,14 +3,20 @@ package org.usfirst.frc.team233.robot;
 import org.usfirst.frc.team233.robot.autonomous.AutonomousShoot;
 import org.usfirst.frc.team233.robot.commands.BeginShooting;
 import org.usfirst.frc.team233.robot.commands.Ceasefire;
+import org.usfirst.frc.team233.robot.commands.ClimbCommand;
+import org.usfirst.frc.team233.robot.commands.ClimbCommand.ClimberAction;
 import org.usfirst.frc.team233.robot.commands.CollectBalls;
+import org.usfirst.frc.team233.robot.commands.CollectorCommand;
+import org.usfirst.frc.team233.robot.commands.CollectorCommand.CollectorAction;
 import org.usfirst.frc.team233.robot.commands.EjectBalls;
 import org.usfirst.frc.team233.robot.commands.ShiftGear;
+import org.usfirst.frc.team233.robot.commands.Shoot;
 import org.usfirst.frc.team233.robot.commands.SpinDown;
 import org.usfirst.frc.team233.robot.commands.SpinUp;
 import org.usfirst.frc.team233.robot.commands.StartClimb;
 import org.usfirst.frc.team233.robot.commands.StopClimb;
 import org.usfirst.frc.team233.robot.commands.StopCollector;
+import org.usfirst.frc.team233.robot.subsystems.ShootingState;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
@@ -73,24 +79,23 @@ public class OI {
 		//==========================================
 		//		Map Joysticks to Commands
 		//==========================================
+		shooterRightTrigger.whileHeld(new Shoot(ShootingState.START_FLYWHEEL));
+		shooterRightTrigger.whenReleased(new Shoot(ShootingState.STOP_FLYWHEEL));
 		
-		//shooterRightBumper.whileHeld(new SpinUp());
-		//shooterRightBumper.whenReleased(new SpinDown());
+		shooterRightBumper.whileHeld(new Shoot(ShootingState.SHOOT));
+		shooterRightBumper.whenReleased(new Shoot(ShootingState.CEASEFIRE));
 		
-		//shooterRightTrigger.whileHeld(new BeginShooting());
-		//shooterRightTrigger.whenReleased(new Ceasefire());
+		rightTrigger.whileHeld(new CollectorCommand(CollectorAction.COLLECT));
+		rightTrigger.whenReleased(new CollectorCommand(CollectorAction.STOP));
 		
-		rightTrigger.whileHeld(new CollectBalls());
-		rightTrigger.whenReleased(new StopCollector());
-		
-		leftTrigger.whileHeld(new EjectBalls());
-		leftTrigger.whenReleased(new StopCollector());
+		leftTrigger.whileHeld(new CollectorCommand(CollectorAction.EJECT));
+		leftTrigger.whenReleased(new CollectorCommand(CollectorAction.STOP));
 		
 		rightBumper.whenPressed(new ShiftGear());
 		
-		// WARNING: Haven't tested this code yet!!!
-		a.whileHeld(new StartClimb());
-		a.whenReleased(new StopClimb());
+		a.whileHeld(new ClimbCommand(ClimberAction.CLIMB));
+		a.whenReleased(new ClimbCommand(ClimberAction.STOP));
+		
 	}
 	
 	public Joystick getBaseJoystick() {
