@@ -17,6 +17,7 @@ import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.Joystick.AxisType;
 import edu.wpi.first.wpilibj.PIDSourceType;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.interfaces.Gyro;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 //import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 
@@ -29,7 +30,7 @@ public class DriveTrain extends Subsystem{
 	private SpeedController rearRightMotor = new Talon(RobotMap.rightBackMotorPort);
 	
 	private Compressor compressor = new Compressor(RobotMap.compressorPort);
-	private AnalogGyro gyro = new AnalogGyro(RobotMap.gyroPort);
+	private AnalogGyro gyro = new AnalogGyro(0);
 	private Solenoid shifterSolenoid = new Solenoid(RobotMap.shiftingSolenoidPort);
 	
 	// Link the motors to the robot
@@ -50,8 +51,8 @@ public class DriveTrain extends Subsystem{
 //	private Encoder leftEncoder = new Encoder(RobotMap.leftEncoderAPort, RobotMap.leftEncoderBPort);
 //	private Encoder rightEncoder = new Encoder(RobotMap.rightEncoderAPort, RobotMap.rightEncoderBPort);
 	
-	private Encoder leftEncoder = new Encoder(RobotMap.leftEncoderAPort, RobotMap.leftEncoderBPort, false, EncodingType.k2X);
-	private Encoder rightEncoder = new Encoder(RobotMap.rightEncoderAPort, RobotMap.rightEncoderBPort, false, EncodingType.k2X);
+	private Encoder leftEncoder = new Encoder(RobotMap.leftEncoderAPort, RobotMap.leftEncoderBPort, false, EncodingType.k1X);
+	private Encoder rightEncoder = new Encoder(RobotMap.rightEncoderAPort, RobotMap.rightEncoderBPort, false, EncodingType.k1X);
 	
 	
 	/** Drive train constructor.*/
@@ -81,6 +82,9 @@ public class DriveTrain extends Subsystem{
 	
 	public void setupComponents() {
 		compressor.setClosedLoopControl(true);
+		gyro.setSensitivity(0.0128);
+		//gyro.calibrate();
+		gyro.reset();
 		//gyro.calibrate();
 	}
 	
@@ -95,6 +99,7 @@ public class DriveTrain extends Subsystem{
 		// These values setup here are random!!!
 		// Need to determine the best values for this!
 		leftEncoder.setPIDSourceType(PIDSourceType.kDisplacement);
+		leftEncoder.setReverseDirection(false);
 		//leftEncoder.setSamplesToAverage(6);
 		//leftEncoder.setMinRate(10);
 		
@@ -104,6 +109,7 @@ public class DriveTrain extends Subsystem{
 		} else {
 			rightEncoder.setDistancePerPulse(distancePerPulse);
 		}
+		rightEncoder.setReverseDirection(true);
 		rightEncoder.setPIDSourceType(PIDSourceType.kDisplacement);
 		//rightEncoder.setMinRate(10);
 		//rightEncoder.setSamplesToAverage(6);
@@ -192,6 +198,7 @@ public class DriveTrain extends Subsystem{
 	 * for autonomous use. */
 	public void reset() {
 		resetEncoders();
+		gyro.reset();
 	}
 	
 	/** This method should be called on any disable to reset and

@@ -16,11 +16,11 @@ public class TankDrive extends Command {
 		protected void execute() {
 			//System.out.println("TankDrive Execute!!!");
 			Robot.drivetrain.drive(Robot.oi.getBaseJoystick());
-//			System.out.println("Encoder Left = " + Robot.drivetrain.getLeftDistance());
-//			System.out.println("Encoder Right = " + Robot.drivetrain.getRightDistance());
+			System.out.println("Encoder Left = " + Robot.drivetrain.getLeftDistance());
+			System.out.println("Encoder Right = " + Robot.drivetrain.getRightDistance());
 //			System.out.println("Left Count Encoder = " + Robot.drivetrain.getLeftEncoderCount());
 //			System.out.println("Right Count Encoder = " + Robot.drivetrain.getRightEncoderCount());
-//			System.out.println("Gyro = " + Robot.drivetrain.getGyroRotation());
+			System.out.println("Gyro = " + Robot.drivetrain.getGyroRotation());
 		}
 
 		// Make this return true when this Command no longer needs to run execute()
