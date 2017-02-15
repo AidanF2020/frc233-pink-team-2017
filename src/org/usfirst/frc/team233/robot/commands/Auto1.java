@@ -2,7 +2,7 @@ package org.usfirst.frc.team233.robot.commands;
 
 import org.usfirst.frc.team233.robot.Robot;
 import org.usfirst.frc.team233.robot.RobotMap;
-import org.usfirst.frc.team233.robot.commands.PinkNavigate;
+import org.usfirst.frc.team233.robot.autonomous.PinkNavigate;
 import edu.wpi.first.wpilibj.AnalogGyro;
 import edu.wpi.first.wpilibj.SPI;
 

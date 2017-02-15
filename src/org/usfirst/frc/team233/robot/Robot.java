@@ -107,12 +107,14 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void autonomousPeriodic() {
+		drivetrain.getGyroRotation();
 		Scheduler.getInstance().run();
 		
 	}
 
 	@Override
 	public void teleopInit() {
+		drivetrain.getGyroRotation();
 		//ASUME 4inch wheels
 		// This makes sure that the autonomous stops running when
 		// teleop starts running. If you want the autonomous to
@@ -134,6 +136,7 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void teleopPeriodic() {
+		drivetrain.getGyroRotation();
 		Scheduler.getInstance().run();
 		log();
 		// TODO Test this change in code to verify if the motors still run
@@ -147,7 +150,7 @@ public class Robot extends IterativeRobot {
 		//SmartDashboard.putNumber("Flywheel Motor Speed", flywheel.getFlywheelMotorSpeed());
 		//SmartDashboard.putNumber("Count Encoder Left", drivetrain.getLeftEncoderCount());
 		//SmartDashboard.putNumber("Count Encoder Right", drivetrain.getRightEncoderCount());
-		SmartDashboard.putData("Gyro", drivetrain.getDriveTrainGyro());
+		//SmartDashboard.putData("Gyro", drivetrain.getDriveTrainGyro());
 	}
 	
 	@Override

@@ -20,6 +20,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.interfaces.Gyro;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 //import edu.wpi.first.wpilibj.livewindow.LiveWindow;
+import edu.wpi.first.wpilibj.SPI;
 
 
 public class DriveTrain extends Subsystem{
@@ -30,7 +31,8 @@ public class DriveTrain extends Subsystem{
 	private SpeedController rearRightMotor = new Talon(RobotMap.rightBackMotorPort);
 	
 	private Compressor compressor = new Compressor(RobotMap.compressorPort);
-	private AnalogGyro gyro = new AnalogGyro(0);
+	private SPI gyro = new SPI(SPI.Port.kOnboardCS0);
+//	private AnalogGyro gyro = new AnalogGyro(0);
 	private Solenoid shifterSolenoid = new Solenoid(RobotMap.shiftingSolenoidPort);
 	
 	// Link the motors to the robot
@@ -82,9 +84,8 @@ public class DriveTrain extends Subsystem{
 	
 	public void setupComponents() {
 		compressor.setClosedLoopControl(true);
-		gyro.setSensitivity(0.0128);
 		//gyro.calibrate();
-		gyro.reset();
+		gyro.resetAccumulator();
 		//gyro.calibrate();
 	}
 	
@@ -187,10 +188,14 @@ public class DriveTrain extends Subsystem{
 	}
 	
 	public double getGyroRotation() {
-		return gyro.getAngle();
+		System.out.println("gyro.getAccumulatorAverage() returns double: "+gyro.getAccumulatorAverage());
+		System.out.println("gyro.getAccumulatorCount() returns int: "+gyro.getAccumulatorCount());
+		System.out.println("gyro.getAccumulatorLastValue() returns int: "+gyro.getAccumulatorLastValue());
+		System.out.println("gyro.getAccumulatorValue() returns long: "+ gyro.getAccumulatorValue());
+		return gyro.getAccumulatorAverage();
 	}
 	
-	public AnalogGyro getDriveTrainGyro() {
+	public SPI getDriveTrainGyro() {
 		return gyro;
 	}
 	
@@ -198,7 +203,7 @@ public class DriveTrain extends Subsystem{
 	 * for autonomous use. */
 	public void reset() {
 		resetEncoders();
-		gyro.reset();
+		gyro.resetAccumulator();
 	}
 	
 	/** This method should be called on any disable to reset and
