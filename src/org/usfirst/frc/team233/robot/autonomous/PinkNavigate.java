@@ -20,12 +20,11 @@ public class PinkNavigate extends Command {
     private double linearVelocity;
     private double angularVelocity; 
     private double maxPower;
+    private double motorCmd;
 
     
     /** Constructor - Define the distance and angle for the robot to */
-    public PinkNavigate(double targetPos, double targetAngle, int currentAngle,
-		     		    double linearVelocity, double angularVelocity, 
-		     		    double maxPower) {
+    public PinkNavigate(double targetPos, double targetAngle, int currentAngle, double maxPower) {
     	this.targetPos = targetPos;
     	this.targetAngle = targetAngle;
     	this.currentAngle = currentAngle;
@@ -41,13 +40,11 @@ public class PinkNavigate extends Command {
     // Tank drive two wheels to target positions in inches.
     // Returns true when both arrive at the target.
     public boolean driveToPos() {
-    	double motorCmd = 0;
         double targetPosCounts = targetPos * COUNTS_PER_INCH;
         double currentPosCounts = (Robot.drivetrain.getLeftDistance() + Robot.drivetrain.getRightDistance())/2.0;
         double linearError = targetPosCounts - currentPosCounts;
         double angularError = targetAngle - currentAngle;
-
-        // Determine the baseline motor speed command
+        double motorCmd = PinkPD.getMotorCmd(0.1, 0.01, linearError, linearVelocity);
         motorCmd = Range.clip(motorCmd, 0.5, -0.5);
 
         // Determine and add the angle offset

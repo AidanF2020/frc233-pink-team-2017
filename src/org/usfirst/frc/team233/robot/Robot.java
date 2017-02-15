@@ -34,6 +34,7 @@ public class Robot extends IterativeRobot {
 	public static RopeClimber ropeClimber;
 	public static Hopper hopper;
 	public static OI oi;
+	
 
 	Command autonomousCommand;
 	SendableChooser<Command> chooser = new SendableChooser<>();
