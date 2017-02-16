@@ -50,14 +50,24 @@ public class Robot extends IterativeRobot {
 		indexer = new Indexer();
 		ballCollector = new BallCollector();
 		ropeClimber = new RopeClimber();
+		//hopper = new Hopper();
 		oi = new OI();
 
+		setupAutonomousList();
+		
 		System.out.println("RoboInit");
 		SmartDashboard.putData(new AutoTest1());
 		SmartDashboard.putData("Auto mode", chooser);
 	}
 	
 	
+	/**
+	 * Add all the autonomous routines to the 
+	 * chooser list
+	 * */
+	private void setupAutonomousList() {
+		chooser.addDefault("AutoTest1", new AutoTest1());
+	}
 
 	/**
 	 * This function is called once each time the robot enters Disabled mode.
