@@ -13,7 +13,11 @@ public class Flywheel extends Subsystem {
 	
 	private ShootingState state;
 	
+	// Defines the default value for the flywheel speed
 	public double flywheelSpeed = RobotMap.flywheelMotorSpeed;
+	// Defines the amount to increase or decrease the flywheel speed
+	private final double speedAdjustment = 0.01;
+
 	private double tolerance = 0.1;
 	private final double flywheelKp = 0.1;
 	private Encoder encoder = new Encoder(RobotMap.flywheelEncoderPortA, RobotMap.flywheelEncoderPortB);
@@ -24,11 +28,13 @@ public class Flywheel extends Subsystem {
 	private final double gearDiameter = 4.0;
 	private final int pulsePerRevolution = 40;
 	private final double distancePerPulse = (Math.PI * gearDiameter) / pulsePerRevolution;
+	private boolean speedButtonPressed;
 	
 	public Flywheel() {
 		super();
 		SmartDashboard.putNumber("Flywheel Motor Speed", flywheelMotor.get());
 		state = ShootingState.FLYWHEEL_INIT;
+		speedButtonPressed = false;
 		encoder.reset();
 		encoder.setDistancePerPulse(flywheelDistancePerPulse);
 	}
@@ -82,15 +88,22 @@ public class Flywheel extends Subsystem {
 	/** Adjust the speed of the */
 	public void adjustFlywheelSpeed(int adjustment){
 		//System.out.println("Button pressed = " + adjustment);
-		if(adjustment == 0){
+		if(adjustment == 0 && !speedButtonPressed){
 			System.out.println("Add speed to flywheel");
-			
-			flywheelSpeed = rangeValue(flywheelSpeed + 0.01);
-		} else if (adjustment == 180){
+			flywheelSpeed = rangeValue(flywheelSpeed + speedAdjustment);
+			speedButtonPressed = true;
+		} else if (adjustment == 180 && !speedButtonPressed){
 			System.out.println("Slow down flywheel");
-			flywheelSpeed = rangeValue(flywheelSpeed - 0.01);
+			flywheelSpeed = rangeValue(flywheelSpeed - speedAdjustment);
+			speedButtonPressed = true;
+		}
+		else if ((adjustment != 0) && (adjustment != 180)){
+			// Only set to false when not pressing either 
+			// the up or down dpad
+			speedButtonPressed = false;
 		}
 	}
+	
 	
 	private double rangeValue(double value) {
 		if (value > 1.0) {

@@ -1,6 +1,7 @@
 package org.usfirst.frc.team233.robot.commands;
 
 import org.usfirst.frc.team233.robot.Robot;
+import org.usfirst.frc.team233.robot.RobotMap;
 import org.usfirst.frc.team233.robot.subsystems.ShootingState;
 
 import edu.wpi.first.wpilibj.command.Command;
@@ -21,10 +22,15 @@ public class Shoot extends Command{
 	@Override
 	protected void execute() {
 		// TODO Auto-generated method stub
-		super.execute();
+		Robot.flywheel.adjustFlywheelSpeed(Robot.oi.getShooterJoystick().getPOV());
 		switch (state) {
 			case START_FLYWHEEL:
-				Robot.flywheel.flywheelHalfSpeed();
+				/* Verify the state of the right bumper button on the shooter control.
+				 * If it's pressed, then skip this command, else start the flywheel at
+				 * half speed. */
+				if (!Robot.oi.getShooterJoystick().getRawButton(RobotMap.rightTriggerButtonNumber)) {
+					Robot.flywheel.flywheelHalfSpeed();
+				}
 				break;
 				
 			case SHOOT:

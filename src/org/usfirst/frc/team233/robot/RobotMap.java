@@ -82,6 +82,20 @@ public class RobotMap {
 	public static int baseJoystickPort = 0;
 	public static int shooterJoystickPort = 1;
 	
+	// Define all raw button numbers
+	public static int xButtonNumber = 1;
+	public static int aButtonNumber = 2;
+	public static int bButtonNumber = 3;
+	public static int yButtonNumber = 4;
+	public static int leftBumperButtonNumber = 5;
+	public static int rightBumperButtonNumber = 6;
+	public static int leftTriggerButtonNumber = 7;
+	public static int rightTriggerButtonNumber = 8;
+	public static int selectButtonNumber = 9;
+	public static int startButtonNumber = 10;
+	public static int leftJoystickButtonNumber = 11;
+	public static int rightJoystickButtonNumber = 12;
+	
 	
 	
 	
