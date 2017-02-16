@@ -56,8 +56,8 @@ public class Robot extends IterativeRobot {
 		setupAutonomousList();
 		
 		System.out.println("RoboInit");
-		SmartDashboard.putData(new AutoTest1());
-		SmartDashboard.putData("Auto mode", chooser);
+		//SmartDashboard.putData(new AutoTest1());
+		SmartDashboard.putData("Auto Mode", chooser);
 	}
 	
 	
