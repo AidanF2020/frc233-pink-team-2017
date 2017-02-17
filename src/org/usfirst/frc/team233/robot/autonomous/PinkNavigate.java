@@ -9,7 +9,7 @@ import edu.wpi.first.wpilibj.command.Command;
 
 
 public class PinkNavigate extends Command {
-    static final double COUNTS_PER_INCH = 54;  // Base travel
+    static final double COUNTS_PER_INCH = 1;  // Base travel
     static final double POSITION_THRESHOLD = 30.0;   // Counts
     static final double ANGLE_THRESHOLD = 5.0;     // Degrees
     
@@ -24,24 +24,24 @@ public class PinkNavigate extends Command {
 
     
     /** Constructor - Define the distance and angle for the robot to */
-    public PinkNavigate(double targetPos, double targetAngle, int currentAngle, double maxPower) {
+    public PinkNavigate(double targetPos, double targetAngle, double maxPower) {
     	this.targetPos = targetPos;
     	this.targetAngle = targetAngle;
-    	this.currentAngle = currentAngle;
-    	this.linearVelocity = linearVelocity;
-    	this.angularVelocity = angularVelocity;
     	this.maxPower = maxPower;
     	requires(Robot.drivetrain);
     	//Robot.drivetrain.resetEncoders();
-    	resetBasePosition();
+    	//resetBasePosition();
     }
     
     
     // Tank drive two wheels to target positions in inches.
     // Returns true when both arrive at the target.
     public boolean driveToPos() {
-        double targetPosCounts = targetPos * COUNTS_PER_INCH;
-        double currentPosCounts = (Robot.drivetrain.getLeftDistance() + Robot.drivetrain.getRightDistance())/2.0;
+    	double currentAngle = Robot.drivetrain.getGyroRotation();
+    	double angularVelocity = Robot.drivetrain.getGyroRate();
+        double targetPosCounts = targetPos;
+        double currentPosCounts = Robot.drivetrain.getDistanceTraveled();
+        double linearVelocity = Robot.drivetrain.getDriveTrainRate();
         double linearError = targetPosCounts - currentPosCounts;
         double angularError = targetAngle - currentAngle;
         double motorCmd = PinkPD.getMotorCmd(0.1, 0.01, linearError, linearVelocity);
