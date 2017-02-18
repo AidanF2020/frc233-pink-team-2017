@@ -11,19 +11,20 @@ import edu.wpi.first.wpilibj.command.Command;
  * 		    DO NOT use for shooting
  * 			yet!*/
 public class Shoot extends Command{
-	ShootingState state;
+	ShooterAction action;
 	
 	public enum ShooterAction{
 		STOP_FLYWHEEL,
 		START_FLYWHEEL,
 		SHOOT,
-		CEASEFIRE;
+		CEASEFIRE,
+		SKIP; // Used to make sure the subsystem actions don't run again
 	}
 	
-	public Shoot(ShootingState state) {
+	public Shoot(ShooterAction action) {
 		// TODO Auto-generated constructor stub
 		requires(Robot.flywheel);
-		this.state = state;
+		this.action = action;
 	}
 	
 	@Override
@@ -31,43 +32,61 @@ public class Shoot extends Command{
 		//edited for if joystick unplugged, will return null
 		if (Robot.oi.getShooterJoystick() != null){
 			Robot.flywheel.adjustFlywheelSpeed(Robot.oi.getShooterJoystick().getPOV());
-		}		switch (state) {
+		}	
+		
+		// Obtain what action to perform 
+		switch (action) {
 			case START_FLYWHEEL:
-				/* Verify the state of the right bumper button on the shooter control.
-				 * If it's pressed, then skip this command, else start the flywheel at
-				 * half speed. */
-				if (Robot.oi.getShooterJoystick() == null || !Robot.oi.getShooterJoystick().getRawButton(RobotMap.rightTriggerButtonNumber)) {
+				if (Robot.flywheel.getFlywheelState() == ShootingState.FLYWHEEL_STOPPED) {
 					Robot.flywheel.flywheelHalfSpeed();
+					Robot.flywheel.setFlywheelState(ShootingState.FLYWHEEL_HALF_SPEED);
+				}
+				//action = ShooterAction.SKIP;
+				break;
+				
+			case STOP_FLYWHEEL:
+				if (Robot.flywheel.getFlywheelState() == ShootingState.FLYWHEEL_HALF_SPEED) {
+					Robot.flywheel.stopFlywheel();
+					Robot.flywheel.setFlywheelState(ShootingState.FLYWHEEL_STOPPED);
 				}
 				break;
 				
 			case SHOOT:
 				Robot.flywheel.startFlywheel();
-				state = ShootingState.FLYWHEEL_SPINNING_UP;
+				if (Robot.flywheel.getFlywheelState() != ShootingState.FLYWHEEL_UP_TO_SPEED){
+					Robot.flywheel.setFlywheelState(ShootingState.FLYWHEEL_SPINNING_UP);
+				}
+				//action = ShooterAction.SKIP;
 				break;
 				
+			case CEASEFIRE:
+				Robot.indexer.stopIndexer();
+				Robot.hopper.stopAgitate();
+				Robot.flywheel.setFlywheelState(ShootingState.INDEXER_STOPPED);
+				break;
+	
+			default:
+				System.out.println("ShootingAction == SKIP");
+				break;
+		}
+		
+		// Depending on the state, run the concurrent command
+		switch (Robot.flywheel.getFlywheelState()) {
 			case FLYWHEEL_SPINNING_UP:
 				if (Robot.flywheel.motorSpeedEqualsSetSpeed()) {
-					state = ShootingState.FLYWHEEL_UP_TO_SPEED;
+					Robot.flywheel.setFlywheelState(ShootingState.FLYWHEEL_UP_TO_SPEED);
 				}
 				break;
 		
 			case FLYWHEEL_UP_TO_SPEED:
 				Robot.hopper.agitate();
-				state = ShootingState.SHOOTING;
+				Robot.indexer.releaseBalls();
+				//Robot.flywheel.setFlywheelState(ShootingState.SHOOTING);
 				break;
 			
-			case SHOOTING:
-				Robot.indexer.releaseBalls();
-				break;
-				
-			case CEASEFIRE:
-				Robot.hopper.stopAgitate();
-				Robot.indexer.stopIndexer();
-				break;
-				
-			case STOP_FLYWHEEL:
-				Robot.flywheel.stopFlywheel();
+			case INDEXER_STOPPED:
+				Robot.flywheel.flywheelHalfSpeed();
+				Robot.flywheel.setFlywheelState(ShootingState.FLYWHEEL_HALF_SPEED);
 				break;
 	
 			default:
@@ -79,9 +98,9 @@ public class Shoot extends Command{
 	@Override
 	protected boolean isFinished() {
 		// TODO Auto-generated method stub
-		if ((ShootingState.START_FLYWHEEL == state) || 
-			(ShootingState.CEASEFIRE == state) ||
-			(ShootingState.STOP_FLYWHEEL == state)) {
+		if ((ShooterAction.START_FLYWHEEL == action) || 
+			(ShooterAction.CEASEFIRE == action) ||
+			(ShooterAction.STOP_FLYWHEEL == action)) {
 			return true;
 		}
 		else {

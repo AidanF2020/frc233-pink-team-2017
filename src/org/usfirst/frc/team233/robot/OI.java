@@ -7,6 +7,7 @@ import org.usfirst.frc.team233.robot.commands.CollectorCommand;
 import org.usfirst.frc.team233.robot.commands.CollectorCommand.CollectorAction;
 import org.usfirst.frc.team233.robot.commands.ShiftGear;
 import org.usfirst.frc.team233.robot.commands.Shoot;
+import org.usfirst.frc.team233.robot.commands.Shoot.ShooterAction;
 import org.usfirst.frc.team233.robot.subsystems.ShootingState;
 
 import edu.wpi.first.wpilibj.Joystick;
@@ -70,11 +71,11 @@ public class OI {
 		//==========================================
 		//		Map Joysticks to Commands
 		//==========================================
-		shooterRightTrigger.whileHeld(new Shoot(ShootingState.START_FLYWHEEL));
-		shooterRightTrigger.whenReleased(new Shoot(ShootingState.STOP_FLYWHEEL));
+		shooterRightTrigger.whileHeld(new Shoot(ShooterAction.START_FLYWHEEL));
+		shooterRightTrigger.whenReleased(new Shoot(ShooterAction.STOP_FLYWHEEL));
 		
-		shooterRightBumper.whileHeld(new Shoot(ShootingState.SHOOT));
-		shooterRightBumper.whenReleased(new Shoot(ShootingState.CEASEFIRE));
+		shooterRightBumper.whileHeld(new Shoot(ShooterAction.SHOOT));
+		shooterRightBumper.whenReleased(new Shoot(ShooterAction.CEASEFIRE));
 		
 		rightTrigger.whileHeld(new CollectorCommand(CollectorAction.COLLECT));
 		rightTrigger.whenReleased(new CollectorCommand(CollectorAction.STOP));
