@@ -9,14 +9,14 @@ public class AutoTest1 extends CommandGroup {
 		addSequential(new PinkNavigate(0,20,1));
 		addSequential(new PinkNavigate(-12, 20, 1)); //Drive to gear position
 		
-		//addSequential(new PinkNavigate(-92, 0, 0, 1)); //Drive to gear position
-		//addSequential(new PinkNavigate(-92,60,0,1)); //Turn to peg
-//		addSequential(new PinkNavigate(-34,60,0,1)); //Drive back on peg
-//		//wait
-//		addSequential(new PinkNavigate(0,60,0,1)); // Drive away from Peg
-//		addSequential(new PinkNavigate(0,0,0,1)); // Turn to line
-//		addSequential(new PinkNavigate(0,0,0,1)); // Drive to line
-//		//shoot
-//		addSequential(new PinkNavigate(-20,0,0,1)); // Drive back to bucket
+		addSequential(new PinkNavigate(-92, 0, 1)); //Drive to gear position
+		addSequential(new PinkNavigate(-92,60,1)); //Turn to peg
+		addSequential(new PinkNavigate(-34,60,1)); //Drive back on peg
+		//wait
+		addSequential(new PinkNavigate(0,60,1)); // Drive away from Peg
+		addSequential(new PinkNavigate(0,0,1)); // Turn to line
+		addSequential(new PinkNavigate(0,0,1)); // Drive to line
+		//shoot
+		addSequential(new PinkNavigate(-20,0,1)); // Drive back to bucket
 	}
 }
