@@ -9,7 +9,7 @@ import edu.wpi.first.wpilibj.command.Command;
 
 
 public class PinkNavigate extends Command {
-    static final double COUNTS_PER_INCH = 1;  // Base travel
+    static final double COUNTS_PER_INCH = 388;  // Base travel
     static final double POSITION_THRESHOLD = 30.0;   // Counts
     static final double ANGLE_THRESHOLD = 5.0;     // Degrees
     
@@ -39,7 +39,7 @@ public class PinkNavigate extends Command {
     public boolean driveToPos() {
     	double currentAngle = Robot.drivetrain.getGyroRotation();
     	double angularVelocity = Robot.drivetrain.getGyroRate();
-        double targetPosCounts = targetPos;
+        double targetPosCounts = targetPos * COUNTS_PER_INCH;
         double currentPosCounts = Robot.drivetrain.getDistanceTraveled();
         double linearVelocity = Robot.drivetrain.getDriveTrainRate();
         double linearError = targetPosCounts - currentPosCounts;
@@ -51,13 +51,13 @@ public class PinkNavigate extends Command {
         double angleOffset = PinkPD.getMotorCmd(0.02, 0.02, angularError, angularVelocity);
         double leftMotorCmd = motorCmd + angleOffset;
         double rightMotorCmd = motorCmd - angleOffset;
-        leftMotorCmd = Range.clip(leftMotorCmd, -1.0, 1.0);
-        rightMotorCmd = Range.clip(rightMotorCmd, -1.0, 1.0);
+        leftMotorCmd = Range.clip(leftMotorCmd, -maxPower, maxPower);
+        rightMotorCmd = Range.clip(rightMotorCmd, -maxPower, maxPower);
 
         // Scale the motor commands back to account for the MC windup problem
         // (if the motor can't keep up with the command, error builds up)
-        leftMotorCmd *= maxPower;
-        rightMotorCmd *= maxPower;
+        //leftMotorCmd *= maxPower;
+        //rightMotorCmd *= maxPower;
 
         Robot.drivetrain.drive(leftMotorCmd, rightMotorCmd);
         if((Math.abs(linearError) < POSITION_THRESHOLD) && (Math.abs(angularError) < ANGLE_THRESHOLD)) {

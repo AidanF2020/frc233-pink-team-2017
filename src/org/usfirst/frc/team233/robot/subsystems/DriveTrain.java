@@ -41,12 +41,12 @@ public class DriveTrain extends Subsystem{
 	
 	/* Calculate the distance each pulse in the encoder equals to for simulation.
 	 * Equation: (Wheel Diameter x Pi) / Number of pulses per encoder revolution */
-	private final double wheelDiameter = 1.0;
-	private final int pulsePerRevolution = 40;
-	private final double distancePerPulse = (Math.PI * wheelDiameter) / pulsePerRevolution;
+	//private final double wheelDiameter = 1.0;
+	//private final int pulsePerRevolution = 40;
+	// final double distancePerPulse = (Math.PI * wheelDiameter) / pulsePerRevolution;
 	
 	// Fixed value for distancePerPulse used in real robot
-	private final double distancePerPulseConstant = 0.029600395;
+	//private final double distancePerPulseConstant = 0.029600395;
 	
 	// Define all the encoders that are going to be used for the drive train.
 	private Encoder leftEncoder = new Encoder(RobotMap.leftEncoderAPort, RobotMap.leftEncoderBPort, false, EncodingType.k1X);
@@ -89,9 +89,9 @@ public class DriveTrain extends Subsystem{
 	public void setupEncoders() {
 		//Setup left encoder
 		if (Robot.isReal()) {
-			leftEncoder.setDistancePerPulse(distancePerPulseConstant);
+			//leftEncoder.setDistancePerPulse(distancePerPulseConstant);
 		} else {
-			leftEncoder.setDistancePerPulse(distancePerPulse);
+			//leftEncoder.setDistancePerPulse(distancePerPulse);
 		}
 		// These values setup here are random!!!
 		// Need to determine the best values for this!
@@ -102,9 +102,9 @@ public class DriveTrain extends Subsystem{
 		
 		// Setup right encoder
 		if (Robot.isReal()) {
-			rightEncoder.setDistancePerPulse(distancePerPulseConstant);
+			//rightEncoder.setDistancePerPulse(distancePerPulseConstant);
 		} else {
-			rightEncoder.setDistancePerPulse(distancePerPulse);
+			//rightEncoder.setDistancePerPulse(distancePerPulse);
 		}
 		rightEncoder.setReverseDirection(true);
 		rightEncoder.setPIDSourceType(PIDSourceType.kDisplacement);
