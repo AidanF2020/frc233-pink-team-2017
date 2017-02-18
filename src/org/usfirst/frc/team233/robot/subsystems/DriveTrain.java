@@ -32,7 +32,7 @@ public class DriveTrain extends Subsystem{
 	// Link the motors to the robot
 	private RobotDrive drive = new RobotDrive(frontLeftMotor, rearLeftMotor, frontRightMotor, rearRightMotor);
 	// Define the direction for each motor
-	boolean isInverted = false;
+	boolean isInverted = true;
 	
 	// Define other drive train components
 		private Compressor compressor = new Compressor(RobotMap.compressorPort);
@@ -128,7 +128,13 @@ public class DriveTrain extends Subsystem{
 	 */
 	public void drive(double left, double right) {
 		//System.out.println("Drive2");
-		drive.tankDrive(left, right);
+		if(isInverted) {
+			drive.tankDrive(right, left);
+		}
+		else {
+			drive.tankDrive(left, right);
+		}
+		
 	}
 
 	/**
@@ -158,10 +164,12 @@ public class DriveTrain extends Subsystem{
 	}
 	
 	public int getLeftEncoderCount() {
+		SmartDashboard.putNumber("leftEncoder", leftEncoder.get());
 		return leftEncoder.get();
 	}
 	
 	public int getRightEncoderCount() {
+		SmartDashboard.putNumber("rightEncoder", rightEncoder.get());
 		return rightEncoder.get();
 	}
 	
@@ -204,7 +212,9 @@ public class DriveTrain extends Subsystem{
 	public double getGyroRate(){
 		return gyro.getRate();
 	}
-	
+	public void resetGyro(){
+		gyro.reset();
+	}
 
 	public ADXRS450_Gyro getDriveTrainGyro() {
 		return gyro;

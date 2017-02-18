@@ -99,6 +99,8 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void autonomousInit() {
 		autonomousCommand = chooser.getSelected();
+		drivetrain.resetGyro();
+		drivetrain.resetEncoders();
 
 		/*
 		 * String autoSelected = SmartDashboard.getString("Auto Selector",
@@ -117,7 +119,6 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void autonomousPeriodic() {
-		drivetrain.getGyroRotation();
 		Scheduler.getInstance().run();
 		
 	}
@@ -147,6 +148,10 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void teleopPeriodic() {
 		drivetrain.getGyroRotation();
+		drivetrain.getDistanceTraveled();
+		drivetrain.getCountsTraveled();
+		drivetrain.getLeftEncoderCount();
+		drivetrain.getRightEncoderCount();
 		Scheduler.getInstance().run();
 		log();
 		// TODO Test this change in code to verify if the motors still run

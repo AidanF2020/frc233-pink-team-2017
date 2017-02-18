@@ -6,6 +6,7 @@ import org.usfirst.frc.team233.robot.Robot;
 import org.usfirst.frc.team233.robot.subsystems.RopeClimber;
 
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 
 public class PinkNavigate extends Command {
@@ -30,13 +31,14 @@ public class PinkNavigate extends Command {
     	this.maxPower = maxPower;
     	requires(Robot.drivetrain);
     	//Robot.drivetrain.resetEncoders();
-    	//resetBasePosition();
+    	resetBasePosition();
     }
     
     
     // Tank drive two wheels to target positions in inches.
     // Returns true when both arrive at the target.
     public boolean driveToPos() {
+    	SmartDashboard.putString("PinkNavigate", "is Running");
     	double currentAngle = Robot.drivetrain.getGyroRotation();
     	double angularVelocity = Robot.drivetrain.getGyroRate();
         double targetPosCounts = targetPos * COUNTS_PER_INCH;
@@ -45,14 +47,18 @@ public class PinkNavigate extends Command {
         double linearError = targetPosCounts - currentPosCounts;
         double angularError = targetAngle - currentAngle;
         double motorCmd = PinkPD.getMotorCmd(0.1, 0.01, linearError, linearVelocity);
+        SmartDashboard.putNumber("MotorCMD", motorCmd);
         motorCmd = Range.clip(motorCmd, 0.5, -0.5);
 
         // Determine and add the angle offset
         double angleOffset = PinkPD.getMotorCmd(0.02, 0.02, angularError, angularVelocity);
+        SmartDashboard.putNumber("Angle Offset", angleOffset);
         double leftMotorCmd = motorCmd + angleOffset;
         double rightMotorCmd = motorCmd - angleOffset;
         leftMotorCmd = Range.clip(leftMotorCmd, -maxPower, maxPower);
         rightMotorCmd = Range.clip(rightMotorCmd, -maxPower, maxPower);
+        SmartDashboard.putNumber("leftMotorCmd", leftMotorCmd);
+        SmartDashboard.putNumber("rightMotorCmd", rightMotorCmd);
 
         // Scale the motor commands back to account for the MC windup problem
         // (if the motor can't keep up with the command, error builds up)
