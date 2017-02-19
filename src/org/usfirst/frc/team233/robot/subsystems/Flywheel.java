@@ -1,5 +1,6 @@
 package org.usfirst.frc.team233.robot.subsystems;
 
+import org.usfirst.frc.team233.robot.Range;
 import org.usfirst.frc.team233.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.Encoder;
@@ -20,7 +21,7 @@ public class Flywheel extends Subsystem {
 	private final double speedAdjustment = 0.01;
 
 	private double tolerance = 0.1;
-	private final double flywheelKp = 0.1;
+	private final double flywheelKp = 0.4;
 	private Encoder encoder = new Encoder(RobotMap.flywheelEncoderPortA, RobotMap.flywheelEncoderPortB, false, EncodingType.k1X);
 	//private Encoder encoder = new Encoder(RobotMap.flywheelEncoderPortA, RobotMap.flywheelEncoderPortB);
 	private final double flywheelDistancePerPulse = 0.123;
@@ -48,7 +49,7 @@ public class Flywheel extends Subsystem {
 	}
 
 	public void startFlywheel() {
-		flywheelMotor.set(getPDSpeed(flywheelMotor.get(), flywheelSpeed, flywheelKp));
+		flywheelMotor.set(getPDSpeed(encoder.getRate(), flywheelSpeed, flywheelKp));
 	}
 
 	public void stopFlywheel() {
@@ -71,7 +72,7 @@ public class Flywheel extends Subsystem {
 	
 	/** Setup encoders before use. */
 	public void setupEncoder() {
-		encoder.setDistancePerPulse(1);
+		encoder.setDistancePerPulse(0.0005);
 		//leftEncoder.setPIDSourceType(PIDSourceType.kDisplacement);
 		//SmartDashboard.putData("Flywheel Encoder", encoder);
 	}
@@ -129,9 +130,11 @@ public class Flywheel extends Subsystem {
 	public double getPDSpeed(double currentSpeed, double targetSpeed, double Kp) {
 		currentSpeed = Math.abs(currentSpeed);
 		double error = (targetSpeed - currentSpeed);
+		double addedSpeed = (Kp * error);
+		addedSpeed = Range.clip(addedSpeed, 0.3, -0.3);
         double speedCmd;
         //System.out.println("inside getSpeedCmd, currentSpeed: " + currentSpeed);
-        speedCmd = ((Kp * error) + targetSpeed);
+        speedCmd = ((addedSpeed) + targetSpeed);
         //System.out.println("Speed CMD = " + speedCmd);
         return speedCmd;
 	}
