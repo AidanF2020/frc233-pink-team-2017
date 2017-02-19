@@ -10,7 +10,7 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 public class AutoGearRoutine1 extends CommandGroup {
 
 	public AutoGearRoutine1(){
-		addSequential();
+		//addSequential();
 		
 	}
 }

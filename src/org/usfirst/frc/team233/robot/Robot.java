@@ -137,6 +137,7 @@ public class Robot extends IterativeRobot {
 			autonomousCommand.cancel();
 		System.out.println("Teleop Init");
 		drivetrain.resetEncoders();
+		flywheel.resetEncoder();
 		//Scheduler.getInstance().enable();
 		//Scheduler.getInstance().removeAll();
 		//Scheduler.getInstance().add(tankDrive);

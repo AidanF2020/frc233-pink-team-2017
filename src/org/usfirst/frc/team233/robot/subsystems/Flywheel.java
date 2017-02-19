@@ -37,8 +37,7 @@ public class Flywheel extends Subsystem {
 		SmartDashboard.putNumber("Flywheel Motor Speed", flywheelMotor.get());
 		state = ShootingState.FLYWHEEL_STOPPED;
 		speedButtonPressed = false;
-		encoder.reset();
-		encoder.setDistancePerPulse(flywheelDistancePerPulse);
+		setupEncoder();
 	}
 	
 
@@ -58,6 +57,10 @@ public class Flywheel extends Subsystem {
 	
 	public void flywheelHalfSpeed() {
 		flywheelMotor.set(0.5);
+	}
+	
+	public void flywheelTest(double test) {
+		flywheelMotor.set(test);
 	}
 
 	

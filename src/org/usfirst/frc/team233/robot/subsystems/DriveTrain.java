@@ -1,7 +1,6 @@
 package org.usfirst.frc.team233.robot.subsystems;
 
 import org.usfirst.frc.team233.robot.Robot;
-//import org.usfirst.frc.team233.robot.Robot;
 import org.usfirst.frc.team233.robot.RobotMap;
 import org.usfirst.frc.team233.robot.commands.TankDrive;
 
@@ -13,7 +12,6 @@ import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.SPI;
-import edu.wpi.first.wpilibj.SPI.Port;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.Talon;
@@ -23,19 +21,13 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 //import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 
-import edu.wpi.first.wpilibj.ADXRS450_Gyro;
-
 
 public class DriveTrain extends Subsystem {
 	// Drive train motor definition
-	public SpeedController frontLeftMotor = new Talon(
-			RobotMap.leftFrontMotorPort);
-	public SpeedController rearLeftMotor = new Talon(
-			RobotMap.leftBackMotorPort);
-	public SpeedController frontRightMotor = new Talon(
-			RobotMap.rightFrontMotorPort);
-	public SpeedController rearRightMotor = new Talon(
-			RobotMap.rightBackMotorPort);
+	public SpeedController frontLeftMotor = new Talon(RobotMap.leftFrontMotorPort);
+	public SpeedController rearLeftMotor = new Talon(RobotMap.leftBackMotorPort);
+	public SpeedController frontRightMotor = new Talon(RobotMap.rightFrontMotorPort);
+	public SpeedController rearRightMotor = new Talon(RobotMap.rightBackMotorPort);
 	
 	// Link the motors to the robot
 	private RobotDrive drive = new RobotDrive(frontLeftMotor, rearLeftMotor,
@@ -43,6 +35,7 @@ public class DriveTrain extends Subsystem {
 	// Define the direction for each motor
 	boolean isInverted = true;
 
+	
 	// Define other drive train components
 	private Compressor compressor = new Compressor(RobotMap.compressorPort);
 	public AHRS gyro = new AHRS(SPI.Port.kMXP);

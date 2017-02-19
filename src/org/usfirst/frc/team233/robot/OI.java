@@ -84,8 +84,8 @@ public class OI {
 		x.whileHeld(new Shoot(ShooterAction.TEST_I_UP));
 		x.whenReleased(new Shoot(ShooterAction.TEST_I_DOWN));
 		
-		y.whileHeld(new ClimbCommand(ClimberAction.REVERSE));
-		y.whenReleased(new ClimbCommand(ClimberAction.STOP));
+		y.whileHeld(new Shoot(ShooterAction.TEST_H_UP));
+		y.whenReleased(new Shoot(ShooterAction.TEST_H_DOWN));
 		
 		b.whileHeld(new Shoot(ShooterAction.TEST_F_UP));
 		b.whenReleased(new Shoot(ShooterAction.TEST_F_DOWN));

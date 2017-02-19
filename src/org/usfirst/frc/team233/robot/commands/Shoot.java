@@ -84,27 +84,27 @@ public class Shoot extends Command{
 				break;
 				
 			case TEST_F_UP:
-				Robot.flywheel.startFlywheel();
+				Robot.flywheel.flywheelTest(0.1);
 				Robot.flywheel.setFlywheelState(ShootingState.IGNORE);
 				break;
 				
 			case TEST_H_UP:
-				Robot.hopper.agitate();
+				Robot.flywheel.flywheelTest(0.5);
 				Robot.flywheel.setFlywheelState(ShootingState.IGNORE);
 				break;
 				
 			case TEST_H_DOWN:
-				Robot.hopper.stopAgitate();
+				Robot.flywheel.stopFlywheel();
 				Robot.flywheel.setFlywheelState(ShootingState.IGNORE);
 				break;
 				
 			case TEST_I_UP:
-				Robot.indexer.releaseBalls();
+				Robot.flywheel.flywheelTest(1.0);
 				Robot.flywheel.setFlywheelState(ShootingState.IGNORE);
 				break;
 			
 			case TEST_I_DOWN:
-				Robot.indexer.stopIndexer();
+				Robot.flywheel.stopFlywheel();
 				Robot.flywheel.setFlywheelState(ShootingState.IGNORE);
 				break;
 				
