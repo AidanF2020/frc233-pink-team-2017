@@ -98,6 +98,7 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void autonomousInit() {
+		System.out.println("AutoInit");
 		autonomousCommand = chooser.getSelected();
 		drivetrain.resetGyro();
 		drivetrain.resetEncoders();
@@ -120,6 +121,7 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void autonomousPeriodic() {
 		Scheduler.getInstance().run();
+		log();
 		
 	}
 
@@ -147,11 +149,11 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void teleopPeriodic() {
-		drivetrain.getGyroRotation();
-		drivetrain.getDistanceTraveled();
-		drivetrain.getCountsTraveled();
-		drivetrain.getLeftEncoderCount();
-		drivetrain.getRightEncoderCount();
+		//drivetrain.getGyroRotation();
+		//drivetrain.getDistanceTraveled();
+		//drivetrain.getCountsTraveled();
+		//drivetrain.getLeftEncoderCount();
+		//drivetrain.getRightEncoderCount();
 		Scheduler.getInstance().run();
 		log();
 		// TODO Test this change in code to verify if the motors still run
@@ -160,8 +162,14 @@ public class Robot extends IterativeRobot {
 	
 	
 	public void log() {
-		SmartDashboard.putNumber("Left Encoder = ", drivetrain.getLeftDistance());
-		SmartDashboard.putNumber("Right Encoder = ", drivetrain.getRightDistance());
+//		SmartDashboard.putNumber("Left Encoder = ", drivetrain.getLeftDistance());
+//		SmartDashboard.putNumber("Right Encoder = ", drivetrain.getRightDistance());
+//		System.out.println("Left Encoder = " + drivetrain.getLeftDistance());
+//		System.out.println("Right Encoder = " + drivetrain.getRightDistance());
+//		SmartDashboard.putNumber("Left Raw = ", drivetrain.leftEncoder.getRaw());
+//		SmartDashboard.putNumber("Right Raw = ", drivetrain.rightEncoder.getRaw());
+		System.out.println("Gyro rotation: "+ drivetrain.getGyroRotation());
+		//System.out.println("Gyro rate: "+ drivetrain.getGyroRate());
 		//SmartDashboard.putNumber("Flywheel Motor Speed", flywheel.getFlywheelMotorSpeed());
 		//SmartDashboard.putNumber("Count Encoder Left", drivetrain.getLeftEncoderCount());
 		//SmartDashboard.putNumber("Count Encoder Right", drivetrain.getRightEncoderCount());

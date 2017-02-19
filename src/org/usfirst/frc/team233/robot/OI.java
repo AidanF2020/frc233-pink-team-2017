@@ -71,11 +71,11 @@ public class OI {
 		//==========================================
 		//		Map Joysticks to Commands
 		//==========================================
-		shooterRightTrigger.whileHeld(new Shoot(ShooterAction.START_FLYWHEEL));
-		shooterRightTrigger.whenReleased(new Shoot(ShooterAction.STOP_FLYWHEEL));
+		//shooterRightTrigger.whileHeld(new Shoot(ShooterAction.START_FLYWHEEL));
+		//shooterRightTrigger.whenReleased(new Shoot(ShooterAction.STOP_FLYWHEEL));
 		
-		shooterRightBumper.whileHeld(new Shoot(ShooterAction.SHOOT));
-		shooterRightBumper.whenReleased(new Shoot(ShooterAction.CEASEFIRE));
+		//shooterRightBumper.whileHeld(new Shoot(ShooterAction.SHOOT));
+		//shooterRightBumper.whenReleased(new Shoot(ShooterAction.CEASEFIRE));
 		
 		rightTrigger.whileHeld(new CollectorCommand(CollectorAction.COLLECT));
 		rightTrigger.whenReleased(new CollectorCommand(CollectorAction.STOP));

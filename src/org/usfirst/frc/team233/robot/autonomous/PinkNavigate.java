@@ -1,6 +1,6 @@
 package org.usfirst.frc.team233.robot.autonomous;
 
-import org.usfirst.frc.team233.robot.AutoPID;
+import org.usfirst.frc.team233.robot.autonomous.AutoPID;
 import org.usfirst.frc.team233.robot.PinkPD;
 import org.usfirst.frc.team233.robot.Range;
 import org.usfirst.frc.team233.robot.Robot;
@@ -35,8 +35,11 @@ public class PinkNavigate extends Command {
 	// stronger action.
 	// D accounts for possible future trends of the error, based on its current
 	// rate of change.[1]
+	
 	private AutoPID pidCont_LeftEncoder;
 	private AutoPID pidCont_RightEncoder;
+	
+	private PIDController pid;
 
 	/** Constructor - Define the distance and angle for the robot to */
 	public PinkNavigate(double targetPos, double targetAngle, double maxPower) {
@@ -46,9 +49,9 @@ public class PinkNavigate extends Command {
     	requires(Robot.drivetrain);
     	resetBasePosition();
     	
-    	pidCont_LeftEncoder = new AutoPID(0.1, 0, 0.01, Robot.drivetrain.leftEncoder);
+    	pidCont_LeftEncoder = new AutoPID(0.1, 0, 0.01, Robot.drivetrain.leftEncoder, Robot.drivetrain.frontLeftMotor);
     	pidCont_LeftEncoder.enable();
-    	pidCont_RightEncoder = new AutoPID(0.1, 0, 0.01, Robot.drivetrain.leftEncoder);
+    	pidCont_RightEncoder = new AutoPID(0.1, 0, 0.01, Robot.drivetrain.leftEncoder, Robot.drivetrain.frontRightMotor);
     	pidCont_RightEncoder.enable();
     }
 

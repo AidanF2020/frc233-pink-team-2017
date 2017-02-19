@@ -23,13 +23,13 @@ import edu.wpi.first.wpilibj.ADXRS450_Gyro;
 
 public class DriveTrain extends Subsystem {
 	// Drive train motor definition
-	private SpeedController frontLeftMotor = new Talon(
+	public SpeedController frontLeftMotor = new Talon(
 			RobotMap.leftFrontMotorPort);
-	private SpeedController rearLeftMotor = new Talon(
+	public SpeedController rearLeftMotor = new Talon(
 			RobotMap.leftBackMotorPort);
-	private SpeedController frontRightMotor = new Talon(
+	public SpeedController frontRightMotor = new Talon(
 			RobotMap.rightFrontMotorPort);
-	private SpeedController rearRightMotor = new Talon(
+	public SpeedController rearRightMotor = new Talon(
 			RobotMap.rightBackMotorPort);
 
 	// Link the motors to the robot
@@ -49,13 +49,12 @@ public class DriveTrain extends Subsystem {
 	 * simulation. Equation: (Wheel Diameter x Pi) / Number of pulses per
 	 * encoder revolution
 	 */
-	// private final double wheelDiameter = 1.0;
-	// private final int pulsePerRevolution = 40;
-	// final double distancePerPulse = (Math.PI * wheelDiameter) /
-	// pulsePerRevolution;
+	private final double wheelDiameter = 1.0;
+	private final int pulsePerRevolution = 40;
+	final double distancePerPulse = (Math.PI * wheelDiameter) / pulsePerRevolution;
 
 	// Fixed value for distancePerPulse used in real robot
-	// private final double distancePerPulseConstant = 0.029600395;
+	private final double distancePerPulseConstant = 0.059839860068377;
 
 	// Define all the encoders that are going to be used for the drive train.
 	public/* private */Encoder leftEncoder = new Encoder(
@@ -69,7 +68,7 @@ public class DriveTrain extends Subsystem {
 	public DriveTrain() {
 		super();
 		// System.out.println("Drivetrain Constructor");
-		drive.setSafetyEnabled(true);
+		drive.setSafetyEnabled(false);
 		setupMotors();
 		setupEncoders();
 		resetEncoders();
@@ -101,26 +100,26 @@ public class DriveTrain extends Subsystem {
 	public void setupEncoders() {
 		// Setup left encoder
 		if (Robot.isReal()) {
-			// leftEncoder.setDistancePerPulse(distancePerPulseConstant);
+			leftEncoder.setDistancePerPulse(distancePerPulseConstant);
 		} else {
-			// leftEncoder.setDistancePerPulse(distancePerPulse);
+			leftEncoder.setDistancePerPulse(distancePerPulse);
 		}
 		// These values setup here are random!!!
 		// Need to determine the best values for this!
 		leftEncoder.setPIDSourceType(PIDSourceType.kDisplacement);
 		leftEncoder.setReverseDirection(false);
-		// leftEncoder.setSamplesToAverage(6);
+		 leftEncoder.setSamplesToAverage(6);
 		// leftEncoder.setMinRate(10);
 
 		// Setup right encoder
 		if (Robot.isReal()) {
-			// rightEncoder.setDistancePerPulse(distancePerPulseConstant);
+			rightEncoder.setDistancePerPulse(distancePerPulseConstant);
 		} else {
-			// rightEncoder.setDistancePerPulse(distancePerPulse);
+			rightEncoder.setDistancePerPulse(distancePerPulse);
 		}
 		rightEncoder.setReverseDirection(true);
 		rightEncoder.setPIDSourceType(PIDSourceType.kDisplacement);
-		// rightEncoder.setSamplesToAverage(6);
+		 rightEncoder.setSamplesToAverage(6);
 		// rightEncoder.setMinRate(10);
 	}
 
@@ -185,6 +184,7 @@ public class DriveTrain extends Subsystem {
 		SmartDashboard.putNumber("rightEncoder", rightEncoder.get());
 		return rightEncoder.get();
 	}
+	
 
 	public double getDriveTrainRate() {
 		double avgEncodersRate = (leftEncoder.getRate() + rightEncoder

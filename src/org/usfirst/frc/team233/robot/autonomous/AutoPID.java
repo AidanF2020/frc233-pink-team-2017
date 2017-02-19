@@ -1,4 +1,4 @@
-package org.usfirst.frc.team233.robot;
+package org.usfirst.frc.team233.robot.autonomous;
 
 import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.PIDOutput;
@@ -11,8 +11,8 @@ public class AutoPID extends PIDController {
 		super(Kp, Ki, Kd, Kf, source, null);
 	}
 
-	public AutoPID(double Kp, double Ki, double Kd, PIDSource source){
-		super(Kp, Ki, Kd, source, null, 20.0);
+	public AutoPID(double Kp, double Ki, double Kd, PIDSource source, PIDOutput output){
+		super(Kp, Ki, Kd, source, output, 20.0);
 	}
 	
 	public double getFeedForward(){
