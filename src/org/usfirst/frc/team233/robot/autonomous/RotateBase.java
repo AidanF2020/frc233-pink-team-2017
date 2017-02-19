@@ -14,12 +14,20 @@ public class RotateBase extends Command {
 	public RotateBase(double angle) {
 		requires(Robot.drivetrain);
 		Robot.drivetrain.reset();
-		// A proportional controller (Kp) will have the effect of reducing the
+		// A proportional controller (Kp) will reduce the
 		// rise time and will reduce, but never eliminate, the steady-state
 		// error.
-		// An integral control (Ki) will have the effect of eliminating the
+		//
+		// Steady-state error is defined as the difference between the input
+		// (command) and the output of a system in the limit as time goes to
+		// infinity (i.e. when the response has reached steady state)
+		//
+		// An integral control (Ki) will eliminate the
 		// steady-state error, but it may make the transient response worse.
-		// A derivative control (Kd) will have the effect of increasing the stability of the system, reducing the overshoot, and improving the transient response but little effect on rise time
+		//
+		// A derivative control (Kd) will increase the
+		// stability of the system, reducing the overshoot, and improving the
+		// transient response but little effect on rise time
 		pid = new PIDController(3, 0, 0.1, new PIDSource() {
 			PIDSourceType m_sourceType = PIDSourceType.kDisplacement;
 
@@ -42,17 +50,17 @@ public class RotateBase extends Command {
 			public void pidWrite(double d) {
 				if (d > 0.5) {
 					d = 0.5;
-				}
-				else if (d < -0.5) {
+				} else if (d < -0.5) {
 					d = -0.5;
 				}
+				// CCW is positive
 				// if turning left
-				//if( (Robot.drivetrain.getGyroRotation() % 360 - angle) < 0){
-					//drive(left, right)
-					Robot.drivetrain.drive(-d, d);
-				//} else {  // turning left
-					//Robot.drivetrain.drive(d, -d);
-				//}
+				// if( angle < 180){
+				// drive(left, right)
+				Robot.drivetrain.drive(-d, d);
+				// } else { // turning left
+				// Robot.drivetrain.drive(d, -d);
+				// }
 			}
 		});
 		pid.setAbsoluteTolerance(tolerance);
