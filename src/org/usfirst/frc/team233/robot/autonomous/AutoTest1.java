@@ -7,6 +7,14 @@ import edu.wpi.first.wpilibj.command.WaitCommand;
 public class AutoTest1 extends CommandGroup {
 
 	public AutoTest1() {
+		//Should end up in same position & orientation
+		addSequential(new DriveStraight(12));
+		addSequential(new RotateBase(90));
+		addSequential(new DriveStraight(12));
+		addSequential(new RotateBase(90));
+		addSequential(new DriveStraight(12));
+		addSequential(new RotateBase(90));
+		addSequential(new DriveStraight(12));
 		addSequential(new RotateBase(90));
 		//addSequential(new PinkNavigate(0,20,1));
 //		addSequential(new PinkNavigate(-12, 0, 1)); //Drive to gear position
