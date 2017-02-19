@@ -12,6 +12,7 @@ import edu.wpi.first.wpilibj.command.Command;
  * 			yet!*/
 public class Shoot extends Command{
 	ShooterAction action;
+	private boolean aBoolean = false;
 	
 	public enum ShooterAction{
 		STOP_FLYWHEEL,
@@ -30,7 +31,9 @@ public class Shoot extends Command{
 	
 	public Shoot(ShooterAction action) {
 		// TODO Auto-generated constructor stub
-		requires(Robot.flywheel);
+//		requires(Robot.flywheel);
+//		requires(Robot.hopper);
+//		requires(Robot.indexer);
 		this.action = action;
 	}
 	
@@ -38,13 +41,17 @@ public class Shoot extends Command{
 	protected void execute() {
 		//edited for if joystick unplugged, will return null
 		if (Robot.oi.getShooterJoystick() != null){
+			System.out.println("Change speed");
 			Robot.flywheel.adjustFlywheelSpeed(Robot.oi.getShooterJoystick().getPOV());
 		}	
 		
 		// Obtain what action to perform 
+		System.out.println("ACTION = " + action.toString());
 		switch (action) {
 			case START_FLYWHEEL:
+				System.out.println("inside START FLYWHEEL");
 				if (Robot.flywheel.getFlywheelState() == ShootingState.FLYWHEEL_STOPPED) {
+					System.out.println("Flywheel half speed");
 					Robot.flywheel.flywheelHalfSpeed();
 					Robot.flywheel.setFlywheelState(ShootingState.FLYWHEEL_HALF_SPEED);
 				}
@@ -59,8 +66,10 @@ public class Shoot extends Command{
 				break;
 				
 			case SHOOT:
+				System.out.println("inside SHOOT");
 				Robot.flywheel.startFlywheel();
 				if (Robot.flywheel.getFlywheelState() != ShootingState.FLYWHEEL_UP_TO_SPEED){
+					System.out.println("flywheel state not FLYWHEEL UP TO SPEED");
 					Robot.flywheel.setFlywheelState(ShootingState.FLYWHEEL_SPINNING_UP);
 				}
 				//action = ShooterAction.SKIP;
@@ -109,6 +118,7 @@ public class Shoot extends Command{
 		}
 		
 		// Depending on the state, run the concurrent command
+		System.out.println("STATE = " + Robot.flywheel.getFlywheelState().toString());
 		switch (Robot.flywheel.getFlywheelState()) {
 			case FLYWHEEL_SPINNING_UP:
 				if (Robot.flywheel.motorSpeedEqualsSetSpeed()) {
@@ -118,12 +128,18 @@ public class Shoot extends Command{
 		
 			case FLYWHEEL_UP_TO_SPEED:
 				Robot.hopper.agitate();
+				//if(Robot.flywheel)
 				Robot.indexer.releaseBalls();
 				//Robot.flywheel.setFlywheelState(ShootingState.SHOOTING);
 				break;
 			
 			case INDEXER_STOPPED:
-				Robot.flywheel.flywheelHalfSpeed();
+				if (Robot.oi.getShooterJoystick().getRawButton(RobotMap.rightTriggerButtonNumber)) {
+					Robot.flywheel.flywheelHalfSpeed();
+				}
+				else {
+					Robot.flywheel.stopFlywheel();
+				}
 				Robot.flywheel.setFlywheelState(ShootingState.FLYWHEEL_HALF_SPEED);
 				break;
 	
@@ -136,14 +152,21 @@ public class Shoot extends Command{
 	@Override
 	protected boolean isFinished() {
 		// TODO Auto-generated method stub
-		if ((ShooterAction.START_FLYWHEEL == action) || 
-			(ShooterAction.CEASEFIRE == action) ||
-			(ShooterAction.STOP_FLYWHEEL == action)) {
+		if ((ShooterAction.CEASEFIRE == action) ||
+			(ShooterAction.STOP_FLYWHEEL == action) ||
+			(Robot.flywheel.getFlywheelState() == ShootingState.IGNORE)) {
 			return true;
 		}
 		else {
 			return false;
 		}
+	}
+	
+	@Override
+	protected void interrupted() {
+		// TODO Auto-generated method stub
+		System.out.println("Interrupted Action = " + action.toString());
+		end();
 	}
 
 }

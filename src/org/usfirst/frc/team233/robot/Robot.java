@@ -155,7 +155,7 @@ public class Robot extends IterativeRobot {
 		//drivetrain.getLeftEncoderCount();
 		//drivetrain.getRightEncoderCount();
 		Scheduler.getInstance().run();
-		log();
+		//log();
 		// TODO Test this change in code to verify if the motors still run
 		//System.out.println("Teleop Periodic");
 	}

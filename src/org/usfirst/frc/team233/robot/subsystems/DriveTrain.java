@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj.CounterBase.EncodingType;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.RobotDrive;
+import edu.wpi.first.wpilibj.SPI.Port;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.Talon;
@@ -90,13 +91,11 @@ public class DriveTrain extends Subsystem {
 
 	public void setupComponents() {
 		compressor.setClosedLoopControl(true);
-		// gyro.calibrate();
 		try{
 			//gyro.reset();
 		}catch(Exception e){
 			e.printStackTrace();
 		}
-		// gyro.calibrate();
 	}
 
 	/** Setup encoders before use. */
