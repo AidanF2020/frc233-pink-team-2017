@@ -5,12 +5,14 @@ import org.usfirst.frc.team233.robot.Robot;
 import org.usfirst.frc.team233.robot.RobotMap;
 import org.usfirst.frc.team233.robot.commands.TankDrive;
 
-import edu.wpi.first.wpilibj.AnalogGyro;
+import com.kauailabs.navx.frc.AHRS;
+
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.CounterBase.EncodingType;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.RobotDrive;
+import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.SPI.Port;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.SpeedController;
@@ -20,7 +22,9 @@ import edu.wpi.first.wpilibj.PIDSourceType;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 //import edu.wpi.first.wpilibj.livewindow.LiveWindow;
+
 import edu.wpi.first.wpilibj.ADXRS450_Gyro;
+
 
 public class DriveTrain extends Subsystem {
 	// Drive train motor definition
@@ -32,7 +36,7 @@ public class DriveTrain extends Subsystem {
 			RobotMap.rightFrontMotorPort);
 	public SpeedController rearRightMotor = new Talon(
 			RobotMap.rightBackMotorPort);
-
+	
 	// Link the motors to the robot
 	private RobotDrive drive = new RobotDrive(frontLeftMotor, rearLeftMotor,
 			frontRightMotor, rearRightMotor);
@@ -41,7 +45,7 @@ public class DriveTrain extends Subsystem {
 
 	// Define other drive train components
 	private Compressor compressor = new Compressor(RobotMap.compressorPort);
-	//private ADXRS450_Gyro gyro = new ADXRS450_Gyro();
+	public AHRS gyro = new AHRS(SPI.Port.kMXP);
 	private Solenoid shifterSolenoid = new Solenoid(RobotMap.shiftingSolenoidPort);
 
 	/*
@@ -227,19 +231,19 @@ public class DriveTrain extends Subsystem {
 			//	getSmartDashboardType(),
 				//"gyro.getAccumulatorAverage() returns double: "
 					//	+ gyro.getAngle());
-		return 0.0;//gyro.getAngle();
+		return gyro.getAngle();
 	}
 
 	public double getGyroRate() {
-		return 0.0;//gyro.getRate();
+		return gyro.getRate();
 	}
 
 	public void resetGyro() {
-		//gyro.reset();
+		gyro.reset();
 	}
 
-	public ADXRS450_Gyro getDriveTrainGyro() {
-		return null;//gyro;
+	public AHRS getDriveTrainGyro() {
+		return gyro;
 	}
 
 	/**

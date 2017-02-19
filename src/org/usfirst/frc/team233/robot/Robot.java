@@ -161,6 +161,7 @@ public class Robot extends IterativeRobot {
 	}
 	
 	
+	@SuppressWarnings("deprecation")
 	public void log() {
 //		SmartDashboard.putNumber("Left Encoder = ", drivetrain.getLeftDistance());
 //		SmartDashboard.putNumber("Right Encoder = ", drivetrain.getRightDistance());
@@ -174,11 +175,13 @@ public class Robot extends IterativeRobot {
 		SmartDashboard.putNumber("Flywheel Encoder Rate", flywheel.getFlywheelEncoderSpeed());
 		
 		//System.out.println("Indexer motor: " + i);
-		//System.out.println("Gyro rate: "+ drivetrain.getGyroRate());
+		System.out.println("Gyro rate: "+ drivetrain.getGyroRate());
 		//SmartDashboard.putNumber("Flywheel Motor Speed", flywheel.getFlywheelMotorSpeed());
 		//SmartDashboard.putNumber("Count Encoder Left", drivetrain.getLeftEncoderCount());
 		//SmartDashboard.putNumber("Count Encoder Right", drivetrain.getRightEncoderCount());
-		//SmartDashboard.putData("Gyro", drivetrain.getDriveTrainGyro());
+		SmartDashboard.putData("Gyro", drivetrain.getDriveTrainGyro());
+		SmartDashboard.putNumber("Gyro rate ", drivetrain.getGyroRate());
+		SmartDashboard.putNumber("Gyro angle ", drivetrain.getGyroRotation());
 	}
 	
 	@Override
