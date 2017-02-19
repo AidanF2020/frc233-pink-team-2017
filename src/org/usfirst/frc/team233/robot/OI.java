@@ -9,17 +9,10 @@ import org.usfirst.frc.team233.robot.commands.ShiftGear;
 import org.usfirst.frc.team233.robot.commands.Shoot;
 import org.usfirst.frc.team233.robot.commands.Shoot.ShooterAction;
 import org.usfirst.frc.team233.robot.subsystems.ShootingState;
-
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 
-//import org.usfirst.frc.team233.robot.commands.Autonomous;
-//import org.usfirst.frc.team233.robot.commands.OpenClaw;
-//import org.usfirst.frc.team233.robot.commands.Pickup;
-//import org.usfirst.frc.team233.robot.commands.Place;
-//import org.usfirst.frc.team233.robot.commands.PrepareToPickup;
-//import org.usfirst.frc.team233.robot.commands.SetElevatorSetpoint;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -71,11 +64,11 @@ public class OI {
 		//==========================================
 		//		Map Joysticks to Commands
 		//==========================================
-		//shooterRightTrigger.whileHeld(new Shoot(ShooterAction.START_FLYWHEEL));
-		//shooterRightTrigger.whenReleased(new Shoot(ShooterAction.STOP_FLYWHEEL));
+		shooterRightTrigger.whileHeld(new Shoot(ShooterAction.START_FLYWHEEL));
+		shooterRightTrigger.whenReleased(new Shoot(ShooterAction.STOP_FLYWHEEL));
 		
-		//shooterRightBumper.whileHeld(new Shoot(ShooterAction.SHOOT));
-		//shooterRightBumper.whenReleased(new Shoot(ShooterAction.CEASEFIRE));
+		shooterRightBumper.whileHeld(new Shoot(ShooterAction.SHOOT));
+		shooterRightBumper.whenReleased(new Shoot(ShooterAction.CEASEFIRE));
 		
 		rightTrigger.whileHeld(new CollectorCommand(CollectorAction.COLLECT));
 		rightTrigger.whenReleased(new CollectorCommand(CollectorAction.STOP));
@@ -88,6 +81,14 @@ public class OI {
 		a.whileHeld(new ClimbCommand(ClimberAction.CLIMB));
 		a.whenReleased(new ClimbCommand(ClimberAction.STOP));
 		
+		x.whileHeld(new Shoot(ShooterAction.TEST_I_UP));
+		x.whenReleased(new Shoot(ShooterAction.TEST_I_DOWN));
+		
+		y.whileHeld(new Shoot(ShooterAction.TEST_H_UP));
+		y.whenReleased(new Shoot(ShooterAction.TEST_H_DOWN));
+		
+		b.whileHeld(new Shoot(ShooterAction.TEST_F_UP));
+		b.whenReleased(new Shoot(ShooterAction.TEST_F_DOWN));
 	}
 	
 	public Joystick getBaseJoystick() {

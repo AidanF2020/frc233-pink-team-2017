@@ -50,7 +50,7 @@ public class Robot extends IterativeRobot {
 		indexer = new Indexer();
 		ballCollector = new BallCollector();
 		ropeClimber = new RopeClimber();
-		//hopper = new Hopper();
+		hopper = new Hopper();
 		oi = new OI();
 
 		setupAutonomousList();
@@ -168,7 +168,9 @@ public class Robot extends IterativeRobot {
 //		System.out.println("Right Encoder = " + drivetrain.getRightDistance());
 //		SmartDashboard.putNumber("Left Raw = ", drivetrain.leftEncoder.getRaw());
 //		SmartDashboard.putNumber("Right Raw = ", drivetrain.rightEncoder.getRaw());
-		System.out.println("Gyro rotation: "+ drivetrain.getGyroRotation());
+		//System.out.println("Gyro rotation: "+ drivetrain.getGyroRotation());
+		System.out.println("Flywheel motor: " + flywheel.getFlywheelMotorSpeed());
+		//System.out.println("Indexer motor: " + i);
 		//System.out.println("Gyro rate: "+ drivetrain.getGyroRate());
 		//SmartDashboard.putNumber("Flywheel Motor Speed", flywheel.getFlywheelMotorSpeed());
 		//SmartDashboard.putNumber("Count Encoder Left", drivetrain.getLeftEncoderCount());

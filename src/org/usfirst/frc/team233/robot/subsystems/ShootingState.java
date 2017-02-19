@@ -14,6 +14,7 @@ public enum ShootingState {
 	INDEXER_STOPPED,	//indexer motor @0%
 	//READY_TO_SHOOT, 	//
 	FLYWHEEL_STARTED,		//flywheel motor <50%
+	IGNORE,
 	//STOP_FLYWHEEL,		//flywheel motor @0%
 	//SHOOTING_INTERRUPTED,	//undef case
 	SHOOTING,		//all 3 motors are running; == BALLS_RELEASING + FLYWHEEL_UP_TO_SPEED

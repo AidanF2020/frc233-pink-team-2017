@@ -25,7 +25,7 @@ public class RobotMap {
 	
 	// Pneumatics
 	public static int compressorPort = 0;
-	public static int shiftingSolenoidPort = 1;
+	public static int shiftingSolenoidPort = 0;
 	
 	// Gyro
 	public static int gyroPort = 0;
@@ -53,7 +53,7 @@ public class RobotMap {
 	public static int collectorMotorPort = 6;
 	
 	// Motor Speed
-	public static double collectorMotorSpeed = 1.0;
+	public static double collectorMotorSpeed = 0.5;
 	
 
 	//============================================

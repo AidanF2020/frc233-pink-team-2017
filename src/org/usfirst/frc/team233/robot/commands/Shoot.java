@@ -18,7 +18,14 @@ public class Shoot extends Command{
 		START_FLYWHEEL,
 		SHOOT,
 		CEASEFIRE,
+		TEST_F_UP,
+		TEST_F_DOWN,
+		TEST_H_UP,
+		TEST_H_DOWN,
+		TEST_I_UP,
+		TEST_I_DOWN,
 		SKIP; // Used to make sure the subsystem actions don't run again
+		
 	}
 	
 	public Shoot(ShooterAction action) {
@@ -64,6 +71,37 @@ public class Shoot extends Command{
 				Robot.hopper.stopAgitate();
 				Robot.flywheel.setFlywheelState(ShootingState.INDEXER_STOPPED);
 				break;
+				
+			case TEST_F_DOWN:
+				Robot.flywheel.stopFlywheel();
+				Robot.flywheel.setFlywheelState(ShootingState.IGNORE);
+				break;
+				
+			case TEST_F_UP:
+				Robot.flywheel.startFlywheel();
+				Robot.flywheel.setFlywheelState(ShootingState.IGNORE);
+				break;
+				
+			case TEST_H_UP:
+				Robot.hopper.agitate();
+				Robot.flywheel.setFlywheelState(ShootingState.IGNORE);
+				break;
+				
+			case TEST_H_DOWN:
+				Robot.hopper.stopAgitate();
+				Robot.flywheel.setFlywheelState(ShootingState.IGNORE);
+				break;
+				
+			case TEST_I_UP:
+				Robot.indexer.releaseBalls();
+				Robot.flywheel.setFlywheelState(ShootingState.IGNORE);
+				break;
+			
+			case TEST_I_DOWN:
+				Robot.indexer.stopIndexer();
+				Robot.flywheel.setFlywheelState(ShootingState.IGNORE);
+				break;
+				
 	
 			default:
 				System.out.println("ShootingAction == SKIP");

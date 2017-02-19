@@ -40,9 +40,8 @@ public class DriveTrain extends Subsystem {
 
 	// Define other drive train components
 	private Compressor compressor = new Compressor(RobotMap.compressorPort);
-	private ADXRS450_Gyro gyro = new ADXRS450_Gyro();
-	private Solenoid shifterSolenoid = new Solenoid(
-			RobotMap.shiftingSolenoidPort);
+	//private ADXRS450_Gyro gyro = new ADXRS450_Gyro();
+	private Solenoid shifterSolenoid = new Solenoid(RobotMap.shiftingSolenoidPort);
 
 	/*
 	 * Calculate the distance each pulse in the encoder equals to for
@@ -68,7 +67,7 @@ public class DriveTrain extends Subsystem {
 	public DriveTrain() {
 		super();
 		// System.out.println("Drivetrain Constructor");
-		drive.setSafetyEnabled(false);
+		drive.setSafetyEnabled(true);
 		setupMotors();
 		setupEncoders();
 		resetEncoders();
@@ -92,7 +91,11 @@ public class DriveTrain extends Subsystem {
 	public void setupComponents() {
 		compressor.setClosedLoopControl(true);
 		// gyro.calibrate();
-		gyro.reset();
+		try{
+			//gyro.reset();
+		}catch(Exception e){
+			e.printStackTrace();
+		}
 		// gyro.calibrate();
 	}
 
@@ -221,23 +224,23 @@ public class DriveTrain extends Subsystem {
 	public double getGyroRotation() {
 		// System.out.println("gyro.getAccumulatorAverage() returns double: " +
 		// gyro.getAngle());
-		SmartDashboard.putString(
-				getSmartDashboardType(),
-				"gyro.getAccumulatorAverage() returns double: "
-						+ gyro.getAngle());
-		return gyro.getAngle();
+		//SmartDashboard.putString(
+			//	getSmartDashboardType(),
+				//"gyro.getAccumulatorAverage() returns double: "
+					//	+ gyro.getAngle());
+		return 0.0;//gyro.getAngle();
 	}
 
 	public double getGyroRate() {
-		return gyro.getRate();
+		return 0.0;//gyro.getRate();
 	}
 
 	public void resetGyro() {
-		gyro.reset();
+		//gyro.reset();
 	}
 
 	public ADXRS450_Gyro getDriveTrainGyro() {
-		return gyro;
+		return null;//gyro;
 	}
 
 	/**
@@ -246,7 +249,12 @@ public class DriveTrain extends Subsystem {
 	 */
 	public void reset() {
 		resetEncoders();
-		gyro.reset();
+		try{
+			//gyro.reset();
+			
+		}catch(Exception e){
+			e.printStackTrace();
+		}
 	}
 
 	/**
