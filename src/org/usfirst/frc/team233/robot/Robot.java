@@ -155,7 +155,7 @@ public class Robot extends IterativeRobot {
 		//drivetrain.getLeftEncoderCount();
 		//drivetrain.getRightEncoderCount();
 		Scheduler.getInstance().run();
-		//log();
+		log();
 		// TODO Test this change in code to verify if the motors still run
 		//System.out.println("Teleop Periodic");
 	}
@@ -170,6 +170,9 @@ public class Robot extends IterativeRobot {
 //		SmartDashboard.putNumber("Right Raw = ", drivetrain.rightEncoder.getRaw());
 		//System.out.println("Gyro rotation: "+ drivetrain.getGyroRotation());
 		System.out.println("Flywheel motor: " + flywheel.getFlywheelMotorSpeed());
+		SmartDashboard.putNumber("Flywheel Encoder Count", flywheel.getEncoderCounts());
+		SmartDashboard.putNumber("Flywheel Encoder Rate", flywheel.getFlywheelEncoderSpeed());
+		
 		//System.out.println("Indexer motor: " + i);
 		//System.out.println("Gyro rate: "+ drivetrain.getGyroRate());
 		//SmartDashboard.putNumber("Flywheel Motor Speed", flywheel.getFlywheelMotorSpeed());

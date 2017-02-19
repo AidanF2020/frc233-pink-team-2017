@@ -31,9 +31,6 @@ public class Shoot extends Command{
 	
 	public Shoot(ShooterAction action) {
 		// TODO Auto-generated constructor stub
-//		requires(Robot.flywheel);
-//		requires(Robot.hopper);
-//		requires(Robot.indexer);
 		this.action = action;
 	}
 	
@@ -128,9 +125,7 @@ public class Shoot extends Command{
 		
 			case FLYWHEEL_UP_TO_SPEED:
 				Robot.hopper.agitate();
-				//if(Robot.flywheel)
 				Robot.indexer.releaseBalls();
-				//Robot.flywheel.setFlywheelState(ShootingState.SHOOTING);
 				break;
 			
 			case INDEXER_STOPPED:

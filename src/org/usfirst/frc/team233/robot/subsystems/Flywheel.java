@@ -5,6 +5,7 @@ import org.usfirst.frc.team233.robot.RobotMap;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.Talon;
+import edu.wpi.first.wpilibj.CounterBase.EncodingType;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
@@ -20,7 +21,8 @@ public class Flywheel extends Subsystem {
 
 	private double tolerance = 0.1;
 	private final double flywheelKp = 0.1;
-	private Encoder encoder = new Encoder(RobotMap.flywheelEncoderPortA, RobotMap.flywheelEncoderPortB);
+	private Encoder encoder = new Encoder(RobotMap.flywheelEncoderPortA, RobotMap.flywheelEncoderPortB, false, EncodingType.k1X);
+	//private Encoder encoder = new Encoder(RobotMap.flywheelEncoderPortA, RobotMap.flywheelEncoderPortB);
 	private final double flywheelDistancePerPulse = 0.123;
 	
 	/* Calculate the distance each pulse in the encoder equals to.
@@ -47,8 +49,6 @@ public class Flywheel extends Subsystem {
 	}
 
 	public void startFlywheel() {
-		//System.out.println("Running Flywheel");
-		//flywheelMotor.set(flywheelSpeed);
 		flywheelMotor.set(getPDSpeed(flywheelMotor.get(), flywheelSpeed, flywheelKp));
 	}
 
@@ -68,9 +68,9 @@ public class Flywheel extends Subsystem {
 	
 	/** Setup encoders before use. */
 	public void setupEncoder() {
-		encoder.setDistancePerPulse(distancePerPulse);
+		encoder.setDistancePerPulse(1);
 		//leftEncoder.setPIDSourceType(PIDSourceType.kDisplacement);
-		SmartDashboard.putData("Flywheel Encoder", encoder);
+		//SmartDashboard.putData("Flywheel Encoder", encoder);
 	}
 	
 	/** Get the current value of the flywheel motor.
@@ -83,6 +83,10 @@ public class Flywheel extends Subsystem {
 	 * by the encoder. */
 	public double getFlywheelEncoderSpeed(){
 		return encoder.getRate();
+	}
+	
+	public double getEncoderCounts() {
+		return encoder.get();
 	}
 	
 	/** Adjust the speed of the */
