@@ -164,7 +164,11 @@ public class Robot extends IterativeRobot {
 	}
 	
 	public void log() {
-		SmartDashboard.putData("Power Distribution Panel", pdPanel);
+//		SmartDashboard.putData("Power Distribution Panel", pdPanel);
+		SmartDashboard.putNumber("Flywheel motor", pdPanel.getCurrent(14));
+		SmartDashboard.putNumber("Agitator motor", pdPanel.getCurrent(4));
+		SmartDashboard.putNumber("Indexer motor", pdPanel.getCurrent(5));
+		SmartDashboard.putNumber("Collector motor", pdPanel.getCurrent(8));
 //		SmartDashboard.putNumber("Left Encoder = ", drivetrain.getLeftDistance());
 //		SmartDashboard.putNumber("Right Encoder = ", drivetrain.getRightDistance());
 //		SmartDashboard.putNumber("Left Raw = ", drivetrain.leftEncoder.getRaw());
