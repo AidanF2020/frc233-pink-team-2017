@@ -10,9 +10,11 @@ import edu.wpi.first.wpilibj.command.Command;
 public class RotateBase extends Command {
 	private PIDController pid;
 	private final double tolerance = 0.5;
+	private final double targetAngle;
 
 	public RotateBase(double angle) {
 		requires(Robot.drivetrain);
+		targetAngle = angle;
 		Robot.drivetrain.reset();
 		// A proportional controller (Kp) will reduce the
 		// rise time and will reduce, but never eliminate, the steady-state
@@ -53,14 +55,15 @@ public class RotateBase extends Command {
 				} else if (d < -0.5) {
 					d = -0.5;
 				}
-				// CCW is positive
-				// if turning left
-				// if( angle < 180){
-				// drive(left, right)
-				Robot.drivetrain.drive(-d, d);
-				// } else { // turning left
-				// Robot.drivetrain.drive(d, -d);
-				// }
+				Robot.drivetrain.drive(d, -d);
+//				NEED TO TEST:
+//				// CW/right turn is positive
+//				if (targetAngle < 0) { // turning left
+//					// drive(left, right)
+//					Robot.drivetrain.drive(d, -d);
+//				} else { // turning left
+//					Robot.drivetrain.drive(-d, d);
+//				}
 			}
 		});
 		pid.setAbsoluteTolerance(tolerance);

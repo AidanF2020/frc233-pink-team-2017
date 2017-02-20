@@ -20,7 +20,7 @@ public class AutoGearRoutine1 extends CommandGroup {
 		addSequential(new DriveStraight(148));
 		addSequential(new RotateBase(0));
 		addSequential(new DriveStraight(-15));
-		addSequential (new StopBase());
+		//addSequential (new StopBase());
 		//addSequential();
 		
 	}
