@@ -8,6 +8,8 @@ import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
+import org.usfirst.frc.team233.robot.autonomous.AutoGearRoutine1;
+import org.usfirst.frc.team233.robot.autonomous.AutoShootRoutine1;
 import org.usfirst.frc.team233.robot.autonomous.AutoTest1;
 import org.usfirst.frc.team233.robot.subsystems.BallCollector;
 import org.usfirst.frc.team233.robot.subsystems.DriveTrain;
@@ -53,7 +55,10 @@ public class Robot extends IterativeRobot {
 		hopper = new Hopper();
 		oi = new OI();
 
-		setupAutonomousList();
+		SmartDashboard.putNumber("Autonomous delay", 0.0);
+		double delay = SmartDashboard.getNumber("Autonomous delay", 0.0);
+		SmartDashboard.putNumber("Autonomous delay", delay);
+		setupAutonomousList(delay);
 		
 		System.out.println("RoboInit");
 		//SmartDashboard.putData(new AutoTest1());
@@ -65,8 +70,10 @@ public class Robot extends IterativeRobot {
 	 * Add all the autonomous routines to the 
 	 * chooser list
 	 * */
-	private void setupAutonomousList() {
-		chooser.addDefault("AutoTest1", new AutoTest1());
+	private void setupAutonomousList(double delay) {
+		chooser.addDefault("AutoTest1", new AutoTest1(delay));
+		chooser.addObject("Auto Gear Routine 1", new AutoGearRoutine1());
+		chooser.addObject("Auto Shoot Routine 1", new AutoShootRoutine1());
 	}
 
 	/**
@@ -102,7 +109,10 @@ public class Robot extends IterativeRobot {
 		autonomousCommand = chooser.getSelected();
 		drivetrain.resetGyro();
 		drivetrain.resetEncoders();
-
+		
+		if(autonomousCommand instanceof AutoTest1){
+			
+		}
 		/*
 		 * String autoSelected = SmartDashboard.getString("Auto Selector",
 		 * "Default"); switch(autoSelected) { case "My Auto": autonomousCommand
@@ -122,7 +132,6 @@ public class Robot extends IterativeRobot {
 	public void autonomousPeriodic() {
 		Scheduler.getInstance().run();
 		log();
-		
 	}
 
 	@Override
@@ -141,8 +150,6 @@ public class Robot extends IterativeRobot {
 		//Scheduler.getInstance().enable();
 		//Scheduler.getInstance().removeAll();
 		//Scheduler.getInstance().add(tankDrive);
-		
-		
 	}
 
 	/**
@@ -187,7 +194,6 @@ public class Robot extends IterativeRobot {
 	
 	@Override
 	public void robotPeriodic() {
-		// TODO Auto-generated method stub
 	}
 	
 	/**

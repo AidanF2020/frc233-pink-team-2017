@@ -6,7 +6,9 @@ import edu.wpi.first.wpilibj.command.WaitCommand;
 
 public class AutoTest1 extends CommandGroup {
 
-	public AutoTest1() {
+	public AutoTest1(double delay) {
+		// testing ability to set a delay from SmartDashboard
+		addSequential(new WaitCommand(delay));
 		//Should end up in same position & orientation
 		addSequential(new DriveStraight(60));
 		addSequential(new RotateBase(90));
@@ -37,4 +39,6 @@ public class AutoTest1 extends CommandGroup {
 //		//shoot
 //		addSequential(new PinkNavigate(-20,0,1)); // Drive back to bucket
 	}
+	
+	
 }

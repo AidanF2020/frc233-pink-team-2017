@@ -23,16 +23,6 @@ public class PinkNavigate extends Command {
 		Robot.drivetrain.resetEncoders();
 	}
 
-	@Override
-	protected boolean isFinished() {
-		return driveToPos();
-	}
-
-	@Override
-	protected void end() {
-		Robot.drivetrain.drive(0, 0);
-	}
-
 	// Tank drive two wheels to target positions in inches.
 	// Returns true when both arrive at the target.
 	public boolean driveToPos() {
@@ -78,5 +68,15 @@ public class PinkNavigate extends Command {
 			return min;
 		}
 		return cmd;
+	}
+	
+	@Override
+	protected boolean isFinished() {
+		return driveToPos();
+	}
+
+	@Override
+	protected void end() {
+		Robot.drivetrain.drive(0, 0);
 	}
 }

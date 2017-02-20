@@ -10,7 +10,6 @@ public class AutoTest2 extends PIDCommand{
 	private boolean reverse;
 	
 	public AutoTest2(double kp, double kd, double targetPos, boolean reverse) {
-		// TODO Auto-generated constructor stub
 		super(kp, 0, kd);
 		setSetpoint(targetPos);
 		this.targetPos = targetPos;
