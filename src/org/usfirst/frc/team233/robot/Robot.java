@@ -10,6 +10,8 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import org.usfirst.frc.team233.robot.autonomous.AutoGearRoutine1;
+import org.usfirst.frc.team233.robot.autonomous.AutoGearRoutine2;
+import org.usfirst.frc.team233.robot.autonomous.AutoGearRoutine3;
 import org.usfirst.frc.team233.robot.autonomous.AutoShootRoutine1;
 import org.usfirst.frc.team233.robot.autonomous.AutoTest1;
 import org.usfirst.frc.team233.robot.subsystems.BallCollector;
@@ -73,8 +75,10 @@ public class Robot extends IterativeRobot {
 	 * chooser list
 	 * */
 	private void setupAutonomousList(double delay) {
-		chooser.addDefault("AutoTest1", new AutoTest1(delay));
-		chooser.addObject("Auto Gear Routine 1", new AutoGearRoutine1());
+		chooser.addObject("AutoTest1", new AutoTest1(delay));
+		chooser.addDefault("Auto Gear Routine 1", new AutoGearRoutine1());
+		chooser.addObject("Auto Gear Routine 2", new AutoGearRoutine2());
+		chooser.addObject("Auto Gear Routine 3", new AutoGearRoutine3());
 		chooser.addObject("Auto Shoot Routine 1", new AutoShootRoutine1());
 	}
 

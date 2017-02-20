@@ -1,13 +1,14 @@
 package org.usfirst.frc.team233.robot.autonomous;
 
 import org.usfirst.frc.team233.robot.PinkPD;
+import org.usfirst.frc.team233.robot.Range;
 import org.usfirst.frc.team233.robot.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class PinkNavigate extends Command {
-	static final double POSITION_THRESHOLD = 1.0; // Distance (Inches)
+	static final double POSITION_THRESHOLD = 10.0; // Distance (Inches)
 	static final double ANGLE_THRESHOLD = 5.0; // Degrees
 
 	private double targetPos;
@@ -20,29 +21,39 @@ public class PinkNavigate extends Command {
 		this.targetAngle = targetAngle;
 		this.maxPower = maxPower;
 		requires(Robot.drivetrain);
-		Robot.drivetrain.resetEncoders();
 	}
 
 	// Tank drive two wheels to target positions in inches.
 	// Returns true when both arrive at the target.
 	public boolean driveToPos() {
 		double angularVelocity = Robot.drivetrain.getGyroRate();
+		SmartDashboard.putNumber("angularVelocity", angularVelocity);
 		double linearVelocity = Robot.drivetrain.getDriveTrainRate();
+		SmartDashboard.putNumber("linearVelocity", linearVelocity);
 		double linearError = targetPos - Robot.drivetrain.getDistanceTraveled();
+		SmartDashboard.putNumber("linearError", linearError);
 		double angularError = targetAngle - Robot.drivetrain.getGyroRotation();
+		SmartDashboard.putNumber("angularError", angularError);
 		double motorCmd = PinkPD.getMotorCmd(0.1, 0.01, linearError,
 				linearVelocity);
 		SmartDashboard.putNumber("MotorCMD", motorCmd);
-		motorCmd = clip(motorCmd, 0.5, -0.5);
+		motorCmd = Range.clip(motorCmd, 0.8, -0.8);
 
 		// Determine and add the angle offset
-		double angleOffset = PinkPD.getMotorCmd(0.02, 0.02, angularError,
+		double angleOffset = PinkPD.getMotorCmd(0.03, 0.002, angularError,
 				angularVelocity);
 		SmartDashboard.putNumber("Angle Offset", angleOffset);
+//<<<<<<< Updated upstream
 		double leftMotorCmd = motorCmd + angleOffset;
 		double rightMotorCmd = motorCmd - angleOffset;
 		leftMotorCmd = clip(leftMotorCmd, maxPower, -maxPower);
 		rightMotorCmd = clip(rightMotorCmd, maxPower, -maxPower);
+//=======
+		double leftMotorCmd = motorCmd - angleOffset;
+		double rightMotorCmd = motorCmd + angleOffset;
+		leftMotorCmd = Range.clip(leftMotorCmd, maxPower, -maxPower);
+		rightMotorCmd = Range.clip(rightMotorCmd, maxPower, -maxPower);
+//>>>>>>> Stashed changes
 		SmartDashboard.putNumber("leftMotorCmd", leftMotorCmd);
 		SmartDashboard.putNumber("rightMotorCmd", rightMotorCmd);
 

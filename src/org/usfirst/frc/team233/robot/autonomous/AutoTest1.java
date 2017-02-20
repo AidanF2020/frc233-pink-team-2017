@@ -8,17 +8,19 @@ public class AutoTest1 extends CommandGroup {
 
 	public AutoTest1(double delay) {
 		// testing ability to set a delay from SmartDashboard
-		addSequential(new WaitCommand(delay));
-		//Should end up in same position & orientation
-		addSequential(new DriveStraight(60));
-		addSequential(new RotateBase(90));
-		addSequential(new DriveStraight(60));
-		addSequential(new RotateBase(90));
-		addSequential(new DriveStraight(60));
-		addSequential(new RotateBase(90));
-		addSequential(new DriveStraight(60));
-		addSequential(new RotateBase(90));
-		//addSequential(new PinkNavigate(0,20,1));
+//		addSequential(new WaitCommand(delay));
+//		addSequential(new DriveStraight(-12));
+//		addSequential (new RotateBase(90));
+		addSequential(new PinkNavigate(-60,0,1));
+		addSequential(new PinkNavigate(-60,90,1));
+		addSequential(new PinkNavigate(-120,90,1));
+		addSequential(new PinkNavigate(-120,180,1));
+		addSequential(new PinkNavigate(-180,180,1));
+		addSequential(new PinkNavigate(-180,270,1));
+		addSequential(new PinkNavigate(-240,270,1));
+		addSequential(new PinkNavigate(-240,360,1));
+		addSequential(new PinkNavigate(-300,360,1));
+		addSequential (new StopBase());
 //		addSequential(new PinkNavigate(-12, 0, 1)); //Drive to gear position
 		//addSequential(new DriveStraight(12));
 		//addSequential(new WaitCommand(2.0));

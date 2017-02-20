@@ -20,24 +20,11 @@ import org.usfirst.frc.team233.robot.Robot;
  * encoders.
  */
 public class StopBase extends Command {
-	private PIDController pid;
-	private final double tolerance = 0.15;
 
 	public StopBase() {
 		requires(Robot.drivetrain);
-		Robot.drivetrain.drive(0, 0);
 	}
 
-	// Called just before this Command runs the first time
-	@Override
-	protected void initialize() {
-		// Get everything in a safe starting state.
-		Robot.drivetrain.reset();
-		pid.reset();
-		pid.enable();
-	}
-
-	// Make this return true when this Command no longer needs to run execute()
 	@Override
 	protected boolean isFinished() {
 		return false;
@@ -47,7 +34,6 @@ public class StopBase extends Command {
 	@Override
 	protected void end() {
 		// Stop PID and the wheels
-		pid.disable();
 		Robot.drivetrain.drive(0, 0);
 	}
 }
