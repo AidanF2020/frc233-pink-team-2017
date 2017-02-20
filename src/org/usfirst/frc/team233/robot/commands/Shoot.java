@@ -10,11 +10,10 @@ import edu.wpi.first.wpilibj.command.Command;
  * WARNING: Still in prototype phase!
  * 		    DO NOT use for shooting
  * 			yet!*/
-public class Shoot extends Command{
+public class Shoot extends Command {
 	ShooterAction action;
-	private boolean aBoolean = false;
 	
-	public enum ShooterAction{
+	public enum ShooterAction {
 		STOP_FLYWHEEL,
 		START_FLYWHEEL,
 		SHOOT,
@@ -47,7 +46,10 @@ public class Shoot extends Command{
 		switch (action) {
 			case START_FLYWHEEL:
 				System.out.println("inside START FLYWHEEL");
-				if (Robot.flywheel.getFlywheelState() == ShootingState.FLYWHEEL_STOPPED) {
+				if ((Robot.flywheel.getFlywheelState() == ShootingState.FLYWHEEL_STOPPED) ||
+					(Robot.flywheel.getFlywheelState() == ShootingState.FLYWHEEL_HALF_SPEED) ||
+					(Robot.flywheel.getFlywheelState() == ShootingState.IGNORE)) {
+					
 					System.out.println("Flywheel half speed");
 					Robot.flywheel.flywheelHalfSpeed();
 					Robot.flywheel.setFlywheelState(ShootingState.FLYWHEEL_HALF_SPEED);
@@ -84,27 +86,27 @@ public class Shoot extends Command{
 				break;
 				
 			case TEST_F_UP:
-				Robot.flywheel.flywheelTest(0.1);
+				Robot.flywheel.startFlywheel();
 				Robot.flywheel.setFlywheelState(ShootingState.IGNORE);
 				break;
 				
 			case TEST_H_UP:
-				Robot.flywheel.flywheelTest(0.5);
+				Robot.hopper.agitate();
 				Robot.flywheel.setFlywheelState(ShootingState.IGNORE);
 				break;
 				
 			case TEST_H_DOWN:
-				Robot.flywheel.stopFlywheel();
+				Robot.hopper.stopAgitate();
 				Robot.flywheel.setFlywheelState(ShootingState.IGNORE);
 				break;
 				
 			case TEST_I_UP:
-				Robot.flywheel.flywheelTest(1.0);
+				Robot.indexer.releaseBalls();
 				Robot.flywheel.setFlywheelState(ShootingState.IGNORE);
 				break;
 			
 			case TEST_I_DOWN:
-				Robot.flywheel.stopFlywheel();
+				Robot.indexer.stopIndexer();
 				Robot.flywheel.setFlywheelState(ShootingState.IGNORE);
 				break;
 				
