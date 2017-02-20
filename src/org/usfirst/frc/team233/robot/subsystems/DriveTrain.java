@@ -54,12 +54,14 @@ public class DriveTrain extends Subsystem {
 	private final double distancePerPulseConstant = 0.059839860068377;
 
 	// Define all the encoders that are going to be used for the drive train.
-	public/* private */Encoder leftEncoder = new Encoder(
-			RobotMap.leftEncoderAPort, RobotMap.leftEncoderBPort, false,
-			EncodingType.k1X);
-	public/* private */Encoder rightEncoder = new Encoder(
-			RobotMap.rightEncoderAPort, RobotMap.rightEncoderBPort, false,
-			EncodingType.k1X);
+	public Encoder leftEncoder = new Encoder(RobotMap.leftEncoderAPort, 
+											 RobotMap.leftEncoderBPort, 
+											 false,
+											 EncodingType.k1X);
+	public Encoder rightEncoder = new Encoder(RobotMap.rightEncoderAPort, 
+											  RobotMap.rightEncoderBPort, 
+											  false,
+											  EncodingType.k1X);
 
 	/** Drive train constructor. */
 	public DriveTrain() {
@@ -78,6 +80,7 @@ public class DriveTrain extends Subsystem {
 		setDefaultCommand(new TankDrive());
 	}
 
+	/** Steup drive train motors. */
 	public void setupMotors() {
 		frontLeftMotor.setInverted(isInverted);
 		rearLeftMotor.setInverted(isInverted);
@@ -86,13 +89,10 @@ public class DriveTrain extends Subsystem {
 		rearRightMotor.setInverted(isInverted);
 	}
 
+	/** Setup other components used by the drive train. */
 	public void setupComponents() {
 		compressor.setClosedLoopControl(true);
-		try{
-			//gyro.reset();
-		}catch(Exception e){
-			e.printStackTrace();
-		}
+		gyro.reset();
 	}
 
 	/** Setup encoders before use. */
@@ -103,12 +103,9 @@ public class DriveTrain extends Subsystem {
 		} else {
 			leftEncoder.setDistancePerPulse(distancePerPulse);
 		}
-		// These values setup here are random!!!
-		// Need to determine the best values for this!
 		leftEncoder.setPIDSourceType(PIDSourceType.kDisplacement);
 		leftEncoder.setReverseDirection(false);
-		 leftEncoder.setSamplesToAverage(6);
-		// leftEncoder.setMinRate(10);
+		leftEncoder.setSamplesToAverage(6);
 
 		// Setup right encoder
 		if (Robot.isReal()) {
@@ -118,8 +115,7 @@ public class DriveTrain extends Subsystem {
 		}
 		rightEncoder.setReverseDirection(true);
 		rightEncoder.setPIDSourceType(PIDSourceType.kDisplacement);
-		 rightEncoder.setSamplesToAverage(6);
-		// rightEncoder.setMinRate(10);
+		rightEncoder.setSamplesToAverage(6);
 	}
 
 	/** Reset all encoders. */
@@ -137,7 +133,15 @@ public class DriveTrain extends Subsystem {
 	 *            Speed in range [-1,1]
 	 */
 	public void drive(double left, double right) {
-		// System.out.println("Drive2");
+		/*
+		 * If for some reason the wires for the drive train
+		 * motors get placed in the switched sides, then
+		 * we need to update the ports on RobotMap 
+		 * and set the drive train isInverted to the
+		 * correct value. This method will take that 
+		 * inversion into consideration to align the 
+		 * joysticks to the correct side of the drive train. */
+		
 		if (isInverted) {
 			drive.tankDrive(right, left);
 		} else {
@@ -174,17 +178,26 @@ public class DriveTrain extends Subsystem {
 		return dist;
 	}
 
+	/** 
+	 * Get the the calculated pulse count for the left encoder.
+	 * */
 	public int getLeftEncoderCount() {
 		SmartDashboard.putNumber("leftEncoder", leftEncoder.get());
 		return leftEncoder.get();
 	}
 
+	/** 
+	 * Get the the calculated pulse count for the right encoder.
+	 * */
 	public int getRightEncoderCount() {
 		SmartDashboard.putNumber("rightEncoder", rightEncoder.get());
 		return rightEncoder.get();
 	}
 	
-
+	/**
+	 * Get the current rate (speed) that the drive train is going at
+	 * by averaging both encoder rates.
+	 * */
 	public double getDriveTrainRate() {
 		double avgEncodersRate = (leftEncoder.getRate() + rightEncoder
 				.getRate()) / 2;
@@ -203,12 +216,20 @@ public class DriveTrain extends Subsystem {
 		return avgEncoders;
 	}
 
+	/**
+	 * This method returns the average raw count of pulses between
+	 * the left and right encoder.
+	 * */
 	public double getCountsTraveled() {
 		double avgCounts = (leftEncoder.getRaw() + rightEncoder.getRaw()) / 2;
 		SmartDashboard.putNumber("Encoder Avg Counts", avgCounts);
 		return avgCounts;
 	}
 
+	/**
+	 * Shifts to the opposite of the current gear (toggles).
+	 * Ex: Low->Hi, Hi->Low
+	 * */
 	public void shiftGears() {
 		if (shifterSolenoid.get()) {
 			shifterSolenoid.set(false);
@@ -216,21 +237,33 @@ public class DriveTrain extends Subsystem {
 			shifterSolenoid.set(true);
 		}
 	}
+	
+	/** 
+	 * Shift to hi or low gear. Will be used for autonomous.
+	 * @param gearShift 	if true, shift to hi gear,
+	 *  					else shift to low gear
+	 * */
+	public void shiftGears(boolean gearShift) {
+		shifterSolenoid.set(gearShift);
+	}
 
+	
+	/**
+	 *  Get the drive trains angle of rotation since the
+	 * last reset.
+	 * */
 	public double getGyroRotation() {
-		// System.out.println("gyro.getAccumulatorAverage() returns double: " +
-		// gyro.getAngle());
-		//SmartDashboard.putString(
-			//	getSmartDashboardType(),
-				//"gyro.getAccumulatorAverage() returns double: "
-					//	+ gyro.getAngle());
 		return gyro.getAngle();
 	}
 
+	/**
+	 * Get the rotation rate for the drive train.
+	 * */
 	public double getGyroRate() {
 		return gyro.getRate();
 	}
 
+	/** Reset the gyro. */
 	public void resetGyro() {
 		gyro.reset();
 	}
@@ -245,12 +278,7 @@ public class DriveTrain extends Subsystem {
 	 */
 	public void reset() {
 		resetEncoders();
-		try{
-			//gyro.reset();
-			
-		}catch(Exception e){
-			e.printStackTrace();
-		}
+		gyro.reset();
 	}
 
 	/**

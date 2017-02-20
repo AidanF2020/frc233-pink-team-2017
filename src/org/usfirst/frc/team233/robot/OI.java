@@ -6,6 +6,7 @@ import org.usfirst.frc.team233.robot.commands.ClimbCommand.ClimberAction;
 import org.usfirst.frc.team233.robot.commands.CollectorCommand;
 import org.usfirst.frc.team233.robot.commands.CollectorCommand.CollectorAction;
 import org.usfirst.frc.team233.robot.commands.ShiftGear;
+import org.usfirst.frc.team233.robot.commands.ShiftGear.ShiftAction;
 import org.usfirst.frc.team233.robot.commands.Shoot;
 import org.usfirst.frc.team233.robot.commands.Shoot.ShooterAction;
 import org.usfirst.frc.team233.robot.subsystems.ShootingState;
@@ -76,7 +77,7 @@ public class OI {
 		leftTrigger.whileHeld(new CollectorCommand(CollectorAction.EJECT));
 		leftTrigger.whenReleased(new CollectorCommand(CollectorAction.STOP));
 		
-		rightBumper.whenPressed(new ShiftGear());
+		rightBumper.whenPressed(new ShiftGear(ShiftAction.TOGGLE));
 		
 		a.whileHeld(new ClimbCommand(ClimberAction.CLIMB));
 		a.whenReleased(new ClimbCommand(ClimberAction.STOP));
