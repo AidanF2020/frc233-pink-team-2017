@@ -30,6 +30,9 @@ public class RobotMap {
 	// Gyro
 	public static int gyroPort = 0;
 	
+	// Power Distribution Panel
+	public static int pdpDeviceID = 1;
+	
 	//============================================
 	// 		SHOOTER VARIABLES
 	//============================================

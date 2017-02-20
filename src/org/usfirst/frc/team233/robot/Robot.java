@@ -1,6 +1,7 @@
 package org.usfirst.frc.team233.robot;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
+import edu.wpi.first.wpilibj.PowerDistributionPanel;
 //import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
@@ -36,7 +37,7 @@ public class Robot extends IterativeRobot {
 	public static RopeClimber ropeClimber;
 	public static Hopper hopper;
 	public static OI oi;
-	
+	public static PowerDistributionPanel pdPanel;
 
 	Command autonomousCommand;
 	SendableChooser<Command> chooser = new SendableChooser<>();
@@ -54,14 +55,15 @@ public class Robot extends IterativeRobot {
 		ropeClimber = new RopeClimber();
 		hopper = new Hopper();
 		oi = new OI();
-
+		pdPanel = new PowerDistributionPanel(RobotMap.pdpDeviceID);
+		pdPanel.resetTotalEnergy();
+		
+		// didn't work, value didn't get passed
 		SmartDashboard.putNumber("Autonomous delay", 0.0);
 		double delay = SmartDashboard.getNumber("Autonomous delay", 0.0);
 		SmartDashboard.putNumber("Autonomous delay", delay);
-		setupAutonomousList(delay);
 		
-		System.out.println("RoboInit");
-		//SmartDashboard.putData(new AutoTest1());
+		setupAutonomousList(delay);
 		SmartDashboard.putData("Auto Mode", chooser);
 	}
 	
@@ -111,7 +113,7 @@ public class Robot extends IterativeRobot {
 		drivetrain.resetEncoders();
 		
 		if(autonomousCommand instanceof AutoTest1){
-			
+			//check for delay value
 		}
 		/*
 		 * String autoSelected = SmartDashboard.getString("Auto Selector",
@@ -157,33 +159,18 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void teleopPeriodic() {
-		//drivetrain.getGyroRotation();
-		//drivetrain.getDistanceTraveled();
-		//drivetrain.getCountsTraveled();
-		//drivetrain.getLeftEncoderCount();
-		//drivetrain.getRightEncoderCount();
 		Scheduler.getInstance().run();
 		log();
-		// TODO Test this change in code to verify if the motors still run
-		//System.out.println("Teleop Periodic");
 	}
 	
-	
-	@SuppressWarnings("deprecation")
 	public void log() {
+		SmartDashboard.putData("Power Distribution Panel", pdPanel);
 //		SmartDashboard.putNumber("Left Encoder = ", drivetrain.getLeftDistance());
 //		SmartDashboard.putNumber("Right Encoder = ", drivetrain.getRightDistance());
-//		System.out.println("Left Encoder = " + drivetrain.getLeftDistance());
-//		System.out.println("Right Encoder = " + drivetrain.getRightDistance());
 //		SmartDashboard.putNumber("Left Raw = ", drivetrain.leftEncoder.getRaw());
 //		SmartDashboard.putNumber("Right Raw = ", drivetrain.rightEncoder.getRaw());
-		//System.out.println("Gyro rotation: "+ drivetrain.getGyroRotation());
-		System.out.println("Flywheel motor: " + flywheel.getFlywheelMotorSpeed());
 		SmartDashboard.putNumber("Flywheel Encoder Count", flywheel.getEncoderCounts());
 		SmartDashboard.putNumber("Flywheel Encoder Rate", flywheel.getFlywheelEncoderSpeed());
-		
-		//System.out.println("Indexer motor: " + i);
-		System.out.println("Gyro rate: "+ drivetrain.getGyroRate());
 		//SmartDashboard.putNumber("Flywheel Motor Speed", flywheel.getFlywheelMotorSpeed());
 		//SmartDashboard.putNumber("Count Encoder Left", drivetrain.getLeftEncoderCount());
 		//SmartDashboard.putNumber("Count Encoder Right", drivetrain.getRightEncoderCount());
