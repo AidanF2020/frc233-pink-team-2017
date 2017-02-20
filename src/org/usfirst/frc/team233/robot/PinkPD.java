@@ -1,24 +1,13 @@
 package org.usfirst.frc.team233.robot;
 
-import org.usfirst.frc.team233.robot.RobotMap;
-
-import edu.wpi.first.wpilibj.SpeedController;
-import edu.wpi.first.wpilibj.Talon;
-import edu.wpi.first.wpilibj.command.Subsystem;
-
 public class PinkPD {
 
-    private PinkPD() {
-    }
+    private PinkPD() {}
 
     // Use a PD to determine a motor command, which has a range of -1 to 1 (-1=rev; 0=stop; 1=fwd)
     public static double getMotorCmd(double Kp, double Kd, double error, double currentVel) {
-
-        double motorCmd;
-
-        motorCmd = (Kp * error) - (Kd * currentVel);
-        //        motorCmd = Range.clip(motorCmd, -1.0, 1.0);
-
+        double motorCmd = (Kp * error) - (Kd * currentVel);
+        //motorCmd = Range.clip(motorCmd, -1.0, 1.0);
         return motorCmd;
     }
 

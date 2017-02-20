@@ -140,8 +140,8 @@ public class Flywheel extends Subsystem {
 	}
 	
 	public boolean motorSpeedEqualsSetSpeed(){
-		if (Math.abs(Math.abs(flywheelMotor.get()) - flywheelSpeed) < tolerance) {
-			//System.out.println("Motor up to speed!");
+		if (Math.abs(encoder.getRate() - flywheelSpeed) < tolerance) {
+		//if (Math.abs(Math.abs(flywheelMotor.get()) - flywheelSpeed) < tolerance) {
 			return true;
 		}
 		return false;

@@ -200,7 +200,7 @@ public class DriveTrain extends Subsystem {
 	 * */
 	public double getDriveTrainRate() {
 		double avgEncodersRate = (leftEncoder.getRate() + rightEncoder
-				.getRate()) / 2;
+				.getRate()) / 2.0;
 		SmartDashboard.putNumber("Encoder Avg Rate", avgEncodersRate);
 		return avgEncodersRate;
 	}
@@ -211,7 +211,7 @@ public class DriveTrain extends Subsystem {
 	 */
 	public double getDistanceTraveled() {
 		double avgEncoders = (leftEncoder.getDistance() + rightEncoder
-				.getDistance()) / 2;
+				.getDistance()) / 2.0;
 		SmartDashboard.putNumber("Encoder Avg", avgEncoders);
 		return avgEncoders;
 	}
@@ -221,7 +221,7 @@ public class DriveTrain extends Subsystem {
 	 * the left and right encoder.
 	 * */
 	public double getCountsTraveled() {
-		double avgCounts = (leftEncoder.getRaw() + rightEncoder.getRaw()) / 2;
+		double avgCounts = (leftEncoder.getRaw() + rightEncoder.getRaw()) / 2.0;
 		SmartDashboard.putNumber("Encoder Avg Counts", avgCounts);
 		return avgCounts;
 	}
