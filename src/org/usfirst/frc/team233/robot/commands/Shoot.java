@@ -12,6 +12,7 @@ import edu.wpi.first.wpilibj.command.Command;
  * 			yet!*/
 public class Shoot extends Command {
 	ShooterAction action;
+	private int dPadValue = Integer.MAX_VALUE;
 	
 	public enum ShooterAction {
 		STOP_FLYWHEEL,
@@ -29,7 +30,6 @@ public class Shoot extends Command {
 	}
 	
 	public Shoot(ShooterAction action) {
-		// TODO Auto-generated constructor stub
 		this.action = action;
 	}
 	
@@ -38,7 +38,10 @@ public class Shoot extends Command {
 		//edited for if joystick unplugged, will return null
 		if (Robot.oi.getShooterJoystick() != null){
 			System.out.println("Change speed");
-			Robot.flywheel.adjustFlywheelSpeed(Robot.oi.getShooterJoystick().getPOV());
+			if(dPadValue != Robot.oi.getShooterJoystick().getPOV() && Robot.oi.getShooterJoystick().getPOV() == -1){
+				Robot.flywheel.adjustFlywheelSpeed( dPadValue /*Robot.oi.getShooterJoystick().getPOV()*/);
+			}
+			dPadValue = Robot.oi.getShooterJoystick().getPOV();
 		}	
 		
 		// Obtain what action to perform 

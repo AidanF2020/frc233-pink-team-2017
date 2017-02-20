@@ -43,17 +43,10 @@ public class PinkNavigate extends Command {
 		double angleOffset = PinkPD.getMotorCmd(0.03, 0.002, angularError,
 				angularVelocity);
 		SmartDashboard.putNumber("Angle Offset", angleOffset);
-//<<<<<<< Updated upstream
-		double leftMotorCmd = motorCmd + angleOffset;
-		double rightMotorCmd = motorCmd - angleOffset;
-		leftMotorCmd = clip(leftMotorCmd, maxPower, -maxPower);
-		rightMotorCmd = clip(rightMotorCmd, maxPower, -maxPower);
-//=======
 		double leftMotorCmd = motorCmd - angleOffset;
 		double rightMotorCmd = motorCmd + angleOffset;
 		leftMotorCmd = Range.clip(leftMotorCmd, maxPower, -maxPower);
 		rightMotorCmd = Range.clip(rightMotorCmd, maxPower, -maxPower);
-//>>>>>>> Stashed changes
 		SmartDashboard.putNumber("leftMotorCmd", leftMotorCmd);
 		SmartDashboard.putNumber("rightMotorCmd", rightMotorCmd);
 
