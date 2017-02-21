@@ -1,5 +1,7 @@
 package org.usfirst.frc.team233.robot;
 
+import edu.wpi.cscore.UsbCamera;
+import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.PowerDistributionPanel;
 //import edu.wpi.first.wpilibj.Joystick;
@@ -40,6 +42,8 @@ public class Robot extends IterativeRobot {
 	public static Hopper hopper;
 	public static OI oi;
 	public static PowerDistributionPanel pdPanel;
+	//private UsbCamera gearCamera;
+	
 
 	Command autonomousCommand;
 	SendableChooser<Command> chooser = new SendableChooser<>();
@@ -59,7 +63,6 @@ public class Robot extends IterativeRobot {
 		oi = new OI();
 		pdPanel = new PowerDistributionPanel(RobotMap.pdpDeviceID);
 		pdPanel.resetTotalEnergy();
-		
 		// didn't work, value didn't get passed
 		SmartDashboard.putNumber("Autonomous delay", 0.0);
 		double delay = SmartDashboard.getNumber("Autonomous delay", 0.0);
@@ -67,6 +70,8 @@ public class Robot extends IterativeRobot {
 		
 		setupAutonomousList(delay);
 		SmartDashboard.putData("Auto Mode", chooser);
+		
+		//gearCamera = CameraServer.getInstance().startAutomaticCapture();
 	}
 	
 	
@@ -173,10 +178,10 @@ public class Robot extends IterativeRobot {
 		SmartDashboard.putNumber("Agitator motor", pdPanel.getCurrent(4));
 		SmartDashboard.putNumber("Indexer motor", pdPanel.getCurrent(5));
 		SmartDashboard.putNumber("Collector motor", pdPanel.getCurrent(8));
-//		SmartDashboard.putNumber("Left Encoder = ", drivetrain.getLeftDistance());
-//		SmartDashboard.putNumber("Right Encoder = ", drivetrain.getRightDistance());
-//		SmartDashboard.putNumber("Left Raw = ", drivetrain.leftEncoder.getRaw());
-//		SmartDashboard.putNumber("Right Raw = ", drivetrain.rightEncoder.getRaw());
+		SmartDashboard.putNumber("Left Encoder = ", drivetrain.getLeftDistance());
+		SmartDashboard.putNumber("Right Encoder = ", drivetrain.getRightDistance());
+		SmartDashboard.putNumber("Left Raw = ", drivetrain.leftEncoder.getRaw());
+		SmartDashboard.putNumber("Right Raw = ", drivetrain.rightEncoder.getRaw());
 		SmartDashboard.putNumber("Flywheel Encoder Count", flywheel.getEncoderCounts());
 		SmartDashboard.putNumber("Flywheel Encoder Rate", flywheel.getFlywheelEncoderSpeed());
 		//SmartDashboard.putNumber("Flywheel Motor Speed", flywheel.getFlywheelMotorSpeed());

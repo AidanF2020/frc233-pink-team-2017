@@ -8,8 +8,8 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class PinkNavigate extends Command {
-	static final double POSITION_THRESHOLD = 10.0; // Distance (Inches)
-	static final double ANGLE_THRESHOLD = 5.0; // Degrees
+	static final double POSITION_THRESHOLD = 0.5; // Distance (Inches)
+	static final double ANGLE_THRESHOLD = 3.0; // Degrees
 
 	private double targetPos;
 	private double targetAngle;
@@ -21,11 +21,13 @@ public class PinkNavigate extends Command {
 		this.targetAngle = targetAngle;
 		this.maxPower = maxPower;
 		requires(Robot.drivetrain);
+		System.out.println("PinkNav initialized");
 	}
 
 	// Tank drive two wheels to target positions in inches.
 	// Returns true when both arrive at the target.
 	public boolean driveToPos() {
+		SmartDashboard.putNumber("Distance traveled", Robot.drivetrain.getDistanceTraveled());
 		double angularVelocity = Robot.drivetrain.getGyroRate();
 		SmartDashboard.putNumber("angularVelocity", angularVelocity);
 		double linearVelocity = Robot.drivetrain.getDriveTrainRate();
@@ -40,7 +42,7 @@ public class PinkNavigate extends Command {
 		motorCmd = Range.clip(motorCmd, 0.8, -0.8);
 
 		// Determine and add the angle offset
-		double angleOffset = PinkPD.getMotorCmd(0.05, 0.002, angularError,
+		double angleOffset = PinkPD.getMotorCmd(0.05/*0.02*/, 0.0/*0.002*/, angularError,
 				angularVelocity);
 		SmartDashboard.putNumber("Angle Offset", angleOffset);
 		double leftMotorCmd = motorCmd - angleOffset;
@@ -56,8 +58,8 @@ public class PinkNavigate extends Command {
 		// rightMotorCmd *= maxPower;
 
 		Robot.drivetrain.drive(leftMotorCmd, rightMotorCmd);
-		if ((Math.abs(linearError) < POSITION_THRESHOLD)
-				&& (Math.abs(angularError) < ANGLE_THRESHOLD)) {
+		if ((Math.abs(linearError) < POSITION_THRESHOLD) && 
+			(Math.abs(angularError) < ANGLE_THRESHOLD)) {
 			return true;
 		} else {
 			return false;
