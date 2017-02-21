@@ -96,11 +96,11 @@ public class Flywheel extends Subsystem {
 	/** Adjust the speed of the */
 	public void adjustFlywheelSpeed(int adjustment){
 		//System.out.println("Button pressed = " + adjustment);
-		if(adjustment == 0 && !speedButtonPressed){
+		if(adjustment == 0 /*&& !speedButtonPressed*/){
 			System.out.println("Add speed to flywheel");
 			flywheelSpeed = rangeValue(flywheelSpeed + speedAdjustment);
 			speedButtonPressed = true;
-		} else if (adjustment == 180 && !speedButtonPressed){
+		} else if (adjustment == 180 /*&& !speedButtonPressed*/){
 			System.out.println("Slow down flywheel");
 			flywheelSpeed = rangeValue(flywheelSpeed - speedAdjustment);
 			speedButtonPressed = true;

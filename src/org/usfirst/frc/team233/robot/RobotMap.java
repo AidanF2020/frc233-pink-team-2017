@@ -41,7 +41,7 @@ public class RobotMap {
 	public static int indexerMotorPort = 5;
 	
 	// Motor Speeds
-	public static double flywheelMotorSpeed = 0.7;
+	public static double flywheelMotorSpeed = 0.65;
 	public static double indexerMotorSpeed = 0.5;
 	
 	// Encoder
@@ -56,7 +56,7 @@ public class RobotMap {
 	public static int collectorMotorPort = 6;
 	
 	// Motor Speed
-	public static double collectorMotorSpeed = 0.5;
+	public static double collectorMotorSpeed = 0.75;
 	
 
 	//============================================
@@ -76,7 +76,7 @@ public class RobotMap {
 	public static int agitatorMotorPort = 8;
 	
 	// Motor Speeds
-	public static double agitatorMotorSpeed = 1;
+	public static double agitatorMotorSpeed = 0.75;
 	
 	
 	//============================================
