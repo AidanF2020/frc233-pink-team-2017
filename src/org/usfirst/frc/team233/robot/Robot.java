@@ -76,8 +76,8 @@ public class Robot extends IterativeRobot {
 	 * */
 	private void setupAutonomousList(double delay) {
 		chooser.addObject("AutoTest1", new AutoTest1(delay));
-		chooser.addDefault("Auto Gear Routine 1", new AutoGearRoutine1());
-		chooser.addObject("Auto Gear Routine 2", new AutoGearRoutine2());
+		chooser.addDefault("Auto Gear Routine 2", new AutoGearRoutine2());
+		chooser.addObject("Auto Gear Routine 1", new AutoGearRoutine1());
 		chooser.addObject("Auto Gear Routine 3", new AutoGearRoutine3());
 		chooser.addObject("Auto Shoot Routine 1", new AutoShootRoutine1());
 	}

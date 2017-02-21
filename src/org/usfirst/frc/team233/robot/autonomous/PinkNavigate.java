@@ -40,7 +40,7 @@ public class PinkNavigate extends Command {
 		motorCmd = Range.clip(motorCmd, 0.8, -0.8);
 
 		// Determine and add the angle offset
-		double angleOffset = PinkPD.getMotorCmd(0.03, 0.002, angularError,
+		double angleOffset = PinkPD.getMotorCmd(0.05, 0.002, angularError,
 				angularVelocity);
 		SmartDashboard.putNumber("Angle Offset", angleOffset);
 		double leftMotorCmd = motorCmd - angleOffset;

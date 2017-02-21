@@ -11,7 +11,7 @@ import edu.wpi.first.wpilibj.command.WaitCommand;
 public class AutoGearRoutine2 extends CommandGroup {
 
 	public AutoGearRoutine2(){
-		addSequential(new PinkNavigate(-70,0,1));
+		addSequential(new PinkNavigate(-69,0,0.6));
 		//addSequential (new StopBase());
 		//addSequential();
 		
