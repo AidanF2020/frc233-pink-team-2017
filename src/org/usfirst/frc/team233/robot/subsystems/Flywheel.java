@@ -154,5 +154,9 @@ public class Flywheel extends Subsystem {
 	public ShootingState getFlywheelState() {
 		return state;
 	}
+	
+	public void resetFlywheelSpeed(){
+		flywheelSpeed = RobotMap.flywheelMotorSpeed;
+	}
 
 }
