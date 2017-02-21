@@ -11,9 +11,12 @@ import edu.wpi.first.wpilibj.command.WaitCommand;
 public class AutoGearRoutine2 extends CommandGroup {
 
 	public AutoGearRoutine2(){
+		// back up to spring tip
 		addSequential(new PinkNavigate(-69,0,0.6));
-		//addSequential (new StopBase());
-		//addSequential();
+		//ease onto spear
+		addSequential(new PinkNavigate(-4, 0, 0.3));
+		// go forward off of spear
+		addSequential(new PinkNavigate(4, 0, 0.3));
 		
 	}
 }
