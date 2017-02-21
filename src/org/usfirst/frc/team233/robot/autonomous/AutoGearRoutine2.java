@@ -16,9 +16,9 @@ public class AutoGearRoutine2 extends CommandGroup {
 		
 		
 		
-		addSequential(new PinkNavigate(-109,0, 1));
-		addSequential(new PinkNavigate(-109,-60, 1));
-		addSequential(new PinkNavigate(-141,-60, 1));
+		addSequential(new PinkNavigate(24,0, 1));
+		addSequential(new PinkNavigate(24,60, 1));
+		addSequential(new PinkNavigate(24,-60, 1));
 		
 		
 		//addSequential(new DriveStraight(-70));

@@ -83,8 +83,8 @@ public class OI {
 		
 		rightBumper.whenPressed(new ShiftGear(ShiftAction.TOGGLE));
 		
-		leftTrigger.whileHeld(new ClimbCommand(ClimberAction.CLIMB));
-		leftTrigger.whenReleased(new ClimbCommand(ClimberAction.STOP));
+		leftBumper.whileHeld(new ClimbCommand(ClimberAction.CLIMB));
+		leftBumper.whenReleased(new ClimbCommand(ClimberAction.STOP));
 		
 		x.whileHeld(new Shoot(ShooterAction.TEST_I_UP));
 		x.whenReleased(new Shoot(ShooterAction.TEST_I_DOWN));
