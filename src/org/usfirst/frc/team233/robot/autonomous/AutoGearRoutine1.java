@@ -14,6 +14,11 @@ public class AutoGearRoutine1 extends CommandGroup {
 		addSequential(new PinkNavigate(-72.5,0,1));
 		addSequential(new PinkNavigate(-72.5,60,1));
 		addSequential(new PinkNavigate(-137.5,60,1));
+		//go to the hopper
+		addSequential(new WaitCommand(2));
+		addSequential(new PinkNavigate(-117.5, 0, 0.7));
+		addSequential(new PinkNavigate(-117.5, 135, 0.7));
+		addSequential(new PinkNavigate(-67.5, 0, 0.7));
 		//addSequential (new StopBase());
 		//addSequential();
 		

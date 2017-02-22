@@ -44,7 +44,7 @@ public class PinkNavigate extends Command {
 
 		// Determine and add the angle offset
 		// 02/21/2017 TESTED ANGLE_KP=0.07 ON COMPETITION ROBOT WITH FULL BATTERY, WORKED PERFECTLY
-		double angleOffset = PinkPD.getMotorCmd(0.07 /*0.02*/, 0.0/*0.002*/, angularError,
+		double angleOffset = PinkPD.getMotorCmd(0.04 /*0.02*/, 0.0/*0.002*/, angularError,
 				angularVelocity);
 		SmartDashboard.putNumber("Angle Offset", angleOffset);
 		double leftMotorCmd = motorCmd - angleOffset;
