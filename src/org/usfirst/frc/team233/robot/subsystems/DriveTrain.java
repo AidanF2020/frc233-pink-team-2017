@@ -37,9 +37,7 @@ public class DriveTrain extends Subsystem {
 
 	
 	// Define other drive train components
-	private Compressor compressor = new Compressor(RobotMap.compressorPort);
 	public AHRS gyro = new AHRS(SPI.Port.kMXP);
-	private Solenoid shifterSolenoid = new Solenoid(RobotMap.shiftingSolenoidPort);
 
 	/*
 	 * Calculate the distance each pulse in the encoder equals to for
@@ -94,7 +92,6 @@ public class DriveTrain extends Subsystem {
 
 	/** Setup other components used by the drive train. */
 	public void setupComponents() {
-		compressor.setClosedLoopControl(true);
 		gyro.reset();
 	}
 
@@ -227,27 +224,6 @@ public class DriveTrain extends Subsystem {
 		double avgCounts = (leftEncoder.getRaw() + rightEncoder.getRaw()) / 2.0;
 		SmartDashboard.putNumber("Encoder Avg Counts", avgCounts);
 		return avgCounts;
-	}
-
-	/**
-	 * Shifts to the opposite of the current gear (toggles).
-	 * Ex: Low->Hi, Hi->Low
-	 * */
-	public void shiftGears() {
-		if (shifterSolenoid.get()) {
-			shifterSolenoid.set(false);
-		} else {
-			shifterSolenoid.set(true);
-		}
-	}
-	
-	/** 
-	 * Shift to hi or low gear. Will be used for autonomous.
-	 * @param gearShift 	if true, shift to hi gear,
-	 *  					else shift to low gear
-	 * */
-	public void shiftGears(boolean gearShift) {
-		shifterSolenoid.set(gearShift);
 	}
 
 	

@@ -41,7 +41,6 @@ public class Robot extends IterativeRobot {
 	public static RopeClimber ropeClimber;
 	public static Hopper hopper;
 	public static OI oi;
-	public static PowerDistributionPanel pdPanel;
 	//private UsbCamera gearCamera;
 	
 
@@ -61,8 +60,6 @@ public class Robot extends IterativeRobot {
 		ropeClimber = new RopeClimber();
 		hopper = new Hopper();
 		oi = new OI();
-		pdPanel = new PowerDistributionPanel(RobotMap.pdpDeviceID);
-		pdPanel.resetTotalEnergy();
 		// didn't work, value didn't get passed
 		SmartDashboard.putNumber("Autonomous delay", 0.0);
 		double delay = SmartDashboard.getNumber("Autonomous delay", 0.0);
@@ -173,11 +170,6 @@ public class Robot extends IterativeRobot {
 	}
 	
 	public void log() {
-//		SmartDashboard.putData("Power Distribution Panel", pdPanel);
-		SmartDashboard.putNumber("Flywheel motor", pdPanel.getCurrent(14));
-		SmartDashboard.putNumber("Agitator motor", pdPanel.getCurrent(4));
-		SmartDashboard.putNumber("Indexer motor", pdPanel.getCurrent(5));
-		SmartDashboard.putNumber("Collector motor", pdPanel.getCurrent(8));
 		SmartDashboard.putNumber("Left Encoder = ", drivetrain.getLeftDistance());
 		SmartDashboard.putNumber("Right Encoder = ", drivetrain.getRightDistance());
 		SmartDashboard.putNumber("Left Raw = ", drivetrain.leftEncoder.getRaw());

@@ -8,7 +8,7 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class PinkNavigate extends Command {
-	static final double POSITION_THRESHOLD = 0.5; // Distance (Inches)
+	static final double POSITION_THRESHOLD = 1.0; // Distance (Inches)
 	static final double ANGLE_THRESHOLD = 3.0; // Degrees
 
 	private double targetPos;
@@ -36,13 +36,13 @@ public class PinkNavigate extends Command {
 		SmartDashboard.putNumber("linearError", linearError);
 		double angularError = targetAngle - Robot.drivetrain.getGyroRotation();
 		SmartDashboard.putNumber("angularError", angularError);
-		double motorCmd = PinkPD.getMotorCmd(0.1, 0.01, linearError,
+		double motorCmd = PinkPD.getMotorCmd(0.2, 0.01, linearError,
 				linearVelocity);
 		SmartDashboard.putNumber("MotorCMD", motorCmd);
 		motorCmd = Range.clip(motorCmd, 0.8, -0.8);
 
 		// Determine and add the angle offset
-		double angleOffset = PinkPD.getMotorCmd(0.05/*0.02*/, 0.0/*0.002*/, angularError,
+		double angleOffset = PinkPD.getMotorCmd(0.028/*0.02*/, 0.0/*0.002*/, angularError,
 				angularVelocity);
 		SmartDashboard.putNumber("Angle Offset", angleOffset);
 		double leftMotorCmd = motorCmd - angleOffset;

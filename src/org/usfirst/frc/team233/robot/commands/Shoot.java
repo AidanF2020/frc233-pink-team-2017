@@ -36,13 +36,13 @@ public class Shoot extends Command {
 	@Override
 	protected void execute() {
 		//edited for if joystick unplugged, will return null
-		if (Robot.oi.getShooterJoystick() != null){
-			System.out.println("Change speed");
-			if(dPadValue != Robot.oi.getShooterJoystick().getPOV() && Robot.oi.getShooterJoystick().getPOV() == -1){
-				Robot.flywheel.adjustFlywheelSpeed( dPadValue /*Robot.oi.getShooterJoystick().getPOV()*/);
-			}
-			dPadValue = Robot.oi.getShooterJoystick().getPOV();
-		}	
+//		if (Robot.oi.getShooterJoystick() != null){
+//			System.out.println("Change speed");
+//			if(dPadValue != Robot.oi.getShooterJoystick().getPOV() && Robot.oi.getShooterJoystick().getPOV() == -1){
+//				Robot.flywheel.adjustFlywheelSpeed( dPadValue /*Robot.oi.getShooterJoystick().getPOV()*/);
+//			}
+//			dPadValue = Robot.oi.getShooterJoystick().getPOV();
+//		}	
 		
 		// Obtain what action to perform 
 		System.out.println("ACTION = " + action.toString());
@@ -134,12 +134,12 @@ public class Shoot extends Command {
 				break;
 			
 			case INDEXER_STOPPED:
-				if (Robot.oi.getShooterJoystick().getRawButton(RobotMap.rightTriggerButtonNumber)) {
-					Robot.flywheel.flywheelHalfSpeed();
-				}
-				else {
-					Robot.flywheel.stopFlywheel();
-				}
+//				if (Robot.oi.getShooterJoystick().getRawButton(RobotMap.rightTriggerButtonNumber)) {
+//					Robot.flywheel.flywheelHalfSpeed();
+//				}
+//				else {
+//					Robot.flywheel.stopFlywheel();
+//				}
 				Robot.flywheel.setFlywheelState(ShootingState.FLYWHEEL_HALF_SPEED);
 				break;
 	

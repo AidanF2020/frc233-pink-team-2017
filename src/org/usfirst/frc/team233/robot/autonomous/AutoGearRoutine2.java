@@ -13,12 +13,9 @@ public class AutoGearRoutine2 extends CommandGroup {
 	public AutoGearRoutine2(){
 		// back up to spring tip
 		//addSequential(new PinkNavigate(-70, 0, 0.7));
-		
-		
-		
 		addSequential(new PinkNavigate(24,0, 1));
-		addSequential(new PinkNavigate(24,60, 1));
-		addSequential(new PinkNavigate(24,-60, 1));
+		addSequential(new PinkNavigate(48,60, 1));
+		addSequential(new PinkNavigate(72,-60, 1));
 		
 		
 		//addSequential(new DriveStraight(-70));
