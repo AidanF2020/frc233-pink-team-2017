@@ -30,7 +30,7 @@ import org.usfirst.frc.team233.robot.subsystems.RopeClimber;
  * creating this project, you must also update the manifest file in the resource
  * directory.
  */
-public class Robot extends IterativeRobot {
+public class Robot extends IterativeRobot{
 	
 	
 	// Define subsystem variables
@@ -41,7 +41,7 @@ public class Robot extends IterativeRobot {
 	public static RopeClimber ropeClimber;
 	public static Hopper hopper;
 	public static OI oi;
-	//private UsbCamera gearCamera;
+	private UsbCamera gearCamera;
 	
 
 	Command autonomousCommand;
@@ -68,7 +68,9 @@ public class Robot extends IterativeRobot {
 		setupAutonomousList(delay);
 		SmartDashboard.putData("Auto Mode", chooser);
 		
-		//gearCamera = CameraServer.getInstance().startAutomaticCapture();
+		gearCamera = CameraServer.getInstance().startAutomaticCapture();
+		gearCamera.setResolution(480, 320);
+		gearCamera.setFPS(2);
 	}
 	
 	
