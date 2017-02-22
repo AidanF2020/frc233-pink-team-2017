@@ -12,7 +12,7 @@ public class AutoGearRoutine2 extends CommandGroup {
 
 	public AutoGearRoutine2(){
 		// back up to spring tip2
-		addSequential(new PinkNavigate(-66, 0, 0.7));		
+		addSequential(new PinkNavigate(-62, 0, 0.7));		
 //		addSequential(new PinkNavigate(24,0, 1));
 //		addSequential(new PinkNavigate(24,60, 1));
 //		addSequential(new PinkNavigate(24,-60, 1));
@@ -21,9 +21,9 @@ public class AutoGearRoutine2 extends CommandGroup {
 		addSequential(new PinkNavigate(-70, 0, 0.5));
 		// go forward off of spear and hopper
 		addSequential(new WaitCommand(2));
-		addSequential(new PinkNavigate(-56, 0, 0.7));
-		addSequential(new PinkNavigate(-56, 135, 0.7));
-		addSequential(new PinkNavigate(20, 0, 0.7));
+		addSequential(new PinkNavigate(-30, 0, 0.7));
+		addSequential(new PinkNavigate(-30, 135, 1));
+		addSequential(new PinkNavigate(70, 135, 0.7));
 		
 	}
 }

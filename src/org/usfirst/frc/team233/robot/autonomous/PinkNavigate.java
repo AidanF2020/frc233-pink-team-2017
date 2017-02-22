@@ -10,6 +10,8 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class PinkNavigate extends Command {
 	static final double POSITION_THRESHOLD = 0.5; // Distance (Inches)
 	static final double ANGLE_THRESHOLD = 3.0; // Degrees
+	static final double ANGLE_KP = 0.04;
+	static final double BASE_KP = 0.3;
 
 	private double targetPos;
 	private double targetAngle;
@@ -37,14 +39,14 @@ public class PinkNavigate extends Command {
 		double angularError = targetAngle - Robot.drivetrain.getGyroRotation();
 		SmartDashboard.putNumber("angularError", angularError);
 		// 02/21/2017 TESTED MOTOR_KP=0.3 ON COMPETITION ROBOT WITH FULL BATTERY, WORKED PERFECTLY
-		double motorCmd = PinkPD.getMotorCmd(0.3, 0.01, linearError,
+		double motorCmd = PinkPD.getMotorCmd(BASE_KP, 0.01, linearError,
 				linearVelocity);
 		SmartDashboard.putNumber("MotorCMD", motorCmd);
 		motorCmd = Range.clip(motorCmd, 0.8, -0.8);
 
 		// Determine and add the angle offset
 		// 02/21/2017 TESTED ANGLE_KP=0.07 ON COMPETITION ROBOT WITH FULL BATTERY, WORKED PERFECTLY
-		double angleOffset = PinkPD.getMotorCmd(0.04 /*0.02*/, 0.0/*0.002*/, angularError,
+		double angleOffset = PinkPD.getMotorCmd(ANGLE_KP /*0.02*/, 0.0/*0.002*/, angularError,
 				angularVelocity);
 		SmartDashboard.putNumber("Angle Offset", angleOffset);
 		double leftMotorCmd = motorCmd - angleOffset;
