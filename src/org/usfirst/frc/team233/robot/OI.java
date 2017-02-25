@@ -5,6 +5,8 @@ import org.usfirst.frc.team233.robot.commands.ClimbCommand;
 import org.usfirst.frc.team233.robot.commands.ClimbCommand.ClimberAction;
 import org.usfirst.frc.team233.robot.commands.CollectorCommand;
 import org.usfirst.frc.team233.robot.commands.CollectorCommand.CollectorAction;
+import org.usfirst.frc.team233.robot.commands.LightTest;
+import org.usfirst.frc.team233.robot.commands.LightTest.LightAction;
 import org.usfirst.frc.team233.robot.commands.ResetFlywheel;
 import org.usfirst.frc.team233.robot.commands.Shoot;
 import org.usfirst.frc.team233.robot.commands.Shoot.ShooterAction;
@@ -73,14 +75,25 @@ public class OI {
 //		
 //		shooterY.whenPressed(new ResetFlywheel());
 		
-		rightTrigger.whileHeld(new CollectorCommand(CollectorAction.COLLECT));
-		rightTrigger.whenReleased(new CollectorCommand(CollectorAction.STOP));
 		
-		leftTrigger.whileHeld(new CollectorCommand(CollectorAction.EJECT));
-		leftTrigger.whenReleased(new CollectorCommand(CollectorAction.STOP));
+		start.whenPressed(new LightTest(LightAction.OFF));
+		x.whenPressed(new LightTest(LightAction.POLICE));
+		a.whenPressed(new LightTest(LightAction.RAINBOW));
+		y.whenPressed(new LightTest(LightAction.SHOOTER));
+		b.whenPressed(new LightTest(LightAction.MISSING_DOT));
+		rightBumper.whenPressed(new LightTest(LightAction.HEARTBEAT));
+		leftBumper.whenPressed(new LightTest(LightAction.BREATHE));
+		rightTrigger.whenPressed(new LightTest(LightAction.STAYING_ALIVE));
+		//		rightTrigger.whileHeld(new CollectorCommand(CollectorAction.COLLECT));
+//		rightTrigger.whenReleased(new CollectorCommand(CollectorAction.STOP));
+//		
+//		leftTrigger.whileHeld(new CollectorCommand(CollectorAction.EJECT));
+//		leftTrigger.whenReleased(new CollectorCommand(CollectorAction.STOP));
+
 		
-		leftBumper.whileHeld(new ClimbCommand(ClimberAction.CLIMB));
-		leftBumper.whenReleased(new ClimbCommand(ClimberAction.STOP));
+		
+//		leftBumper.whileHeld(new ClimbCommand(ClimberAction.CLIMB));
+//		leftBumper.whenReleased(new ClimbCommand(ClimberAction.STOP));
 //		
 //		x.whileHeld(new Shoot(ShooterAction.TEST_I_UP));
 //		x.whenReleased(new Shoot(ShooterAction.TEST_I_DOWN));

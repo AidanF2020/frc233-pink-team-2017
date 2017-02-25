@@ -4,6 +4,7 @@ import edu.wpi.cscore.UsbCamera;
 import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.PowerDistributionPanel;
+import edu.wpi.first.wpilibj.Timer;
 //import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
@@ -21,7 +22,9 @@ import org.usfirst.frc.team233.robot.subsystems.DriveTrain;
 import org.usfirst.frc.team233.robot.subsystems.Flywheel;
 import org.usfirst.frc.team233.robot.subsystems.Hopper;
 import org.usfirst.frc.team233.robot.subsystems.Indexer;
+import org.usfirst.frc.team233.robot.subsystems.Lights;
 import org.usfirst.frc.team233.robot.subsystems.RopeClimber;
+import org.usfirst.frc.team233.robot.subsystems.Lights.LightingType;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -41,7 +44,9 @@ public class Robot extends IterativeRobot{
 	public static RopeClimber ropeClimber;
 	public static Hopper hopper;
 	public static OI oi;
-	private UsbCamera gearCamera;
+	//private UsbCamera gearCamera;
+	
+	public static Lights lights;
 	
 
 	Command autonomousCommand;
@@ -59,7 +64,9 @@ public class Robot extends IterativeRobot{
 		ballCollector = new BallCollector();
 		ropeClimber = new RopeClimber();
 		hopper = new Hopper();
+		lights = new Lights();
 		oi = new OI();
+		
 		// didn't work, value didn't get passed
 		SmartDashboard.putNumber("Autonomous delay", 0.0);
 		double delay = SmartDashboard.getNumber("Autonomous delay", 0.0);
@@ -68,9 +75,11 @@ public class Robot extends IterativeRobot{
 		setupAutonomousList(delay);
 		SmartDashboard.putData("Auto Mode", chooser);
 		
-		gearCamera = CameraServer.getInstance().startAutomaticCapture();
-		gearCamera.setResolution(480, 320);
-		gearCamera.setFPS(2);
+		//gearCamera = CameraServer.getInstance().startAutomaticCapture();
+		//gearCamera.setResolution(480, 320);
+		//gearCamera.setFPS(2);
+		lights.activateLights(LightingType.off);
+		lights.activateLights(LightingType.staying_alive);
 	}
 	
 	
@@ -95,11 +104,15 @@ public class Robot extends IterativeRobot{
 	public void disabledInit() {
 		// Reset any resources that are not needed
 		Robot.drivetrain.disableDriveTrain();
+		if (lights != null) {
+			//lights.activateLights(LightingType.off);
+		}
 	}
 
 	@Override
 	public void disabledPeriodic() {
 		Scheduler.getInstance().run();
+		
 	}
 
 	/**
@@ -176,8 +189,11 @@ public class Robot extends IterativeRobot{
 		SmartDashboard.putNumber("Right Encoder = ", drivetrain.getRightDistance());
 		SmartDashboard.putNumber("Left Raw = ", drivetrain.leftEncoder.getRaw());
 		SmartDashboard.putNumber("Right Raw = ", drivetrain.rightEncoder.getRaw());
-		SmartDashboard.putNumber("Flywheel Encoder Count", flywheel.getEncoderCounts());
-		SmartDashboard.putNumber("Flywheel Encoder Rate", flywheel.getFlywheelEncoderSpeed());
+		SmartDashboard.putNumber("Clock", Timer.getMatchTime());
+		SmartDashboard.putNumber("Speed", drivetrain.getDriveTrainRate());
+		SmartDashboard.putNumber("Distance", drivetrain.getDistanceTraveled());
+		//SmartDashboard.putNumber("Flywheel Encoder Count", flywheel.getEncoderCounts());
+		//SmartDashboard.putNumber("Flywheel Encoder Rate", flywheel.getFlywheelEncoderSpeed());
 		//SmartDashboard.putNumber("Flywheel Motor Speed", flywheel.getFlywheelMotorSpeed());
 		//SmartDashboard.putNumber("Count Encoder Left", drivetrain.getLeftEncoderCount());
 		//SmartDashboard.putNumber("Count Encoder Right", drivetrain.getRightEncoderCount());
