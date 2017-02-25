@@ -4,9 +4,7 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 import edu.wpi.first.wpilibj.command.WaitCommand;
 
 /**
- * Autonomous gear routine starting @ farthest position from boiler
- * @author Meriel
- *
+ * Autonomous gear routine starting @ nearest position to boiler
  */
 public class AutoGearRoutine3 extends CommandGroup {
 
