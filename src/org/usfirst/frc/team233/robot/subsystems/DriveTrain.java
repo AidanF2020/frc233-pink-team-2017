@@ -68,7 +68,7 @@ public class DriveTrain extends Subsystem {
 	public DriveTrain() {
 		super();
 		// System.out.println("Drivetrain Constructor");
-		drive.setSafetyEnabled(true);
+		//drive.setSafetyEnabled(true);
 		setupMotors();
 		setupEncoders();
 		resetEncoders();
@@ -260,6 +260,11 @@ public class DriveTrain extends Subsystem {
 		gyro.reset();
 	}
 
+	
+	public void setDriveTrainSafety(boolean value) {
+		drive.setSafetyEnabled(value);
+	}
+	
 	/**
 	 * This method should be called on any disable to reset and release any
 	 * resource that is not going to be used anymore.

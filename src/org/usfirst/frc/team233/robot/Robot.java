@@ -132,6 +132,7 @@ public class Robot extends IterativeRobot{
 		autonomousCommand = chooser.getSelected();
 		drivetrain.resetGyro();
 		drivetrain.resetEncoders();
+		drivetrain.setDriveTrainSafety(false);
 		
 		if(autonomousCommand instanceof AutoTest1){
 			//check for delay value
@@ -170,6 +171,7 @@ public class Robot extends IterativeRobot{
 		System.out.println("Teleop Init");
 		drivetrain.resetEncoders();
 		flywheel.resetEncoder();
+		drivetrain.setDriveTrainSafety(true);
 		//Scheduler.getInstance().enable();
 		//Scheduler.getInstance().removeAll();
 		//Scheduler.getInstance().add(tankDrive);
