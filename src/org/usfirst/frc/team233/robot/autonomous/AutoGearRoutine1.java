@@ -28,7 +28,17 @@ public class AutoGearRoutine1 extends CommandGroup {
 //			addSequential(new PinkNavigate(-67.5, 0, 0.7));
 			//addSequential (new StopBase());
 		} else {
-			
+			//back up directly to peg
+			addSequential(new PinkNavigate(-3, 0, 1));
+			addSequential(new PinkNavigate(-3, 30, 1));
+			addSequential(new PinkNavigate(-92, 30, 1));
+			//turn & edge onto peg
+			addSequential(new PinkNavigate(-92, 60, 1));
+			addSequential(new PinkNavigate(-100.5, 60, 1));
+			//leave peg and go to hopper
+			addSequential(new PinkNavigate(-75.5, 60, 1));
+			addSequential(new PinkNavigate(-5, 150, 0.7));
+
 		}
 	}
 }
