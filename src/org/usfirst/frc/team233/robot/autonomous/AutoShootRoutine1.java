@@ -7,6 +7,7 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 
 /**
  * Autonomous routine starting @ farthest position from boiler
+ * Red Alliance Side
  * @author Meriel
  *
  */

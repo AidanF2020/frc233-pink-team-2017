@@ -5,6 +5,7 @@ import edu.wpi.first.wpilibj.command.WaitCommand;
 
 /**
  * Autonomous gear routine starting @ middle position
+ * Red Alliance SideS
  */
 
 public class AutoGearRoutine2 extends CommandGroup {
