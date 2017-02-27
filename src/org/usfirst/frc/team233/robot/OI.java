@@ -1,24 +1,21 @@
 package org.usfirst.frc.team233.robot;
 
-import org.usfirst.frc.team233.robot.commands.BeginShooting;
-import org.usfirst.frc.team233.robot.commands.Ceasefire;
-import org.usfirst.frc.team233.robot.commands.CollectBalls;
-import org.usfirst.frc.team233.robot.commands.EjectBalls;
-import org.usfirst.frc.team233.robot.commands.AutonomousShoot;
-import org.usfirst.frc.team233.robot.commands.SpinDown;
-import org.usfirst.frc.team233.robot.commands.SpinUp;
-import org.usfirst.frc.team233.robot.commands.StopCollector;
+import org.usfirst.frc.team233.robot.autonomous.AutonomousShoot;
+import org.usfirst.frc.team233.robot.commands.ClimbCommand;
+import org.usfirst.frc.team233.robot.commands.ClimbCommand.ClimberAction;
+import org.usfirst.frc.team233.robot.commands.CollectorCommand;
+import org.usfirst.frc.team233.robot.commands.CollectorCommand.CollectorAction;
+import org.usfirst.frc.team233.robot.commands.ResetFlywheel;
+import org.usfirst.frc.team233.robot.commands.ShiftGear;
+import org.usfirst.frc.team233.robot.commands.ShiftGear.ShiftAction;
+import org.usfirst.frc.team233.robot.commands.Shoot;
+import org.usfirst.frc.team233.robot.commands.Shoot.ShooterAction;
+import org.usfirst.frc.team233.robot.subsystems.ShootingState;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 
-//import org.usfirst.frc.team233.robot.commands.Autonomous;
-//import org.usfirst.frc.team233.robot.commands.OpenClaw;
-//import org.usfirst.frc.team233.robot.commands.Pickup;
-//import org.usfirst.frc.team233.robot.commands.Place;
-//import org.usfirst.frc.team233.robot.commands.PrepareToPickup;
-//import org.usfirst.frc.team233.robot.commands.SetElevatorSetpoint;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -70,18 +67,33 @@ public class OI {
 		//==========================================
 		//		Map Joysticks to Commands
 		//==========================================
+		shooterRightTrigger.whileHeld(new Shoot(ShooterAction.START_FLYWHEEL));
+		shooterRightTrigger.whenReleased(new Shoot(ShooterAction.STOP_FLYWHEEL));
 		
-		shooterRightBumper.whileHeld(new SpinUp());
-		shooterRightBumper.whenReleased(new SpinDown());
+		shooterRightBumper.whileHeld(new Shoot(ShooterAction.SHOOT));
+		shooterRightBumper.whenReleased(new Shoot(ShooterAction.CEASEFIRE));
 		
-		shooterRightTrigger.whileHeld(new BeginShooting());
-		shooterRightTrigger.whenReleased(new Ceasefire());
+		shooterY.whenPressed(new ResetFlywheel());
 		
-		rightTrigger.whileHeld(new CollectBalls());
-		rightTrigger.whenReleased(new StopCollector());
+		rightTrigger.whileHeld(new CollectorCommand(CollectorAction.COLLECT));
+		rightTrigger.whenReleased(new CollectorCommand(CollectorAction.STOP));
 		
-		leftTrigger.whileHeld(new EjectBalls());
-		leftTrigger.whenReleased(new StopCollector());
+		leftTrigger.whileHeld(new CollectorCommand(CollectorAction.EJECT));
+		leftTrigger.whenReleased(new CollectorCommand(CollectorAction.STOP));
+		
+		rightBumper.whenPressed(new ShiftGear(ShiftAction.TOGGLE));
+		
+		shooterY.whileHeld(new ClimbCommand(ClimberAction.CLIMB));
+		shooterY.whenReleased(new ClimbCommand(ClimberAction.STOP));
+		
+		x.whileHeld(new Shoot(ShooterAction.TEST_I_UP));
+		x.whenReleased(new Shoot(ShooterAction.TEST_I_DOWN));
+		
+		y.whileHeld(new Shoot(ShooterAction.TEST_H_UP));
+		y.whenReleased(new Shoot(ShooterAction.TEST_H_DOWN));
+		
+		b.whileHeld(new Shoot(ShooterAction.TEST_F_UP));
+		b.whenReleased(new Shoot(ShooterAction.TEST_F_DOWN));
 	}
 	
 	public Joystick getBaseJoystick() {

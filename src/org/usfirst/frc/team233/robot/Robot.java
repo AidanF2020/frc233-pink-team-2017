@@ -1,6 +1,9 @@
 package org.usfirst.frc.team233.robot;
 
+import edu.wpi.cscore.UsbCamera;
+import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.IterativeRobot;
+import edu.wpi.first.wpilibj.PowerDistributionPanel;
 //import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
@@ -8,11 +11,17 @@ import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
+import org.usfirst.frc.team233.robot.autonomous.AutoGearRoutine1;
+import org.usfirst.frc.team233.robot.autonomous.AutoGearRoutine2;
+import org.usfirst.frc.team233.robot.autonomous.AutoGearRoutine3;
+import org.usfirst.frc.team233.robot.autonomous.AutoShootRoutine1;
+import org.usfirst.frc.team233.robot.autonomous.AutoTest1;
 import org.usfirst.frc.team233.robot.subsystems.BallCollector;
 import org.usfirst.frc.team233.robot.subsystems.DriveTrain;
+import org.usfirst.frc.team233.robot.subsystems.Flywheel;
 import org.usfirst.frc.team233.robot.subsystems.Hopper;
+import org.usfirst.frc.team233.robot.subsystems.Indexer;
 import org.usfirst.frc.team233.robot.subsystems.RopeClimber;
-import org.usfirst.frc.team233.robot.subsystems.Shooter;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -26,11 +35,15 @@ public class Robot extends IterativeRobot {
 	
 	// Define subsystem variables
 	public static DriveTrain drivetrain;
-	public static Shooter shooter;
+	public static Flywheel flywheel;
+	public static Indexer indexer;
 	public static BallCollector ballCollector;
 	public static RopeClimber ropeClimber;
 	public static Hopper hopper;
 	public static OI oi;
+	public static PowerDistributionPanel pdPanel;
+	//private UsbCamera gearCamera;
+	
 
 	Command autonomousCommand;
 	SendableChooser<Command> chooser = new SendableChooser<>();
@@ -42,15 +55,37 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void robotInit() {
 		drivetrain = new DriveTrain();
-		shooter = new Shooter();
+		flywheel = new Flywheel();
+		indexer = new Indexer();
 		ballCollector = new BallCollector();
+		ropeClimber = new RopeClimber();
+		hopper = new Hopper();
 		oi = new OI();
-		// chooser.addObject("My Auto", new MyAutoCommand());
-		System.out.println("RoboInit");
-		SmartDashboard.putData("Auto mode", chooser);
+		pdPanel = new PowerDistributionPanel(RobotMap.pdpDeviceID);
+		pdPanel.resetTotalEnergy();
+		// didn't work, value didn't get passed
+		SmartDashboard.putNumber("Autonomous delay", 0.0);
+		double delay = SmartDashboard.getNumber("Autonomous delay", 0.0);
+		SmartDashboard.putNumber("Autonomous delay", delay);
+		
+		setupAutonomousList(delay);
+		SmartDashboard.putData("Auto Mode", chooser);
+		
+		//gearCamera = CameraServer.getInstance().startAutomaticCapture();
 	}
 	
 	
+	/**
+	 * Add all the autonomous routines to the 
+	 * chooser list
+	 * */
+	private void setupAutonomousList(double delay) {
+		chooser.addObject("AutoTest1", new AutoTest1(delay));
+		chooser.addDefault("Auto Gear Routine 2", new AutoGearRoutine2());
+		chooser.addObject("Auto Gear Routine 1", new AutoGearRoutine1());
+		chooser.addObject("Auto Gear Routine 3", new AutoGearRoutine3());
+		chooser.addObject("Auto Shoot Routine 1", new AutoShootRoutine1());
+	}
 
 	/**
 	 * This function is called once each time the robot enters Disabled mode.
@@ -81,8 +116,14 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void autonomousInit() {
+		System.out.println("AutoInit");
 		autonomousCommand = chooser.getSelected();
-
+		drivetrain.resetGyro();
+		drivetrain.resetEncoders();
+		
+		if(autonomousCommand instanceof AutoTest1){
+			//check for delay value
+		}
 		/*
 		 * String autoSelected = SmartDashboard.getString("Auto Selector",
 		 * "Default"); switch(autoSelected) { case "My Auto": autonomousCommand
@@ -101,11 +142,12 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void autonomousPeriodic() {
 		Scheduler.getInstance().run();
-		
+		log();
 	}
 
 	@Override
 	public void teleopInit() {
+		drivetrain.getGyroRotation();
 		//ASUME 4inch wheels
 		// This makes sure that the autonomous stops running when
 		// teleop starts running. If you want the autonomous to
@@ -114,11 +156,11 @@ public class Robot extends IterativeRobot {
 		if (autonomousCommand != null)
 			autonomousCommand.cancel();
 		System.out.println("Teleop Init");
+		drivetrain.resetEncoders();
+		flywheel.resetEncoder();
 		//Scheduler.getInstance().enable();
 		//Scheduler.getInstance().removeAll();
 		//Scheduler.getInstance().add(tankDrive);
-		
-		
 	}
 
 	/**
@@ -127,18 +169,31 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
-		// TODO Test this change in code to verify if the motors still run
-		//System.out.println("Teleop Periodic");
+		log();
 	}
-
+	
+	public void log() {
+//		SmartDashboard.putData("Power Distribution Panel", pdPanel);
+		SmartDashboard.putNumber("Flywheel motor", pdPanel.getCurrent(14));
+		SmartDashboard.putNumber("Agitator motor", pdPanel.getCurrent(4));
+		SmartDashboard.putNumber("Indexer motor", pdPanel.getCurrent(5));
+		SmartDashboard.putNumber("Collector motor", pdPanel.getCurrent(8));
+		SmartDashboard.putNumber("Left Encoder = ", drivetrain.getLeftDistance());
+		SmartDashboard.putNumber("Right Encoder = ", drivetrain.getRightDistance());
+		SmartDashboard.putNumber("Left Raw = ", drivetrain.leftEncoder.getRaw());
+		SmartDashboard.putNumber("Right Raw = ", drivetrain.rightEncoder.getRaw());
+		SmartDashboard.putNumber("Flywheel Encoder Count", flywheel.getEncoderCounts());
+		SmartDashboard.putNumber("Flywheel Encoder Rate", flywheel.getFlywheelEncoderSpeed());
+		//SmartDashboard.putNumber("Flywheel Motor Speed", flywheel.getFlywheelMotorSpeed());
+		//SmartDashboard.putNumber("Count Encoder Left", drivetrain.getLeftEncoderCount());
+		//SmartDashboard.putNumber("Count Encoder Right", drivetrain.getRightEncoderCount());
+		SmartDashboard.putData("Gyro", drivetrain.getDriveTrainGyro());
+		SmartDashboard.putNumber("Gyro rate ", drivetrain.getGyroRate());
+		SmartDashboard.putNumber("Gyro angle ", drivetrain.getGyroRotation());
+	}
+	
 	@Override
 	public void robotPeriodic() {
-		// TODO Auto-generated method stub
-		/* NOTE
-		 * I removed the drive method in favor of the command
-		 * TankDrive, which is set as the default command now
-		 * in the DriveTrain subsystem class.
-		 * NEED TO TEST THIS!!!*/
 	}
 	
 	/**

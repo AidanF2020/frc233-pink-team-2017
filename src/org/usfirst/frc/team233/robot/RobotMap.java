@@ -12,17 +12,26 @@ public class RobotMap {
 	// 		DRIVE TRAIN VARIABLES
 	//============================================
 	// Motors
-	public static int leftFrontMotorPort = 0;
-	public static int leftBackMotorPort = 1;
-	public static int rightFrontMotorPort = 2;
-	public static int rightBackMotorPort = 3;
+	public static int leftFrontMotorPort = 2;
+	public static int leftBackMotorPort = 3;
+	public static int rightFrontMotorPort = 0;
+	public static int rightBackMotorPort = 1;
 	
 	// Encoders
 	public static int leftEncoderAPort = 0;
 	public static int leftEncoderBPort = 1;
-	public static int rightEncoderAPort = 3;
-	public static int rightEncoderBPort = 4;
+	public static int rightEncoderAPort = 2;
+	public static int rightEncoderBPort = 3;
 	
+	// Pneumatics
+	public static int compressorPort = 0;
+	public static int shiftingSolenoidPort = 0;
+	
+	// Gyro
+	public static int gyroPort = 0;
+	
+	// Power Distribution Panel
+	public static int pdpDeviceID = 1;
 	
 	//============================================
 	// 		SHOOTER VARIABLES
@@ -32,7 +41,7 @@ public class RobotMap {
 	public static int indexerMotorPort = 5;
 	
 	// Motor Speeds
-	public static double flywheelMotorSpeed = 1.0;
+	public static double flywheelMotorSpeed = 0.65;
 	public static double indexerMotorSpeed = 0.5;
 	
 	// Encoder
@@ -47,7 +56,7 @@ public class RobotMap {
 	public static int collectorMotorPort = 6;
 	
 	// Motor Speed
-	public static double collectorMotorSpeed = 0.5;
+	public static double collectorMotorSpeed = 0.75;
 	
 
 	//============================================
@@ -57,8 +66,7 @@ public class RobotMap {
 	public static int ropeClimberMotorPort = 7;
 	
 	// Motor Speeds
-	public static double ropeClimberSpeed = 0.75;
-	public static double ropeHoldSpeed = 0.25;
+	public static double ropeClimberSpeed = 1.0;
 	
 	
 	//============================================
@@ -66,11 +74,9 @@ public class RobotMap {
 	//============================================
 	// Motors
 	public static int agitatorMotorPort = 8;
-	public static int blowerMotorPort = 9;
 	
 	// Motor Speeds
-	public static double blowerMotorSpeed = 1;
-	public static double agitatorMotorSpeed = 1;
+	public static double agitatorMotorSpeed = 0.75;
 	
 	
 	//============================================
@@ -78,6 +84,20 @@ public class RobotMap {
 	//============================================
 	public static int baseJoystickPort = 0;
 	public static int shooterJoystickPort = 1;
+	
+	// Define all raw button numbers
+	public static int xButtonNumber = 1;
+	public static int aButtonNumber = 2;
+	public static int bButtonNumber = 3;
+	public static int yButtonNumber = 4;
+	public static int leftBumperButtonNumber = 5;
+	public static int rightBumperButtonNumber = 6;
+	public static int leftTriggerButtonNumber = 7;
+	public static int rightTriggerButtonNumber = 8;
+	public static int selectButtonNumber = 9;
+	public static int startButtonNumber = 10;
+	public static int leftJoystickButtonNumber = 11;
+	public static int rightJoystickButtonNumber = 12;
 	
 	
 	

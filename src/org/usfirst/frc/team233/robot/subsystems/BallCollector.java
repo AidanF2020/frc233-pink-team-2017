@@ -11,7 +11,7 @@ public class BallCollector extends Subsystem{
 	
 	// Collector Motor Definition
 	private SpeedController collectorMotor = new Talon(RobotMap.collectorMotorPort);
-	private final boolean isInverted = false;
+	private final boolean isInverted = true;
 	
 	public BallCollector() {	
 		// TODO Auto-generated constructor stub
