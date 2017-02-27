@@ -10,11 +10,12 @@ import edu.wpi.first.wpilibj.command.WaitCommand;
 
 public class AutoGearRoutine1 extends CommandGroup {
 	
+	//make isBlueAlliance constructor param after finished testing
 	public boolean isBlueAlliance = true;
 	public boolean shortcut = false;
 	
 	public AutoGearRoutine1(){
-		if(isBlueAlliance){
+		if(!isBlueAlliance){
 			if(!shortcut){
 				//back up until you're on peg's angle
 				addSequential(new PinkNavigate(-95, 0, 1));

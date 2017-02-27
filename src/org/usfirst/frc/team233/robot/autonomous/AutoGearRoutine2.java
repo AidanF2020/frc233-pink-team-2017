@@ -10,10 +10,11 @@ import edu.wpi.first.wpilibj.command.WaitCommand;
 
 public class AutoGearRoutine2 extends CommandGroup {
 
+	//make isBlueAlliance constructor param after finished testing
 	public boolean isBlueAlliance = true;
 
 	public AutoGearRoutine2(){
-		if(isBlueAlliance){
+		if(!isBlueAlliance){
 			// back up to spring tip2
 			addSequential(new PinkNavigate(-65, 0, 0.7));		
 //			addSequential(new PinkNavigate(-62, 0, 0.7));		

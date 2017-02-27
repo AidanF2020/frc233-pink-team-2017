@@ -9,10 +9,10 @@ import edu.wpi.first.wpilibj.command.WaitCommand;
  */
 public class AutoGearRoutine3 extends CommandGroup {
 
+	//make isBlueAlliance constructor param after finished testing
 	public boolean isBlueAlliance = true;
 
 	public AutoGearRoutine3(){
-<<<<<<< Updated upstream
 		addSequential(new PinkNavigate(-84,0,1));
 		addSequential(new PinkNavigate(-84,-60,1));
         addSequential(new PinkNavigate(-126,-60,0.7));
@@ -24,8 +24,7 @@ public class AutoGearRoutine3 extends CommandGroup {
 		//addSequential (new StopBase());
 		//addSequential();
 		
-=======
-		if(isBlueAlliance){
+		if(!isBlueAlliance){
 			addSequential(new PinkNavigate(-109,0,1));
 			addSequential(new PinkNavigate(-109,-60,1));
 	        addSequential(new PinkNavigate(-164,-60,1));
@@ -38,9 +37,6 @@ public class AutoGearRoutine3 extends CommandGroup {
 			//addSequential();
 		} else {
 			 //red alliance stuff
-
 		}
-
->>>>>>> Stashed changes
 	}
 }
