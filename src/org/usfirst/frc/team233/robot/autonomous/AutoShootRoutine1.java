@@ -37,7 +37,7 @@ public class AutoShootRoutine1 extends CommandGroup{
 		addSequential(new PinkNavigate(98, -90, 1));
 		addSequential(new PinkNavigate(98, -180, 0.7));
 		addSequential(new PinkNavigate(156, -180, 1));
-		addParallel(new PinkNavigate(156, -180, 1));
+		addParallel(new PinkNavigate(156, -180, 1, true));
 		addSequential(new Shoot(ShooterAction.SHOOT));
 	}
 }

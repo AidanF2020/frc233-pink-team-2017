@@ -12,7 +12,7 @@ public class PinkNavigate extends Command {
 	static final double ANGLE_THRESHOLD = 3.0; // Degrees
 	final double BASE_KP = 0.2;
 	final double ANGLE_KP = 0.028/*0.02*/;
-	boolean looping = false;
+	boolean looping;
 
 	private double targetPos;
 	private double targetAngle;
@@ -20,11 +20,7 @@ public class PinkNavigate extends Command {
 
 	/** Constructor - Define the distance and angle for the robot to */
 	public PinkNavigate(double targetPos, double targetAngle, double maxPower) {
-		this.targetPos = targetPos;
-		this.targetAngle = targetAngle;
-		this.maxPower = maxPower;
-		requires(Robot.drivetrain);
-		System.out.println("PinkNav initialized");
+		this(targetPos, targetAngle, maxPower, false);
 	}
 
 	/** Constructor - Define the distance and angle for the robot to 
@@ -72,7 +68,7 @@ public class PinkNavigate extends Command {
 		// rightMotorCmd *= maxPower;
 
 		Robot.drivetrain.drive(leftMotorCmd, rightMotorCmd);
-		if (!looping || (Math.abs(linearError) < POSITION_THRESHOLD) && 
+		if ((Math.abs(linearError) < POSITION_THRESHOLD) && 
 			(Math.abs(angularError) < ANGLE_THRESHOLD)) {
 			return true;
 		} else {
@@ -91,8 +87,13 @@ public class PinkNavigate extends Command {
 	}
 	
 	@Override
+	protected void execute() {
+		// TODO Auto-generated method stub
+	}
+	
+	@Override
 	protected boolean isFinished() {
-		return driveToPos();
+		return driveToPos() && !looping;
 	}
 
 	@Override

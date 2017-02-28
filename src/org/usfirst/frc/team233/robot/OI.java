@@ -1,6 +1,5 @@
 package org.usfirst.frc.team233.robot;
 
-import org.usfirst.frc.team233.robot.autonomous.AutonomousShoot;
 import org.usfirst.frc.team233.robot.commands.ClimbCommand;
 import org.usfirst.frc.team233.robot.commands.ClimbCommand.ClimberAction;
 import org.usfirst.frc.team233.robot.commands.CollectorCommand;
