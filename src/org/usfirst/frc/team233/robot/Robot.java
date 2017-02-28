@@ -44,13 +44,14 @@ public class Robot extends IterativeRobot{
 	public static RopeClimber ropeClimber;
 	public static Hopper hopper;
 	public static OI oi;
-	//private UsbCamera gearCamera;
+	private UsbCamera gearCamera;
 	
 	public static Lights lights;
 	
 
 	Command autonomousCommand;
 	SendableChooser<Command> chooser = new SendableChooser<>();
+	SendableChooser<Integer> delayChooser = new SendableChooser<>();
 
 	/**
 	 * This function is run when the robot is first started up and should be
@@ -68,16 +69,21 @@ public class Robot extends IterativeRobot{
 		oi = new OI();
 		
 		// didn't work, value didn't get passed
-		SmartDashboard.putNumber("Autonomous delay", 0.0);
-		double delay = SmartDashboard.getNumber("Autonomous delay", 0.0);
-		SmartDashboard.putNumber("Autonomous delay", delay);
+		//SmartDashboard.putNumber("Autonomous delay", 0.0);
+		//double delay = SmartDashboard.getNumber("Autonomous delay", 0.0);
+		//SmartDashboard.putNumber("Autonomous delay", delay);
 		
-		setupAutonomousList(delay);
+		setupDelayList();
+		SmartDashboard.putData("Auto delay", delayChooser);
+		
+		setupAutonomousList();
 		SmartDashboard.putData("Auto Mode", chooser);
 		
-		//gearCamera = CameraServer.getInstance().startAutomaticCapture();
-		//gearCamera.setResolution(480, 320);
-		//gearCamera.setFPS(2);
+		gearCamera = CameraServer.getInstance().startAutomaticCapture();
+		gearCamera.setResolution(480, 320);
+		gearCamera.setFPS(30);
+		System.out.println(gearCamera.getPath());
+		
 		lights.activateLights(LightingType.off);
 		lights.activateLights(LightingType.staying_alive);
 	}
@@ -87,18 +93,26 @@ public class Robot extends IterativeRobot{
 	 * Add all the autonomous routines to the 
 	 * chooser list
 	 * */
-	private void setupAutonomousList(double delay) {
+	private void setupAutonomousList() {
 		
 		chooser.addObject("RED Gear Routine 1", new AutoGearRoutine1(false));
-		chooser.addDefault("RED Gear Routine 2", new AutoGearRoutine2(false));
+		chooser.addObject("RED Gear Routine 2", new AutoGearRoutine2(false));
 		chooser.addObject("RED Gear Routine 3", new AutoGearRoutine3(false));
 		
 		chooser.addObject("BLUE Gear Routine 1", new AutoGearRoutine1(true));
 		chooser.addObject("BLUE Gear Routine 2", new AutoGearRoutine2(true));
 		chooser.addObject("BLUE Gear Routine 3", new AutoGearRoutine3(true));
-		chooser.addObject("Auto Shoot Routine 1", new AutoShootRoutine1());
+		
+		chooser.addDefault("Auto Shoot Routine 1", new AutoShootRoutine1());
 	}
 
+	private void setupDelayList(){
+		delayChooser.addDefault("0", 0);
+		for (int i = 1; i < 6; i++){
+			delayChooser.addObject(new Integer(i).toString(), i);
+		}
+	}
+	
 	/**
 	 * This function is called once each time the robot enters Disabled mode.
 	 * You can use it to reset any subsystem information you want to clear when
@@ -109,7 +123,7 @@ public class Robot extends IterativeRobot{
 		// Reset any resources that are not needed
 		Robot.drivetrain.disableDriveTrain();
 		if (lights != null) {
-			//lights.activateLights(LightingType.off);
+			lights.activateLights(LightingType.off);
 		}
 	}
 
