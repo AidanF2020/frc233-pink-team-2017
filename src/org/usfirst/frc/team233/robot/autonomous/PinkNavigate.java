@@ -12,7 +12,7 @@ public class PinkNavigate extends Command {
 	static final double ANGLE_THRESHOLD = 3.0; // Degrees
 	final double BASE_KP = 0.2;
 	final double ANGLE_KP = 0.028/*0.02*/;
-	
+	boolean looping = false;
 
 	private double targetPos;
 	private double targetAngle;
@@ -27,6 +27,17 @@ public class PinkNavigate extends Command {
 		System.out.println("PinkNav initialized");
 	}
 
+	/** Constructor - Define the distance and angle for the robot to 
+	 * Use for auto*/
+	public PinkNavigate(double targetPos, double targetAngle, double maxPower, boolean looping) {
+		this.targetPos = targetPos;
+		this.targetAngle = targetAngle;
+		this.maxPower = maxPower;
+		this.looping = looping;
+		requires(Robot.drivetrain);
+		System.out.println("PinkNav initialized");
+	}
+	
 	// Tank drive two wheels to target positions in inches.
 	// Returns true when both arrive at the target.
 	public boolean driveToPos() {
@@ -61,7 +72,7 @@ public class PinkNavigate extends Command {
 		// rightMotorCmd *= maxPower;
 
 		Robot.drivetrain.drive(leftMotorCmd, rightMotorCmd);
-		if ((Math.abs(linearError) < POSITION_THRESHOLD) && 
+		if (!looping || (Math.abs(linearError) < POSITION_THRESHOLD) && 
 			(Math.abs(angularError) < ANGLE_THRESHOLD)) {
 			return true;
 		} else {
