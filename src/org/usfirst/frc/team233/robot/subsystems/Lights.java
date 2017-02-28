@@ -1,6 +1,7 @@
 package org.usfirst.frc.team233.robot.subsystems;
 
 import java.util.concurrent.Semaphore;
+import java.util.concurrent.ThreadLocalRandom;
 
 import edu.wpi.first.wpilibj.SerialPort;
 import edu.wpi.first.wpilibj.Timer;
@@ -30,7 +31,9 @@ public class Lights extends Subsystem {
 		breathe,
 		heartbeat,
 		staying_alive,
-		shooter;
+		shooter,
+		set_pink_color,
+		set_random_color;
 	};
 
 	@Override
@@ -53,7 +56,7 @@ public class Lights extends Subsystem {
 				break;
 				
 			case missing_dot:
-				sendLightCommand("missing_dot_chase,255,0,0,0, ,0,10,0!");
+				sendLightCommand("missing_dot_chase,255,0,0,0,0,0,10,0!");
 				break;
 				
 			case heartbeat:
@@ -67,6 +70,19 @@ public class Lights extends Subsystem {
 			case staying_alive:
 				sendLightCommand("stayingAlive,255,0,0,255,21,80,100,2!");
 				break;
+		
+			case set_pink_color:
+				sendLightCommand("setColor,255,21,80,0,0,0,0,0!");
+				break;
+
+			case set_random_color:
+				int r = ThreadLocalRandom.current().nextInt(0, 255);
+				int g = ThreadLocalRandom.current().nextInt(0, 255);
+				int b = ThreadLocalRandom.current().nextInt(0, 255);
+				sendLightCommand("setColor,r,g,b,0,0,0,0,0!");
+				break;
+
+			// The lights command for the off case is caught here in default
 			default:
 				sendLightCommand("off,0,0,0,0,0,0,0,0!");
 				break;

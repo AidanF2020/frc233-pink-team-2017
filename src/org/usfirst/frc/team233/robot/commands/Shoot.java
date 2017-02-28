@@ -3,6 +3,8 @@ package org.usfirst.frc.team233.robot.commands;
 import org.usfirst.frc.team233.robot.Robot;
 import org.usfirst.frc.team233.robot.RobotMap;
 import org.usfirst.frc.team233.robot.subsystems.ShootingState;
+import org.usfirst.frc.team233.robot.subsystems.Lights;
+import org.usfirst.frc.team233.robot.subsystems.Lights.LightingType;
 
 import edu.wpi.first.wpilibj.command.Command;
 
@@ -56,6 +58,7 @@ public class Shoot extends Command {
 					System.out.println("Flywheel half speed");
 					Robot.flywheel.flywheelHalfSpeed();
 					Robot.flywheel.setFlywheelState(ShootingState.FLYWHEEL_HALF_SPEED);
+					Robot.lights.activateLights(LightingType.missing_dot);				
 				}
 				//action = ShooterAction.SKIP;
 				break;
@@ -81,6 +84,7 @@ public class Shoot extends Command {
 				Robot.indexer.stopIndexer();
 				Robot.hopper.stopAgitate();
 				Robot.flywheel.setFlywheelState(ShootingState.INDEXER_STOPPED);
+				Robot.lights.activateLights(LightingType.set_pink_color);
 				break;
 				
 			case TEST_F_DOWN:
@@ -131,6 +135,7 @@ public class Shoot extends Command {
 			case FLYWHEEL_UP_TO_SPEED:
 				Robot.hopper.agitate();
 				Robot.indexer.releaseBalls();
+				Robot.lights.activateLights(LightingType.shooter);
 				break;
 			
 			case INDEXER_STOPPED:

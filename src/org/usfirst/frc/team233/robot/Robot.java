@@ -162,9 +162,12 @@ public class Robot extends IterativeRobot{
 		 * autonomousCommand = new ExampleCommand(); break; }
 		 */
 
+		lights.activateLights(LightingType.set_random_color);
+
 		// schedule the autonomous command (example)
-		if (autonomousCommand != null)
+		if (autonomousCommand != null){
 			autonomousCommand.start();
+		}
 	}
 
 	/**
@@ -190,6 +193,7 @@ public class Robot extends IterativeRobot{
 		drivetrain.resetEncoders();
 		flywheel.resetEncoder();
 		drivetrain.setDriveTrainSafety(true);
+		lights.activateLights(LightingType.set_random_color);
 		//Scheduler.getInstance().enable();
 		//Scheduler.getInstance().removeAll();
 		//Scheduler.getInstance().add(tankDrive);

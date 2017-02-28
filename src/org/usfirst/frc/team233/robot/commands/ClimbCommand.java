@@ -26,15 +26,18 @@ public class ClimbCommand extends Command {
 		super.execute();
 		switch (action) {
 			case CLIMB:
+				Robot.lights.activateLights(LightingType.off);
 				Robot.ropeClimber.startClimbingRope();
 				break;
 			
 			case REVERSE:
+				Robot.lights.activateLights(LightingType.off);
 				Robot.ropeClimber.reverseClimber();
 				break;
 	
 			default:
 				Robot.ropeClimber.stopClimbingRope();
+				Robot.lights.activateLights(LightingType.rainbow);
 			break;
 		}
 	}
