@@ -7,6 +7,8 @@ import org.usfirst.frc.team233.robot.commands.CollectorCommand.CollectorAction;
 import org.usfirst.frc.team233.robot.commands.LightTest;
 import org.usfirst.frc.team233.robot.commands.LightTest.LightAction;
 import org.usfirst.frc.team233.robot.commands.ResetFlywheel;
+import org.usfirst.frc.team233.robot.commands.ShiftGear;
+import org.usfirst.frc.team233.robot.commands.ShiftGear.ShiftAction;
 import org.usfirst.frc.team233.robot.commands.Shoot;
 import org.usfirst.frc.team233.robot.commands.Shoot.ShooterAction;
 import org.usfirst.frc.team233.robot.subsystems.ShootingState;
@@ -22,7 +24,7 @@ import edu.wpi.first.wpilibj.buttons.JoystickButton;
  */
 public class OI {
 	private Joystick base = new Joystick(RobotMap.baseJoystickPort);
-//	private Joystick shooter = new Joystick(RobotMap.shooterJoystickPort);
+	private Joystick shooter = new Joystick(RobotMap.shooterJoystickPort);
 	
 	public OI() {
 		// TODO Auto-generated constructor stub
@@ -47,52 +49,55 @@ public class OI {
 		int baseDpad = base.getPOV();
 		
 		//Shooter
-//		JoystickButton shooterX = new JoystickButton(shooter, 1);
-//		JoystickButton shooterA = new JoystickButton(shooter, 2);
-//		JoystickButton shooterB = new JoystickButton(shooter, 3);
-//		JoystickButton shooterY = new JoystickButton(shooter, 4);
-//		JoystickButton shooterLeftBumper = new JoystickButton(shooter, 5);
-//		JoystickButton shooterRightBumper = new JoystickButton(shooter, 6);
-//		JoystickButton shooterLeftTrigger = new JoystickButton(shooter, 7);
-//		JoystickButton shooterRightTrigger = new JoystickButton(shooter, 8);
-//		JoystickButton shooterSelect = new JoystickButton(shooter, 9);
-//		JoystickButton shooterStart = new JoystickButton(shooter, 10);
-//		JoystickButton shooterleftJoystickPress = new JoystickButton(shooter, 11);
-//		JoystickButton shooterrightJoystickPress = new JoystickButton(shooter, 12);
-//		int shooterDpad = shooter.getPOV();
+		JoystickButton shooterX = new JoystickButton(shooter, 1);
+		JoystickButton shooterA = new JoystickButton(shooter, 2);
+		JoystickButton shooterB = new JoystickButton(shooter, 3);
+		JoystickButton shooterY = new JoystickButton(shooter, 4);
+		JoystickButton shooterLeftBumper = new JoystickButton(shooter, 5);
+		JoystickButton shooterRightBumper = new JoystickButton(shooter, 6);
+		JoystickButton shooterLeftTrigger = new JoystickButton(shooter, 7);
+		JoystickButton shooterRightTrigger = new JoystickButton(shooter, 8);
+		JoystickButton shooterSelect = new JoystickButton(shooter, 9);
+		JoystickButton shooterStart = new JoystickButton(shooter, 10);
+		JoystickButton shooterleftJoystickPress = new JoystickButton(shooter, 11);
+		JoystickButton shooterrightJoystickPress = new JoystickButton(shooter, 12);
+		int shooterDpad = shooter.getPOV();
 		
 		
 		
 		//==========================================
 		//		Map Joysticks to Commands
 		//==========================================
-//		shooterRightTrigger.whileHeld(new Shoot(ShooterAction.START_FLYWHEEL));
-//		shooterRightTrigger.whenReleased(new Shoot(ShooterAction.STOP_FLYWHEEL));
+		shooterRightTrigger.whileHeld(new Shoot(ShooterAction.START_FLYWHEEL));
+		shooterRightTrigger.whenReleased(new Shoot(ShooterAction.STOP_FLYWHEEL));
+		
+		shooterRightBumper.whileHeld(new Shoot(ShooterAction.SHOOT));
+		shooterRightBumper.whenReleased(new Shoot(ShooterAction.CEASEFIRE));
+		
+		shooterY.whenPressed(new ResetFlywheel());
+		
+		
+//		start.whenPressed(new LightTest(LightAction.OFF));
+//		x.whenPressed(new LightTest(LightAction.POLICE));
+//		a.whenPressed(new LightTest(LightAction.RAINBOW));
+//		y.whenPressed(new LightTest(LightAction.SHOOTER));
+//		b.whenPressed(new LightTest(LightAction.MISSING_DOT));
+//		rightBumper.whenPressed(new LightTest(LightAction.HEARTBEAT));
+//		leftBumper.whenPressed(new LightTest(LightAction.BREATHE));
+		
+		
+//		rightTrigger.whenPressed(new LightTest(LightAction.STAYING_ALIVE));
+		rightTrigger.whileHeld(new CollectorCommand(CollectorAction.COLLECT));
+		rightTrigger.whenReleased(new CollectorCommand(CollectorAction.STOP));
+		
+		leftTrigger.whileHeld(new CollectorCommand(CollectorAction.EJECT));
+		leftTrigger.whenReleased(new CollectorCommand(CollectorAction.STOP));
+//
 //		
-//		shooterRightBumper.whileHeld(new Shoot(ShooterAction.SHOOT));
-//		shooterRightBumper.whenReleased(new Shoot(ShooterAction.CEASEFIRE));
+//		rightBumper.whenPressed(new ShiftGear(ShiftAction.TOGGLE));
 //		
-//		shooterY.whenPressed(new ResetFlywheel());
-		
-		
-		start.whenPressed(new LightTest(LightAction.OFF));
-		x.whenPressed(new LightTest(LightAction.POLICE));
-		a.whenPressed(new LightTest(LightAction.RAINBOW));
-		y.whenPressed(new LightTest(LightAction.SHOOTER));
-		b.whenPressed(new LightTest(LightAction.MISSING_DOT));
-		rightBumper.whenPressed(new LightTest(LightAction.HEARTBEAT));
-		leftBumper.whenPressed(new LightTest(LightAction.BREATHE));
-		rightTrigger.whenPressed(new LightTest(LightAction.STAYING_ALIVE));
-		//		rightTrigger.whileHeld(new CollectorCommand(CollectorAction.COLLECT));
-//		rightTrigger.whenReleased(new CollectorCommand(CollectorAction.STOP));
-//		
-//		leftTrigger.whileHeld(new CollectorCommand(CollectorAction.EJECT));
-//		leftTrigger.whenReleased(new CollectorCommand(CollectorAction.STOP));
-
-		
-		
-//		leftBumper.whileHeld(new ClimbCommand(ClimberAction.CLIMB));
-//		leftBumper.whenReleased(new ClimbCommand(ClimberAction.STOP));
+//		shooterY.whileHeld(new ClimbCommand(ClimberAction.CLIMB));
+//		shooterY.whenReleased(new ClimbCommand(ClimberAction.STOP));
 //		
 //		x.whileHeld(new Shoot(ShooterAction.TEST_I_UP));
 //		x.whenReleased(new Shoot(ShooterAction.TEST_I_DOWN));
@@ -107,7 +112,8 @@ public class OI {
 	public Joystick getBaseJoystick() {
 		return base;
 	}
-//	public Joystick getShooterJoystick() {
-//		return shooter;
-//	}
+	
+	public Joystick getShooterJoystick() {
+		return shooter;
+	}
 }

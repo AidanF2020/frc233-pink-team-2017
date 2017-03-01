@@ -3,6 +3,7 @@ package org.usfirst.frc.team233.robot.subsystems;
 import org.usfirst.frc.team233.robot.Robot;
 import org.usfirst.frc.team233.robot.RobotMap;
 import org.usfirst.frc.team233.robot.commands.TankDrive;
+import org.usfirst.frc.team233.robot.subsystems.Lights.LightingType;
 
 import com.kauailabs.navx.frc.AHRS;
 
@@ -37,6 +38,8 @@ public class DriveTrain extends Subsystem {
 
 	
 	// Define other drive train components
+	private Compressor compressor = new Compressor(RobotMap.compressorPort);
+	private Solenoid shifterSolenoid = new Solenoid(RobotMap.shiftingSolenoidPort);
 	public AHRS gyro = new AHRS(SPI.Port.kMXP);
 
 	/*
@@ -92,6 +95,7 @@ public class DriveTrain extends Subsystem {
 
 	/** Setup other components used by the drive train. */
 	public void setupComponents() {
+		compressor.setClosedLoopControl(true);
 		gyro.reset();
 	}
 
@@ -275,5 +279,28 @@ public class DriveTrain extends Subsystem {
 		frontRightMotor.disable();
 		rearLeftMotor.disable();
 		rearRightMotor.disable();
+	}
+	
+	/**
+	 * Shifts to the opposite of the current gear (toggles).
+	 * Ex: Low->Hi, Hi->Low
+	 * */
+	public void shiftGears() {
+		if (shifterSolenoid.get()) {
+			shifterSolenoid.set(false);
+			Robot.lights.activateLights(LightingType.set_pink_color);
+		} else {
+			shifterSolenoid.set(true);
+			Robot.lights.activateLights(LightingType.police);
+		}
+	}
+	
+	/** 
+	 * Shift to hi or low gear. Will be used for autonomous.
+	 * @param gearShift 	if true, shift to hi gear,
+	 *  					else shift to low gear
+	 * */
+	public void shiftGears(boolean gearShift) {
+		shifterSolenoid.set(gearShift);
 	}
 }

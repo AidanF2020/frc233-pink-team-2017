@@ -19,10 +19,8 @@ public class AutoGearRoutine2 extends CommandGroup {
 			
 			// back up to spring tip2
 			addSequential(new PinkNavigate(-65, 0, 0.7));		
-//			addSequential(new PinkNavigate(-62, 0, 0.7));		
 			//ease onto spear
 			addSequential(new PinkNavigate(-74, 0, 0.5));
-//			addSequential(new PinkNavigate(-71, 0, 0.5));
 			// go forward off of spear and hopper
 			addSequential(new WaitCommand(2));
 			addSequential(new PinkNavigate(-20, 0, 0.7)); // Don't go all the way to the end to turn

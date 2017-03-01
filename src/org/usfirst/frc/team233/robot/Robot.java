@@ -16,6 +16,7 @@ import org.usfirst.frc.team233.robot.autonomous.AutoGearRoutine1;
 import org.usfirst.frc.team233.robot.autonomous.AutoGearRoutine2;
 import org.usfirst.frc.team233.robot.autonomous.AutoGearRoutine3;
 import org.usfirst.frc.team233.robot.autonomous.AutoShootRoutine1;
+import org.usfirst.frc.team233.robot.autonomous.AutoSitAndShoot;
 import org.usfirst.frc.team233.robot.autonomous.AutoTest1;
 import org.usfirst.frc.team233.robot.subsystems.BallCollector;
 import org.usfirst.frc.team233.robot.subsystems.DriveTrain;
@@ -73,19 +74,26 @@ public class Robot extends IterativeRobot{
 		//double delay = SmartDashboard.getNumber("Autonomous delay", 0.0);
 		//SmartDashboard.putNumber("Autonomous delay", delay);
 		
-		setupDelayList();
-		SmartDashboard.putData("Auto delay", delayChooser);
+//		setupDelayList();
+//		SmartDashboard.putData("Auto delay", delayChooser);
 		
 		setupAutonomousList();
 		SmartDashboard.putData("Auto Mode", chooser);
 		
-		gearCamera = CameraServer.getInstance().startAutomaticCapture();
-		gearCamera.setResolution(480, 320);
-		gearCamera.setFPS(30);
-		System.out.println(gearCamera.getPath());
-		
 		lights.activateLights(LightingType.off);
 		lights.activateLights(LightingType.staying_alive);
+
+		
+		try {
+			gearCamera = CameraServer.getInstance().startAutomaticCapture();
+			gearCamera.setResolution(480, 320);
+			gearCamera.setFPS(30);
+			//System.out.println(gearCamera.getPath());
+		} catch (Exception e) {
+			// Do nothing
+		}
+		
+		//
 	}
 	
 	
@@ -104,6 +112,8 @@ public class Robot extends IterativeRobot{
 		chooser.addObject("BLUE Gear Routine 3", new AutoGearRoutine3(true));
 		
 		chooser.addDefault("Auto Shoot Routine 1", new AutoShootRoutine1());
+		chooser.addDefault("BLUE Sit and Shoot", new AutoSitAndShoot(true));
+		chooser.addDefault("RED Sit and Shoot", new AutoSitAndShoot(false));
 	}
 
 	private void setupDelayList(){
@@ -122,9 +132,9 @@ public class Robot extends IterativeRobot{
 	public void disabledInit() {
 		// Reset any resources that are not needed
 		Robot.drivetrain.disableDriveTrain();
-		if (lights != null) {
-			lights.activateLights(LightingType.off);
-		}
+//		if (lights != null) {
+//			lights.activateLights(LightingType.staying_alive);
+//		}
 	}
 
 	@Override
@@ -162,12 +172,9 @@ public class Robot extends IterativeRobot{
 		 * autonomousCommand = new ExampleCommand(); break; }
 		 */
 
-		lights.activateLights(LightingType.set_random_color);
-
 		// schedule the autonomous command (example)
-		if (autonomousCommand != null){
+		if (autonomousCommand != null)
 			autonomousCommand.start();
-		}
 	}
 
 	/**
@@ -191,9 +198,9 @@ public class Robot extends IterativeRobot{
 			autonomousCommand.cancel();
 		System.out.println("Teleop Init");
 		drivetrain.resetEncoders();
+		flywheel.resetFlywheelSpeed();
 		flywheel.resetEncoder();
 		drivetrain.setDriveTrainSafety(true);
-		lights.activateLights(LightingType.set_random_color);
 		//Scheduler.getInstance().enable();
 		//Scheduler.getInstance().removeAll();
 		//Scheduler.getInstance().add(tankDrive);
@@ -211,9 +218,9 @@ public class Robot extends IterativeRobot{
 	public void log() {
 		SmartDashboard.putNumber("Left Encoder = ", drivetrain.getLeftDistance());
 		SmartDashboard.putNumber("Right Encoder = ", drivetrain.getRightDistance());
-		SmartDashboard.putNumber("Left Raw = ", drivetrain.leftEncoder.getRaw());
-		SmartDashboard.putNumber("Right Raw = ", drivetrain.rightEncoder.getRaw());
-		SmartDashboard.putNumber("Clock", Timer.getMatchTime());
+		//SmartDashboard.putNumber("Left Raw = ", drivetrain.leftEncoder.getRaw());
+		//SmartDashboard.putNumber("Right Raw = ", drivetrain.rightEncoder.getRaw());
+		//SmartDashboard.putNumber("Clock", Timer.getMatchTime());
 		SmartDashboard.putNumber("Speed", drivetrain.getDriveTrainRate());
 		SmartDashboard.putNumber("Distance", drivetrain.getDistanceTraveled());
 		//SmartDashboard.putNumber("Flywheel Encoder Count", flywheel.getEncoderCounts());
@@ -221,7 +228,7 @@ public class Robot extends IterativeRobot{
 		//SmartDashboard.putNumber("Flywheel Motor Speed", flywheel.getFlywheelMotorSpeed());
 		//SmartDashboard.putNumber("Count Encoder Left", drivetrain.getLeftEncoderCount());
 		//SmartDashboard.putNumber("Count Encoder Right", drivetrain.getRightEncoderCount());
-		SmartDashboard.putData("Gyro", drivetrain.getDriveTrainGyro());
+		//SmartDashboard.putData("Gyro", drivetrain.getDriveTrainGyro());
 		SmartDashboard.putNumber("Gyro rate ", drivetrain.getGyroRate());
 		SmartDashboard.putNumber("Gyro angle ", drivetrain.getGyroRotation());
 	}

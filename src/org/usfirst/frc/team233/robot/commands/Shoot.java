@@ -35,6 +35,11 @@ public class Shoot extends Command {
 		this.action = action;
 	}
 	
+	public Shoot(ShooterAction action, double flywheelSpeed){
+		this.action = action;
+		Robot.flywheel.overrideFlywheelSpeed(flywheelSpeed);
+	}
+	
 	@Override
 	protected void execute() {
 		//edited for if joystick unplugged, will return null
@@ -57,8 +62,9 @@ public class Shoot extends Command {
 					
 					System.out.println("Flywheel half speed");
 					Robot.flywheel.flywheelHalfSpeed();
+					Robot.lights.activateLights(LightingType.missing_dot);
 					Robot.flywheel.setFlywheelState(ShootingState.FLYWHEEL_HALF_SPEED);
-					Robot.lights.activateLights(LightingType.missing_dot);				
+									
 				}
 				//action = ShooterAction.SKIP;
 				break;

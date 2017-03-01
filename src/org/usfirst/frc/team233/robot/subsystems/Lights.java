@@ -8,23 +8,9 @@ import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class Lights extends Subsystem {
-//	private PWM arduino = new PWM(9);
-	private SerialPort arduino;
-	private Semaphore mutex = new Semaphore(1);
-	private boolean isUsbAvailable = true;
-	
-	
-	public Lights() {
-		// TODO Auto-generated constructor stub
-		try {
-			arduino = new SerialPort(9600, SerialPort.Port.kUSB1);
-		} catch (Exception e) {
-			isUsbAvailable = false;
-		}
-	}
-	
 	public enum LightingType {
-		police, 
+		police,
+		init,
 		rainbow, 
 		off, 
 		missing_dot,
@@ -35,14 +21,35 @@ public class Lights extends Subsystem {
 		set_pink_color,
 		set_random_color;
 	};
+	
+	private SerialPort arduino;
+	private Semaphore mutex = new Semaphore(1);
+	private boolean isUsbAvailable = true;
+	private LightingType lastCommand;
+	
+	public Lights() {
+		// TODO Auto-generated constructor stub
+		try {
+			arduino = new SerialPort(9600, SerialPort.Port.kUSB1);
+		} catch (Exception e) {
+			isUsbAvailable = false;
+		}
+		lastCommand = LightingType.init;
+	}
+	
+	
 
 	@Override
 	protected void initDefaultCommand() {
-
 	}
 
 	public void activateLights(LightingType lightingType) {
-		switch(lightingType){
+		if (lightingType == lastCommand) {
+			System.out.println("Command " + lightingType.toString() + " already sent");
+			return;
+		}
+		
+		switch(lightingType) {
 			case police:
 				sendLightCommand("police,255,0,0,0,0,0,0,0!");
 				break;
@@ -79,7 +86,7 @@ public class Lights extends Subsystem {
 				int r = ThreadLocalRandom.current().nextInt(0, 255);
 				int g = ThreadLocalRandom.current().nextInt(0, 255);
 				int b = ThreadLocalRandom.current().nextInt(0, 255);
-				sendLightCommand("setColor,r,g,b,0,0,0,0,0!");
+				sendLightCommand("setColor," + new Integer(r).toString() + "," + new Integer(g).toString() + "," + new Integer(b).toString() + ",0,0,0,0,0!");
 				break;
 
 			// The lights command for the off case is caught here in default
@@ -87,6 +94,7 @@ public class Lights extends Subsystem {
 				sendLightCommand("off,0,0,0,0,0,0,0,0!");
 				break;
 		}
+		lastCommand = lightingType;
 	}
 	
 	private void sendLightCommand(String command) {

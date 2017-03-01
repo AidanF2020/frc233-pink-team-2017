@@ -112,6 +112,10 @@ public class Flywheel extends Subsystem {
 		}
 	}
 	
+	public void overrideFlywheelSpeed(double newSpeed){
+		flywheelSpeed = Range.clip(newSpeed, 1, -1);
+	}
+	
 	
 	private double rangeValue(double value) {
 		if (value > 1.0) {
@@ -144,7 +148,8 @@ public class Flywheel extends Subsystem {
 		//if (Math.abs(Math.abs(flywheelMotor.get()) - flywheelSpeed) < tolerance) {
 			return true;
 		}
-		return false;
+		return true;
+		//return false;
 	}
 	
 	public void setFlywheelState(ShootingState setState) {
