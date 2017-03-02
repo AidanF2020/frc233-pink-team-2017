@@ -122,7 +122,7 @@ public class Robot extends IterativeRobot {
 
 	@Override
 	public void disabledPeriodic() {
-		delayTime = SmartDashboard.getDouble("Autonomous delay");
+		delayTime = SmartDashboard.getNumber("Autonomous delay", 0.0);
 		SmartDashboard.putNumber("Autonomous delay", delayTime);
 		Scheduler.getInstance().run();
 	}

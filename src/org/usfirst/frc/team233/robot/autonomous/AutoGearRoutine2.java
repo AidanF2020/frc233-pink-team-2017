@@ -20,9 +20,9 @@ public class AutoGearRoutine2 extends CommandGroup {
 			/* RED ALLIANCE AUTONOMOUS CODE */
 			addSequential(new WaitCommand(Robot.delayTime));
 			// back up to spring tip2
-			addSequential(new PinkNavigate(-71, 0, 0.7));		
+			addSequential(new PinkNavigate(-68, 0, 0.7));		
 			//ease onto spear
-			addSequential(new PinkNavigate(-74, 0, 0.5));
+			addSequential(new PinkNavigate(-70, 0, 0.5));
 			// go forward off of spear and hopper
 			addSequential(new WaitCommand(1.0));
 			addSequential(new PinkNavigate(-24, 0, 0.7)); // Don't go all the way to the end to turn
@@ -37,9 +37,9 @@ public class AutoGearRoutine2 extends CommandGroup {
 			/* BLUE ALLIANCE AUTONOMOUS CODE */
 			addSequential(new WaitCommand(Robot.delayTime));
 			// back up to spring tip2
-			addSequential(new PinkNavigate(-71, 0, 0.7));		
+			addSequential(new PinkNavigate(-68, 0, 0.7));		
 			//ease onto spear
-			addSequential(new PinkNavigate(-74, 0, 0.5));
+			addSequential(new PinkNavigate(-70, 0, 0.5));
 			// go forward off of spear and hopper
 			addSequential(new WaitCommand(1.0));
 			addSequential(new PinkNavigate(-24, 0, 0.7)); // Don't go all the way to the end to turn
@@ -47,7 +47,7 @@ public class AutoGearRoutine2 extends CommandGroup {
 			addSequential(new PinkNavigate(176, -135, 1));
 			addSequential(new PinkNavigate(176, -180, 1));
 			addSequential(new PinkNavigate(178, -180, 0.7));
-			addSequential(new PinkNavigate(178, -90, 0.7, true));
+			addSequential(new PinkNavigate(178, -90, 1, true));
 			
 		}
 	}
