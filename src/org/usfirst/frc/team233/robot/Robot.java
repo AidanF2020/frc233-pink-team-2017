@@ -46,6 +46,7 @@ public class Robot extends IterativeRobot {
 	public static PowerDistributionPanel pdPanel;
 	public static Lights lights;
 	private UsbCamera gearCamera;
+	public static double delayTime;
 	
 
 	Command autonomousCommand;
@@ -68,11 +69,11 @@ public class Robot extends IterativeRobot {
 		pdPanel = new PowerDistributionPanel(RobotMap.pdpDeviceID);
 		pdPanel.resetTotalEnergy();
 		// didn't work, value didn't get passed
-		SmartDashboard.putNumber("Autonomous delay", 0.0);
-		double delay = SmartDashboard.getNumber("Autonomous delay", 0.0);
-		SmartDashboard.putNumber("Autonomous delay", delay);
-		
-		setupAutonomousList(delay);
+//		SmartDashboard.putNumber("Autonomous delay", 0.0);
+//		double delay = SmartDashboard.getNumber("Autonomous delay", 0.0);
+//		SmartDashboard.putNumber("Autonomous delay", delay);
+		SmartDashboard.putDouble("Autonomous delay", 0.0);
+		setupAutonomousList();
 		SmartDashboard.putData("Auto Mode", chooser);
 		
 		lights.activateLights(LightingType.off);
@@ -94,7 +95,7 @@ public class Robot extends IterativeRobot {
 	 * Add all the autonomous routines to the 
 	 * chooser list
 	 * */
-	private void setupAutonomousList(double delay) {
+	private void setupAutonomousList() {
 		chooser.addObject("RED Gear Routine 1", new AutoGearRoutine1(false));
 		chooser.addObject("RED Gear Routine 2", new AutoGearRoutine2(false));
 		chooser.addObject("RED Gear Routine 3", new AutoGearRoutine3(false));
@@ -121,6 +122,8 @@ public class Robot extends IterativeRobot {
 
 	@Override
 	public void disabledPeriodic() {
+		delayTime = SmartDashboard.getDouble("Autonomous delay");
+		SmartDashboard.putNumber("Autonomous delay", delayTime);
 		Scheduler.getInstance().run();
 	}
 
