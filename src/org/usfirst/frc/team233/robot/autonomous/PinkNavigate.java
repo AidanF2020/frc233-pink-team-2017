@@ -12,22 +12,35 @@ public class PinkNavigate extends Command {
 	static final double ANGLE_THRESHOLD = 3.0; // Degrees
 	static final double ANGLE_KP = 0.04;
 	static final double BASE_KP = 0.3;
-
+	
+	private boolean looping;
 	private double targetPos;
 	private double targetAngle;
 	private double maxPower;
 
+	
 	/** Constructor - Define the distance and angle for the robot to */
 	public PinkNavigate(double targetPos, double targetAngle, double maxPower) {
+		this(targetPos, targetAngle, maxPower, false);
+	}
+	
+	/** 
+	 * Constructor - Define the distance and angle for the robot to 
+	 * NOTE: Used in auto routines 
+	 * */
+	public PinkNavigate(double targetPos, double targetAngle, double maxPower, boolean looping) {
 		this.targetPos = targetPos;
 		this.targetAngle = targetAngle;
 		this.maxPower = maxPower;
+		this.looping = looping;
 		requires(Robot.drivetrain);
-		System.out.println("PinkNav initialized");
+		//System.out.println("PinkNav initialized");
 	}
 
-	// Tank drive two wheels to target positions in inches.
-	// Returns true when both arrive at the target.
+	/**
+	 * Tank drive two wheels to target positions in inches.
+	 * Returns true when both arrive at the target.
+	 */
 	public boolean driveToPos() {
 		SmartDashboard.putNumber("Distance traveled", Robot.drivetrain.getDistanceTraveled());
 		double angularVelocity = Robot.drivetrain.getGyroRate();
@@ -70,6 +83,7 @@ public class PinkNavigate extends Command {
 		}
 	}
 
+	/** Clip the command value in between the defined max and min value. */
 	// migrated over from Range class
 	public static double clip(double cmd, double max, double min) {
 		if (cmd > max) {
@@ -82,7 +96,7 @@ public class PinkNavigate extends Command {
 	
 	@Override
 	protected boolean isFinished() {
-		return driveToPos();
+		return driveToPos() && !looping;
 	}
 
 	@Override

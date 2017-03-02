@@ -3,6 +3,7 @@ package org.usfirst.frc.team233.robot.subsystems;
 import org.usfirst.frc.team233.robot.Robot;
 import org.usfirst.frc.team233.robot.RobotMap;
 import org.usfirst.frc.team233.robot.commands.TankDrive;
+import org.usfirst.frc.team233.robot.subsystems.Lights.LightingType;
 
 import com.kauailabs.navx.frc.AHRS;
 
@@ -236,8 +237,10 @@ public class DriveTrain extends Subsystem {
 	public void shiftGears() {
 		if (shifterSolenoid.get()) {
 			shifterSolenoid.set(false);
+			Robot.lights.activateLights(LightingType.set_pink_color);
 		} else {
 			shifterSolenoid.set(true);
+			Robot.lights.activateLights(LightingType.police);
 		}
 	}
 	
@@ -275,6 +278,10 @@ public class DriveTrain extends Subsystem {
 		return gyro;
 	}
 
+	public void setDriveTrainSafety(boolean value) {
+		drive.setSafetyEnabled(value);
+	}
+	
 	/**
 	 * Use this method to reset encoders and any other resource for autonomous
 	 * use.

@@ -1,6 +1,7 @@
 package org.usfirst.frc.team233.robot.commands;
 
 import org.usfirst.frc.team233.robot.Robot;
+import org.usfirst.frc.team233.robot.subsystems.Lights.LightingType;
 
 import edu.wpi.first.wpilibj.command.Command;
 
@@ -27,14 +28,17 @@ public class ClimbCommand extends Command {
 		switch (action) {
 			case CLIMB:
 				Robot.ropeClimber.startClimbingRope();
+				Robot.lights.activateLights(LightingType.off);
 				break;
 			
 			case REVERSE:
 				Robot.ropeClimber.reverseClimber();
+				Robot.lights.activateLights(LightingType.off);
 				break;
 	
 			default:
 				Robot.ropeClimber.stopClimbingRope();
+				Robot.lights.activateLights(LightingType.rainbow);
 			break;
 		}
 	}

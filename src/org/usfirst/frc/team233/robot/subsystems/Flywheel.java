@@ -113,6 +113,10 @@ public class Flywheel extends Subsystem {
 	}
 	
 	
+	public void overrideFlywheelSpeed(double newSpeed){
+		flywheelSpeed = Range.clip(newSpeed, 1, -1);
+	}
+	
 	private double rangeValue(double value) {
 		if (value > 1.0) {
 			return 1.0;

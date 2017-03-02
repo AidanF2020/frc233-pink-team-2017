@@ -15,12 +15,14 @@ import org.usfirst.frc.team233.robot.autonomous.AutoGearRoutine1;
 import org.usfirst.frc.team233.robot.autonomous.AutoGearRoutine2;
 import org.usfirst.frc.team233.robot.autonomous.AutoGearRoutine3;
 import org.usfirst.frc.team233.robot.autonomous.AutoShootRoutine1;
-import org.usfirst.frc.team233.robot.autonomous.AutoTest1;
+import org.usfirst.frc.team233.robot.autonomous.AutoSitAndShoot;
 import org.usfirst.frc.team233.robot.subsystems.BallCollector;
 import org.usfirst.frc.team233.robot.subsystems.DriveTrain;
 import org.usfirst.frc.team233.robot.subsystems.Flywheel;
 import org.usfirst.frc.team233.robot.subsystems.Hopper;
 import org.usfirst.frc.team233.robot.subsystems.Indexer;
+import org.usfirst.frc.team233.robot.subsystems.Lights;
+import org.usfirst.frc.team233.robot.subsystems.Lights.LightingType;
 import org.usfirst.frc.team233.robot.subsystems.RopeClimber;
 
 /**
@@ -42,7 +44,8 @@ public class Robot extends IterativeRobot {
 	public static Hopper hopper;
 	public static OI oi;
 	public static PowerDistributionPanel pdPanel;
-	//private UsbCamera gearCamera;
+	public static Lights lights;
+	private UsbCamera gearCamera;
 	
 
 	Command autonomousCommand;
@@ -60,6 +63,7 @@ public class Robot extends IterativeRobot {
 		ballCollector = new BallCollector();
 		ropeClimber = new RopeClimber();
 		hopper = new Hopper();
+		lights = new Lights();
 		oi = new OI();
 		pdPanel = new PowerDistributionPanel(RobotMap.pdpDeviceID);
 		pdPanel.resetTotalEnergy();
@@ -71,7 +75,18 @@ public class Robot extends IterativeRobot {
 		setupAutonomousList(delay);
 		SmartDashboard.putData("Auto Mode", chooser);
 		
-		//gearCamera = CameraServer.getInstance().startAutomaticCapture();
+		lights.activateLights(LightingType.off);
+		lights.activateLights(LightingType.staying_alive);
+		
+		try {
+			gearCamera = CameraServer.getInstance().startAutomaticCapture();
+			gearCamera.setResolution(480, 320);
+			gearCamera.setFPS(30);
+			//System.out.println(gearCamera.getPath());
+		} catch (Exception e) {
+			//Do nothing
+		}
+		
 	}
 	
 	
@@ -80,11 +95,17 @@ public class Robot extends IterativeRobot {
 	 * chooser list
 	 * */
 	private void setupAutonomousList(double delay) {
-		chooser.addObject("AutoTest1", new AutoTest1(delay));
-		chooser.addDefault("Auto Gear Routine 2", new AutoGearRoutine2());
-		chooser.addObject("Auto Gear Routine 1", new AutoGearRoutine1());
-		chooser.addObject("Auto Gear Routine 3", new AutoGearRoutine3());
-		chooser.addObject("Auto Shoot Routine 1", new AutoShootRoutine1());
+		chooser.addObject("RED Gear Routine 1", new AutoGearRoutine1(false));
+		chooser.addObject("RED Gear Routine 2", new AutoGearRoutine2(false));
+		chooser.addObject("RED Gear Routine 3", new AutoGearRoutine3(false));
+		
+		chooser.addObject("BLUE Gear Routine 1", new AutoGearRoutine1(true));
+		chooser.addObject("BLUE Gear Routine 2", new AutoGearRoutine2(true));
+		chooser.addObject("BLUE Gear Routine 3", new AutoGearRoutine3(true));
+		
+		chooser.addDefault("Auto Shoot Routine 1", new AutoShootRoutine1());
+		chooser.addDefault("BLUE Sit and Shoot", new AutoSitAndShoot(true));
+		chooser.addDefault("RED Sit and Shoot", new AutoSitAndShoot(false));
 	}
 
 	/**
@@ -120,10 +141,8 @@ public class Robot extends IterativeRobot {
 		autonomousCommand = chooser.getSelected();
 		drivetrain.resetGyro();
 		drivetrain.resetEncoders();
+		drivetrain.setDriveTrainSafety(false);
 		
-		if(autonomousCommand instanceof AutoTest1){
-			//check for delay value
-		}
 		/*
 		 * String autoSelected = SmartDashboard.getString("Auto Selector",
 		 * "Default"); switch(autoSelected) { case "My Auto": autonomousCommand
@@ -156,8 +175,10 @@ public class Robot extends IterativeRobot {
 		if (autonomousCommand != null)
 			autonomousCommand.cancel();
 		System.out.println("Teleop Init");
+		flywheel.resetFlywheelSpeed();
 		drivetrain.resetEncoders();
 		flywheel.resetEncoder();
+		drivetrain.setDriveTrainSafety(true);
 		//Scheduler.getInstance().enable();
 		//Scheduler.getInstance().removeAll();
 		//Scheduler.getInstance().add(tankDrive);

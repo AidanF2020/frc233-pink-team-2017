@@ -1,6 +1,5 @@
 package org.usfirst.frc.team233.robot;
 
-import org.usfirst.frc.team233.robot.autonomous.AutonomousShoot;
 import org.usfirst.frc.team233.robot.commands.ClimbCommand;
 import org.usfirst.frc.team233.robot.commands.ClimbCommand.ClimberAction;
 import org.usfirst.frc.team233.robot.commands.CollectorCommand;
@@ -10,10 +9,8 @@ import org.usfirst.frc.team233.robot.commands.ShiftGear;
 import org.usfirst.frc.team233.robot.commands.ShiftGear.ShiftAction;
 import org.usfirst.frc.team233.robot.commands.Shoot;
 import org.usfirst.frc.team233.robot.commands.Shoot.ShooterAction;
-import org.usfirst.frc.team233.robot.subsystems.ShootingState;
 
 import edu.wpi.first.wpilibj.Joystick;
-import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 
 
@@ -86,14 +83,14 @@ public class OI {
 		shooterY.whileHeld(new ClimbCommand(ClimberAction.CLIMB));
 		shooterY.whenReleased(new ClimbCommand(ClimberAction.STOP));
 		
-		x.whileHeld(new Shoot(ShooterAction.TEST_I_UP));
-		x.whenReleased(new Shoot(ShooterAction.TEST_I_DOWN));
-		
-		y.whileHeld(new Shoot(ShooterAction.TEST_H_UP));
-		y.whenReleased(new Shoot(ShooterAction.TEST_H_DOWN));
-		
-		b.whileHeld(new Shoot(ShooterAction.TEST_F_UP));
-		b.whenReleased(new Shoot(ShooterAction.TEST_F_DOWN));
+//		x.whileHeld(new Shoot(ShooterAction.TEST_I_UP));
+//		x.whenReleased(new Shoot(ShooterAction.TEST_I_DOWN));
+//		
+//		y.whileHeld(new Shoot(ShooterAction.TEST_H_UP));
+//		y.whenReleased(new Shoot(ShooterAction.TEST_H_DOWN));
+//		
+//		b.whileHeld(new Shoot(ShooterAction.TEST_F_UP));
+//		b.whenReleased(new Shoot(ShooterAction.TEST_F_DOWN));
 	}
 	
 	public Joystick getBaseJoystick() {
