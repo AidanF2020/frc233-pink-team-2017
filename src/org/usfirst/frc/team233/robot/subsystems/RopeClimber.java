@@ -10,12 +10,14 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 public class RopeClimber extends Subsystem {
 
 	private SpeedController climberMotor = new Talon(RobotMap.ropeClimberMotorPort);
+	private SpeedController climberMotor2 = new Talon(RobotMap.ropeClimber2MotorPort);
 	private final boolean isInverted = false;
 	
 	public RopeClimber() {
 		// TODO Auto-generated constructor stub
 		if (Robot.isReal()) {
 			climberMotor.setInverted(isInverted);
+			//climberMotor2.setInverted(isInverted);
 		}
 	}
 	
@@ -31,14 +33,17 @@ public class RopeClimber extends Subsystem {
 		// otherwise ratchet component gets destroyed
 		// no backspinning
 		climberMotor.set(Math.abs(RobotMap.ropeClimberSpeed));
+		climberMotor2.set(Math.abs(RobotMap.ropeClimberSpeed));
 	}
 	
 	public void stopClimbingRope() {
 		climberMotor.stopMotor();
+		climberMotor2.stopMotor();
 	}
 	
  	public void reverseClimber() {
  		climberMotor.set(-0.5);
+ 		climberMotor2.set(-0.5);
  	}
 	
 	

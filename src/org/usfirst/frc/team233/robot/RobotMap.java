@@ -64,6 +64,7 @@ public class RobotMap {
 	//============================================
 	// Motors
 	public static int ropeClimberMotorPort = 7;
+	public static int ropeClimber2MotorPort = 9;
 	
 	// Motor Speeds
 	public static double ropeClimberSpeed = 1.0;
