@@ -21,65 +21,37 @@ public class AutoGearRoutine1 extends CommandGroup {
 			/* RED ALLIANCE AUTONOMOUS CODE */
 			
 			addSequential(new WaitCommand(Robot.delayTime));
-			addSequential(new PinkNavigate(-70, 0, 1));
-			//turn 60 degrees to back up to tip of peg
-			addSequential(new PinkNavigate(-70, 60, 0.7));
-			addSequential(new PinkNavigate(-132, 60, 0.7));
-			addSequential(new PinkNavigate(-140, 60, 0.5));
-			addSequential(new WaitCommand(2));
-			//go to the hopper
-			addSequential(new PinkNavigate(-80, 60, 1));
-			addSequential(new PinkNavigate(-80, 180, 0.7));
-			addSequential(new PinkNavigate(55, 180, 1));
-			addSequential(new PinkNavigate(55, 90, 1));
-			addSequential(new PinkNavigate(110, 90, 1));
+			addSequential(new PinkNavigate(-72.5, 0, 1));
 			
-			//DERECK's CODE
-//			addSequential(new PinkNavigate(-72.5,0,1));
-//			addSequential(new PinkNavigate(-72.5,60,1));
-//			addSequential(new PinkNavigate(-137.5,60,1));
-//			addSequential(new PinkNavigate(-140,60,0.5));
-//			
-//			//go to the hopper
-//			addSequential(new WaitCommand(2));
-//			addSequential(new PinkNavigate(-117.5, 60, 0.7));
-//			addSequential(new PinkNavigate(-117.5, 135, 0.7));
-//			addSequential(new PinkNavigate(150, 135, 1));
-//			addSequential(new PinkNavigate(150, 180, 1));
-//			addSequential(new PinkNavigate(150, 180, 0.7));
-//			addSequential(new PinkNavigate(150, 90, 0.7));
-//			addSequential (new HoldPosition(150,90,0.7));
+			//turn 60 degrees to back up to tip of peg
+			addSequential(new PinkNavigate(-72.5, 60, 0.7));
+			addSequential(new PinkNavigate(-75, 60, 0.7));
+			addSequential(new PinkNavigate(-78, 60, 0.5));
+			addSequential(new WaitCommand(1.0));
+
+			//go to the hopper
+			addSequential(new PinkNavigate(-34, 60, 1));
+			addSequential(new PinkNavigate(-34, 135, 0.7));
+			addSequential(new PinkNavigate(129, 135, 1));
+			addSequential(new PinkNavigate(129, 90, 1, true));
+			
 		} else {
 			/* BLUE ALLIANCE AUTONOMOUS CODE */
 			addSequential(new WaitCommand(Robot.delayTime));
-			addSequential(new PinkNavigate(-70, 0, 1));
-			//turn 60 degrees to back up to tip of peg
-			addSequential(new PinkNavigate(-70, -60, 0.7));
-			addSequential(new PinkNavigate(-132, -60, 0.7));
-			addSequential(new PinkNavigate(-140, -60, 0.5));
-			addSequential(new WaitCommand(2));
-			//go to the hopper
-			addSequential(new PinkNavigate(-80, -60, 1));
-			addSequential(new PinkNavigate(-80, -180, 0.7));
-			addSequential(new PinkNavigate(55, -180, 1));
-			addSequential(new PinkNavigate(55, -90, 1));
-			addSequential(new PinkNavigate(110, -90, 1));
+			addSequential(new PinkNavigate(-72.5, 0, 1));
 			
-			//DERECKS'S CODE
-//			addSequential(new PinkNavigate(-72.5,0,1));
-//			addSequential(new PinkNavigate(-72.5,-60,1));
-//			addSequential(new PinkNavigate(-137.5,-60,1));
-//			addSequential(new PinkNavigate(-140,-60,0.5));
-//			
-//			//go to the hopper
-//			addSequential(new WaitCommand(2));
-//			addSequential(new PinkNavigate(-117.5, -60, 0.7));
-//			addSequential(new PinkNavigate(-117.5, 135, 0.7));
-//			addSequential(new PinkNavigate(150, 135, 1));
-//			addSequential(new PinkNavigate(150, 180, 1));
-//			addSequential(new PinkNavigate(150, 180, 0.7));
-//			addSequential(new PinkNavigate(150, 90, 0.7));
-//			addSequential (new HoldPosition(150,90,0.7));
+			//turn 60 degrees to back up to tip of peg
+			addSequential(new PinkNavigate(-72.5, -60, 0.7));
+			addSequential(new PinkNavigate(-75, -60, 0.7));
+			addSequential(new PinkNavigate(-78, -60, 0.5));
+			addSequential(new WaitCommand(1.0));
+
+			//go to the hopper
+			addSequential(new PinkNavigate(-34, -60, 1));
+			addSequential(new PinkNavigate(-34, -135, 0.7));
+			addSequential(new PinkNavigate(129, -135, 1));
+			addSequential(new PinkNavigate(129, -90, 1, true));
+			
 		}
 	}
 }

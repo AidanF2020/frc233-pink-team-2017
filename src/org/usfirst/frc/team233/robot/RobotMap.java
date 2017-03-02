@@ -42,7 +42,7 @@ public class RobotMap {
 	
 	// Motor Speeds
 	public static double flywheelMotorSpeed = 0.65;
-	public static double indexerMotorSpeed = 0.5;
+	public static double indexerMotorSpeed = 0.75;
 	
 	// Encoder
 	public static int flywheelEncoderPortA = 5;

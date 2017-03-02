@@ -72,7 +72,7 @@ public class Robot extends IterativeRobot {
 //		SmartDashboard.putNumber("Autonomous delay", 0.0);
 //		double delay = SmartDashboard.getNumber("Autonomous delay", 0.0);
 //		SmartDashboard.putNumber("Autonomous delay", delay);
-		SmartDashboard.putDouble("Autonomous delay", 0.0);
+		SmartDashboard.putNumber("Autonomous delay", 0.0);
 		setupAutonomousList();
 		SmartDashboard.putData("Auto Mode", chooser);
 		
@@ -96,13 +96,13 @@ public class Robot extends IterativeRobot {
 	 * chooser list
 	 * */
 	private void setupAutonomousList() {
-		chooser.addObject("RED Gear Routine 1", new AutoGearRoutine1(false));
-		chooser.addObject("RED Gear Routine 2", new AutoGearRoutine2(false));
-		chooser.addObject("RED Gear Routine 3", new AutoGearRoutine3(false));
+		chooser.addObject("RED Gear Right", new AutoGearRoutine1(false));
+		chooser.addObject("RED Gear Center", new AutoGearRoutine2(false));
+		chooser.addObject("RED Gear Left", new AutoGearRoutine3(false));
 		
-		chooser.addObject("BLUE Gear Routine 1", new AutoGearRoutine1(true));
-		chooser.addObject("BLUE Gear Routine 2", new AutoGearRoutine2(true));
-		chooser.addObject("BLUE Gear Routine 3", new AutoGearRoutine3(true));
+		chooser.addObject("BLUE Gear Right", new AutoGearRoutine1(true));
+		chooser.addObject("BLUE Gear Center", new AutoGearRoutine2(true));
+		chooser.addObject("BLUE Gear Left", new AutoGearRoutine3(true));
 		
 		chooser.addDefault("Auto Shoot Routine 1", new AutoShootRoutine1());
 		chooser.addDefault("BLUE Sit and Shoot", new AutoSitAndShoot(true));
@@ -208,7 +208,7 @@ public class Robot extends IterativeRobot {
 		SmartDashboard.putNumber("Right Raw = ", drivetrain.rightEncoder.getRaw());
 		SmartDashboard.putNumber("Flywheel Encoder Count", flywheel.getEncoderCounts());
 		SmartDashboard.putNumber("Flywheel Encoder Rate", flywheel.getFlywheelEncoderSpeed());
-		//SmartDashboard.putNumber("Flywheel Motor Speed", flywheel.getFlywheelMotorSpeed());
+		SmartDashboard.putNumber("Flywheel Motor Speed", flywheel.getFlywheelMotorSpeed());
 		//SmartDashboard.putNumber("Count Encoder Left", drivetrain.getLeftEncoderCount());
 		//SmartDashboard.putNumber("Count Encoder Right", drivetrain.getRightEncoderCount());
 		SmartDashboard.putData("Gyro", drivetrain.getDriveTrainGyro());
