@@ -96,9 +96,9 @@ public class Robot extends IterativeRobot {
 	 * chooser list
 	 * */
 	private void setupAutonomousList() {
-		chooser.addObject("RED Gear Right", new AutoGearRoutine1(false));
+		chooser.addObject("RED Gear Left", new AutoGearRoutine1(false));
 		chooser.addObject("RED Gear Center", new AutoGearRoutine2(false));
-		chooser.addObject("RED Gear Left", new AutoGearRoutine3(false));
+		chooser.addObject("RED Gear Right", new AutoGearRoutine3(false));
 		
 		chooser.addObject("BLUE Gear Right", new AutoGearRoutine1(true));
 		chooser.addObject("BLUE Gear Center", new AutoGearRoutine2(true));
