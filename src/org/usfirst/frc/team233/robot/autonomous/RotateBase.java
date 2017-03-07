@@ -15,7 +15,7 @@ public class RotateBase extends Command {
 	public RotateBase(double angle) {
 		requires(Robot.drivetrain);
 		targetAngle = angle;
-		Robot.drivetrain.reset();
+		//Robot.drivetrain.reset();
 		// A proportional controller (Kp) will reduce the
 		// rise time and will reduce, but never eliminate, the steady-state
 		// error.
@@ -68,14 +68,15 @@ public class RotateBase extends Command {
 		});
 		pid.setAbsoluteTolerance(tolerance);
 		pid.setSetpoint(angle);
+		//pid.setOutputRange(0.5, 1.0);
 	}
 
 	// Called just before this Command runs the first time
 	@Override
 	protected void initialize() {
 		// Get everything in a safe starting state.
-		Robot.drivetrain.reset();
-		pid.reset();
+		//Robot.drivetrain.reset();
+		//pid.reset();
 		pid.enable();
 	}
 
