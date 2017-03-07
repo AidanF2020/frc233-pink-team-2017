@@ -51,6 +51,7 @@ public class Robot extends IterativeRobot {
 
 	Command autonomousCommand;
 	SendableChooser<Command> chooser = new SendableChooser<>();
+	SendableChooser<Double> delay = new SendableChooser<>();
 
 	/**
 	 * This function is run when the robot is first started up and should be
@@ -75,6 +76,10 @@ public class Robot extends IterativeRobot {
 		SmartDashboard.putNumber("Autonomous delay", 0.0);
 		setupAutonomousList();
 		SmartDashboard.putData("Auto Mode", chooser);
+		
+//		delayTime = 0;
+//		SmartDashboard.putNumber("Autonomous delay", delayTime);
+		SmartDashboard.putData("Auto Delay", delay);
 		
 		lights.activateLights(LightingType.off);
 		lights.activateLights(LightingType.staying_alive);
@@ -107,6 +112,15 @@ public class Robot extends IterativeRobot {
 		chooser.addDefault("Auto Shoot Routine 1", new AutoShootRoutine1());
 		chooser.addDefault("BLUE Sit and Shoot", new AutoSitAndShoot(true));
 		chooser.addDefault("RED Sit and Shoot", new AutoSitAndShoot(false));
+		
+		//delay options
+		delay.addDefault("0 sec", new Double(0));
+		delay.addObject("1 sec", new Double(1));
+		delay.addObject("3 sec", new Double(3));
+		delay.addObject("5 sec", new Double(5));
+		delay.addObject("7 sec", new Double(7));
+		delay.addObject("10 sec", new Double(10));
+		
 	}
 
 	/**
@@ -122,8 +136,8 @@ public class Robot extends IterativeRobot {
 
 	@Override
 	public void disabledPeriodic() {
-		delayTime = SmartDashboard.getNumber("Autonomous delay", 0.0);
-		SmartDashboard.putNumber("Autonomous delay", delayTime);
+		delayTime = SmartDashboard.getNumber("Autonomous delay", delayTime);
+//		SmartDashboard.putNumber("Autonomous delay", delayTime);
 		Scheduler.getInstance().run();
 	}
 
@@ -140,8 +154,10 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void autonomousInit() {
+//		delayTime = SmartDashboard.getNumber("Autonomous delay", delayTime);
 		System.out.println("AutoInit");
 		autonomousCommand = chooser.getSelected();
+		delayTime = delay.getSelected().doubleValue();
 		drivetrain.resetGyro();
 		drivetrain.resetEncoders();
 		drivetrain.setDriveTrainSafety(false);
