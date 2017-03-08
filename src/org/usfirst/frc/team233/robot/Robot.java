@@ -24,6 +24,7 @@ import org.usfirst.frc.team233.robot.subsystems.Indexer;
 import org.usfirst.frc.team233.robot.subsystems.Lights;
 import org.usfirst.frc.team233.robot.subsystems.Lights.LightingType;
 import org.usfirst.frc.team233.robot.subsystems.RopeClimber;
+import org.usfirst.frc.team233.robot.subsystems.GearSlot;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -42,6 +43,7 @@ public class Robot extends IterativeRobot {
 	public static BallCollector ballCollector;
 	public static RopeClimber ropeClimber;
 	public static Hopper hopper;
+	public static GearSlot gearSlot;
 	public static OI oi;
 	public static PowerDistributionPanel pdPanel;
 	public static Lights lights;
@@ -66,6 +68,7 @@ public class Robot extends IterativeRobot {
 		ropeClimber = new RopeClimber();
 		hopper = new Hopper();
 		lights = new Lights();
+//		gearSlot = new GearSlot();
 		oi = new OI();
 		pdPanel = new PowerDistributionPanel(RobotMap.pdpDeviceID);
 		pdPanel.resetTotalEnergy();
