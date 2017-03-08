@@ -15,7 +15,7 @@ public class RotateBase extends Command {
 	public RotateBase(double angle) {
 		requires(Robot.drivetrain);
 		targetAngle = angle;
-		Robot.drivetrain.reset();
+		//Robot.drivetrain.reset();
 		// A proportional controller (Kp) will reduce the
 		// rise time and will reduce, but never eliminate, the steady-state
 		// error.
@@ -50,31 +50,32 @@ public class RotateBase extends Command {
 		}, new PIDOutput() {
 			@Override
 			public void pidWrite(double d) {
-				if (d > 0.5) {
-					d = 0.5;
-				} else if (d < -0.5) {
-					d = -0.5;
+				if (d > 1.0) {
+					d = 1.0;
+				} else if (d < -1.0) {
+					d = -1.0;
 				}
-				Robot.drivetrain.drive(d, -d);
+				//Robot.drivetrain.drive(d, -d);
 //				NEED TO TEST:
 //				// CW/right turn is positive
-//				if (targetAngle < 0) { // turning left
-//					// drive(left, right)
-//					Robot.drivetrain.drive(d, -d);
-//				} else { // turning left
-//					Robot.drivetrain.drive(-d, d);
-//				}
+				if (targetAngle < 0) { // turning left
+					// drive(left, right)
+					Robot.drivetrain.drive(d, -d);
+				} else { // turning left
+					Robot.drivetrain.drive(-d, d);
+				}
 			}
 		});
 		pid.setAbsoluteTolerance(tolerance);
 		pid.setSetpoint(angle);
+		pid.setOutputRange(0.5, 0.7);
 	}
 
 	// Called just before this Command runs the first time
 	@Override
 	protected void initialize() {
 		// Get everything in a safe starting state.
-		Robot.drivetrain.reset();
+		//Robot.drivetrain.reset();
 		pid.reset();
 		pid.enable();
 	}

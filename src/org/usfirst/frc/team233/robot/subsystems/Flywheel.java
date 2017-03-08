@@ -18,7 +18,7 @@ public class Flywheel extends Subsystem {
 	// Defines the default value for the flywheel speed
 	public double flywheelSpeed = RobotMap.flywheelMotorSpeed;
 	// Defines the amount to increase or decrease the flywheel speed
-	private final double speedAdjustment = 0.01;
+	private final double speedAdjustment = 0.02;
 
 	private double tolerance = 0.1;
 	private final double flywheelKp = 0.4;
@@ -112,6 +112,10 @@ public class Flywheel extends Subsystem {
 		}
 	}
 	
+	
+	public void overrideFlywheelSpeed(double newSpeed){
+		flywheelSpeed = Range.clip(newSpeed, 1, -1);
+	}
 	
 	private double rangeValue(double value) {
 		if (value > 1.0) {
