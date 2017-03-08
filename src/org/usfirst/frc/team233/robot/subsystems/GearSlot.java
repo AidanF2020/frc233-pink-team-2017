@@ -15,8 +15,8 @@ public class GearSlot extends Subsystem {
 
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
-	private Solenoid gearSlot = new Solenoid(1);
-	private Solenoid ejectMechanism = new Solenoid(2);
+	//private Solenoid gearSlot = new Solenoid(1);
+	//private Solenoid ejectMechanism = new Solenoid(2);
 
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.
