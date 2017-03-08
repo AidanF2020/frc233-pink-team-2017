@@ -24,7 +24,7 @@ public class AutoGearRoutine3 extends CommandGroup {
 			addSequential(new PinkNavigate(-72.5, 0, 1));
 			
 			//turn 60 degrees to back up to tip of peg
-			addSequential(new RotateBase(-60));
+			addSequential(new PinkNavigate(-72.5, -60, 1));
 			//addSequential(new PinkNavigate(-72.5, -60, 1));
 			addSequential(new PinkNavigate(-99, -60, 0.5));
 			//addSequential(new PinkNavigate(-96.5, -60, 0.7));
@@ -43,7 +43,7 @@ public class AutoGearRoutine3 extends CommandGroup {
 			addSequential(new PinkNavigate(-72.5, 0, 1));
 			
 			//turn 60 degrees to back up to tip of peg
-			addSequential(new RotateBase(60));
+			addSequential(new PinkNavigate(-72.5, 60, 1));
 			//addSequential(new PinkNavigate(-72.5, -60, 1));
 			addSequential(new PinkNavigate(-99, 60, 0.5));
 			//addSequential(new PinkNavigate(-96.5, -60, 0.7));

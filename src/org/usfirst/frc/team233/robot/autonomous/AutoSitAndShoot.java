@@ -36,7 +36,7 @@ public class AutoSitAndShoot extends CommandGroup {
 			//drive over line
 			addSequential(new PinkNavigate(-24, 0, 1.0));
 			addSequential(new PinkNavigate(300, -90, 1.0));
-			addSequential(new RotateBase(0));
+			addSequential(new PinkNavigate(300, 0, 1.0));
 			addSequential(new PinkNavigate(360, 0, 1.0));
 
 		} else {
@@ -50,7 +50,7 @@ public class AutoSitAndShoot extends CommandGroup {
 			
 			//cross line
 			addSequential(new PinkNavigate(-324, -45, 1.0));
-			addSequential(new RotateBase(45));
+			addSequential(new PinkNavigate(-324, 45, 1.0));
 			addSequential(new PinkNavigate(-288, 45, 1.0));
 			//addSequential(new PinkNavigate(-324, 45, 1.0));
 			//addSequential(new PinkNavigate(-324, 45, 1.0));

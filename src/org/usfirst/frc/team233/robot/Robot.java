@@ -106,12 +106,12 @@ public class Robot extends IterativeRobot {
 		chooser.addObject("RED Gear Right", new AutoGearRoutine3(false));
 		
 		chooser.addObject("BLUE Gear Right", new AutoGearRoutine1(true));
-		chooser.addObject("BLUE Gear Center", new AutoGearRoutine2(true));
+		chooser.addDefault("BLUE Gear Center", new AutoGearRoutine2(true));
 		chooser.addObject("BLUE Gear Left", new AutoGearRoutine3(true));
 		
-		chooser.addDefault("Auto Shoot Routine 1", new AutoShootRoutine1());
-		chooser.addDefault("BLUE Sit and Shoot", new AutoSitAndShoot(true));
-		chooser.addDefault("RED Sit and Shoot", new AutoSitAndShoot(false));
+		chooser.addObject("Auto Shoot Routine 1", new AutoShootRoutine1());
+		chooser.addObject("BLUE Sit and Shoot", new AutoSitAndShoot(true));
+		chooser.addObject("RED Sit and Shoot", new AutoSitAndShoot(false));
 		
 		//delay options
 		delay.addDefault("0 sec", new Double(0));
