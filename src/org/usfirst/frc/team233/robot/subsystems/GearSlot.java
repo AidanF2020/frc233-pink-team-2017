@@ -20,7 +20,9 @@ public class GearSlot extends Subsystem {
     // here. Call these from Commands.
 	private Solenoid gearSolenoid = new Solenoid(RobotMap.gearSlotSolenoidPort);
 	private Solenoid ejectorSolenoid = new Solenoid(RobotMap.ejectorSolenoidPort);
-	public double delay = 1.0;
+	
+	// Global delay for gear eject action
+	private double delay = 0.5; //
 
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.
@@ -71,7 +73,7 @@ public class GearSlot extends Subsystem {
      * 					the gear is ejected
      */
 //    public void fullActionEject(double delay) {
-        public void fullActionEject() {
+    public void fullActionEject() {
     	gearSolenoid.set(true);
     	Timer.delay(delay);
     	ejectorSolenoid.set(true);
