@@ -25,6 +25,10 @@ import org.usfirst.frc.team233.robot.subsystems.Lights;
 import org.usfirst.frc.team233.robot.subsystems.Lights.LightingType;
 import org.usfirst.frc.team233.robot.subsystems.RopeClimber;
 import org.usfirst.frc.team233.robot.subsystems.GearSlot;
+import org.usfirst.frc.team233.robot.OI;
+
+import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.buttons.JoystickButton;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -140,7 +144,6 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void disabledPeriodic() {
 		delayTime = SmartDashboard.getNumber("Autonomous delay", delayTime);
-//		SmartDashboard.putNumber("Autonomous delay", delayTime);
 		Scheduler.getInstance().run();
 	}
 

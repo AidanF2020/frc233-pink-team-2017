@@ -21,8 +21,8 @@ import edu.wpi.first.wpilibj.buttons.JoystickButton;
  * interface to the commands and command groups that allow control of the robot.
  */
 public class OI {
-	private Joystick base = new Joystick(RobotMap.baseJoystickPort);
-	private Joystick shooter = new Joystick(RobotMap.shooterJoystickPort);
+	public Joystick base = new Joystick(RobotMap.baseJoystickPort);
+	public Joystick shooter = new Joystick(RobotMap.shooterJoystickPort);
 	
 	public OI() {
 		// TODO Auto-generated constructor stub
@@ -60,9 +60,7 @@ public class OI {
 		JoystickButton shooterleftJoystickPress = new JoystickButton(shooter, 11);
 		JoystickButton shooterrightJoystickPress = new JoystickButton(shooter, 12);
 		int shooterDpad = shooter.getPOV();
-		
-		
-		
+
 		//==========================================
 		//		Map Joysticks to Commands
 		//==========================================

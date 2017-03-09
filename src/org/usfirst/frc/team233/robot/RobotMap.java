@@ -83,8 +83,8 @@ public class RobotMap {
 	//============================================
 	// 		GEAR SLOT VARIABLES
 	//============================================
-	public static int gearSlotSolenoidPort = 1;
-	public static int ejectorSolenoidPort = 2;
+	public static int gearSlotSolenoidPort = 7;
+	public static int ejectorSolenoidPort = 6;
 	
 	
 	//============================================
