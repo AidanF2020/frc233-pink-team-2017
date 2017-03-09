@@ -68,7 +68,7 @@ public class Robot extends IterativeRobot {
 		ropeClimber = new RopeClimber();
 		hopper = new Hopper();
 		lights = new Lights();
-//		gearSlot = new GearSlot();
+		gearSlot = new GearSlot();
 		oi = new OI();
 		pdPanel = new PowerDistributionPanel(RobotMap.pdpDeviceID);
 		pdPanel.resetTotalEnergy();

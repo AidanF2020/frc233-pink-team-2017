@@ -10,6 +10,7 @@ public class GearCommand extends Command {
 		OPEN_SLOT,
 		CLOSE_SLOT,
 		EJECT_GEAR,
+		RETRACT_EJECTOR,
 		RESET;
 	}
 	
@@ -17,7 +18,7 @@ public class GearCommand extends Command {
 	
     public GearCommand(GearAction action) {
         // Use requires() here to declare subsystem dependencies
-        //requires(Robot.gearSlot);
+    	requires(Robot.gearSlot);
     	this.action = action;
     }
 
@@ -29,17 +30,23 @@ public class GearCommand extends Command {
     protected void execute() {
     	switch (action) {
 			case OPEN_SLOT:
-				//gearSlot.openGearSlot();
+				Robot.gearSlot.openGearSlot();
 				break;
+				
 			case CLOSE_SLOT:
-				//gearSlot.closeGearSlot();
+				Robot.gearSlot.closeGearSlot();
 				break;
+				
 			case EJECT_GEAR:
-				//gearSlot.ejectGear();
+				Robot.gearSlot.ejectGear();
+				break;
+				
+			case RETRACT_EJECTOR:
+				Robot.gearSlot.retractEjecter();
 				break;
 
 			default:
-				//gearSlot.resetGearSlot();
+				Robot.gearSlot.resetGearSlot();
 				break;
 		}
     }

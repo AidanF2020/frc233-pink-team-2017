@@ -1,6 +1,9 @@
 package org.usfirst.frc.team233.robot.subsystems;
 
+import org.usfirst.frc.team233.robot.RobotMap;
+
 import edu.wpi.first.wpilibj.Solenoid;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
@@ -15,12 +18,11 @@ public class GearSlot extends Subsystem {
 
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
-	//private Solenoid gearSlot = new Solenoid(1);
-	//private Solenoid ejectMechanism = new Solenoid(2);
+	private Solenoid gearSolenoid = new Solenoid(RobotMap.gearSlotSolenoidPort);
+	private Solenoid ejectorSolenoid = new Solenoid(RobotMap.ejectorSolenoidPort);
 
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.
-        //setDefaultCommand(new MySpecialCommand());
     }
     
     /**
@@ -29,7 +31,7 @@ public class GearSlot extends Subsystem {
      */
     public void openGearSlot() {
     	// Code for opening the gear slot
-    	//gearSlot.set(true);
+    	gearSolenoid.set(true);
     }
 
     /**
@@ -38,7 +40,7 @@ public class GearSlot extends Subsystem {
      */
     public void closeGearSlot() {
     	// Code for closing the gear slot
-    	//gearSlot.set(false);
+    	gearSolenoid.set(false);
     }
     
     /**
@@ -48,13 +50,37 @@ public class GearSlot extends Subsystem {
      */
     public void ejectGear() {
     	// Code to eject gear
+    	ejectorSolenoid.set(true);
+    }
+    
+    /**
+     * Retract the gear ejector mechanism to it's 
+     * original state.
+     */
+    public void retractEjecter() {
+    	ejectorSolenoid.set(false);
+    }
+     
+    /**
+     * This is an auxiliary method that already implements
+     * an possible behavior if the gear slot needs to 
+     * open before ejecting the gear. 
+     * 
+     * @param delay		specifies the required delay before 
+     * 					the gear is ejected
+     */
+    public void fullActionEject(double delay) {
+    	gearSolenoid.set(true);
+    	Timer.delay(delay);
+    	ejectorSolenoid.set(true);
     }
     
     /**
      * Reset the gear slot mechanism
      */
     public void resetGearSlot() {
-    	
+    	gearSolenoid.set(false);
+    	ejectorSolenoid.set(false);
     }
 }
 

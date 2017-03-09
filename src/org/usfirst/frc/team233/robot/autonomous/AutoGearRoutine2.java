@@ -23,8 +23,12 @@ public class AutoGearRoutine2 extends CommandGroup {
 			addSequential(new PinkNavigate(-66, 0, 0.7));		
 			//ease onto spear
 			addSequential(new PinkNavigate(-68, 0, 0.6));
+			
 			// go forward off of spear and hopper
-			addSequential(new WaitCommand(3));
+			//addParallel(new GearCommand(GearAction.EJECT_GEAR));
+			addSequential(new WaitCommand(2.0));
+			//addParallel(new GearCommand(GearAction.RETRACT_EJECTOR));
+			
 			addSequential(new PinkNavigate(-14, 0, 0.7)); // Don't go all the way to the end to turn
 			addSequential(new PinkNavigate(-14, -135, 0.8));
 			addSequential(new PinkNavigate(176, -135, 1));
@@ -40,8 +44,12 @@ public class AutoGearRoutine2 extends CommandGroup {
 			addSequential(new PinkNavigate(-66, 0, 0.7));		
 			//ease onto spear
 			addSequential(new PinkNavigate(-68, 0, 0.6));
+			
 			// go forward off of spear and hopper
-			addSequential(new WaitCommand(3));
+			//addParallel(new GearCommand(GearAction.EJECT_GEAR));
+			addSequential(new WaitCommand(2.0));
+			//addParallel(new GearCommand(GearAction.RETRACT_EJECTOR));
+			
 			addSequential(new PinkNavigate(-14, 0, 0.7)); // Don't go all the way to the end to turn
 			addSequential(new PinkNavigate(-14, 135, 0.8));
 			addSequential(new PinkNavigate(176, 135, 1));
