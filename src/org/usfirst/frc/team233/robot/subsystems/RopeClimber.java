@@ -2,6 +2,7 @@ package org.usfirst.frc.team233.robot.subsystems;
 
 import org.usfirst.frc.team233.robot.Robot;
 import org.usfirst.frc.team233.robot.RobotMap;
+import org.usfirst.frc.team233.robot.commands.GearCommand;
 
 import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.Talon;
@@ -34,6 +35,7 @@ public class RopeClimber extends Subsystem {
 		// no backspinning
 		climberMotor.set(Math.abs(RobotMap.ropeClimberSpeed));
 		climberMotor2.set(Math.abs(RobotMap.ropeClimberSpeed));
+		Robot.gearSlot.closeGearSlot();
 	}
 	
 	public void stopClimbingRope() {
