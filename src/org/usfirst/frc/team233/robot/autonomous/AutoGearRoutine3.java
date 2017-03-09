@@ -18,13 +18,14 @@ public class AutoGearRoutine3 extends CommandGroup {
 
 	public AutoGearRoutine3(boolean isBlueAlliance){
 		if(!isBlueAlliance){
+			addSequential(new WaitCommand(Robot.delayTime));
 			/* RED ALLIANCE AUTONOMOUS CODE */
 			
 			//addSequential(new WaitCommand(Robot.delayTime));
 			addSequential(new PinkNavigate(-72.5, 0, 1));
 			
 			//turn 60 degrees to back up to tip of peg
-			addSequential(new PinkNavigate(-72.5, -60, 1));
+			addSequential(new PinkNavigate(-72.5, -60, 0.8));
 			//addSequential(new PinkNavigate(-72.5, -60, 1));
 			addSequential(new PinkNavigate(-99, -60, 0.5));
 			//addSequential(new PinkNavigate(-96.5, -60, 0.7));
@@ -39,11 +40,11 @@ public class AutoGearRoutine3 extends CommandGroup {
 			
 		} else {
 			/* BLUE ALLIANCE AUTONOMOUS CODE */
-			//addSequential(new WaitCommand(Robot.delayTime));
+			addSequential(new WaitCommand(Robot.delayTime));
 			addSequential(new PinkNavigate(-72.5, 0, 1));
 			
 			//turn 60 degrees to back up to tip of peg
-			addSequential(new PinkNavigate(-72.5, 60, 1));
+			addSequential(new PinkNavigate(-72.5, 60, 0.8));
 			//addSequential(new PinkNavigate(-72.5, -60, 1));
 			addSequential(new PinkNavigate(-99, 60, 0.5));
 			//addSequential(new PinkNavigate(-96.5, -60, 0.7));

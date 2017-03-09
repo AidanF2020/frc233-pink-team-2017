@@ -159,8 +159,9 @@ public class Robot extends IterativeRobot {
 	public void autonomousInit() {
 //		delayTime = SmartDashboard.getNumber("Autonomous delay", delayTime);
 		System.out.println("AutoInit");
-		autonomousCommand = chooser.getSelected();
 		delayTime = delay.getSelected().doubleValue();
+		setupAutonomousList();		
+		autonomousCommand = chooser.getSelected();
 		drivetrain.resetGyro();
 		drivetrain.resetEncoders();
 		drivetrain.setDriveTrainSafety(false);

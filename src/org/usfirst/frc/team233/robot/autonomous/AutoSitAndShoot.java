@@ -26,7 +26,7 @@ public class AutoSitAndShoot extends CommandGroup {
 		
 		if(!isBlueAlliance){
 			/*RED ALLIANCE SIDE -- SHOOTER CLOSER TO WALL*/
-			
+			addSequential(new WaitCommand(Robot.delayTime));
 			//line up however we want & shoot immediately
 			addParallel(new Shoot(ShooterAction.SHOOT, shootingSpeed));
 			//addParallel(new PinkNavigate(0, 0, 0.7, true));
@@ -41,7 +41,7 @@ public class AutoSitAndShoot extends CommandGroup {
 
 		} else {
 			/*BLUE ALLIANCE SIDE -- SHOOTER AWAY FROM WALL*/
-	
+			addSequential(new WaitCommand(Robot.delayTime));
 			//line up however we want & shoot immediately
 			addParallel(new Shoot(ShooterAction.SHOOT, shootingSpeed));
 			//addParallel(new PinkNavigate(0, 0, 0.7, true));
