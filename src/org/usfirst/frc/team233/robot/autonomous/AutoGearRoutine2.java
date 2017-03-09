@@ -21,9 +21,9 @@ public class AutoGearRoutine2 extends CommandGroup {
 			/* RED ALLIANCE AUTONOMOUS CODE */
 			addSequential(new WaitCommand(Robot.delayTime));
 			// back up to spring tip2
-			addSequential(new PinkNavigate(-66, 0, 0.7));		
+			addSequential(new PinkNavigate(-64, 0, 0.7));		
 			//ease onto spear
-			addSequential(new PinkNavigate(-68, 0, 0.6));
+			addSequential(new PinkNavigate(-66, 0, 0.6));
 			
 			// go forward off of spear and hopper
 			addSequential(new GearCommand(GearAction.EJECT_GEAR));
@@ -43,9 +43,9 @@ public class AutoGearRoutine2 extends CommandGroup {
 			/* BLUE ALLIANCE AUTONOMOUS CODE */
 			addSequential(new WaitCommand(Robot.delayTime));
 			// back up to spring tip2
-			addSequential(new PinkNavigate(-66, 0, 0.7));		
+			addSequential(new PinkNavigate(-64, 0, 0.7));		
 			//ease onto spear
-			addSequential(new PinkNavigate(-68, 0, 0.6));
+			addSequential(new PinkNavigate(-66, 0, 0.6));
 			
 			// go forward off of spear and hopper
 			addParallel(new GearCommand(GearAction.EJECT_GEAR));

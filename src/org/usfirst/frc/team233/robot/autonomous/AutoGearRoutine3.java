@@ -26,7 +26,7 @@ public class AutoGearRoutine3 extends CommandGroup {
 			
 			//turn 60 degrees to back up to tip of peg
 			addSequential(new PinkNavigate(-72.5, -60, 0.8));
-			addSequential(new PinkNavigate(-99, -60, 0.5));
+			addSequential(new PinkNavigate(-97, -60, 0.5));
 			addParallel(new GearCommand(GearAction.EJECT_GEAR));
 			addSequential(new WaitCommand(Robot.gearSlot.getDelay()));
 			//addSequential(new WaitCommand(2.0));
@@ -46,7 +46,7 @@ public class AutoGearRoutine3 extends CommandGroup {
 			
 			//turn 60 degrees to back up to tip of peg
 			addSequential(new PinkNavigate(-72.5, 60, 0.8));
-			addSequential(new PinkNavigate(-99, 60, 0.5));
+			addSequential(new PinkNavigate(-97, 60, 0.5));
 			addSequential(new GearCommand(GearAction.EJECT_GEAR));
 			addSequential(new WaitCommand(Robot.gearSlot.getDelay()));
 			//addSequential(new WaitCommand(2.0));
