@@ -28,6 +28,7 @@ public class AutoGearRoutine1 extends CommandGroup {
 			addSequential(new PinkNavigate(-72.5, 60, 0.8));
 			addSequential(new PinkNavigate(-99, 60, 0.5));
 			//addParallel(new GearCommand(GearAction.EJECT_GEAR));
+			//addSequential(new WaitCommand(Robot.gearSlot.getDelay()));
 			addSequential(new WaitCommand(2.0));
 			//addParallel(new GearCommand(GearAction.RETRACT_EJECTOR));
 
@@ -49,6 +50,7 @@ public class AutoGearRoutine1 extends CommandGroup {
 			addSequential(new PinkNavigate(-72.5, -60, 0.8));
 			addSequential(new PinkNavigate(-99, -60, 0.5));
 			//addParallel(new GearCommand(GearAction.EJECT_GEAR));
+			//addSequential(new WaitCommand(Robot.gearSlot.getDelay()));
 			addSequential(new WaitCommand(2.0));
 			//addParallel(new GearCommand(GearAction.RETRACT_EJECTOR));
 

@@ -26,6 +26,7 @@ public class AutoGearRoutine2 extends CommandGroup {
 			
 			// go forward off of spear and hopper
 			//addParallel(new GearCommand(GearAction.EJECT_GEAR));
+			//addSequential(new WaitCommand(Robot.gearSlot.getDelay()));
 			addSequential(new WaitCommand(2.0));
 			//addParallel(new GearCommand(GearAction.RETRACT_EJECTOR));
 			
@@ -47,6 +48,7 @@ public class AutoGearRoutine2 extends CommandGroup {
 			
 			// go forward off of spear and hopper
 			//addParallel(new GearCommand(GearAction.EJECT_GEAR));
+			//addSequential(new WaitCommand(Robot.gearSlot.getDelay()));
 			addSequential(new WaitCommand(2.0));
 			//addParallel(new GearCommand(GearAction.RETRACT_EJECTOR));
 			
