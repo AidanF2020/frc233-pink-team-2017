@@ -4,7 +4,8 @@ import org.usfirst.frc.team233.robot.Robot;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 import edu.wpi.first.wpilibj.command.WaitCommand;
-
+import org.usfirst.frc.team233.robot.commands.GearCommand;
+import org.usfirst.frc.team233.robot.commands.GearCommand.GearAction;
 /**
  * Autonomous gear routine starting @ middle position
  * Red Alliance SideS
@@ -25,10 +26,10 @@ public class AutoGearRoutine2 extends CommandGroup {
 			addSequential(new PinkNavigate(-68, 0, 0.6));
 			
 			// go forward off of spear and hopper
-			//addParallel(new GearCommand(GearAction.EJECT_GEAR));
-			//addSequential(new WaitCommand(Robot.gearSlot.getDelay()));
-			addSequential(new WaitCommand(2.0));
-			//addParallel(new GearCommand(GearAction.RETRACT_EJECTOR));
+			addSequential(new GearCommand(GearAction.EJECT_GEAR));
+			addSequential(new WaitCommand(Robot.gearSlot.getDelay()));
+			//addSequential(new WaitCommand(2.0));
+			addParallel(new GearCommand(GearAction.RETRACT_EJECTOR));
 			
 			addSequential(new PinkNavigate(-14, 0, 0.7)); // Don't go all the way to the end to turn
 			addSequential(new PinkNavigate(-14, -135, 0.8));
@@ -47,10 +48,10 @@ public class AutoGearRoutine2 extends CommandGroup {
 			addSequential(new PinkNavigate(-68, 0, 0.6));
 			
 			// go forward off of spear and hopper
-			//addParallel(new GearCommand(GearAction.EJECT_GEAR));
-			//addSequential(new WaitCommand(Robot.gearSlot.getDelay()));
-			addSequential(new WaitCommand(2.0));
-			//addParallel(new GearCommand(GearAction.RETRACT_EJECTOR));
+			addParallel(new GearCommand(GearAction.EJECT_GEAR));
+			addSequential(new WaitCommand(Robot.gearSlot.getDelay()));
+			//addSequential(new WaitCommand(2.0));
+			addParallel(new GearCommand(GearAction.RETRACT_EJECTOR));
 			
 			addSequential(new PinkNavigate(-14, 0, 0.7)); // Don't go all the way to the end to turn
 			addSequential(new PinkNavigate(-14, 135, 0.8));
