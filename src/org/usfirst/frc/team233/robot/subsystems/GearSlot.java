@@ -46,6 +46,20 @@ public class GearSlot extends Subsystem {
     	gearSolenoid.set(false);
     }
     
+    
+    /**
+     * This method will toggle the gear slot
+     * mechanism to either open or close.
+     */
+    public void toggleGearSlot() {
+    	if (gearSolenoid.get()) {
+    		closeGearSlot();
+    	}
+    	else {
+    		openGearSlot();
+    	}
+    }
+    
     /**
      * This method implements the code logic needed
      * to eject the gear once the slot doors

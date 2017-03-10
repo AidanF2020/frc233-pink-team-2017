@@ -11,7 +11,8 @@ public class GearCommand extends Command {
 		CLOSE_SLOT,
 		EJECT_GEAR,
 		RETRACT_EJECTOR,
-		RESET;
+		RESET,
+		TOGGLE;
 	}
 	
 	GearAction action;
@@ -43,6 +44,10 @@ public class GearCommand extends Command {
 				
 			case RETRACT_EJECTOR:
 				Robot.gearSlot.retractEjecter();
+				break;
+				
+			case TOGGLE:
+				Robot.gearSlot.toggleGearSlot();
 				break;
 
 			default:
