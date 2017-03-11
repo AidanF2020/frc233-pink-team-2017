@@ -38,6 +38,7 @@ public class ClimbCommand extends Command {
 	
 			default:
 				Robot.ropeClimber.stopClimbingRope();
+				//Robot.ropeClimber.holdPos();
 				Robot.lights.activateLights(LightingType.rainbow);
 			break;
 		}

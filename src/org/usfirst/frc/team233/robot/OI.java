@@ -83,8 +83,8 @@ public class OI {
 		shooterY.whileHeld(new ClimbCommand(ClimberAction.CLIMB));
 		shooterY.whenReleased(new ClimbCommand(ClimberAction.STOP));
 		
-		shooterA.whileHeld(new GearCommand(GearAction.OPEN_SLOT));
-		//shooterA.whenPressed(new GearCommand(GearAction.OPEN_SLOT));
+		//shooterA.whileHeld(new GearCommand(GearAction.OPEN_SLOT));
+		shooterA.whenPressed(new GearCommand(GearAction.OPEN_SLOT));
 		shooterA.whenReleased(new GearCommand(GearAction.CLOSE_SLOT));
 		
 		shooterLeftTrigger.whileHeld(new GearCommand(GearAction.EJECT_GEAR));

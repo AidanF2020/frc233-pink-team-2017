@@ -47,6 +47,11 @@ public class RopeClimber extends Subsystem {
  		climberMotor.set(-0.5);
  		climberMotor2.set(-0.5);
  	}
+
+ 	public void holdPos(){
+ 		climberMotor.set(0.05);
+ 		climberMotor2.set(0.05);
+ 	}
 	
 	
 

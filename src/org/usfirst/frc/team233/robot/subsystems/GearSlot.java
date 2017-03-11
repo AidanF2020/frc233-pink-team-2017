@@ -22,7 +22,7 @@ public class GearSlot extends Subsystem {
 	private Solenoid ejectorSolenoid = new Solenoid(RobotMap.ejectorSolenoidPort);
 	
 	// Global delay for gear eject action
-	private double delay = 0.5; //
+	private double delay = 1.0; //
 
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.

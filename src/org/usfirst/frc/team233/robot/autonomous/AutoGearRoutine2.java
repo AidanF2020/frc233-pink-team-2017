@@ -21,9 +21,9 @@ public class AutoGearRoutine2 extends CommandGroup {
 			/* RED ALLIANCE AUTONOMOUS CODE */
 			addSequential(new WaitCommand(Robot.delayTime));
 			// back up to spring tip2
-			addSequential(new PinkNavigate(-64, 0, 0.7));		
+			addSequential(new PinkNavigate(-67, 0, 0.7));		
 			//ease onto spear
-			addSequential(new PinkNavigate(-66, 0, 0.6));
+			addSequential(new PinkNavigate(-69, 0, 0.6));
 			
 			// go forward off of spear and hopper
 			addSequential(new GearCommand(GearAction.EJECT_GEAR));
@@ -34,7 +34,7 @@ public class AutoGearRoutine2 extends CommandGroup {
 			addSequential(new PinkNavigate(-14, 0, 0.7)); // Don't go all the way to the end to turn
 			addSequential(new PinkNavigate(-14, -135, 0.8));
 			addSequential(new PinkNavigate(176, -135, 1));
-			addSequential(new PinkNavigate(176, -180, 0.8));
+			addSequential(new PinkNavigate(176, -180, 1));
 			addSequential(new PinkNavigate(178, -180, 0.7));
 			addSequential(new PinkNavigate(178, -90, 0.7, true));
 			
@@ -43,9 +43,9 @@ public class AutoGearRoutine2 extends CommandGroup {
 			/* BLUE ALLIANCE AUTONOMOUS CODE */
 			addSequential(new WaitCommand(Robot.delayTime));
 			// back up to spring tip2
-			addSequential(new PinkNavigate(-64, 0, 0.7));		
+			addSequential(new PinkNavigate(-67, 0, 0.7));		
 			//ease onto spear
-			addSequential(new PinkNavigate(-66, 0, 0.6));
+			addSequential(new PinkNavigate(-69, 0, 0.6));
 			
 			// go forward off of spear and hopper
 			addParallel(new GearCommand(GearAction.EJECT_GEAR));
@@ -54,9 +54,9 @@ public class AutoGearRoutine2 extends CommandGroup {
 			addParallel(new GearCommand(GearAction.RETRACT_EJECTOR));
 			
 			addSequential(new PinkNavigate(-14, 0, 0.7)); // Don't go all the way to the end to turn
-			addSequential(new PinkNavigate(-14, 135, 0.8));
+			addSequential(new PinkNavigate(-14, 135, 1));
 			addSequential(new PinkNavigate(176, 135, 1));
-			addSequential(new PinkNavigate(176, 180, 0.8));
+			addSequential(new PinkNavigate(176, 180, 1));
 			addSequential(new PinkNavigate(178, 180, 0.7));
 			addSequential(new PinkNavigate(178, 90, 1, true));
 			

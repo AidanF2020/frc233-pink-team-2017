@@ -10,7 +10,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class PinkNavigate extends Command {
 	static final double POSITION_THRESHOLD = 0.5; // Distance (Inches)
 	static final double ANGLE_THRESHOLD = 3.0; // Degrees
-	static final double ANGLE_KP = 0.03;
+	static final double ANGLE_KP = 0.033;
 	static final double BASE_KP = 0.35;
 	
 	private boolean looping;

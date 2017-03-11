@@ -34,10 +34,10 @@ public class AutoSitAndShoot extends CommandGroup {
 			addSequential(new Shoot(ShooterAction.CEASEFIRE));
 			
 			//drive over line
-			addSequential(new PinkNavigate(-24, 0, 1.0));
-			addSequential(new PinkNavigate(300, -90, 1.0));
-			addSequential(new PinkNavigate(300, 0, 1.0));
-			addSequential(new PinkNavigate(360, 0, 1.0));
+			addSequential(new PinkNavigate(-24, 0, 1.0, false));
+			addSequential(new PinkNavigate(300, -90, 1.0, false));
+			addSequential(new PinkNavigate(300, 0, 1.0, false));
+			addSequential(new PinkNavigate(360, 0, 1.0, true));
 
 		} else {
 			/*BLUE ALLIANCE SIDE -- SHOOTER AWAY FROM WALL*/
@@ -49,9 +49,9 @@ public class AutoSitAndShoot extends CommandGroup {
 			addSequential(new Shoot(ShooterAction.CEASEFIRE));
 			
 			//cross line
-			addSequential(new PinkNavigate(-324, -45, 1.0));
-			addSequential(new PinkNavigate(-324, 45, 1.0));
-			addSequential(new PinkNavigate(-288, 45, 1.0));
+			addSequential(new PinkNavigate(-324, -45, 1.0, false));
+			addSequential(new PinkNavigate(-324, 45, 1.0, false));
+			addSequential(new PinkNavigate(-288, 45, 1.0, true));
 			//addSequential(new PinkNavigate(-324, 45, 1.0));
 			//addSequential(new PinkNavigate(-324, 45, 1.0));
 			//addSequential(new PinkNavigate());

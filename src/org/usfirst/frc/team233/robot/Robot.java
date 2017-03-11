@@ -16,6 +16,8 @@ import org.usfirst.frc.team233.robot.autonomous.AutoGearRoutine2;
 import org.usfirst.frc.team233.robot.autonomous.AutoGearRoutine3;
 import org.usfirst.frc.team233.robot.autonomous.AutoShootRoutine1;
 import org.usfirst.frc.team233.robot.autonomous.AutoSitAndShoot;
+import org.usfirst.frc.team233.robot.commands.GearCommand;
+import org.usfirst.frc.team233.robot.commands.GearCommand.GearAction;
 import org.usfirst.frc.team233.robot.subsystems.BallCollector;
 import org.usfirst.frc.team233.robot.subsystems.DriveTrain;
 import org.usfirst.frc.team233.robot.subsystems.Flywheel;
@@ -168,7 +170,12 @@ public class Robot extends IterativeRobot {
 		drivetrain.resetGyro();
 		drivetrain.resetEncoders();
 		drivetrain.setDriveTrainSafety(false);
-		
+		Robot.gearSlot.closeGearSlot();
+		Robot.gearSlot.retractEjecter();
+		Robot.drivetrain.shiftGears(false);
+		flywheel.flywheelMotor.set(0);
+		indexer.indexer.set(0);
+		hopper.stopAgitate();
 		/*
 		 * String autoSelected = SmartDashboard.getString("Auto Selector",
 		 * "Default"); switch(autoSelected) { case "My Auto": autonomousCommand
@@ -205,6 +212,14 @@ public class Robot extends IterativeRobot {
 		drivetrain.resetEncoders();
 		flywheel.resetEncoder();
 		drivetrain.setDriveTrainSafety(true);
+		Robot.gearSlot.retractEjecter();
+		Robot.gearSlot.closeGearSlot();
+		Robot.drivetrain.shiftGears(false);
+		flywheel.flywheelMotor.set(0);
+		indexer.indexer.set(0);
+		hopper.stopAgitate();
+		
+		
 		//Scheduler.getInstance().enable();
 		//Scheduler.getInstance().removeAll();
 		//Scheduler.getInstance().add(tankDrive);
