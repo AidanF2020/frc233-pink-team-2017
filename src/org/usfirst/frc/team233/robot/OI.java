@@ -4,6 +4,8 @@ import org.usfirst.frc.team233.robot.commands.ClimbCommand;
 import org.usfirst.frc.team233.robot.commands.ClimbCommand.ClimberAction;
 import org.usfirst.frc.team233.robot.commands.CollectorCommand;
 import org.usfirst.frc.team233.robot.commands.CollectorCommand.CollectorAction;
+import org.usfirst.frc.team233.robot.commands.GearCommand;
+import org.usfirst.frc.team233.robot.commands.GearCommand.GearAction;
 import org.usfirst.frc.team233.robot.commands.ResetFlywheel;
 import org.usfirst.frc.team233.robot.commands.ShiftGear;
 import org.usfirst.frc.team233.robot.commands.ShiftGear.ShiftAction;
@@ -19,8 +21,8 @@ import edu.wpi.first.wpilibj.buttons.JoystickButton;
  * interface to the commands and command groups that allow control of the robot.
  */
 public class OI {
-	private Joystick base = new Joystick(RobotMap.baseJoystickPort);
-	private Joystick shooter = new Joystick(RobotMap.shooterJoystickPort);
+	public Joystick base = new Joystick(RobotMap.baseJoystickPort);
+	public Joystick shooter = new Joystick(RobotMap.shooterJoystickPort);
 	
 	public OI() {
 		// TODO Auto-generated constructor stub
@@ -58,9 +60,7 @@ public class OI {
 		JoystickButton shooterleftJoystickPress = new JoystickButton(shooter, 11);
 		JoystickButton shooterrightJoystickPress = new JoystickButton(shooter, 12);
 		int shooterDpad = shooter.getPOV();
-		
-		
-		
+
 		//==========================================
 		//		Map Joysticks to Commands
 		//==========================================
@@ -70,7 +70,7 @@ public class OI {
 		shooterRightBumper.whileHeld(new Shoot(ShooterAction.SHOOT));
 		shooterRightBumper.whenReleased(new Shoot(ShooterAction.CEASEFIRE));
 		
-		shooterY.whenPressed(new ResetFlywheel());
+		shooterStart.whenPressed(new ResetFlywheel());
 		
 		rightTrigger.whileHeld(new CollectorCommand(CollectorAction.COLLECT));
 		rightTrigger.whenReleased(new CollectorCommand(CollectorAction.STOP));
@@ -82,6 +82,13 @@ public class OI {
 		
 		shooterY.whileHeld(new ClimbCommand(ClimberAction.CLIMB));
 		shooterY.whenReleased(new ClimbCommand(ClimberAction.STOP));
+		
+		//shooterA.whileHeld(new GearCommand(GearAction.OPEN_SLOT));
+		shooterA.whenPressed(new GearCommand(GearAction.OPEN_SLOT));
+		shooterA.whenReleased(new GearCommand(GearAction.CLOSE_SLOT));
+		
+		shooterLeftTrigger.whileHeld(new GearCommand(GearAction.EJECT_GEAR));
+		shooterLeftTrigger.whenReleased(new GearCommand(GearAction.RETRACT_EJECTOR));
 		
 //		x.whileHeld(new Shoot(ShooterAction.TEST_I_UP));
 //		x.whenReleased(new Shoot(ShooterAction.TEST_I_DOWN));

@@ -16,6 +16,8 @@ import org.usfirst.frc.team233.robot.autonomous.AutoGearRoutine2;
 import org.usfirst.frc.team233.robot.autonomous.AutoGearRoutine3;
 import org.usfirst.frc.team233.robot.autonomous.AutoShootRoutine1;
 import org.usfirst.frc.team233.robot.autonomous.AutoSitAndShoot;
+import org.usfirst.frc.team233.robot.commands.GearCommand;
+import org.usfirst.frc.team233.robot.commands.GearCommand.GearAction;
 import org.usfirst.frc.team233.robot.subsystems.BallCollector;
 import org.usfirst.frc.team233.robot.subsystems.DriveTrain;
 import org.usfirst.frc.team233.robot.subsystems.Flywheel;
@@ -24,6 +26,11 @@ import org.usfirst.frc.team233.robot.subsystems.Indexer;
 import org.usfirst.frc.team233.robot.subsystems.Lights;
 import org.usfirst.frc.team233.robot.subsystems.Lights.LightingType;
 import org.usfirst.frc.team233.robot.subsystems.RopeClimber;
+import org.usfirst.frc.team233.robot.subsystems.GearSlot;
+import org.usfirst.frc.team233.robot.OI;
+
+import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.buttons.JoystickButton;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -42,6 +49,7 @@ public class Robot extends IterativeRobot {
 	public static BallCollector ballCollector;
 	public static RopeClimber ropeClimber;
 	public static Hopper hopper;
+	public static GearSlot gearSlot;
 	public static OI oi;
 	public static PowerDistributionPanel pdPanel;
 	public static Lights lights;
@@ -66,6 +74,7 @@ public class Robot extends IterativeRobot {
 		ropeClimber = new RopeClimber();
 		hopper = new Hopper();
 		lights = new Lights();
+		gearSlot = new GearSlot();
 		oi = new OI();
 		pdPanel = new PowerDistributionPanel(RobotMap.pdpDeviceID);
 		pdPanel.resetTotalEnergy();
@@ -137,7 +146,6 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void disabledPeriodic() {
 		delayTime = SmartDashboard.getNumber("Autonomous delay", delayTime);
-//		SmartDashboard.putNumber("Autonomous delay", delayTime);
 		Scheduler.getInstance().run();
 	}
 
@@ -156,12 +164,18 @@ public class Robot extends IterativeRobot {
 	public void autonomousInit() {
 //		delayTime = SmartDashboard.getNumber("Autonomous delay", delayTime);
 		System.out.println("AutoInit");
-		autonomousCommand = chooser.getSelected();
 		delayTime = delay.getSelected().doubleValue();
+		setupAutonomousList();		
+		autonomousCommand = chooser.getSelected();
 		drivetrain.resetGyro();
 		drivetrain.resetEncoders();
 		drivetrain.setDriveTrainSafety(false);
-		
+		Robot.gearSlot.closeGearSlot();
+		Robot.gearSlot.retractEjecter();
+		Robot.drivetrain.shiftGears(false);
+		flywheel.flywheelMotor.set(0);
+		indexer.indexer.set(0);
+		hopper.stopAgitate();
 		/*
 		 * String autoSelected = SmartDashboard.getString("Auto Selector",
 		 * "Default"); switch(autoSelected) { case "My Auto": autonomousCommand
@@ -198,6 +212,14 @@ public class Robot extends IterativeRobot {
 		drivetrain.resetEncoders();
 		flywheel.resetEncoder();
 		drivetrain.setDriveTrainSafety(true);
+		Robot.gearSlot.retractEjecter();
+		Robot.gearSlot.closeGearSlot();
+		Robot.drivetrain.shiftGears(false);
+		flywheel.flywheelMotor.set(0);
+		indexer.indexer.set(0);
+		hopper.stopAgitate();
+		
+		
 		//Scheduler.getInstance().enable();
 		//Scheduler.getInstance().removeAll();
 		//Scheduler.getInstance().add(tankDrive);

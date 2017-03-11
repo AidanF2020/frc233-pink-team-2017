@@ -1,5 +1,6 @@
 package org.usfirst.frc.team233.robot.autonomous;
 
+import org.usfirst.frc.team233.robot.Robot;
 import org.usfirst.frc.team233.robot.commands.CollectorCommand;
 import org.usfirst.frc.team233.robot.commands.CollectorCommand.CollectorAction;
 import org.usfirst.frc.team233.robot.commands.Shoot;
@@ -19,6 +20,7 @@ public class AutoShootRoutine1 extends CommandGroup{
 	// aim at 18 deg towards touchpad from right next to boiler
 	
 	public AutoShootRoutine1(){
+		addSequential(new WaitCommand(Robot.delayTime));
 		// CALCULATED FROM BLUE SIDE
 		// drive to inside edge of touchpad
 		//addSequential(new DriveStraight(195.16));
